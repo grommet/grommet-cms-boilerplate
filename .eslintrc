@@ -3,6 +3,7 @@ parser: babel-eslint
 
 plugins:
   - react
+  - flowtype
 
 ecmaFeatures:
   jsx: true
