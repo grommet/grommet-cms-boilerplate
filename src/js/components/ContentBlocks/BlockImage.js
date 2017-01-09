@@ -7,7 +7,7 @@ export default function BlockImage ({ content, image }) {
     <Box full="horizontal" align="center" pad={{ vertical: 'medium' }}>
       <Box full="horizontal" size={{height: 'xlarge'}} 
         texture={image}
-        style={{backgroundPosition: '50% 70%'}} />
+        style={{backgroundPosition: '50% 50%'}} />
       <Box className="labs__section" pad={{horizontal: 'large'}}>
         <Heading tag="h5" strong={true} margin="small">
           {content}

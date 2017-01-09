@@ -5,8 +5,7 @@ import Section from 'grommet/components/Section';
 
 export default function BlockParagraph ({ content }) {
   return (
-
-    <Section className="labs__section" 
+    <Section
       pad={{ horizontal: 'large', vertical: 'small' }}
       alignSelf="center">
       <Box full="horizontal">

@@ -30,7 +30,7 @@ export class CarouselSlideForm extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.url !== this.props.url && this.props.url !== '') {
       this.setState({
-        image: `/api/image/${this.props.url}`
+        image: `${this.props.url}`
       });
     }
 
@@ -93,7 +93,7 @@ CarouselSlideForm.propTypes = {
 };
 
 function mapStateToProps(state, props) {
-  const { url } = state.image;
+  const { url } = state.fileUpload;
   return { url };
 }
 

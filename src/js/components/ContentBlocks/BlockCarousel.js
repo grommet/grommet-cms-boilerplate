@@ -12,7 +12,7 @@ export default function BlockCarousel ({ carousel }) {
   );
 
   return (
-    <Section className="labs__section mobile-hide" pad={{ vertical: 'medium', horizontal: 'large' }} 
+    <Section pad={{ vertical: 'medium', horizontal: 'large' }} 
       alignSelf="center">
       <Carousel>
         {slides}
