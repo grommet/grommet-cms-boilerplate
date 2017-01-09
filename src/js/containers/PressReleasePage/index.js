@@ -22,13 +22,12 @@ export class PressReleasePage extends Component {
       : 'Press Release';
 
     return (
-       <Box className="labs" align="center">
+      <Box className="labs" align="center">
         <Helmet title={title} />
         <Headline size="medium" margin="none" strong={true}>
           {post.title}
         </Headline>
-
-          <ContentBlocks blocks={post.contentBlocks} />
+        <ContentBlocks blocks={post.contentBlocks} />
       </Box>
     );
   }
