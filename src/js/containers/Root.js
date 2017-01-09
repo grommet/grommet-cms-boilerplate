@@ -3,18 +3,20 @@ import { Provider } from 'react-redux';
 import { getRoutes } from '../routes';
 import { Router, applyRouterMiddleware } from 'react-router';
 import { useScroll } from 'react-router-scroll';
-import ReactGA from 'react-ga';
+//import ReactGA from 'react-ga';
 
 export default class Root extends Component { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
-    ReactGA.initialize('UA-73635552-1', {
+    // Google Analytics init.
+    /*ReactGA.initialize('UA-73635552-1', {
       debug: false
-    });
+    });*/
   }
 
   _logPageView() {
-    ReactGA.set({ page: window.location.pathname });
-    ReactGA.pageview(window.location.pathname);
+    // Logs each page view to your Google Analytics account.
+    //ReactGA.set({ page: window.location.pathname });
+    //ReactGA.pageview(window.location.pathname);
   }
 
   render() {
