@@ -1,0 +1,50 @@
+// (C) Copyright 2014-2015 Hewlett Packard Enterprise Development LP
+
+// HPE CaaS header width.
+$caas-header-width: 1124px;
+
+@import '~grommet/scss/hpe/index';
+
+@import 'objects.dashboard';
+@import 'objects.markdown';
+@import 'objects.markdown-guide';
+@import 'objects.quote';
+
+body {
+  // Fixes mobile Layer scroll bug.
+  overflow: hidden;
+}
+
+img {
+  // Fixes IE11 image scaling within a flexbox bug.
+  min-height: 1px;
+}
+
+.hpe-logo {
+  height: 100%;
+  width: auto;
+  z-index: 10;
+}
+
+@include media-query(palm) {
+  .mobile-hide {
+    display: none;
+  }
+}
+
+.mobile-show {
+  display: none;
+
+  @include media-query(palm) {
+    display: inherit;
+  }
+}
+
+.grommetux-box {
+  max-width: 100%;
+
+  .grommetux-box--full {
+    // height: 100% is causing errors in Firefox and Safari.
+    height: auto;
+  }
+}

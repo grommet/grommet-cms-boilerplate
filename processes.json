@@ -1,0 +1,16 @@
+{
+  "apps" : [{
+    "name"       : "labs-web",
+    "script"     : "server/babel-server.js",
+    "instances"  : 1,
+    "exec_mode"  : "cluster_mode",
+    "autorestart" : true,
+    "error_file" : "./logs/web-err.log",
+    "out_file"   : "./logs/web-out.log",
+    "merge_logs"  : true,
+    "env": {
+        "BABEL_ENV": "production",
+        "NODE_ENV": "production"
+    }
+  }]
+}

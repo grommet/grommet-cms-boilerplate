@@ -1,0 +1,78 @@
+import { v4 as uuid } from 'uuid';
+import { 
+  BLOCK_ADD, BLOCK_ADD_LIST, BLOCK_REMOVE, BLOCK_EDIT, BLOCK_TYPE, 
+  BLOCK_SUBMIT, BLOCK_MOVE_UP, BLOCK_MOVE_DOWN
+} from './constants';
+
+const initialState = [];
+
+export function contentBlocks(state = initialState, action) {
+  const newBlocks = state.slice(0);
+  const blockIndex = (action.id)
+    ? newBlocks.findIndex(
+        (block) => block.id === action.id
+      )
+    : undefined;
+
+  switch(action.type) {
+    case BLOCK_ADD:
+      return state.concat({
+        id: uuid(),
+        edit: true
+      });
+      break; 
+
+    case BLOCK_ADD_LIST:
+      const newList = action.list.slice(0);
+      return newList;
+
+    case BLOCK_REMOVE:
+      newBlocks.splice(blockIndex, 1);
+      return newBlocks;
+      break; 
+
+    case BLOCK_EDIT:
+      newBlocks[blockIndex].edit = true;
+      return newBlocks;
+
+    case BLOCK_TYPE:
+      newBlocks[blockIndex].blockType = action.blockType;
+      return newBlocks;
+
+    case BLOCK_SUBMIT:
+      newBlocks[blockIndex] = Object.assign(
+        {},
+        newBlocks[blockIndex],
+        action.content
+      );
+      newBlocks[blockIndex].edit = false;
+      return newBlocks;
+
+    case BLOCK_MOVE_UP:
+      if (blockIndex - 1 >= 0) {
+        const blockToMove = newBlocks[blockIndex];
+        newBlocks.splice(blockIndex, 1);
+        newBlocks.splice(blockIndex - 1, 0, blockToMove);
+        return newBlocks; 
+      } else { 
+        return state;
+      }
+      break;
+
+    case BLOCK_MOVE_DOWN:
+      if (blockIndex + 1 <= state.length - 1) {
+        const blockToMove = newBlocks[blockIndex];
+        newBlocks.splice(blockIndex, 1);
+        newBlocks.splice(blockIndex + 1, 0, blockToMove);
+        return newBlocks; 
+      } else { 
+        return state;
+      }
+      break;
+
+    default: 
+      return state;
+  }
+}
+
+export default contentBlocks;

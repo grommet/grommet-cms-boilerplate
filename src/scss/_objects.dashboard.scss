@@ -1,0 +1,29 @@
+.grommet.dashboard {
+  .grommetux-form {
+    width: auto;
+
+    .grommetux-date-time {
+      max-width: 350px;
+    }
+  }
+
+  .dashboard__nav nav a {
+    text-decoration: none;
+  }
+
+  .dashboard__col {
+    width: 100%;
+
+    @include media-query(lap-and-up) {
+      width: 50%;
+    }
+  }
+
+  .posts-list {
+    .posts-list__post .grommetux-heading {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

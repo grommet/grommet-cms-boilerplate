@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta charset="UTF-8">
+    <%- title %>
+    <meta name="description" content="" />
+    <meta name="fragment" content="!" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="Description" content="Hewlett Packard Labs">
+    <meta name="Keywords" content="Hewlett Packard Labs, Labs">
+    <meta property="og:title" content="Hewlett Packard Labs">
+    <meta property="og:site_name" content="Hewlett Packard Labs">
+    <meta property="og:description" content="Innovation drives progress in today’s world">
+    <meta property="og:type" content="website">
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link href='/assets/css/index.css?v0.01' rel='stylesheet' type='text/css'>
+    <script src="<%- scriptsBase %>/ie/en/scripts/framework/jquery/v-1-8/jquery.js"></script>
+    <script src="<%- scriptsBase %>/ie/en/scripts/framework/jquery/v-1-8/can.jquery.js"></script>
+    <script src="<%- scriptsBase %>/caas/header-footer/us/en/hpe/latest.r?contentType=js"></script>
+  </head>
+  <body>
+    <div id="header" class="header"></div>
+    <div id="content">
+      <%- content %>
+    </div>
+    <div id="footer" class="footer"></div>
+    <script>
+      window.__PRELOADED_STATE__ = <%- initialState %>;
+    </script>
+    <script src="/index.js"></script>
+  </body>
+</html>
