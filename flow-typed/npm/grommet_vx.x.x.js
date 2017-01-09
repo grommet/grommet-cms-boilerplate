@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 
@@ -23,31 +23,105 @@ declare module 'grommet' {
  * needed.
  */
 declare module 'grommet/components/Accordion' {
-  declare module.exports: any;
+  declare type AccordionProps = {
+    active?: number | number[],
+    animate?: boolean,
+    onActive?: Function,
+    openMulti?: boolean
+  }
+  declare class Accordion extends React$Component {
+    props: AccordionProps;
+  }
+  declare module.exports:  Class<Accordion>;
 }
 
 declare module 'grommet/components/AccordionPanel' {
-  declare module.exports: any;
+  declare type AccordionPanelProps = {
+    a11yTitle?: string,
+    active?: boolean,
+    animate?: boolean,
+    heading?: HTMLElement,
+    onChange?: Function,
+    pad?: any
+  }
+  declare class AccordionPanel extends React$Component {
+    props: AccordionPanelProps;
+  }
+  declare module.exports: Class<AccordionPanel>;
 }
 
 declare module 'grommet/components/Anchor' {
-  declare module.exports: any;
+  declare type AnchorProps = {
+    a11yTitle?: string,
+    align?: "start" | "center" | "end",
+    animateIcon?: boolean,
+    disabled?: boolean,
+    href?: string,
+    icon?: HTMLElement | React$Element<any>,
+    id?: string,
+    label?: string,
+    method?: "push" | "replace",
+    onClick?: Function,
+    path?: string,
+    primary?: boolean,
+    reverse?: boolean,
+    tag?: string,
+    target?: string
+  }
+
+  declare class Anchor extends React$Component {
+    props: AnchorProps;
+  }
+  declare module.exports: Class<Anchor>;
 }
 
 declare module 'grommet/components/Animate' {
-  declare module.exports: any;
+  declare type AnimateProps = {
+    component?: string | Function,
+    enter?: GrommetCustomTypes$AnimationDetails,
+    keep?: boolean,
+    leave?: GrommetCustomTypes$AnimationDetails,
+    visible?: "scroll" | boolean
+  }
+  declare class Animate extends React$Component {
+    props: AnimateProps;
+  }
+  declare module.exports: Class<Animate>;
 }
 
 declare module 'grommet/components/App' {
-  declare module.exports: any;
+  declare type AppProps = {
+    centered?: boolean,
+    inline?: boolean
+  }
+  declare type AppDefaultProps = {
+    centered?: boolean
+  }
+  declare class App extends React$Component {
+    props: AppProps;
+  }
+  declare module.exports: Class<App>;
 }
 
 declare module 'grommet/components/Article' {
-  declare module.exports: any;
+  declare type ArticleProps = {
+    controls?: boolean,
+    onProgress?: Function,
+    onSelect?: Function,
+    scrollStep?: boolean,
+    selected?: number
+  } & Grommet$BoxProps<Article>
+  declare class Article extends React$Component {
+    props: ArticleProps;
+  }
+  declare module.exports: Class<Article>;
 }
 
 declare module 'grommet/components/Box' {
-  declare module.exports: any;
+  declare class Box extends React$Component {
+    props: Grommet$BoxProps<Box>;
+  }
+  declare module.exports: Class<Box>;
 }
 
 declare module 'grommet/components/Button' {
@@ -4130,4 +4204,101 @@ declare module 'grommet/utils/Throttle.js' {
 }
 declare module 'grommet/utils/Validator.js' {
   declare module.exports: $Exports<'grommet/utils/Validator'>;
+}
+
+declare type GrommetBoxTypes$FixedSizes = "xsmall" | "small" | "medium" | "large" | "xlarge" | "xxlarge";
+
+declare type GrommetBoxTypes$MarginSizes = "small" | "medium" | "large" | "none";
+
+declare type GrommetBoxTypes$BoxSizes = "xsmall" | "small" | "medium" | "large" | "xlarge" | "xxlarge" | "full" | "1/2" | "1/3" | "2/3" | "1/4" | "3/4";
+
+declare type GrommetBoxTypes$PadSizes = "small" | "medium" | "large" | "none";
+
+declare type GrommetBoxTypes$Size = "auto" | "xsmall" | "small" | "medium" | "large" | "xlarge" | "xxlarge" | "full";
+
+declare interface GrommetContextTypes$Intl {
+  intl?: {}
+}
+
+declare interface GrommetContextTypes$All {
+  router?: any,
+  history?: {},
+  intl?: {},
+  store?: {}
+}
+declare type GrommetCustomTypes$SelectValueType = {
+  label?: string,
+  value?: any } | string | number;
+
+declare interface GrommetCustomTypes$SearchInputValue {
+  label?: string,
+  value?: string
+}
+
+declare type GrommetCustomTypes$VERTICAL_ALIGN_OPTIONS = "top" | "bottom";
+
+declare type GrommetCustomTypes$HORIZONTAL_ALIGN_OPTIONS = "right" | "left";
+
+declare type GrommetCustomTypes$FormPadding = "none" | "small" | "medium" | "large";
+
+declare type GrommetCustomTypes$AnimationType = "fade" | "slide-up" | "slide-down" | "slide-left" | "slide-right" | "jiggle";
+
+declare interface GrommetCustomTypes$AnimationDetails {
+  animation: GrommetCustomTypes$AnimationType,
+  duration?: number,
+  delay?: number
+}
+
+declare type GrommetCustomTypes$TIME_STAMP_FIELD_TYPES = "date" | "time" | "year" | "month" | "day" | "hour" | "minute" | "second" | "hours" | "minutes" | "seconds";
+
+declare type Grommet$BoxProps<T> = {
+  a11yTitle?: string | any,
+  announce?: boolean,
+  align?: "start" | "center" | "end" | "baseline" | "stretch",
+  alignContent?: "start" | "center" | "end" | "between" | "around" | "stretch",
+  alignSelf?: "start" | "center" | "end" | "stretch",
+  appCentered?: boolean,
+  backgroundImage?: string,
+  basis?: GrommetBoxTypes$BoxSizes,
+  colorIndex?: string,
+  containerClassName?: string,
+  direction?: "row" | "column",
+  focusable?: boolean,
+  flex?: "grow" | "shrink" | boolean,
+  full?: "horizontal" | "vertical" | boolean,
+  onClick?: Function,
+  justify?: "start" | "center" | "between" | "end",
+  margin?: GrommetBoxTypes$MarginSizes | {
+    bottom: GrommetBoxTypes$MarginSizes,
+    horizontal: GrommetBoxTypes$MarginSizes,
+    left: GrommetBoxTypes$MarginSizes,
+    right: GrommetBoxTypes$MarginSizes,
+    top: GrommetBoxTypes$MarginSizes,
+    vertical: GrommetBoxTypes$MarginSizes
+  },
+  pad?: GrommetBoxTypes$PadSizes | {
+    between?: GrommetBoxTypes$PadSizes,
+    horizontal?: GrommetBoxTypes$PadSizes,
+    vertical?: GrommetBoxTypes$PadSizes
+  },
+  primary?: boolean,
+  reverse?: boolean,
+  responsive?: boolean,
+  role?: string,
+  separator?: "top" | "bottom" | "left" | "right" | "horizontal" | "vertical" | "all" | "none",
+  size?: {
+    height?: GrommetBoxTypes$Size | {
+      max?: GrommetBoxTypes$FixedSizes,
+      min?: GrommetBoxTypes$FixedSizes
+    },
+    width?: GrommetBoxTypes$Size | {
+      max?: GrommetBoxTypes$FixedSizes,
+      min?: GrommetBoxTypes$FixedSizes
+    }
+  },
+  tag?: string,
+  textAlign?: "left" | "center" | "right",
+  texture?: React.ReactNode | string,
+  wrap?: boolean,
+  onFocus?: Function
 }
