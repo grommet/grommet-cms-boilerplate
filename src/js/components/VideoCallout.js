@@ -35,5 +35,5 @@ VideoCallout.propTypes = {
 };
 
 VideoCallout.defaultProps = {
-  thumbnail: '/img/dmc/dmc-notebook.jpg'
+  thumbnail: '/img/dashboard/video-thumb.jpg'
 };
