@@ -41,7 +41,7 @@ export const getRoutes = (store) => {
 
       <Route path="/" component={App}>
         <IndexRoute component={HomePage} />
-        <Route path="news/press-release/:slug" component={PressReleasePage} />
+        <Route path="posts/:slug" component={PressReleasePage} />
         <Route path="*" component={HomePage} />
       </Route>
     </Router>

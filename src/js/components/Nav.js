@@ -1,23 +1,20 @@
 import React from 'react';
+import Anchor from 'grommet/components/Anchor';
+import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
 import Menu from 'grommet/components/Menu';
-import NavAnchor from './NavAnchor';
+import GrommetIcon from 'grommet/components/icons/base/BrandGrommetOutline';
 
 export default function Nav (props) {
   return (
-    <Header className="labs__section mobile-hide" size="large"
-      justify="between" separator="bottom" pad={{ horizontal: 'medium' }}>
-      <Menu inline={true} direction="row" responsive={false}>
-        <NavAnchor path="/the-machine" label="The Machine" />
-        <NavAnchor path="/next-next" label="Next Next" />
-        <NavAnchor path="/news" label="News" />
-      </Menu>
-      <Menu inline={true} direction="row" responsive={false}
-        justify="end">
-        <NavAnchor path="/about" label="About Us" />
-        <NavAnchor path="/publications" label="Publications" />
-        <NavAnchor path="/downloads" label="Downloads" />
-      </Menu>
+    <Header className="mobile-hide" size="large" colorIndex="neutral-5"
+      justify="center" separator="bottom" pad={{ horizontal: 'medium' }}>
+      <Box size={{ width: 'xxlarge' }} direction="row" responsive={false}>
+        <Menu inline={true} direction="row" responsive={false} align="center">
+          <Anchor path="/" icon={<GrommetIcon />} />
+          <Anchor path="/posts" label="Posts" />
+        </Menu>
+      </Box>
     </Header>
   );
 };

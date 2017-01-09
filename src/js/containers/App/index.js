@@ -3,6 +3,7 @@
 import React from 'react';
 import GrommetApp from 'grommet/components/App';
 import Helmet from 'react-helmet';
+import Nav from '../../components/Nav';
 
 class App extends React.Component {
   render() {
@@ -11,6 +12,7 @@ class App extends React.Component {
         <Helmet
           title="Home"
           titleTemplate="Grommet | %s" />
+        <Nav />
         {this.props.children}
       </GrommetApp>
     );
