@@ -5,7 +5,7 @@ import GrommetApp from 'grommet/components/App';
 import Helmet from 'react-helmet';
 
 type Props = {
-  children: React$Element[],
+  children: React$Element<*>,
 };
 
 class App extends React.Component {
