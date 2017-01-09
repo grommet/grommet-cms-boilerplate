@@ -42,6 +42,11 @@ export default {
       ]
     },
     module: {
+      preLoaders: [{
+        test: /\.jsx?$/,
+        loader: 'remove-flow-types',
+        include: path.join(__dirname, './src')
+      }],
       loaders: [
         {
           test: /\.jsx?$/,
