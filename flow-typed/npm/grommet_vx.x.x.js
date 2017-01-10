@@ -209,7 +209,7 @@ declare module 'grommet/components/chart/Axis' {
     vertical?: boolean,
   }
   declare class Axis extends React$Component {
-    props: Grommet$Chart$AxisProps; 
+    props: Grommet$Chart$AxisProps;
   }
   declare module.exports: Class<Axis>;
 }
@@ -256,7 +256,7 @@ declare module 'grommet/components/chart/Grid' {
 }
 
 declare module 'grommet/components/chart/HotSpots' {
-  declare type $Grommet$Chart$HotSpots {
+  declare type $Grommet$Chart$HotSpots = {
     a11yTitle?: number | string,
     activeIndex?: number,
     count: number,
@@ -549,183 +549,318 @@ declare module 'grommet/components/Hero' {
 }
 
 declare module 'grommet/components/icons/base/3d' {
-  declare module.exports: any;
+  declare class ThreeDIcon extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<ThreeDIcon>;
 }
 
 declare module 'grommet/components/icons/base/AccessAccessibility' {
-  declare module.exports: any;
+  declare class AccessAccessibility extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<AccessAccessibility>;
 }
 
 declare module 'grommet/components/icons/base/AccessAd' {
-  declare module.exports: any;
+  declare class AccessAd extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<AccessAd>;
 }
 
 declare module 'grommet/components/icons/base/AccessAssistListening' {
-  declare module.exports: any;
+  declare class AccessAssistListening extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<AccessAssistListening>;
 }
 
 declare module 'grommet/components/icons/base/AccessBraille' {
-  declare module.exports: any;
+  declare class AccessBraille extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<AccessBraille>;
 }
 
 declare module 'grommet/components/icons/base/AccessSign' {
-  declare module.exports: any;
+  declare class AccessSign extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<AccessSign>;
 }
 
 declare module 'grommet/components/icons/base/AccessTty' {
-  declare module.exports: any;
+  declare class AccessTty extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<AccessTty>;
 }
 
 declare module 'grommet/components/icons/base/AccessVolumeControl' {
-  declare module.exports: any;
+  declare class AccessVolumeControl extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<AccessVolumeControl>;
 }
 
 declare module 'grommet/components/icons/base/AccessWheelchair' {
-  declare module.exports: any;
+  declare class AccessWheelchair extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<AccessWheelchair>;
 }
 
 declare module 'grommet/components/icons/base/AccessWheelchairActive' {
-  declare module.exports: any;
+  declare class AccessWheelchairActive extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<AccessWheelchairActive>;
 }
 
 declare module 'grommet/components/icons/base/Achievement' {
-  declare module.exports: any;
+  declare class Achievement extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Achievement>;
 }
 
 declare module 'grommet/components/icons/base/Action' {
-  declare module.exports: any;
+  declare class Action extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Action>;
 }
 
 declare module 'grommet/components/icons/base/Actions' {
-  declare module.exports: any;
+  declare class Actions extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Actions>;
 }
 
 declare module 'grommet/components/icons/base/Add' {
-  declare module.exports: any;
+  declare class Add extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Add>;
 }
 
 declare module 'grommet/components/icons/base/AddCircle' {
-  declare module.exports: any;
+  declare class AddCircle extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<AddCircle>;
 }
 
 declare module 'grommet/components/icons/base/Aggregate' {
-  declare module.exports: any;
+  declare class Aggregate extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Aggregate>;
 }
 
 declare module 'grommet/components/icons/base/Aid' {
-  declare module.exports: any;
+  declare class Aid extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Aid>;
 }
 
 declare module 'grommet/components/icons/base/Alarm' {
-  declare module.exports: any;
+  declare class Alarm extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Alarm>;
 }
 
 declare module 'grommet/components/icons/base/Alert' {
-  declare module.exports: any;
+  declare class Alert extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Alert>;
 }
 
 declare module 'grommet/components/icons/base/Analytics' {
-  declare module.exports: any;
+  declare class Analytics extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Analytics>;
 }
 
 declare module 'grommet/components/icons/base/Announce' {
-  declare module.exports: any;
+  declare class Announce extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Announce>;
 }
 
 declare module 'grommet/components/icons/base/Apps' {
-  declare module.exports: any;
+  declare class Apps extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Apps>;
 }
 
 declare module 'grommet/components/icons/base/Archive' {
-  declare module.exports: any;
+  declare class Archive extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Archive>;
 }
 
 declare module 'grommet/components/icons/base/Article' {
-  declare module.exports: any;
+  declare class Article extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Article>;
 }
 
 declare module 'grommet/components/icons/base/Ascend' {
-  declare module.exports: any;
+  declare class Ascend extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Ascend>;
 }
 
 declare module 'grommet/components/icons/base/Attachment' {
-  declare module.exports: any;
+  declare class Attachment extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Attachment>;
 }
 
 declare module 'grommet/components/icons/base/BackTen' {
-  declare module.exports: any;
+  declare class BackTen extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<BackTen>;
 }
 
 declare module 'grommet/components/icons/base/BarChart' {
-  declare module.exports: any;
+  declare class BarChart extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<BarChart>;
 }
 
 declare module 'grommet/components/icons/base/Basket' {
-  declare module.exports: any;
+  declare class Basket extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Basket>;
 }
 
 declare module 'grommet/components/icons/base/Blog' {
-  declare module.exports: any;
+  declare class Blog extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Blog>;
 }
 
 declare module 'grommet/components/icons/base/Book' {
-  declare module.exports: any;
+  declare class Book extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Book>;
 }
 
 declare module 'grommet/components/icons/base/Bookmark' {
-  declare module.exports: any;
+  declare class Bookmark extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<Bookmark>;
 }
 
 declare module 'grommet/components/icons/base/BottomCorner' {
-  declare module.exports: any;
+  declare class BottomCorner extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<BottomCorner>;
 }
 
 declare module 'grommet/components/icons/base/BrandAppleAppStore' {
-  declare module.exports: any;
+  declare class BrandAppleAppStore extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<BrandAppleAppStore>;
 }
 
 declare module 'grommet/components/icons/base/BrandCodepenEdit' {
-  declare module.exports: any;
+  declare class BrandCodepenEdit extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<BrandCodepenEdit>;
 }
 
 declare module 'grommet/components/icons/base/BrandCodepenTry' {
-  declare module.exports: any;
+  declare class BrandCodepenTry extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<BrandCodepenTry>;
 }
 
 declare module 'grommet/components/icons/base/BrandGooglePlay' {
-  declare module.exports: any;
+  declare class BrandGooglePlay extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<BrandGooglePlay>;
 }
 
 declare module 'grommet/components/icons/base/BrandGrommetOutline' {
-  declare module.exports: any;
+  declare class BrandGrommetOutline extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<BrandGrommetOutline>;
 }
 
 declare module 'grommet/components/icons/base/BrandGrommetPath' {
-  declare module.exports: any;
+  declare class BrandGrommetPath extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<BrandGrommetPath>;
 }
 
 declare module 'grommet/components/icons/base/BrandHpeElementOutline' {
-  declare module.exports: any;
+  declare class BrandHpeElementOutline extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<BrandHpeElementOutline>;
 }
 
 declare module 'grommet/components/icons/base/BrandHpeElementPath' {
-  declare module.exports: any;
+  declare class BrandHpeElementPath extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<BrandHpeElementPath>;
 }
 
 declare module 'grommet/components/icons/base/BrandHpeLabsInsignia' {
-  declare module.exports: any;
+  declare class BrandHpeLabsInsignia extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<BrandHpeLabsInsignia>;
 }
 
 declare module 'grommet/components/icons/base/BrandHpeLabsInsigniaOutline' {
-  declare module.exports: any;
+  declare class BrandHpeLabsInsigniaOutline extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<BrandHpeLabsInsigniaOutline>;
 }
 
 declare module 'grommet/components/icons/base/BrandHpeStack' {
-  declare module.exports: any;
+  declare class BrandHpeStack extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<BrandHpeStack>;
 }
 
 declare module 'grommet/components/icons/base/BrandHpeStackCentered' {
-  declare module.exports: any;
+  declare class BrandHpeStackCentered extends React$Component {
+    props: Grommet$Icons$GenericProps;
+  }
+  declare module.exports: Class<BrandHpeStackCentered>;
 }
 
 declare module 'grommet/components/icons/base/Briefcase' {
@@ -2431,7 +2566,7 @@ declare module 'grommet/components/Legend' {
   declare class Legend extends React$Component {
     props: Grommet$LegendProps;
   }
-  declare module.exports: HTMLElementLegend>;
+  declare module.exports: Class<Legend>;
 }
 
 declare module 'grommet/components/List' {
@@ -5044,6 +5179,14 @@ declare type Grommet$Chart$GraphProps<T> = {
   type?: 'area' | 'line' | 'bar';
   vertical?: boolean,
   width?: number;
+}
+
+declare type Grommet$Icons$IconSize = 'small' | 'medium' | 'large' | 'xlarge' | 'huge';
+declare type Grommet$Icons$GenericProps = {
+  a11yTitle?: string,
+  colorIndex?: string,
+  size?: Grommet$Icons$IconSize,
+  responsive?: boolean
 }
 
 declare type Grommet$BoxProps<T> = {
