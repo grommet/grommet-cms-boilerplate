@@ -146,8 +146,8 @@ class ExampleApp extends Component {
                   colorIndex: "neutral-1",
                   total: 10,
                   children: [
-                    {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
-                    {label: "leaf-1", value: 5, colorIndex: "neutral-1"}
+                {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
+                {label: "leaf-1", value: 5, colorIndex: "neutral-1"}
                   ]
                 }
               ]
@@ -155,15 +155,15 @@ class ExampleApp extends Component {
               value: 30,
               colorIndex: "neutral-2",
               children: [
-                {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
-                {label: "leaf-1", value: 5, colorIndex: "neutral-1"}
+              {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
+              {label: "leaf-1", value: 5, colorIndex: "neutral-1"}
               ]
             }, {
               value: 20,
               colorIndex: "neutral-3",
               children: [
-                {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
-                {label: "leaf-1", value: 5, colorIndex: "neutral-1"}
+              {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
+              {label: "leaf-1", value: 5, colorIndex: "neutral-1"}
               ]
             }]}
             onActive={this.handleClick}
@@ -179,8 +179,8 @@ class ExampleApp extends Component {
                 id: "category-3",
                 label: "Third category",
                 items: [
-                {id: "item-3-1", label: "Sixth item"},
-                {id: "item-3-2", label: "Seventh item"}
+              {id: "item-3-1", label: "Sixth item"},
+              {id: "item-3-2", label: "Seventh item"}
                 ]
               }
             ],
@@ -228,7 +228,7 @@ class ExampleApp extends Component {
           <tbody>
             <TableRow>
               <td>
-                  1
+                1
               </td>
               <td>
                 Alan
@@ -239,7 +239,7 @@ class ExampleApp extends Component {
             </TableRow>
             <TableRow>
               <td>
-                  2
+                2
               </td>
               <td>
                 Chris
