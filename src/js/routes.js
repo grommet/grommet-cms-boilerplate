@@ -11,7 +11,8 @@ import {
   DashboardUserForm,
   DashboardUsersPage,
   DashboardPressReleasesPage,
-  DashboardPressReleasePage
+  DashboardPressReleasePage,
+  ExampleApp
 } from './containers';
 
 export const getRoutes = (store) => {
@@ -41,6 +42,7 @@ export const getRoutes = (store) => {
       </Route>
 
       <Route path="/" component={App}>
+        <Route path="example" component={ExampleApp} />
         <IndexRoute component={HomePage} />
         <Route path="posts/:slug" component={PressReleasePage} />
         <Route path="*" component={HomePage} />
