@@ -27,7 +27,8 @@ export class PressReleasePage extends Component {
         <Headline size="medium" margin="none" strong={true}>
           {post.title}
         </Headline>
-        <ContentBlocks blocks={post.contentBlocks} />
+        
+          <ContentBlocks blocks={post.contentBlocks} />
       </Box>
     );
   }
