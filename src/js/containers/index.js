@@ -7,6 +7,7 @@ export DashboardContentBlocks from './DashboardContentBlocks';
 export DashboardFileUpload from './DashboardFileUpload';
 export DashboardHomePage from './DashboardHomePage';
 export DashboardPressReleasePage from './DashboardPressReleasePage';
+export DashboardPressReleasesPage from './DashboardPressReleasesPage';
 export DashboardUserForm from './DashboardUserForm';
 export DashboardUsersPage from './DashboardUsersPage';
 export EntryOrder from './EntryOrder';

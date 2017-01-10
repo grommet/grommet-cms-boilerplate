@@ -22,6 +22,7 @@
     "express": "^4.10.6",
     "express-sanitized": "^0.5.1",
     "express-session": "^1.14.0",
+    "express-session-mongo": "^0.1.0",
     "grommet": "https://github.com/grommet/grommet/tarball/stable",
     "history": "^1.17.0",
     "isomorphic-fetch": "^2.2.1",

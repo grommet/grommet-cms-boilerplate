@@ -29,6 +29,10 @@ import usersApi from './routes/users';
 import fileApi from './routes/file';
 import pressReleasesApi from './routes/pressReleases';
 
+// Session memory store.
+import session from 'express-session';
+import MongoStore from 'express-session-mongo';
+
 // Init Express server.
 process.setMaxListeners(0);
 
@@ -44,16 +48,22 @@ app.use(expressSanitized());
 app.use(cookieParser());
 
 // Sessions
-app.use(require('express-session')({
+app.use(
+  session({
     secret: SESSION_KEY,
     resave: false,
     saveUninitialized: false,
+    store: new MongoStore(),
     cookie: {
       httpOnly: false,
       maxAge: null
     }
   })
 );
+
+// To remove stale sessions from the DB:
+// db.sessions.ensureIndex( { "lastAccess": 1 }, { expireAfterSeconds: 3600 } )
+// This removes sessions older than an hour every 60 seconds.
 
 // Allow external calls to API for dev purposes.
 app.use(function(req, res, next) {
