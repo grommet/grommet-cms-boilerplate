@@ -13,4 +13,3 @@ export EntryOrder from './EntryOrder';
 export HomePage from './HomePage';
 export LoginPage from './LoginPage';
 export PressReleasePage from './PressReleasePage';
-export ExampleApp from './ExampleApp';
