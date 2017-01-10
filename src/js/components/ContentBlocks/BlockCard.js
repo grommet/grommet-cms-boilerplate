@@ -52,7 +52,7 @@ export default class BlockCard extends Component {
       <Box full="horizontal" align="center">
         {videoLayer}
         <Box full="horizontal" align="center">
-          <Box className="labs__section" direction="row">
+          <Box direction="row">
             <Box basis="2/3" pad={{horizontal: 'large'}}>
               <Markdown content={content} components={{ 
                 'p': { 'props':  { size: 'large', margin: 'small' } },

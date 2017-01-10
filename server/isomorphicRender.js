@@ -13,12 +13,6 @@ import { match } from 'react-router';
 // Load environment variables
 env(path.join(__dirname, '..', '.env'));
 
-function getScriptsBase(env) {
-  return (process.env.NODE_ENV === 'production')
-    ? 'https://ssl.www8.hp.com' 
-    : 'http://www8.hp.com';
-}
-
 export default function isomorphicRender(req, res) {
   const location = createLocation(req.url);
   const authStatus = req.isAuthenticated();
@@ -71,15 +65,13 @@ export default function isomorphicRender(req, res) {
       );
 
       const componentHTML = renderToString(InitialComponent);
-      const scriptsBaseUrl = getScriptsBase(process.env.NODE_ENV);
       let head = Helmet.rewind();
 
       res.render('index.ejs', {
         title: head.title.toString(),
         content: componentHTML,
         meta: head.meta.toString(),
-        initialState: initialState,
-        scriptsBase: scriptsBaseUrl
+        initialState: initialState
       });
     });
   });

@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import Box from 'grommet/components/Box';
-import LabsQuote from '../LabsQuote';
+import BlockQuote from './BlockQuote';
 
 export default function BlockQuotePreview ({ content, source }) {
   return (
     <Box>
-      <LabsQuote quote={content} source={source} />
+      <BlockQuote content={content} source={source} />
     </Box>
   );
 };

@@ -5,33 +5,29 @@ import Image from 'grommet/components/Image';
 import Markdown from 'grommet/components/Markdown';
 import Section from 'grommet/components/Section';
 
+// These are seperated out into individual components to allow
+// for more versatile layouts.
+
 const LargeBlock = ({content, image, imageDesc}) =>
   <Section full="horizontal" align="center"
     pad={{ horizontal: 'large', vertical: 'small' }}
     alignSelf="center">
-    <Box className="labs__offset-image-wrap mobile-hide" full="horizontal" align="center">
-      <Box className="labs__image" full="horizontal">
-        <Box pad="small" />
-        <Box direction="row" justify="end">
-          <Box basis="1/2" texture={image}
-            size={{ height: 'xlarge' }} />
-        </Box>
-        <Box direction="row" justify="end">
-          <Box basis="1/2" pad={{vertical: 'small'}}>
-            <Heading tag="h5" strong={true}>
-              {imageDesc}
-            </Heading>
-          </Box>
-        </Box>
+    <Box className="labs__section" direction="row" pad={{horizontal: 'large'}}>
+      <Box basis="1/4">
+        <Markdown content={content} components={{ 
+          'p': { 'props':  { size: 'large', margin: 'small' } },
+          'h2': { 'props':  { strong: true } }
+        }}/>
       </Box>
-    </Box>
-    <Box className="labs__section" pad={{ horizontal: 'large' }}>
-      <Box className="labs__section" align="start">
-        <Box size={{ width: 'medium' }}>
-          <Markdown content={content} components={{ 
-            'p': { 'props':  { size: 'large', margin: 'small' } },
-            'h2': { 'props':  { strong: true } }
-          }}/>
+      <Box pad="medium" />
+      <Box basis="3/4">
+        <Box pad={{ vertical: 'small' }}>
+          <Image full="horizontal" src={image} />
+        </Box>
+        <Box pad={{vertical: 'small'}}>
+          <Heading tag="h5" strong={true} margin="none">
+            {imageDesc}
+          </Heading>
         </Box>
       </Box>
     </Box>

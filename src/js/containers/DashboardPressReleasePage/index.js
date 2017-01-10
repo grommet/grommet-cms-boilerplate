@@ -61,12 +61,10 @@ DashboardPressReleasePage.propTypes = {
 
 function mapStateToProps(state, props) {
   const { post, error, request } = state.pressRelease;
-  const { url } = state.image;
   return {
     post,
     error,
-    request,
-    url
+    request
   };
 };
 

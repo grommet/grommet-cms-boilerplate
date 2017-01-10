@@ -29,7 +29,7 @@ export class Dashboard extends Component {
       : null;
 
     return (
-      <GrommetApp className="dashboard">
+      <GrommetApp className="dashboard" centered={false}>
         <Helmet
           title="Dashboard"
           titleTemplate="HPE Labs | %s" />
