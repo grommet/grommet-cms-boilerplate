@@ -267,7 +267,7 @@ declare module 'grommet/components/chart/HotSpots' {
   declare class HotSpots extends React$Component {
     props: $Grommet$Chart$HotSpots;
   }
-  declare module.exports: Chart<HotSpots>;
+  declare module.exports: Class<HotSpots>;
 }
 
 declare module 'grommet/components/chart/Layers' {
