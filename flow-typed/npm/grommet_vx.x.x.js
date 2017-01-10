@@ -23,20 +23,20 @@ declare module 'grommet' {
  * needed.
  */
 declare module 'grommet/components/Accordion' {
-  declare type AccordionProps = {
+  declare type Grommet$ccordionProps = {
     active?: number | number[],
     animate?: boolean,
     onActive?: Function,
     openMulti?: boolean
   }
   declare class Accordion extends React$Component {
-    props: AccordionProps;
+    props: Grommet$AccordionProps;
   }
   declare module.exports:  Class<Accordion>;
 }
 
 declare module 'grommet/components/AccordionPanel' {
-  declare type AccordionPanelProps = {
+  declare type Grommet$AccordionPanelProps = {
     a11yTitle?: string,
     active?: boolean,
     animate?: boolean,
@@ -45,13 +45,13 @@ declare module 'grommet/components/AccordionPanel' {
     pad?: any
   }
   declare class AccordionPanel extends React$Component {
-    props: AccordionPanelProps;
+    props: Grommet$AccordionPanelProps;
   }
   declare module.exports: Class<AccordionPanel>;
 }
 
 declare module 'grommet/components/Anchor' {
-  declare type AnchorProps = {
+  declare type Grommet$AnchorProps = {
     a11yTitle?: string,
     align?: "start" | "center" | "end",
     animateIcon?: boolean,
@@ -70,13 +70,13 @@ declare module 'grommet/components/Anchor' {
   }
 
   declare class Anchor extends React$Component {
-    props: AnchorProps;
+    props: Grommet$AnchorProps;
   }
   declare module.exports: Class<Anchor>;
 }
 
 declare module 'grommet/components/Animate' {
-  declare type AnimateProps = {
+  declare type Grommet$AnimateProps = {
     component?: string | Function,
     enter?: GrommetCustomTypes$AnimationDetails,
     keep?: boolean,
@@ -84,27 +84,24 @@ declare module 'grommet/components/Animate' {
     visible?: "scroll" | boolean
   }
   declare class Animate extends React$Component {
-    props: AnimateProps;
+    props: Grommet$AnimateProps;
   }
   declare module.exports: Class<Animate>;
 }
 
 declare module 'grommet/components/App' {
-  declare type AppProps = {
+  declare type Grommet$AppProps = {
     centered?: boolean,
     inline?: boolean
   }
-  declare type AppDefaultProps = {
-    centered?: boolean
-  }
   declare class App extends React$Component {
-    props: AppProps;
+    props: Grommet$AppProps;
   }
   declare module.exports: Class<App>;
 }
 
 declare module 'grommet/components/Article' {
-  declare type ArticleProps = {
+  declare type Grommet$ArticleProps = {
     controls?: boolean,
     onProgress?: Function,
     onSelect?: Function,
@@ -112,7 +109,7 @@ declare module 'grommet/components/Article' {
     selected?: number
   } & Grommet$BoxProps<Article>
   declare class Article extends React$Component {
-    props: ArticleProps;
+    props: Grommet$ArticleProps;
   }
   declare module.exports: Class<Article>;
 }
@@ -125,15 +122,66 @@ declare module 'grommet/components/Box' {
 }
 
 declare module 'grommet/components/Button' {
-  declare module.exports: any;
+  declare type Grommet$ButtonProps = {
+    a11yTitle?: string,
+    accent?: boolean,
+    align?: "start" | "center" | "end",
+    fill?: boolean,
+    href?: string,
+    icon?: React$Element<any>,
+    label?: HTMLElement,
+    method?: "push" | "replace",
+    onClick?: Function,
+    path?: string,
+    plain?: boolean,
+    primary?: boolean,
+    reverse?: boolean,
+    secondary?: boolean,
+    type?: "button" | "reset" | "submit"
+  }
+  declare class Button extends React$Component{
+    props: Grommet$ButtonProps;
+  }
+  declare module.exports: Class<Button>;
 }
 
 declare module 'grommet/components/Card' {
-  declare module.exports: any;
+  declare type Grommet$CardProps = {
+    contentPad?: GrommetBoxTypes$PadSizes | {
+      between?: GrommetBoxTypes$PadSizes,
+      horizontal?: GrommetBoxTypes$PadSizes,
+      vertical?: GrommetBoxTypes$PadSizes
+    },
+    description?: string | React$Element<any>,
+    heading?: string | React$Element<any>,
+    headingStrong?: boolean,
+    label?: string | React$Element<any>,
+    link?: React$Element<any>,
+    textSize?: "xsmall" | "small" | "medium" | "large" | "xlarge",
+    thumbnail?: string | React$Element<any>,
+    truncate?: boolean,
+    video?: {
+      source: string,
+      type?: string
+    } | React$Element<any>
+  } & Grommet$BoxProps<Card>
+
+  declare class Card extends React$Component {
+    props: Grommet$CardProps;
+  }
+  declare module.exports: Class<Card>;
 }
 
 declare module 'grommet/components/Carousel' {
-  declare module.exports: any;
+  declare type Grommet$CarouselProps = {
+    a11yTitle?: string,
+    autoplay?: boolean,
+    autoplaySpeed?: number,
+    infinite?: boolean,
+    persistentNav?: boolean
+  }
+  declare class Carousel extends React$Component {}
+  declare module.exports: Class<Carousel>;
 }
 
 declare module 'grommet/components/chart/Area' {
@@ -197,67 +245,211 @@ declare module 'grommet/components/chart/utils' {
 }
 
 declare module 'grommet/components/CheckBox' {
-  declare module.exports: any;
-}
+  declare type Grommet$CheckBoxProps = {
+    checked?: boolean,
+    disabled?: boolean,
+    label?: HTMLElement,
+    name?: string,
+    onChange?: Function,
+    reverse?: boolean,
+    toggle?: boolean
+  }
 
-declare module 'grommet/components/Collapsible' {
-  declare module.exports: any;
+  declare class CheckBox extends React$Component{
+    props: Grommet$CheckBoxProps;
+  }
+  declare module.exports: Class<CheckBox>;
 }
 
 declare module 'grommet/components/Columns' {
-  declare module.exports: any;
+  declare type Grommet$ColumnsProps = {
+    justify?: "start" | "center" | "between" | "end",
+    margin?: "small" | "medium" | "large",
+    masonry?: boolean,
+    maxCount?: number,
+    responsive?: boolean,
+    size?: "small" | "medium" | "large"
+  }
+  declare class Columns extends React$Component {
+    props: Grommet$ColumnsProps;
+  }
+  declare module.exports: Class<Columns>;
 }
 
 declare module 'grommet/components/DateTime' {
-  declare module.exports: any;
-}
-
-declare module 'grommet/components/DateTimeDrop' {
-  declare module.exports: any;
+  declare type Grommet$DateTimeProps = {
+    format?: string,
+    id?: string,
+    name?: string,
+    onChange?: Function,
+    step?: number,
+    value?: string | {}
+  }
+  declare class DateTime extends React$Component {
+    props: Grommet$DateTimeProps
+  }
+  declare module.exports: Class<DateTime>;
 }
 
 declare module 'grommet/components/Distribution' {
-  declare module.exports: any;
+  declare type Grommet$DistributionProps = {
+    a11yTitle?: string,
+    full?: boolean,
+    series?: Array<{
+      label?: HTMLElement,
+      value: number,
+      colorIndex?: string,
+      important?: boolean,
+      onClick?: Function,
+      icon?: {
+        width?: number,
+        height?: number,
+        svgElement?: HTMLElement
+      }
+    }>,
+    size?: "small" | "medium" | "large" | "full",
+    units?: string,
+    vertical?: boolean
+  }
+  declare class Distribution extends React$Component {
+    props: Grommet$DistributionProps;
+  }
+  declare module.exports: Class<Distribution>;
 }
 
 declare module 'grommet/components/Footer' {
-  declare module.exports: any;
+  declare type Grommet$FooterProps = {
+    fixed?: boolean,
+    float?: boolean,
+    primary?: boolean,
+    size?: "small" | "medium" | "large"
+  } & Grommet$BoxProps<Footer>
+
+  declare class Footer extends React$Component {
+    props: Grommet$FooterProps;
+  }
+  declare module.exports: Class<Footer>;
 }
 
 declare module 'grommet/components/Form' {
-  declare module.exports: any;
+  declare type Grommet$FormProps = {
+    compact?: boolean,
+    fill?: boolean,
+    onSubmit?: Function,
+    pad?: GrommetCustomTypes$FormPadding | {
+      horizontal?: GrommetCustomTypes$FormPadding,
+      vertical?: GrommetCustomTypes$FormPadding
+    }
+  }
+
+  declare class Form extends React$Component {
+    props: Grommet$FormProps;
+  }
+  declare module.exports: Class<Form>;
 }
 
 declare module 'grommet/components/FormattedMessage' {
-  declare module.exports: any;
+  declare type Grommet$FormattedMessageProps = {
+    id: string,
+    defaultMessage?: string
+  }
+
+  declare class FormattedMessage extends React$Component {
+    props: Grommet$FormattedMessageProps;
+  }
+  declare module.exports: Class<FormattedMessage>;
 }
 
 declare module 'grommet/components/FormField' {
-  declare module.exports: any;
+  declare type Grommet$FormFieldProps = {
+    error?: HTMLElement,
+    help?: HTMLElement,
+    hidden?: boolean,
+    htmlFor?: string,
+    label?: HTMLElement,
+    size?: "medium" | "large",
+    strong?: boolean
+  }
+  declare class FormField extends React$Component {
+    props: Grommet$FormFieldProps;
+  }
+  declare module.exports: Class<FormField>;
 }
 
 declare module 'grommet/components/FormFields' {
-  declare module.exports: any;
-}
+  declare type Grommet$FormFieldsProps = {
+    children?: HTMLElement,
+    className?: string
+  }
 
-declare module 'grommet/components/Grommet' {
-  declare module.exports: any;
+  declare class FormFields extends React$Component {
+    props: Grommet$FormFieldsProps;
+  }
+  declare module.exports: Class<FormFields>;
 }
 
 declare module 'grommet/components/Header' {
-  declare module.exports: any;
+  declare type Grommet$HeaderProps = {
+    fixed?: boolean,
+    float?: boolean,
+    size?: "small" | "medium" | "large",
+    splash?: boolean
+  } & Grommet$BoxProps<Header>
+  declare class Header extends React$Component {
+    props: Grommet$HeaderProps;
+  }
+  declare module.exports: Class<Header>;
 }
 
 declare module 'grommet/components/Heading' {
-  declare module.exports: any;
+  declare type Grommet$HeadingProps = {
+    align?: "start" | "center" | "end",
+    margin?: "none" | "small" | "medium" | "large",
+    size?: "small" | "medium" | "large",
+    strong?: boolean,
+    tag?: string,
+    truncate?: boolean,
+    uppercase?: boolean
+  }
+
+  declare class Heading extends React$Component {
+    props: Grommet$HeadingProps;
+  }
+  declare module.exports: Class<Heading>;
 }
 
 declare module 'grommet/components/Headline' {
-  declare module.exports: any;
+  declare type Grommet$HeadlineProps = {
+    align?: "start" | "center" | "end",
+    margin?: "none" | "small" | "medium" | "large",
+    size?: "small" | "medium" | "large" | "xlarge",
+    strong?: boolean
+  }
+  declare class Headline extends React.Component {
+    props: Grommet$HeadlineProps;
+  }
+  declare module.exports: Class<Headline>;
 }
 
 declare module 'grommet/components/Hero' {
-  declare module.exports: any;
+  declare type Grommet$HeroProps = {
+    background?: React$Element<any>,
+    backgroundColorIndex?: string,
+    size?: "small" | "medium" | "large",
+    backgroundImage?: string,
+    backgroundPosition?: "left" | "center" | "right",
+    backgroundVideo?: React$Element<any>,
+    colorIndex?: string,
+    flush?: boolean,
+    image?: string,
+    justify?: "start" | "center" | "end",
+    responsiveBackgroundPosition?: "left" | "center" | "right",
+    separator?: boolean
+  }
+  declare class Hero extends React$Component{
+    props: Grommet$HeroProps;
+  }
+  declare module.exports: Class<Hero>;
 }
 
 declare module 'grommet/components/icons/base/3d' {
@@ -2061,23 +2253,103 @@ declare module 'grommet/components/icons/status/Warning' {
 }
 
 declare module 'grommet/components/Image' {
-  declare module.exports: any;
+  declare type Grommet$ImageProps = {
+    align?: {
+      bottom?: boolean,
+      left?: boolean,
+      right?: boolean,
+      top?: boolean
+    },
+    alt?: string,
+    caption?: boolean | string,
+    fit?: "contain" | "cover",
+    full?: "horizontal" | "vertical" | boolean,
+    mask?: boolean,
+    size?: "small" | "medium" | "large" | "thumb",
+    src?: string,
+    title?: string
+  }
+
+  declare class Image extends React$Component {
+    props: Grommet$ImageProps;
+  }
+  declare module.exports: Class<Image>;
 }
 
 declare module 'grommet/components/Label' {
-  declare module.exports: any;
+  declare type Grommet$LabelProps = {
+    announce?: boolean,
+    labelFor?: string,
+    margin?: "none" | "small" | "medium" | "large",
+    size?: "small" | "medium",
+    truncate?: boolean,
+    uppercase?: boolean
+  }
+  declare class Label extends React$Component {
+    props: Grommet$LabelProps;
+  }
+  declare module.exports: Class<Label>;
 }
 
 declare module 'grommet/components/Layer' {
-  declare module.exports: any;
+  declare type Grommet$LayerProps = {
+    align?: "center" |
+      "top" |
+      "bottom" |
+      "left" |
+      "right",
+    closer?: HTMLElement | boolean,
+    flush?: boolean,
+    hidden?: boolean,
+    peek?: boolean,
+    onClose?: Function
+  }
+
+  declare class Layer extends React$Component {
+    props: Grommet$LayerProps;
+  }
+  declare module.exports: Class<Layer>;
 }
 
 declare module 'grommet/components/Legend' {
-  declare module.exports: any;
+  declare type Grommet$LegendProps = {
+    activeIndex?: number,
+    announce?: boolean,
+    onActive?: Function,
+    series: Array<{
+      label?: string,
+      value?: number | HTMLElement,
+      units?: number | HTMLElement | {
+        prefix?: string,
+        suffix?: string
+      },
+      colorIndex?: number | string,
+      onClick?: Function
+    }>,
+    total?: boolean | HTMLElement,
+    units?: string | {
+      prefix?: string,
+      suffix?: string
+    }
+  }
+  declare class Legend extends React$Component {
+    props: Grommet$LegendProps;
+  }
+  declare module.exports: Class<Legend>;
 }
 
 declare module 'grommet/components/List' {
-  declare module.exports: any;
+  declare type Grommet$ListProps = {
+    emptyIndicator?: HTMLElement,
+    onMore?: Function,
+    onSelect?: Function,
+    selectable?: boolean | "multiple",
+    selected?: number | number[]
+  }
+  declare class List extends React$Component {
+    props: Grommet$ListProps;
+  }
+  declare module.exports: Class<List>;
 }
 
 declare module 'grommet/components/ListItem' {
@@ -2085,7 +2357,27 @@ declare module 'grommet/components/ListItem' {
 }
 
 declare module 'grommet/components/LoginForm' {
-  declare module.exports: any;
+  declare type Grommet$LoginFormProps = {
+    align?: "start" | "center" | "end" | "stretch",
+    defaultValues?: {
+      username?: string,
+      rememberMe?: boolean
+    },
+    errors?: string[],
+    forgotPassword?: HTMLElement,
+    logo?: HTMLElement,
+    onSubmit?: Function,
+    onChange?: Function,
+    rememberMe?: boolean,
+    secondaryText?: string,
+    title?: string,
+    usernameType?: string
+  }
+
+  declare class LoginForm extends React$Component {
+    props: Grommet$LoginFormProps;
+  }
+  declare module.exports: Class<LoginForm>;
 }
 
 declare module 'grommet/components/Map' {
@@ -4298,7 +4590,7 @@ declare type Grommet$BoxProps<T> = {
   },
   tag?: string,
   textAlign?: "left" | "center" | "right",
-  texture?: React.ReactNode | string,
+  texture?: HTMLElement | string,
   wrap?: boolean,
   onFocus?: Function
 }
