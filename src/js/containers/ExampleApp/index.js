@@ -43,12 +43,8 @@ import SearchInput from 'grommet/components/SearchInput';
 import Section from 'grommet/components/Section';
 import Select from 'grommet/components/Select';
 import Sidebar from 'grommet/components/Sidebar';
-import SkipLinkAnchor from 'grommet/components/SkipLinkAnchor';
-import SkipLinks from 'grommet/components/SkipLinks';
-import SocialShare from 'grommet/components/SocialShare';
 import Split from 'grommet/components/Split';
 import SunBurst from 'grommet/components/SunBurst';
-import SVGIcon from 'grommet/components/SVGIcon';
 import Tab from 'grommet/components/Tab';
 import Table from 'grommet/components/Table';
 import TableHeader from 'grommet/components/TableHeader';
@@ -67,17 +63,13 @@ import Video from 'grommet/components/Video';
 import WorldMap from 'grommet/components/WorldMap';
 
 class ExampleApp extends Component {
-  constructor() {
-    super();
-    this.handleClick = this.handleClick.bind(this);
-  }
   handleClick() {
     return "foo";
   }
   render() {
     return (
       <App centered inline>
-        <Headline align="center">
+        <Headline align="asdf" justify="left">
           Grommet + TypeScript
         </Headline>
         <Video full={true}
@@ -155,7 +147,7 @@ class ExampleApp extends Component {
                   total: 10,
                   children: [
                     {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
-                    {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
+                    {label: "leaf-1", value: 5, colorIndex: "neutral-1"}
                   ]
                 }
               ]
@@ -164,14 +156,14 @@ class ExampleApp extends Component {
               colorIndex: "neutral-2",
               children: [
                 {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
-                {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
+                {label: "leaf-1", value: 5, colorIndex: "neutral-1"}
               ]
             }, {
               value: 20,
               colorIndex: "neutral-3",
               children: [
                 {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
-                {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
+                {label: "leaf-1", value: 5, colorIndex: "neutral-1"}
               ]
             }]}
             onActive={this.handleClick}
@@ -182,19 +174,19 @@ class ExampleApp extends Component {
         <Legend series={[{label: "Americas", value: 40, colorIndex: "graph-1", onClick: this.handleClick}]} />
         <Map
           data={{
-          categories: [
-            {
-              id: "category-3",
-              label: "Third category",
-              items: [
+            categories: [
+              {
+                id: "category-3",
+                label: "Third category",
+                items: [
                 {id: "item-3-1", label: "Sixth item"},
                 {id: "item-3-2", label: "Seventh item"}
-              ]
-            }
-          ],
-          links: [
-            {parentId: "item-1-1", childId: "item-2-2"},
-          ]
+                ]
+              }
+            ],
+            links: [
+            {parentId: "item-1-1", childId: "item-2-2"}
+            ]
           }}
         />
         <Distribution series={[{label: "First", value: 40, colorIndex: "graph-1"}, {label: "Second", value: 30, colorIndex: "accent-2"}]} />
@@ -504,11 +496,11 @@ class ExampleApp extends Component {
           suggestions={[
             {
               value: "first",
-              label: "FOO",
+              label: "FOO"
             },
             {
               value: "first",
-              label: "FOO",
+              label: "FOO"
             }
           ]}
         />
