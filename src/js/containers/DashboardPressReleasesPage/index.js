@@ -12,7 +12,7 @@ import Heading from 'grommet/components/Heading';
 import ConfirmLayer from '../../components/Dashboard/ConfirmLayer';
 import Add from 'grommet/components/icons/base/Add';
 
-export class PressReleasesPage extends Component {
+export class DashboardPressReleasesPage extends Component {
   constructor(props) {
     super(props);
 
@@ -93,7 +93,7 @@ export class PressReleasesPage extends Component {
   }
 };
 
-PressReleasesPage.propTypes = {
+DashboardPressReleasesPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   request: PropTypes.bool,
   posts: PropTypes.array
@@ -108,4 +108,4 @@ function mapStateToProps (state, props) {
   };
 };
 
-export default connect(mapStateToProps)(PressReleasesPage);
+export default connect(mapStateToProps)(DashboardPressReleasesPage);

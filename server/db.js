@@ -14,7 +14,7 @@ const getDbUri = (dbName) => {
   else 
     console.log('A database must be specified in the .env.');
     process.exit();
-}
+};
 
 const dbOptions = {
   user: process.env.DB_USER,
