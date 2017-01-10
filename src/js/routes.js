@@ -11,8 +11,7 @@ import {
   DashboardUserForm,
   DashboardUsersPage,
   DashboardPressReleasesPage,
-  DashboardPressReleasePage,
-  ExampleApp
+  DashboardPressReleasePage
 } from './containers';
 
 export const getRoutes = (store) => {
