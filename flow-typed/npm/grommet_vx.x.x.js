@@ -180,24 +180,57 @@ declare module 'grommet/components/Carousel' {
     infinite?: boolean,
     persistentNav?: boolean
   }
-  declare class Carousel extends React$Component {}
+  declare class Carousel extends React$Component {
+    props: Grommet$CarouselProps;
+  }
   declare module.exports: Class<Carousel>;
 }
 
 declare module 'grommet/components/chart/Area' {
-  declare module.exports: any;
+  declare class Area extends React$Component {
+    props: Grommet$Chart$GraphProps<Area>;
+  }
+  declare module.exports: Class<Area>;
 }
 
 declare module 'grommet/components/chart/Axis' {
-  declare module.exports: any;
+  declare type Grommet$Chart$AxisProps = {
+    a11yTitle?: string,
+    align?: 'start' | 'end';
+    count: number,
+    labels: Array<{
+      colorIndex?: string,
+      index: number,
+      label: HTMLElement
+    }>,
+    reverse?: boolean,
+    ticks?: boolean,
+    tickAlign?: 'start' | 'end';
+    vertical?: boolean,
+  }
+  declare class Axis extends React$Component {
+    props: Grommet$Chart$AxisProps; 
+  }
+  declare module.exports: Class<Axis>;
 }
 
 declare module 'grommet/components/chart/Bar' {
-  declare module.exports: any;
+  declare class Bar extends React$Component {
+    props: Grommet$Chart$GraphProps<Bar>;
+  }
+  declare module.exports: Class<Bar>;
 }
 
 declare module 'grommet/components/chart/Base' {
-  declare module.exports: any;
+  declare type Grommet$Chart$BaseProps = {
+    height?: 'xxsmall' | 'xsmall' | 'small' | 'medium' | 'large' | 'sparkline',
+    vertical?: boolean,
+    width?: 'small' | 'medium' | 'large' | 'full',
+  }
+  declare class Base extends React$Component {
+    props: Grommet$Chart$BaseProps;
+  }
+  declare module.exports: Class<Base>;
 }
 
 declare module 'grommet/components/chart/Chart' {
@@ -205,43 +238,106 @@ declare module 'grommet/components/chart/Chart' {
 }
 
 declare module 'grommet/components/chart/Graph' {
-  declare module.exports: any;
+  declare class Graph extends React$Component {
+    props: Grommet$Chart$GraphProps<Graph>,
+  }
+  declare module.exports: Class<Graph>;
 }
 
 declare module 'grommet/components/chart/Grid' {
-  declare module.exports: any;
+  declare type Grommet$Chart$GridProps = {
+    columns?: number,
+    row?: number
+  }
+  declare class Grid extends React$Component {
+    props: Grommet$Chart$GridProps;
+  }
+  declare module.exports: Class<Grid>;
 }
 
 declare module 'grommet/components/chart/HotSpots' {
-  declare module.exports: any;
+  declare type $Grommet$Chart$HotSpots {
+    a11yTitle?: number | string,
+    activeIndex?: number,
+    count: number,
+    onActive?: Function,
+    onClick?: Function,
+    vertical?: boolean
+  }
+  declare class HotSpots extends React$Component {
+    props: $Grommet$Chart$HotSpots;
+  }
+  declare module.exports: Chart<HotSpots>;
 }
 
 declare module 'grommet/components/chart/Layers' {
-  declare module.exports: any;
+  declare type Grommet$Chart$LayersProps = {
+    height?: number,
+    width?: number
+  }
+  declare class Layers extends React$Component {
+    props: Grommet$Chart$LayersProps;
+  }
+  declare module.exports: Class<Layers>;
 }
 
 declare module 'grommet/components/chart/Line' {
-  declare module.exports: any;
+  declare class Graph extends React$Component {
+    props: Grommet$Chart$GraphProps<Line>,
+  }
+  declare module.exports: Class<Line>;
 }
 
 declare module 'grommet/components/chart/Marker' {
-  declare module.exports: any;
+  declare type $Grommet$Chart$MarkerProps = {
+    colorIndex: PropTypes.string,
+    count?: number,
+    index?: number,
+    max?: number,
+    min?: number,
+    reverse?: boolean,
+    value?: number,
+    vertical?: boolean,
+  }
+  declare class Marker extends React$Component {
+    props: $Grommet$Chart$MarkerProps,
+  }
+  declare module.exports: Class<Marker>;
 }
 
 declare module 'grommet/components/chart/MarkerLabel' {
-  declare module.exports: any;
-}
-
-declare module 'grommet/components/chart/normalize' {
-  declare module.exports: any;
+  declare type $Grommet$Chart$MarkerLabelProps = {
+    align?: 'start' | 'end',
+    colorIndex?: string,
+    count?: number,
+    index?: number,
+    label?: HTMLElement,
+    max?: number,
+    min?: number,
+    reverse?: boolean,
+    value?: number,
+    vertical?: boolean,
+  }
+  declare class MarkerLabel extends React$Component {
+    props: $Grommet$Chart$MarkerLabelProps,
+  }
+  declare module.exports: Class<MarkerLabel>;
 }
 
 declare module 'grommet/components/chart/Range' {
-  declare module.exports: any;
-}
-
-declare module 'grommet/components/chart/utils' {
-  declare module.exports: any;
+  declare type $Grommet$Chart$RangeProps = {
+    active?: {
+      end: number,
+      start: number
+    },
+    count: number,
+    onActive?: Function,
+    vertical?: boolean
+  }
+  declare class Range extends React$Component {
+    props: $Grommet$Chart$RangeProps,
+  }
+  declare module.exports: Class<Range>;
 }
 
 declare module 'grommet/components/CheckBox' {
@@ -4934,6 +5030,22 @@ declare interface GrommetCustomTypes$AnimationDetails {
 
 declare type GrommetCustomTypes$TIME_STAMP_FIELD_TYPES = "date" | "time" | "year" | "month" | "day" | "hour" | "minute" | "second" | "hours" | "minutes" | "seconds";
 
+declare type Grommet$Chart$GraphProps<T> = {
+  a11yTitle?: string,
+  activeIndex?: number,
+  colorIndex?: string,
+  height?: number,
+  max: number,
+  min: number,
+  points?: boolean,
+  reverse?: boolean,
+  smooth?: boolean,
+  values: Array<number>,
+  type?: 'area' | 'line' | 'bar';
+  vertical?: boolean,
+  width?: number;
+}
+
 declare type Grommet$BoxProps<T> = {
   a11yTitle?: string | any,
   announce?: boolean,
@@ -4952,12 +5064,12 @@ declare type Grommet$BoxProps<T> = {
   onClick?: Function,
   justify?: "start" | "center" | "between" | "end",
   margin?: GrommetBoxTypes$MarginSizes | {
-    bottom: GrommetBoxTypes$MarginSizes,
-    horizontal: GrommetBoxTypes$MarginSizes,
-    left: GrommetBoxTypes$MarginSizes,
-    right: GrommetBoxTypes$MarginSizes,
-    top: GrommetBoxTypes$MarginSizes,
-    vertical: GrommetBoxTypes$MarginSizes
+    bottom?: GrommetBoxTypes$MarginSizes,
+    horizontal?: GrommetBoxTypes$MarginSizes,
+    left?: GrommetBoxTypes$MarginSizes,
+    right?: GrommetBoxTypes$MarginSizes,
+    top?: GrommetBoxTypes$MarginSizes,
+    vertical?: GrommetBoxTypes$MarginSizes
   },
   pad?: GrommetBoxTypes$PadSizes | {
     between?: GrommetBoxTypes$PadSizes,
