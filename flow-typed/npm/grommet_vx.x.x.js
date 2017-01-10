@@ -3489,7 +3489,7 @@ declare module 'grommet/components/Notification' {
     size?: "small" | "medium" | "large",
     state?: string,
     status?: string,
-    timestamp?: {}
+    timestamp?: {} | string
   } & Grommet$BoxProps<Notification>
   declare class Notification extends React$Component {
     props: Grommet$NotificationProps;
