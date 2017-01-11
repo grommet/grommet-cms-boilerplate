@@ -12,6 +12,7 @@ import user from '../containers/DashboardUserForm/reducer';
 import contentBlocks from '../containers/DashboardContentBlocks/reducer';
 import pressReleases from '../containers/DashboardPressReleasesPage/reducer';
 import pressRelease from '../containers/DashboardPressReleasePage/reducer';
+import assets from '../containers/Assets/reducer';
 
 const rootReducer = combineReducers({
   api,
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   routing,
   contentBlocks,
   pressReleases,
-  pressRelease
+  pressRelease,
+  assets
 });
 
 export default rootReducer;

@@ -30,6 +30,7 @@
     "grommet": "https://github.com/grommet/grommet/tarball/stable",
     "history": "^1.17.0",
     "isomorphic-fetch": "^2.2.1",
+    "mkdirp": "^0.5.1",
     "mongoose": "4.5.5",
     "mongoose-auto-increment": "^5.0.1",
     "morgan": "^1.5.0",

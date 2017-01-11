@@ -1,59 +1,117 @@
 import express from 'express';
 import multer from 'multer';
-import env from 'node-env-file';
-import path from 'path';
+import fs from 'fs';
+import File from '../models/File';
+import mkdirp from 'mkdirp';
+import { slugifyFile } from '../utils/slugify';
 import { isAuthed } from '../middleware/auth';
 
 const router = express.Router();
+const currYear = new Date().getFullYear();
+const currMonth = new Date().getMonth() + 1;
 
-// Load environment variables
-env(path.join(__dirname, '../..', '.env'));
-
-const isDateInString = (fileName) => {
-  const fileNameArray = fileName.split('-');
-
-  if (Array.isArray(fileNameArray) && fileNameArray.length > 1) {
-    const search = fileNameArray[1].search(/^(19|20)\d{2}$/);
-    if (search > -1)
-      return true;
-    else
-      return false;
-  }
-
-  return false;
-};
-
-const year = new Date().getFullYear();
-const reportPath = `../../../labs-web-static/techreports/${year}`;
-
+// Setup file multer storage.
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
-    if (process.env.NODE_ENV === 'production' && isDateInString(file.originalname))
-      callback(null, path.join(__dirname, reportPath));
-    else 
-      callback(null, './uploads/media/');
+    const destPath = `./uploads/media/${currYear}/${currMonth}`;
+
+    // Check if destination directory exists, if not make one.
+    if (!fs.existsSync(destPath)) {
+      mkdirp(destPath, (err) => {
+        if (err) console.log(`Make directory error: ${err}`);
+        callback(null, destPath);
+      });
+    } else {
+      callback(null, destPath);
+    }
   },
   filename: function (req, file, callback) {
-    callback(null, file.originalname);
+    // slugifyFile method will slugify and time stamp a file name.
+    callback(null, slugifyFile(file.originalname));
   }
 });
 const upload = multer({storage: storage});
 
+
+// Edit file
+router.post('/api/file/edit/:id', isAuthed, upload.single('file'), function (req, res) {
+  File.findById(req.params.id, function (err, post) {
+    if (err) {
+      return res.status(400).send(err);
+    }
+    const filePath = (req.file !== undefined) 
+      ? '/' + req.file.path 
+      : post.path;
+
+    post.path = filePath;
+    post.title = req.body.title;
+
+    return post.save(function(err) {
+      if (err) return res.status(400).send(err);
+      
+      return res.status(200).send(post);
+    });
+  });
+});
+
 // Create file
 router.post('/api/file/create', isAuthed, upload.single('file'), 
   function(req, res) {
-    let filePath = (req.file !== undefined) 
+    const filePath = (req.file !== undefined) 
       ? '/' + req.file.path 
       : null;
 
-    const { originalname } = req.file;
-    if (process.env.NODE_ENV === 'production' && isDateInString(originalname))
-      filePath = `/techreports/${year}/${originalname}`;
-
-    res.status(200).send(
-      JSON.stringify({ path: filePath })
-    );
+    File.create({
+      title: req.body.title || '',
+      path: filePath,
+      createdAt: Date.now()
+    }, function (err, post) {
+      if (err) {
+        console.log(`File error: ${err}, ${post}`);
+        return res.status(400).send(err);
+      }
+      return res.status(200).send({ path: filePath });
+    });
   }
 );
+
+// Get files
+router.get('/api/files', isAuthed, function (err, res) {
+  File.find().sort({ createdAt: 'desc' }).exec(
+    function(err, files) {
+      if (err) {
+        return res.status(400).send(err);
+      }
+
+      return res.status(200).send(files);
+    }
+  );
+});
+
+// Get file (unprotected)
+router.get('/api/file', function (req, res) {
+  const id = (req.query.id)
+    ? req.query.id
+    : 0;
+
+  File.findById(id, function (err, file) {
+    if (err) {
+      return res.status(400).send(err);
+    }
+
+    return res.status(200).send(file);
+  });
+});
+
+// Delete File
+router.post('/api/file/:id/delete', isAuthed, function(req, res) { 
+  File.findOne({'_id' : req.params.id }).remove().exec(function(err) {
+    if (err) {
+      return res.status(400).send(err);
+    }
+
+    res.status(200).send('success');
+  });
+});
 
 export default router;

@@ -14,3 +14,5 @@ export EntryOrder from './EntryOrder';
 export HomePage from './HomePage';
 export LoginPage from './LoginPage';
 export PressReleasePage from './PressReleasePage';
+export AssetsPage from './Assets/AssetsPage';
+export AssetPage from './Assets/AssetPage';
