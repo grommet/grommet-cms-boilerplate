@@ -5,7 +5,7 @@ import {
   App,
   HomePage,
   PressReleasePage,
-  Dashboard,
+  DashboardContainer,
   LoginPage,
   DashboardHomePage,
   DashboardUserForm,
@@ -33,7 +33,7 @@ export const getRoutes = (store) => {
 
   return (
     <Router history={browserHistory}>
-      <Route path='/dashboard' component={Dashboard}>
+      <Route path='/dashboard' component={DashboardContainer}>
         <IndexRoute component={LoginPage} />
         <Route path="assets" component={AssetsPage} onEnter={authRequired} />
         <Route path="asset/:id" component={AssetPage} onEnter={authRequired} />

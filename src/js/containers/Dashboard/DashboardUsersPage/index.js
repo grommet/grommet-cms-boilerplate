@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { getUsers, deleteUser } from './actions';
 import { browserHistory } from 'react-router';
 
-import DashboardList from '../../components/Dashboard/List';
+import DashboardList from '../../../components/Dashboard/List';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
-import ConfirmLayer from '../../components/Dashboard/ConfirmLayer';
+import ConfirmLayer from '../../../components/Dashboard/ConfirmLayer';
 import Add from 'grommet/components/icons/base/Add';
 
 export class DashboardUsersPage extends Component {
