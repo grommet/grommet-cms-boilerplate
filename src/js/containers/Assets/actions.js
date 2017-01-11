@@ -1,4 +1,3 @@
-//@flow
 import fetch from 'isomorphic-fetch';
 import * as ActionTypes from './constants';
 import { browserHistory } from 'react-router';
@@ -16,7 +15,7 @@ export function assetsSuccess(posts: Array<Asset>) {
   };
 }
 
-export function assetsError(errorMsg: string) {
+export function assetsError(errorMsg) {
   return {
     type: ActionTypes.ASSETS_ERROR,
     error: errorMsg
@@ -30,8 +29,8 @@ export function assetsDeleteSuccess() {
 }
 
 // Delete asset.
-export function deleteAsset(id: string) {
-  return (dispatch: Function, getState: Function) => {
+export function deleteAsset(id) {
+  return (dispatch, getState) => {
     dispatch(assetsRequest());
     let { url } = getState().api;
     fetch(`${url}/file/${id}/delete`, {
@@ -61,7 +60,7 @@ export function deleteAsset(id: string) {
 }
 
 // Create Asset.
-export function submitAsset(data: Object) {
+export function submitAsset(data) {
   const endPoint = (!data.id)
     ? 'file/create'
     : `file/edit/${data.id}`;
@@ -71,7 +70,7 @@ export function submitAsset(data: Object) {
     formData.append(name, data[name]);
   }
 
-  return (dispatch: Function, getState: Function) => {
+  return (dispatch, getState) => {
     let { url } = getState().api;
 
     dispatch(assetsRequest());
@@ -113,7 +112,7 @@ export function submitAsset(data: Object) {
 // This route is auth protected to avoid publicly listing a site's full list 
 // of resources/assets.
 export function getAssets() {
-  return (dispatch: Function, getState: Function) => {
+  return (dispatch, getState) => {
     dispatch(assetsRequest());
     let { url } = getState().api;
     return fetch(`${url}/files`, {
@@ -149,8 +148,8 @@ export function getAssets() {
 }
 
 // Get Asset
-export function getAsset(id: string) {
-  return (dispatch: Function, getState: Function) => {
+export function getAsset(id) {
+  return (dispatch, getState) => {
     dispatch(assetsRequest());
     let { url } = getState().api;
     return fetch(`${url}/file?id=${id}`, {

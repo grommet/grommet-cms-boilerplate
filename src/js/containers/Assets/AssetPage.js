@@ -1,4 +1,3 @@
-//@flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { submitAsset, getAsset, assetsError } from './actions';
@@ -13,24 +12,8 @@ import TrashIcon from 'grommet/components/icons/base/Trash';
 import DocumentIcon from 'grommet/components/icons/base/Document';
 import { isImage } from '../../utils';
 
-type Props = {
-  error: string,
-  posts: Asset,
-  request: boolean
-};
-
 export class AssetPage extends Component {
-  state: {
-    title: string,
-    path: string,
-    id: string
-  };
-
-  _onChange: () => void;
-  _onSubmit: () => void;
-  _removeAssetClick: () => void;
-
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -50,7 +33,7 @@ export class AssetPage extends Component {
       this.props.dispatch(getAsset(id));
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps) {
     const { title, path, _id } = nextProps.posts;
     if (title)
       this.setState({
@@ -60,7 +43,7 @@ export class AssetPage extends Component {
       });
   }
 
-  _onChange(event: Event) {
+  _onChange(event) {
     if (event.target instanceof HTMLInputElement) {
       const key = event.target.id;
       const val = (event.target.files)
@@ -74,7 +57,7 @@ export class AssetPage extends Component {
     }
   }
 
-  _onSubmit(formData: Object) {
+  _onSubmit(formData) {
     if (formData.hasOwnProperty('file') || formData.hasOwnProperty('id') ) {
       const dataToSubmit = Object.assign({}, formData);
       this.props.dispatch(submitAsset(dataToSubmit));
