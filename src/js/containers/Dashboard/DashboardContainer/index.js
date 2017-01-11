@@ -7,7 +7,7 @@ import GrommetApp from 'grommet/components/App';
 import {
   Nav as DashboardNav,
   Error as DashboardError
-} from 'grommet-cms/components/Dashboard/Nav';
+} from 'grommet-cms/components/Dashboard';
 
 export class Dashboard extends Component {
   constructor(props) {
