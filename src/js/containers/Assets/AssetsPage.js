@@ -1,4 +1,3 @@
-//@flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAssets, deleteAsset } from './actions';
@@ -9,13 +8,6 @@ import SpinningIcon from 'grommet/components/icons/Spinning';
 import { AssetTile } from '../../components/Dashboard';
 
 export class AssetsPage extends Component {
-  props: {
-    dispatch: Function,
-    post: Array<Asset>,
-    request: boolean,
-    error: string
-  }
-
   componentWillMount() {
     this.props.dispatch(getAssets());
   }
@@ -24,7 +16,7 @@ export class AssetsPage extends Component {
     this.props.dispatch(deleteAsset(id));
   }
 
-  _renderLoader(request: boolean): ?React$Element<any> {
+  _renderLoader(request) {
     return (request)
       ? <SpinningIcon /> 
       : <Box pad="medium">

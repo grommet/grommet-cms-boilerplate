@@ -1,5 +1,11 @@
 [include]
 src
+
+[ignore]
+.*/node_modules/flow-remove-types/.*
+.*/dist/.*
+.*/lib/.*
+
 [libs]
-flow-typed/npm
+flow-typed
 src/js/containers/Assets

@@ -1,11 +1,4 @@
-//@flow
 import * as ActionTypes from './constants';
-
-type State = {
-  request: boolean,
-  error: string,
-  posts: Array<Asset>
-};
 
 const initialState = {
   request: false,
@@ -13,7 +6,7 @@ const initialState = {
   posts: []
 };
 
-function assets(state: Object = initialState, action: Object): State {
+function assets(state = initialState, action) {
   switch(action.type) {
     case ActionTypes.ASSETS_REQUEST:
       return {
