@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { login } from './actions';
 
 import Box from 'grommet/components/Box';
-import UserForm from '../../components/Dashboard/UserForm';
+import UserForm from 'grommet-cms/components/Dashboard/UserForm';
 
 export class LoginPage extends Component {
   constructor(props) {

@@ -5,7 +5,7 @@ import { fileInsert, fileUpload, fileError } from './actions';
 
 import Button from 'grommet/components/Button';
 import Image from 'grommet/components/icons/base/Image';
-import FileInsertLayer from '../../../components/Dashboard/FileInsertLayer';
+import FileInsertLayer from 'grommet-cms/components/Dashboard/FileInsertLayer';
 
 export class DashboardFileUpload extends Component {
   constructor(props) {

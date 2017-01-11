@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Box from 'grommet/components/Box';
-import { BLOCK_TYPE_MAP } from '../Dashboard/DashboardContentBlocks/constants';
+import { BLOCK_TYPE_MAP } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/constants';
 
 export default class ContentBlocks extends Component {
   _renderBlocks(blocks) {

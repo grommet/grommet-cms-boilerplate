@@ -5,8 +5,7 @@ import {
 } from '../DashboardContentBlocks/actions';
 import { connect } from 'react-redux';
 import Box from 'grommet/components/Box';
-import PreviewHeader from '../../../components/ContentBlocks/PreviewHeader';
-import BlockSelector from '../../../components/ContentBlocks/BlockSelector';
+import { PreviewHeader, BlockSelector } from 'grommet-cms/components/ContentBlocks';
 import { BLOCK_TYPE_MAP } from '../DashboardContentBlocks/constants';
 
 export class DashboardContentBlock extends Component {

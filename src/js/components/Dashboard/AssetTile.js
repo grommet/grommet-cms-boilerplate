@@ -6,13 +6,13 @@ import Menu from 'grommet/components/Menu';
 import TrashIcon from 'grommet/components/icons/base/Trash';
 import EditIcon from 'grommet/components/icons/base/Edit';
 import DocumentIcon from 'grommet/components/icons/base/Document';
-import { isImage } from '../../utils';
+import { isImage } from 'grommet-cms/utils';
 
 export default function AssetTile ({ id, path, title, onDeleteClick }) {
   const thumbnail = (isImage(path))
     ? <Box 
-        texture={path} 
-        size={{ 
+        texture={path}
+        size={{
           height: { min: 'small', max: 'small' },
           width: { min: 'medium', max: 'medium' }
         }}
@@ -21,8 +21,8 @@ export default function AssetTile ({ id, path, title, onDeleteClick }) {
         }}
         colorIndex="grey-3"
       />
-    : <Box 
-        size={{ 
+    : <Box
+        size={{
           height: { min: 'small', max: 'small' },
           width: { min: 'medium', max: 'medium' }
         }}

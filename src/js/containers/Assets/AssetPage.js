@@ -10,7 +10,7 @@ import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import TrashIcon from 'grommet/components/icons/base/Trash';
 import DocumentIcon from 'grommet/components/icons/base/Document';
-import { isImage } from '../../utils';
+import { isImage } from 'grommet-cms/utils';
 
 export class AssetPage extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ export class AssetPage extends Component {
     if (event.target instanceof HTMLInputElement) {
       const key = event.target.id;
       const val = (event.target.files)
-        ? event.target.files[0] 
+        ? event.target.files[0]
         : event.target.value;
       let obj = {};
       obj[key] = val;
@@ -78,14 +78,14 @@ export class AssetPage extends Component {
       ? <Box pad="medium">
           <Image src={path} size="medium" />
           <Box pad={{ vertical: 'small' }}>
-            <Anchor label="Remove Image" icon={<TrashIcon />} 
+            <Anchor label="Remove Image" icon={<TrashIcon />}
               onClick={this._removeAssetClick} />
           </Box>
         </Box>
       : <Box pad="medium">
           <DocumentIcon size="xlarge" />
           <Box pad={{ vertical: 'small' }}>
-            <Anchor label="Remove File" icon={<TrashIcon />} 
+            <Anchor label="Remove File" icon={<TrashIcon />}
               onClick={this._removeAssetClick} />
           </Box>
         </Box>;

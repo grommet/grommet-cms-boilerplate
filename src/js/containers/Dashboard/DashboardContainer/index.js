@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 
 import { connect } from 'react-redux';
-import { logout } from '../../LoginPage/actions';
+import { logout } from 'grommet-cms/containers/LoginPage/actions';
 import Helmet from 'react-helmet';
-
 import GrommetApp from 'grommet/components/App';
-import DashboardNav from '../../../components/Dashboard/Nav';
-import DashboardError from '../../../components/Dashboard/Error';
+import {
+  Nav as DashboardNav,
+  Error as DashboardError
+} from 'grommet-cms/components/Dashboard/Nav';
 
 export class Dashboard extends Component {
   constructor(props) {
