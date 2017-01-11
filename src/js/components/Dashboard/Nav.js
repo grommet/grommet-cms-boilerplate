@@ -14,7 +14,7 @@ export default function Nav({ onLogoutClick }) {
       className={CLASS_ROOT} 
       justify="between" 
       pad={{ horizontal: 'medium', vertical: 'none' }}
-      colorIndex="accent-2"
+      colorIndex="neutral-4"
       align="center"
       size="small">
       <Heading tag="h4" strong={true} margin="none">
