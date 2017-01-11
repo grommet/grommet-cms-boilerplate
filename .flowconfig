@@ -1,0 +1,5 @@
+[include]
+src
+[libs]
+flow-typed/npm
+src/js/containers/Assets

@@ -90,3 +90,7 @@ export function getYears () {
   const numYears = today.getFullYear() - 1989;
   return Array.from({length: numYears}, (v, k) => today.getFullYear() - k);
 }
+
+export function isImage(path) {
+  return (/\.(gif|jpg|jpeg|tiff|png)$/i).test(path);
+}
