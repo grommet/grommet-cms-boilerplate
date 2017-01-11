@@ -36,24 +36,26 @@ export default function AssetTile ({ id, path, title, onDeleteClick }) {
       </Box>;
 
   return (
-    <Box separator="all">
-      <Box colorIndex="light-2" align="end">
-        <Menu responsive={true}
-          inline={false}
-          dropAlign={{ right: 'right'}}>
-          <Anchor onClick={onDeleteClick}>
-            <TrashIcon size="small" /> Delete
-          </Anchor>
-          <Anchor path={`/dashboard/asset/${id}`}>
-            <EditIcon size="small" /> Edit
-          </Anchor>
-        </Menu>
-      </Box>
-      {thumbnail}
-      <Box pad="small" justify="center" align="center">
-        <Heading tag="h3" margin="none">
-          {title || 'Asset'}
-        </Heading>
+    <Box pad="small">
+      <Box separator="all">
+        <Box colorIndex="light-2" align="end">
+          <Menu responsive={true}
+            inline={false}
+            dropAlign={{ right: 'right'}}>
+            <Anchor onClick={onDeleteClick}>
+              <TrashIcon size="small" /> Delete
+            </Anchor>
+            <Anchor path={`/dashboard/asset/${id}`}>
+              <EditIcon size="small" /> Edit
+            </Anchor>
+          </Menu>
+        </Box>
+        {thumbnail}
+        <Box pad="small" justify="center" align="center">
+          <Heading tag="h3" margin="none">
+            {title || 'Asset'}
+          </Heading>
+        </Box>
       </Box>
     </Box>
   );

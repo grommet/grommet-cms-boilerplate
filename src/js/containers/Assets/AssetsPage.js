@@ -24,9 +24,19 @@ export class AssetsPage extends Component {
     this.props.dispatch(deleteAsset(id));
   }
 
+  _renderLoader(request: boolean): ?React$Element<any> {
+    return (request)
+      ? <SpinningIcon /> 
+      : <Box pad="medium">
+          <Heading tag="h2">
+            Click 'Add Asset' to add your first asset.
+          </Heading>
+        </Box>;
+  }
+
   render() {
-    const { post: assets } = this.props;
-    const assetBlocks = (assets.length > 0)
+    const { post: assets, request } = this.props;
+    const assetBlocks = (assets.length > 0 && !request)
       ? assets.map(({_id, title, path}) => 
         <AssetTile 
           key={`asset-${_id}`} 
@@ -34,7 +44,8 @@ export class AssetsPage extends Component {
           onDeleteClick={this._onDeleteClick.bind(this, _id)}
           title={title} 
           path={path} />)
-      : <SpinningIcon />;
+      : this._renderLoader(request);
+
 
     return (
       <Box full="horizontal" align="center">
@@ -49,7 +60,7 @@ export class AssetsPage extends Component {
           </Button>
         </Box>
         <Box size={{ width: 'xxlarge' }} direction="row" wrap={true} justify="center"
-          pad={{ between: 'small', horizontal: 'medium', vertical: 'medium' }}>
+          pad={{ horizontal: 'medium', vertical: 'medium' }}>
           {assetBlocks}
         </Box>
       </Box>
