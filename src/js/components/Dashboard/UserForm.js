@@ -13,7 +13,9 @@ export default function UserForm(props) {
   return (
     <Form compact={false} onSubmit={props.onSubmit}>
       <Box align="center" pad="medium">
-        <HPELogo />
+        {props.hasLogo &&
+          <HPELogo />
+        }
         <Header pad={{ vertical: "medium" }}>
           <Heading align="center">{props.title}</Heading>
         </Header>
@@ -42,9 +44,11 @@ UserForm.propTypes = {
   password: PropTypes.string,
   onChange: PropTypes.func,
   onSubmit: PropTypes.func,
-  submitMessage: PropTypes.string
+  submitMessage: PropTypes.string,
+  hasLogo: PropTypes.bool.isRequired
 };
 
 UserForm.defaultProps = {
-  submitMessage: 'submit'
+  submitMessage: 'submit',
+  hasLogo: false
 };

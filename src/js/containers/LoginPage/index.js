@@ -45,7 +45,7 @@ export class LoginPage extends Component {
       <Box full="vertical" pad="large" align="center" justify="center">
         <UserForm title="Login" username={this.state.username}
           password={this.state.password} onChange={this._onChange}
-          onSubmit={onSubmitClick}/>
+          onSubmit={onSubmitClick} hasLogo />
           {loginError}
       </Box>
     );
