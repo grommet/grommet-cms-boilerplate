@@ -8,7 +8,6 @@ import DashboardList from 'grommet-cms/components/Dashboard/List';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import ConfirmLayer from 'grommet-cms/components/Dashboard/ConfirmLayer';
-import Add from 'grommet/components/icons/base/Add';
 import { PageHeader } from 'grommet-cms/components/Dashboard';
 
 export class DashboardUsersPage extends Component {
