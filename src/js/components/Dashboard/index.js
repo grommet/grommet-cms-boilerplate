@@ -7,3 +7,4 @@ export MarkdownHelp from './MarkdownHelp';
 export Nav from './Nav';
 export UserForm from './UserForm';
 export AssetTile from './AssetTile';
+export PageHeader from './PageHeader';

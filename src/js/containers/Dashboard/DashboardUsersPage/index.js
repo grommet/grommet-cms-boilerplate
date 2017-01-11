@@ -9,6 +9,7 @@ import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import ConfirmLayer from 'grommet-cms/components/Dashboard/ConfirmLayer';
 import Add from 'grommet/components/icons/base/Add';
+import { PageHeader } from 'grommet-cms/components/Dashboard';
 
 export class DashboardUsersPage extends Component {
   constructor(props) {
@@ -66,11 +67,16 @@ export class DashboardUsersPage extends Component {
       : null;
 
     return (
-      <Box direction="column" pad="medium">
+      <Box direction="column">
         {layer}
-        <Box align="end">
-          <Button label="user" icon={<Add />} onClick={this._onCreateClick} primary={true} />
-        </Box>
+        <PageHeader 
+          title="Users" 
+          controls={
+            <Button path="/dashboard/user/create">
+              Add User
+            </Button>
+          }
+        />
         <DashboardList list={this.props.users} titleKey="username"
           onDelete={deleteMethod} links={false} />
       </Box>
