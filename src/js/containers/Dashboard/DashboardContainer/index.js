@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 
 import { connect } from 'react-redux';
-import { logout } from '../LoginPage/actions';
+import { logout } from '../../LoginPage/actions';
 import Helmet from 'react-helmet';
 
 import GrommetApp from 'grommet/components/App';
-import DashboardNav from '../../components/Dashboard/Nav';
-import DashboardError from '../../components/Dashboard/Error';
+import DashboardNav from '../../../components/Dashboard/Nav';
+import DashboardError from '../../../components/Dashboard/Error';
 
 export class Dashboard extends Component {
   constructor(props) {

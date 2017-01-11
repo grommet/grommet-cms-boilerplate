@@ -5,11 +5,11 @@ import { getPressReleases, deletePressRelease } from './actions';
 import { blockAddList } from '../DashboardContentBlocks/actions';
 import { browserHistory } from 'react-router';
 
-import List from '../../components/Dashboard/List';
+import List from '../../../components/Dashboard/List';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import Heading from 'grommet/components/Heading';
-import ConfirmLayer from '../../components/Dashboard/ConfirmLayer';
+import ConfirmLayer from '../../../components/Dashboard/ConfirmLayer';
 import Add from 'grommet/components/icons/base/Add';
 
 export class DashboardPressReleasesPage extends Component {
@@ -35,7 +35,7 @@ export class DashboardPressReleasesPage extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.posts !== prevProps.posts && this.props.request === false) 
+    if (this.props.posts !== prevProps.posts && this.props.request === false)
       this.setState({orderLayer: false});
   }
 
@@ -83,7 +83,7 @@ export class DashboardPressReleasesPage extends Component {
           <Box>
             <Heading tag="h2" margin="none">Press Releases</Heading>
           </Box>
-          <Button  label="press release" icon={<Add />} 
+          <Button  label="press release" icon={<Add />}
             onClick={this._onCreateClick} primary={true} />
         </Box>
         <List list={this.props.posts} route="press-release" titleKey="title"

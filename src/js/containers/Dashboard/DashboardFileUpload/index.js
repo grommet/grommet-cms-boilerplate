@@ -5,7 +5,7 @@ import { fileInsert, fileUpload, fileError } from './actions';
 
 import Button from 'grommet/components/Button';
 import Image from 'grommet/components/icons/base/Image';
-import FileInsertLayer from '../../components/Dashboard/FileInsertLayer';
+import FileInsertLayer from '../../../components/Dashboard/FileInsertLayer';
 
 export class DashboardFileUpload extends Component {
   constructor(props) {
@@ -43,12 +43,12 @@ export class DashboardFileUpload extends Component {
   }
 
   render() {
-    let layer = (this.props.insertRequest) 
-      ? <FileInsertLayer 
-          onLayerClose={this._onLayerClose} 
-          onSubmit={this._onSubmit} 
-          error={this.props.error} 
-          onChange={this._onChange} 
+    let layer = (this.props.insertRequest)
+      ? <FileInsertLayer
+          onLayerClose={this._onLayerClose}
+          onSubmit={this._onSubmit}
+          error={this.props.error}
+          onChange={this._onChange}
           request={this.props.uploadRequest}
         />
       : null;

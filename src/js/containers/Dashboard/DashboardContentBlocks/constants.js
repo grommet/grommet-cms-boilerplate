@@ -2,13 +2,13 @@ import React from 'react';
 import Box from 'grommet/components/Box';
 import PlayFillIcon from 'grommet/components/icons/base/PlayFill';
 
-import BlockParagraphPreview from '../../components/ContentBlocks/BlockParagraphPreview';
-import BlockHeadingPreview from '../../components/ContentBlocks/BlockHeadingPreview';
-import BlockImagePreview from '../../components/ContentBlocks/BlockImagePreview';
-import BlockCardPreview from '../../components/ContentBlocks/BlockCardPreview';
-import BlockQuotePreview from '../../components/ContentBlocks/BlockQuotePreview';
-import BlockVideoPreview from '../../components/ContentBlocks/BlockVideoPreview';
-import BlockCarouselPreview from '../../components/ContentBlocks/BlockCarouselPreview';
+import BlockParagraphPreview from '../../../components/ContentBlocks/BlockParagraphPreview';
+import BlockHeadingPreview from '../../../components/ContentBlocks/BlockHeadingPreview';
+import BlockImagePreview from '../../../components/ContentBlocks/BlockImagePreview';
+import BlockCardPreview from '../../../components/ContentBlocks/BlockCardPreview';
+import BlockQuotePreview from '../../../components/ContentBlocks/BlockQuotePreview';
+import BlockVideoPreview from '../../../components/ContentBlocks/BlockVideoPreview';
+import BlockCarouselPreview from '../../../components/ContentBlocks/BlockCarouselPreview';
 
 import ImageForm from '../DashboardBlockForm/ImageForm';
 import ParagraphForm from '../DashboardBlockForm/ParagraphForm';
@@ -18,17 +18,17 @@ import QuoteForm from '../DashboardBlockForm/QuoteForm';
 import VideoForm from '../DashboardBlockForm/VideoForm';
 import CarouselForm from '../DashboardBlockForm/CarouselForm';
 
-import BlockHeading from '../../components/ContentBlocks/BlockHeading';
-import BlockParagraph from '../../components/ContentBlocks/BlockParagraph';
-import BlockImage from '../../components/ContentBlocks/BlockImage';
-import BlockImageParagraph from '../../components/ContentBlocks/BlockImageParagraph';
-import BlockCard from '../../components/ContentBlocks/BlockCard';
-import BlockQuote from '../../components/ContentBlocks/BlockQuote';
-import BlockVideo from '../../components/ContentBlocks/BlockVideo';
-import BlockCarousel from '../../components/ContentBlocks/BlockCarousel';
+import BlockHeading from '../../../components/ContentBlocks/BlockHeading';
+import BlockParagraph from '../../../components/ContentBlocks/BlockParagraph';
+import BlockImage from '../../../components/ContentBlocks/BlockImage';
+import BlockImageParagraph from '../../../components/ContentBlocks/BlockImageParagraph';
+import BlockCard from '../../../components/ContentBlocks/BlockCard';
+import BlockQuote from '../../../components/ContentBlocks/BlockQuote';
+import BlockVideo from '../../../components/ContentBlocks/BlockVideo';
+import BlockCarousel from '../../../components/ContentBlocks/BlockCarousel';
 
 export const BLOCK_TYPE_MAP = {
-  BlockParagraph: { 
+  BlockParagraph: {
     element: <BlockParagraph />,
     preview: <BlockParagraphPreview />,
     form: <ParagraphForm />,
@@ -54,7 +54,7 @@ export const BLOCK_TYPE_MAP = {
       </Box>
     )
   },
-  BlockImage: { 
+  BlockImage: {
     element: <BlockImage />,
     preview: <BlockImagePreview />,
     form: <ImageForm />,
@@ -124,11 +124,11 @@ export const BLOCK_TYPE_MAP = {
     name: 'Carousel',
     wireframe: (
       <Box pad={{ between: 'small' }} direction="row">
-        <Box basis="1/4" colorIndex="accent-3" 
+        <Box basis="1/4" colorIndex="accent-3"
           pad={{ horizontal: 'small', vertical: 'large' }} />
-        <Box basis="1/2" colorIndex="accent-3" 
+        <Box basis="1/2" colorIndex="accent-3"
           pad={{ horizontal: 'small', vertical: 'large' }} />
-        <Box basis="1/4" colorIndex="accent-3" 
+        <Box basis="1/4" colorIndex="accent-3"
           pad={{ horizontal: 'small', vertical: 'large' }} />
       </Box>
     )

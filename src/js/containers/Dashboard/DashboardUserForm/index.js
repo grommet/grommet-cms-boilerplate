@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createUser, userRequestError } from './actions';
 
 import Box from 'grommet/components/Box';
-import UserForm from '../../components/Dashboard/UserForm';
+import UserForm from '../../../components/Dashboard/UserForm';
 
 export class DashboardUserForm extends Component {
   constructor(props) {

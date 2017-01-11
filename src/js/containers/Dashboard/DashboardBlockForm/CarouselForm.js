@@ -6,7 +6,7 @@ import Tab from 'grommet/components/Tab';
 import AddIcon from 'grommet/components/icons/base/Add';
 import TrashIcon from 'grommet/components/icons/base/Trash';
 import CarouselSlideForm from './CarouselSlideForm';
-import ConfirmLayer from '../../components/Dashboard/ConfirmLayer';
+import ConfirmLayer from '../../../components/Dashboard/ConfirmLayer';
 
 export class CarouselForm extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ export class CarouselForm extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.carousel) {
       // Copy Carousel state array.
-      this.setState({ 
+      this.setState({
         carousel: nextProps.carousel.slice()
       });
     }
@@ -51,9 +51,9 @@ export class CarouselForm extends Component {
       image: ''
     });
 
-    this.setState({ 
+    this.setState({
       activeSlideIndex: nextCarouselState.length - 1,
-      carousel: nextCarouselState 
+      carousel: nextCarouselState
     });
   }
 
@@ -64,13 +64,13 @@ export class CarouselForm extends Component {
   _deleteSlideClick(activeIndex) {
     this._toggleConfirm();
   }
-  
+
   _deleteSlide(activeIndex, event) {
     event.preventDefault();
     const nextCarouselState = this.state.carousel.slice();
     nextCarouselState.splice(activeIndex);
 
-    this.setState({ 
+    this.setState({
       activeSlideIndex: 0,
       carousel: nextCarouselState,
       confirmLayer: false
@@ -100,21 +100,21 @@ export class CarouselForm extends Component {
   render() {
     const { activeSlideIndex } = this.state;
     const form = (
-      <CarouselSlideForm 
-        data={this.state.carousel[activeSlideIndex]} 
-        onChange={this._handleChange} 
-        onSubmit={this._onSubmit.bind(this, this.state.carousel)} 
+      <CarouselSlideForm
+        data={this.state.carousel[activeSlideIndex]}
+        onChange={this._handleChange}
+        onSubmit={this._onSubmit.bind(this, this.state.carousel)}
       />
     );
 
     const tabs = this.state.carousel.map((slide, index) =>
-        <Tab 
-          title={`Slide ${index + 1}`} 
+        <Tab
+          title={`Slide ${index + 1}`}
           key={index}
           onClick={this._onTabsClick.bind(this, index)} />);
 
     const confirmLayer = (this.state.confirmLayer)
-      ? <ConfirmLayer name={`Slide ${activeSlideIndex + 1}`} onClose={this._toggleConfirm} 
+      ? <ConfirmLayer name={`Slide ${activeSlideIndex + 1}`} onClose={this._toggleConfirm}
           onSubmit={this._deleteSlide.bind(this, activeSlideIndex)} />
       : undefined;
 
@@ -125,9 +125,9 @@ export class CarouselForm extends Component {
           <Box direction="row" align="center">
             <Button icon={<AddIcon />} label="add slide" onClick={this._addSlideClick} />
             <Box pad="small" />
-            <Button icon={<TrashIcon />} label="delete slide" 
+            <Button icon={<TrashIcon />} label="delete slide"
               onClick={this._deleteSlideClick.bind(this, activeSlideIndex)} />
-          </Box> 
+          </Box>
         </Box>
         <Box>
           <Box>
@@ -135,7 +135,7 @@ export class CarouselForm extends Component {
               style={{marginBottom:'-1px'}}>
               {tabs}
             </Tabs>
-          </Box> 
+          </Box>
         </Box>
         {form}
       </Box>

@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { 
+import {
   blockEdit, blockRemove, blockType, blockSubmit, blockMoveUp,
   blockMoveDown
 } from '../DashboardContentBlocks/actions';
 import { connect } from 'react-redux';
 import Box from 'grommet/components/Box';
-import PreviewHeader from '../../components/ContentBlocks/PreviewHeader';
-import BlockSelector from '../../components/ContentBlocks/BlockSelector';
+import PreviewHeader from '../../../components/ContentBlocks/PreviewHeader';
+import BlockSelector from '../../../components/ContentBlocks/BlockSelector';
 import { BLOCK_TYPE_MAP } from '../DashboardContentBlocks/constants';
 
 export class DashboardContentBlock extends Component {
@@ -39,14 +39,14 @@ export class DashboardContentBlock extends Component {
     if (direction === 'up')
       this.props.dispatch(blockMoveUp(id));
     if (direction === 'down')
-      this.props.dispatch(blockMoveDown(id)); 
+      this.props.dispatch(blockMoveDown(id));
   }
 
   render() {
     const { blockType, edit, id } = this.props;
 
     // Show block selector when editing and no block type is defined.
-    const blockSelector = (edit && !blockType) 
+    const blockSelector = (edit && !blockType)
       ? (
         <Box pad="medium">
           <BlockSelector onClick={this._onBlockSelectClick.bind(this, id)}
@@ -71,7 +71,7 @@ export class DashboardContentBlock extends Component {
 
 
     // Show block preview when editing/creating is complete.
-    const preview = (!edit && blockType) 
+    const preview = (!edit && blockType)
       ? (
         <Box pad="medium" colorIndex="light-1">
           {React.cloneElement(
@@ -95,11 +95,11 @@ export class DashboardContentBlock extends Component {
 
     return (
       <Box full="horizontal" colorIndex={color} pad="small">
-        <PreviewHeader 
+        <PreviewHeader
           title={title}
           edit={edit}
-          onClose={this._onCloseClick.bind(this, id)} 
-          onMove={this._onBlockMove.bind(this, id)} 
+          onClose={this._onCloseClick.bind(this, id)}
+          onMove={this._onBlockMove.bind(this, id)}
           onEdit={this._onEditClick.bind(this, id)}
         />
         {preview}
@@ -118,13 +118,13 @@ function mapStateToProps(state, props) {
   const blockIndex = state.contentBlocks.findIndex(
     (block) => block.id === props.id
   );
-  const { 
-    blockType, card, carousel, content, edit, 
-    image, imageDesc, imageSize, label, linkUrl, source 
+  const {
+    blockType, card, carousel, content, edit,
+    image, imageDesc, imageSize, label, linkUrl, source
   } = state.contentBlocks[blockIndex];
 
   return {
-    blockType, card, carousel, content, edit, 
+    blockType, card, carousel, content, edit,
     image, imageDesc, imageSize, label, linkUrl, source
   };
 }

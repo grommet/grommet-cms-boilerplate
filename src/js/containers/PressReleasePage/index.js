@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { getPressRelease } from '../DashboardPressReleasePage/actions';
+import { getPressRelease } from '../Dashboard/DashboardPressReleasePage/actions';
 import ContentBlocks from '../ContentBlocks';
 import Box from 'grommet/components/Box';
 import Headline from 'grommet/components/Headline';

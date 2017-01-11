@@ -10,7 +10,7 @@ import Heading from 'grommet/components/Heading';
 import Select from 'grommet/components/Select';
 import FileUpload from '../DashboardFileUpload';
 import DashboardContentBlocks from '../DashboardContentBlocks';
-import { formatDate } from '../../utils';
+import { formatDate } from '../../../utils';
 
 export class PressReleaseForm extends Component {
   constructor(props) {
@@ -77,7 +77,7 @@ export class PressReleaseForm extends Component {
 
     let dataToSubmit = Object.assign({}, this.state);
     dataToSubmit.contentBlocks = this.props.contentBlocks;
-    
+
     // Remove any extreneous form data.
     if (dataToSubmit.postType === 'Press Release')
       delete dataToSubmit.link;
@@ -125,7 +125,7 @@ export class PressReleaseForm extends Component {
                   inline={false}
                   options={["Press Release", "Related Article"]}
                   value={postType}
-                  onChange={this._onChange} 
+                  onChange={this._onChange}
                 />
               </FormField>
               <FormField label="Title" htmlFor="title">
@@ -137,12 +137,12 @@ export class PressReleaseForm extends Component {
                     <DateTime id="date"
                       name="date"
                       format="M/D/YYYY"
-                      onChange={this._onDateChange} 
+                      onChange={this._onDateChange}
                       value={date} />
                   </FormField>
               </FormField>
               <FormField label="Thumbnail Image File Path" htmlFor="image">
-                <input id="image" name="image" type="text" 
+                <input id="image" name="image" type="text"
                   value={image} onChange={this._onChange} />
               </FormField>
               {linkBlock}
@@ -152,7 +152,7 @@ export class PressReleaseForm extends Component {
         <FileUpload />
         {blocks}
         <Box pad="small" />
-        <Button label="submit" onClick={onSubmitClick} primary={true} 
+        <Button label="submit" onClick={onSubmitClick} primary={true}
           type="submit" />
       </span>
     );
