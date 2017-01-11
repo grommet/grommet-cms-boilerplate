@@ -16,26 +16,30 @@ const initialState = {
 function assets(state: Object = initialState, action: Object): State {
   switch(action.type) {
     case ActionTypes.ASSETS_REQUEST:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         request: true,
         posts: []
-      });
+      };
     case ActionTypes.ASSETS_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         request: false,
         error: '',
         posts: action.posts
-      });
+      };
     case ActionTypes.ASSETS_ERROR:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         request: false,
         error: action.error
-      });
+      };
     case ActionTypes.ASSETS_DELETE_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         request: false,
         error: ''
-      });
+      };
     default:
       return state;
   }
