@@ -3,7 +3,7 @@
 import React from 'react';
 import GrommetApp from 'grommet/components/App';
 import Helmet from 'react-helmet';
-import Nav from '../../components/Nav';
+import Nav from 'grommet-cms/components/Nav';
 
 class App extends React.Component {
   render() {

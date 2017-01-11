@@ -39,7 +39,10 @@ export default {
       root: [
         path.resolve(__dirname, './node_modules'),
         path.resolve(__dirname, './src')
-      ]
+      ],
+      alias: {
+        'grommet-cms': path.resolve(__dirname, './src/js/')
+      }
     },
     module: {
       preLoaders: [{

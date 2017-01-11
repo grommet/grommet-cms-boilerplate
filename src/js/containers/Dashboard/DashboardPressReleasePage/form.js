@@ -10,7 +10,7 @@ import Heading from 'grommet/components/Heading';
 import Select from 'grommet/components/Select';
 import FileUpload from '../DashboardFileUpload';
 import DashboardContentBlocks from '../DashboardContentBlocks';
-import { formatDate } from '../../../utils';
+import { formatDate } from 'grommet-cms/utils';
 
 export class PressReleaseForm extends Component {
   constructor(props) {

@@ -2,14 +2,14 @@ import React, { Component, PropTypes } from 'react';
 
 import { connect } from 'react-redux';
 import { getPressReleases, deletePressRelease } from './actions';
-import { blockAddList } from '../DashboardContentBlocks/actions';
+import { blockAddList } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
 import { browserHistory } from 'react-router';
 
-import List from '../../../components/Dashboard/List';
+import List from 'grommet-cms/components/Dashboard/List';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import Heading from 'grommet/components/Heading';
-import ConfirmLayer from '../../../components/Dashboard/ConfirmLayer';
+import ConfirmLayer from 'grommet-cms/components/Dashboard/ConfirmLayer';
 import Add from 'grommet/components/icons/base/Add';
 
 export class DashboardPressReleasesPage extends Component {

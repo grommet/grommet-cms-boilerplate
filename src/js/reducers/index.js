@@ -1,11 +1,11 @@
 import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
 
-import api from '../containers/Api/reducer';
-import homepage from '../containers/HomePage/reducer';
-import login from '../containers/LoginPage/reducer';
-import assets from '../containers/Assets/reducer';
-import * as dashboardReducers from '../containers/Dashboard/reducers';
+import api from 'grommet-cms/containers/Api/reducer';
+import homepage from 'grommet-cms/containers/HomePage/reducer';
+import login from 'grommet-cms/containers/LoginPage/reducer';
+import assets from 'grommet-cms/containers/Assets/reducer';
+import * as dashboardReducers from 'grommet-cms/containers/Dashboard/reducers';
 
 const rootReducer = combineReducers({
   api,

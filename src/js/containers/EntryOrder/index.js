@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Layer from 'grommet/components/Layer';
-import EntryOrderList from '../../components/Dashboard/EntryOrderList';
+import EntryOrderList from 'grommet-cms/components/Dashboard/EntryOrderList';
 
 export class EntryOrder extends Component {
   constructor(props) {

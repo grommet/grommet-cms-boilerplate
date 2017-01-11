@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { getPressRelease } from '../Dashboard/DashboardPressReleasePage/actions';
-import ContentBlocks from '../ContentBlocks';
+import { getPressRelease } from 'grommet-cms/containers/Dashboard/DashboardPressReleasePage/actions';
+import ContentBlocks from 'grommet-cms/containers/ContentBlocks';
 import Box from 'grommet/components/Box';
 import Headline from 'grommet/components/Headline';
 
