@@ -7,14 +7,14 @@ import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
 import Box from 'grommet/components/Box';
-import HPELogo from 'grommet-cms/components/HPELogo';
+import Logo from 'grommet-cms/components/Logo';
 
 export default function UserForm(props) {
   return (
     <Form compact={false} onSubmit={props.onSubmit}>
       <Box align="center" pad="medium">
         {props.hasLogo &&
-          <HPELogo />
+          <Logo size="xlarge" />
         }
         <Header pad={{ vertical: "medium" }}>
           <Heading align="center">{props.title}</Heading>
