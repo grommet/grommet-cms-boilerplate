@@ -2,7 +2,9 @@
 
 import path from 'path';
 
+const env = process.env.NODE_ENV || 'development';
 export default {
+  devTool: env === 'production' ? 'source-map' : 'eval',
   base: '.',
   publicPath: '',
   dist: path.resolve(__dirname, 'dist/'),
