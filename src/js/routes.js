@@ -11,7 +11,9 @@ import {
   DashboardUserForm,
   DashboardUsersPage,
   DashboardPressReleasesPage,
-  DashboardPressReleasePage
+  DashboardPressReleasePage,
+  AssetsPage,
+  AssetPage
 } from './containers';
 
 export const getRoutes = (store) => {
@@ -33,6 +35,8 @@ export const getRoutes = (store) => {
     <Router history={browserHistory}>
       <Route path='/dashboard' component={Dashboard}>
         <IndexRoute component={LoginPage} />
+        <Route path="assets" component={AssetsPage} onEnter={authRequired} />
+        <Route path="asset/:id" component={AssetPage} onEnter={authRequired} />
         <Route path="homepage" component={DashboardHomePage} onEnter={authRequired} />
         <Route path="users" component={DashboardUsersPage} onEnter={authRequired} />
         <Route path='user/create' component={DashboardUserForm} onEnter={authRequired} />
