@@ -5,9 +5,9 @@ import { logout } from 'grommet-cms/containers/LoginPage/actions';
 import Helmet from 'react-helmet';
 import GrommetApp from 'grommet/components/App';
 import {
-  Nav as DashboardNav,
-  Error as DashboardError
-} from 'grommet-cms/components/Dashboard/Nav';
+  DashboardNav,
+  DashboardError
+} from 'grommet-cms/components';
 
 export class Dashboard extends Component {
   constructor(props) {

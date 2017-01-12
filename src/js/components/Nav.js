@@ -7,11 +7,11 @@ import GrommetIcon from 'grommet/components/icons/base/BrandGrommetOutline';
 
 export default function Nav (props) {
   return (
-    <Header className="mobile-hide" size="large" colorIndex="neutral-5"
+    <Header className="mobile-hide" size="large" colorIndex="neutral-4"
       justify="center" separator="bottom" pad={{ horizontal: 'medium' }}>
       <Box size={{ width: 'xxlarge' }} direction="row" responsive={false}>
         <Menu inline={true} direction="row" responsive={false} align="center">
-          <Anchor path="/" icon={<GrommetIcon />} />
+          <Anchor path="/" icon={<GrommetIcon size="large" />} />
           <Anchor path="/posts" label="Posts" />
         </Menu>
       </Box>

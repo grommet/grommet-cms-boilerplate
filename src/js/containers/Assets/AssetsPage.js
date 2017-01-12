@@ -5,7 +5,7 @@ import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import Heading from 'grommet/components/Heading';
 import SpinningIcon from 'grommet/components/icons/Spinning';
-import { AssetTile } from 'grommet-cms/components/Dashboard';
+import { AssetTile, PageHeader } from '../../components/Dashboard';
 
 export class AssetsPage extends Component {
   componentWillMount() {
@@ -41,16 +41,14 @@ export class AssetsPage extends Component {
 
     return (
       <Box full="horizontal" align="center">
-        <Box colorIndex="light-2" full="horizontal" direction="row"
-          justify="between"
-          pad={{ vertical: 'small', horizontal: 'medium' }}>
-          <Heading tag="h4" strong={true} margin="none">
-            Assets
-          </Heading>
-          <Button path="/dashboard/asset/create">
-            Add Asset
-          </Button>
-        </Box>
+        <PageHeader 
+          title="Assets" 
+          controls={
+            <Button path="/dashboard/asset/create">
+              Add Asset
+            </Button>
+          }
+        />
         <Box size={{ width: 'xxlarge' }} direction="row" wrap={true} justify="center"
           pad={{ horizontal: 'medium', vertical: 'medium' }}>
           {assetBlocks}

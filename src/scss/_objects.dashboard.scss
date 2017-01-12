@@ -1,6 +1,7 @@
 .grommet.dashboard {
   .grommetux-form {
     width: auto;
+    min-width: 350px;
 
     .grommetux-date-time {
       max-width: 350px;
@@ -25,5 +26,12 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+  }
+
+  .dashboard__user-form {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-direction: column;
   }
 }

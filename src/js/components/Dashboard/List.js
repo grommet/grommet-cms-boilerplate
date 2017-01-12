@@ -31,8 +31,8 @@ export default function List(props) {
         : null;
 
       return (
-        <Box key={`item-${itemId}`} className="posts-list__post" separator="top" 
-          direction="row" flex="grow" pad={{ vertical: 'medium' }} full="horizontal">
+        <Box key={`item-${itemId}`} className="posts-list__post" separator="bottom" 
+          direction="row" flex="grow" pad="medium" full="horizontal">
           <Box flex="grow">
             <Heading tag="h3">{title}</Heading>
           </Box>

@@ -4,12 +4,12 @@ import Button from 'grommet/components/Button';
 import Form from 'grommet/components/Form';
 import FormField from 'grommet/components/FormField';
 import FormFields from 'grommet/components/FormFields';
-import FileUpload from '../DashboardFileUpload';
+import { DashboardFileUpload } from 'grommet-cms/containers';
 
 export class CarouselSlideForm extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       image: props.data
         && props.data.image || ''
@@ -79,7 +79,7 @@ export class CarouselSlideForm extends Component {
               <input id="image" name="image" type="text"
                 value={image} onChange={this._onChange} />
             </FormField>
-            <FileUpload title='upload image' />
+            <DashboardFileUpload title='upload image' />
           </fieldset>
           <Button label="submit" primary={true} onClick={onSubmit} />
         </FormFields>

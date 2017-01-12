@@ -14,7 +14,7 @@ export default function Nav({ onLogoutClick }) {
       className={CLASS_ROOT} 
       justify="between" 
       pad={{ horizontal: 'medium', vertical: 'none' }}
-      colorIndex="accent-2"
+      colorIndex="neutral-1"
       align="center"
       size="small">
       <Heading tag="h4" strong={true} margin="none">
@@ -28,17 +28,24 @@ export default function Nav({ onLogoutClick }) {
           <Anchor path="/dashboard/press-releases" label="Press Releases" />
           <Anchor path="/dashboard/assets" label="Assets" />
           <Anchor path="/dashboard/users" label="Users" />
-          <Anchor onClick={onLogoutClick} label="Sign Out" />
         </Menu>
-
-        <Image 
-          src="/img/dashboard/user-thumb.jpg" 
-          style={{
-            borderRadius: 25,
-            width: '25px',
-            height: '25px'
-          }}
-        />
+        <Menu responsive={true}
+          inline={false}
+          dropAlign={{ right: 'right'}}
+          icon={
+            <Image 
+              src="/img/dashboard/user-thumb.jpg" 
+              style={{
+                borderRadius: 25,
+                width: '25px',
+                height: '25px'
+              }} 
+            />
+          }>
+          <Anchor onClick={onLogoutClick}>
+            Sign Out
+          </Anchor>
+        </Menu>
       </Box>
     </Header>
   );

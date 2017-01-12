@@ -1,7 +1,15 @@
 import React from 'react';
 import Box from 'grommet/components/Box';
 import PlayFillIcon from 'grommet/components/icons/base/PlayFill';
-
+import {
+  ImageForm,
+  ParagraphForm,
+  ImageParagraphForm,
+  CardParagraphForm,
+  QuoteForm,
+  VideoForm,
+  CarouselForm
+} from 'grommet-cms/containers';
 import {
   BlockParagraphPreview,
   BlockHeadingPreview,
@@ -18,16 +26,7 @@ import {
   BlockQuote,
   BlockVideo,
   BlockCarousel
-} from 'grommet-cms/components/ContentBlocks';
-import {
-  ImageForm,
-  ParagraphForm,
-  ImageParagraphForm,
-  CardParagraphForm,
-  QuoteForm,
-  VideoForm,
-  CarouselForm
-} from 'grommet-cms/containers/Dashboard/DashboardBlockForm';
+} from 'grommet-cms/components';
 
 export const BLOCK_TYPE_MAP = {
   BlockParagraph: {

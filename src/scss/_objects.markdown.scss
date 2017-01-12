@@ -66,7 +66,8 @@
   blockquote {
     margin: 24px;
     border: 16px solid transparent;
-    border-image: linear-gradient(to bottom right, nth($brand-accent-colors, 3) 40%, rgba(253, 154, 105, 0.3) 100%);
+    // These are causing webpack errors.    
+    //border-image: linear-gradient(to bottom right, nth($brand-accent-colors, 3) 40%, rgba(253, 154, 105, 0.3) 100%);
     border-image-slice: 1;
 
     p {
@@ -77,7 +78,8 @@
     @include media-query(lap-and-up) {
       margin: 24px 0;
       border: 24px solid transparent;
-      border-image: linear-gradient(to bottom right, nth($brand-accent-colors, 3) 40%, rgba(253, 154, 105, 0.3) 100%);
+    // These are causing webpack errors.
+      //border-image: linear-gradient(to bottom right, nth($brand-accent-colors, 3) 40%, rgba(253, 154, 105, 0.3) 100%);
       border-image-slice: 1;
 
       p {

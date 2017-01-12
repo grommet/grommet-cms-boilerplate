@@ -7,7 +7,7 @@ import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
 import Select from 'grommet/components/Select';
 
-import FileUpload from '../DashboardFileUpload';
+import { DashboardFileUpload } from 'grommet-cms/containers';
 
 export class ImageParagraphForm extends Component {
   constructor(props) {
@@ -60,7 +60,7 @@ export class ImageParagraphForm extends Component {
       ? this._onSubmit
       : undefined;
 
-    const fileUpload = <FileUpload />;
+    const fileUpload = <DashboardFileUpload />;
     return (
       <Box colorIndex="light-2" pad="medium">
         <Form compact={false} onSubmit={submit}>
@@ -80,7 +80,7 @@ export class ImageParagraphForm extends Component {
                   inline={false}
                   options={["Small", "Medium", "Large"]}
                   value={imageSize}
-                  onChange={this._onChange} 
+                  onChange={this._onChange}
                 />
               </FormField>
               <FormField label="Image file path" htmlFor="image">
@@ -89,10 +89,10 @@ export class ImageParagraphForm extends Component {
               </FormField>
               {fileUpload}
             </fieldset>
-            <Button onClick={submit} primary={false} type="submit" 
+            <Button onClick={submit} primary={false} type="submit"
               label="Done" />
           </FormFields>
-        </Form> 
+        </Form>
       </Box>
     );
   }

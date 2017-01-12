@@ -14,7 +14,7 @@ import {
   DashboardPressReleasePage,
   AssetsPage,
   AssetPage
-} from './containers';
+} from 'grommet-cms/containers';
 
 export const getRoutes = (store) => {
   const authRequired = (nextState, replace) => {

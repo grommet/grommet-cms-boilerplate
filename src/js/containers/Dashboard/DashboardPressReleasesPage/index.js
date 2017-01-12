@@ -8,9 +8,8 @@ import { browserHistory } from 'react-router';
 import List from 'grommet-cms/components/Dashboard/List';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
-import Heading from 'grommet/components/Heading';
 import ConfirmLayer from 'grommet-cms/components/Dashboard/ConfirmLayer';
-import Add from 'grommet/components/icons/base/Add';
+import { PageHeader } from 'grommet-cms/components/Dashboard';
 
 export class DashboardPressReleasesPage extends Component {
   constructor(props) {
@@ -77,17 +76,20 @@ export class DashboardPressReleasesPage extends Component {
       : null;
 
     return (
-      <Box direction="column" pad={{ horizontal: "medium"}}>
+      <Box direction="column">
         {layer}
-        <Box justify="between" direction="row" pad={{ vertical: 'small' }}>
-          <Box>
-            <Heading tag="h2" margin="none">Press Releases</Heading>
-          </Box>
-          <Button  label="press release" icon={<Add />}
-            onClick={this._onCreateClick} primary={true} />
+        <PageHeader 
+          title="Posts" 
+          controls={
+            <Button path="/dashboard/press-release/create">
+              Add Post
+            </Button>
+          }
+        />
+        <Box>
+          <List list={this.props.posts} route="press-release" titleKey="title"
+            onDelete={this._confirmDelete} links={true} />
         </Box>
-        <List list={this.props.posts} route="press-release" titleKey="title"
-          onDelete={this._confirmDelete} links={true} />
       </Box>
     );
   }
