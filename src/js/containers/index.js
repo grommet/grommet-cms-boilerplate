@@ -7,3 +7,4 @@ export PressReleasePage from './PressReleasePage';
 export AssetsPage from './Assets/AssetsPage';
 export AssetPage from './Assets/AssetPage';
 export * from './Dashboard';
+export * from './Post';
