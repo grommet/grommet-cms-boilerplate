@@ -3,7 +3,7 @@
 {{/if}}
 import * as T from './constants';
 {{#if wantFlowTypes}}
-import { {{ properCase name }}Action } from './flowTypes';
+import type { {{ properCase name }}Action } from './flowTypes';
 
 export const loadDataInitiation = (): {{ properCase name }}Action => ({
   type: T.LOAD_DATA_INITIATION

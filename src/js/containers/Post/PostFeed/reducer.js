@@ -1,16 +1,16 @@
 /* @flow */
 import * as T from './constants';
-import { SingleItemPageState, SingleItemPageAction } from './flowTypes';
+import type { PostFeedState, PostFeedAction } from './flowTypes';
 
-export const initialState: SingleItemPageState = {
+export const initialState: PostFeedState = {
   isLoading: false,
   error: null
 };
 
-const singleItemPageReducer = (
-  state: SingleItemPageState = initialState,
-  action: SingleItemPageAction
-): SingleItemPageState => {
+const postFeedReducer = (
+  state: PostFeedState = initialState,
+  action: PostFeedAction
+): PostFeedState => {
   switch (action.type) {
     case T.LOAD_DATA_INITIATION:
       return {
@@ -33,4 +33,4 @@ const singleItemPageReducer = (
   }
 };
 
-export default singleItemPageReducer;
+export default postFeedReducer;

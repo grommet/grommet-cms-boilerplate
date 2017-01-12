@@ -1,4 +1,5 @@
 const path = require('path');
+const { trimTemplateFile } = require('../utils/');
 
 module.exports = {
   description: 'Add a container component',
@@ -34,19 +35,19 @@ module.exports = {
     {
       type: 'confirm',
       name: 'wantSelectors',
-      default: false,
+      default: true,
       message: 'Do you want to use reselect?'
     },
     {
       type: 'confirm',
       name: 'wantFlowTypes',
-      default: false,
+      default: true,
       message: 'Should the container have FlowTypes instead of PropTypes?'
     },
     {
       type: 'confirm',
       name: 'wantJestTests',
-      default: true,
+      default: false,
       message: 'Should the component have an accompanying jest test file?'
     },
     {
@@ -68,11 +69,18 @@ module.exports = {
   ],
   actions: (data) => {
     const containerPath = path.resolve(process.cwd(), `${data.path}/{{properCase name}}/`);
+    const rootPath = path.resolve(process.cwd(), `./src/js/containers/index.js`);
     const actions = [{
       type: 'add',
       path: `${containerPath}/index.jsx`,
       templateFile: './container/index.js.hbs',
       abortOnFail: true
+    }, {
+      type: 'modify',
+      path: rootPath,
+      pattern: /(\/\* GENERATOR \*\/)/g,
+      template: trimTemplateFile('./config/generators/container/export.js.hbs'),
+      abortOnFail: false
     }];
 
     if (data.wantSelectors) {

@@ -8,6 +8,12 @@ module.exports = (plop) => {
   plop.addHelper('uppercase', (text) => {
     return text.toUpperCase();
   });
+  plop.addHelper('getPath', (p) => {
+    const pathParts = p.split('/');
+    const index = pathParts.indexOf('containers');
+    const newPath = pathParts.slice(index + 1, pathParts.length);
+    return [newPath.join('/')].map(i => `./${i}`)[0];
+  });
   plop.addHelper('createImports', (list) => {
     const items = list.map((item) => `import ${item} from 'grommet/components/${item}';`).join('\n');
     return new SafeString(items);

@@ -17,7 +17,7 @@ import * as {{ properCase name }}ActionCreators from './actions';
 import { selectMyProp } from './selectors';
 {{/if}}
 {{#if wantFlowTypes}}
-import {{ properCase name }}Props from './flowTypes';
+import type { {{ properCase name }}Props } from './flowTypes';
 {{/if}}
 
 class {{ properCase name }} extends Component { // eslint-disable-line react/prefer-stateless-function

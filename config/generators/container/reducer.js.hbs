@@ -3,7 +3,7 @@
 {{/if}}
 import * as T from './constants';
 {{#if wantFlowTypes}}
-import { {{ properCase name }}State, {{ properCase name }}Action } from './flowTypes';
+import type { {{ properCase name }}State, {{ properCase name }}Action } from './flowTypes';
 
 export const initialState: {{ properCase name }}State = {
   isLoading: false,
