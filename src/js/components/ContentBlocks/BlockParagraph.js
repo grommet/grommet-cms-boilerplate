@@ -8,7 +8,7 @@ export default function BlockParagraph ({ content }) {
     <Section
       pad={{ horizontal: 'large', vertical: 'small' }}
       alignSelf="center">
-      <Box full="horizontal">
+      <Box>
         <Markdown content={content} components={{ 
           'p': { 'props':  { size: 'large', margin: 'small' } },
           'h2': { 'props':  { strong: true } }
