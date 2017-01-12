@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import { connect } from 'react-redux';
-import { getPost, submitPost } from 'grommet-cms/containers/Posts/actions';
+import { getPost, submitPost } from 'grommet-cms/containers/Posts/PostPage/actions';
 
 import PostForm from './form';
 import Box from 'grommet/components/Box';
@@ -30,14 +30,14 @@ export class DashboardPostPage extends Component {
   }
 
   render() {
-    let form = (!this.props.request 
+    let form = (!this.props.request
       && this.props.post
-      && this.props.params.id !== 'create') 
+      && this.props.params.id !== 'create')
       ? <PostForm post={this.props.post} onSubmit={this._onSubmit} />
       : <span><SpinningIcon /> Loading</span>;
 
     // New post form
-    if (this.props.params.id == 'create') 
+    if (this.props.params.id == 'create')
       form = (<PostForm post={{}} onSubmit={this._onSubmit} />);
 
     let error = (this.props.error)

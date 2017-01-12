@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { getPost } from 'grommet-cms/containers/Posts/actions';
+import { getPost } from 'grommet-cms/containers/Posts/PostPage/actions';
 import ContentBlocks from 'grommet-cms/containers/ContentBlocks';
 import Box from 'grommet/components/Box';
 import Headline from 'grommet/components/Headline';
@@ -30,7 +30,7 @@ export class PostPage extends Component {
     return (
        <Box className="labs" align="center">
         <Helmet title={title} />
-        <Box texture={image} full="horizontal" size={{ height: 'medium' }} 
+        <Box texture={image} full="horizontal" size={{ height: 'medium' }}
           colorIndex="grey-1" justify="center" align="center">
           <Headline size="medium" margin="none" strong={true}>
             {title}

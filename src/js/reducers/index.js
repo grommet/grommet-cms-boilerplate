@@ -5,7 +5,8 @@ import api from 'grommet-cms/containers/Api/reducer';
 import homepage from 'grommet-cms/containers/HomePage/reducer';
 import login from 'grommet-cms/containers/LoginPage/reducer';
 import assets from 'grommet-cms/containers/Assets/reducer';
-import posts from 'grommet-cms/containers/Posts/reducer';
+import post from 'grommet-cms/containers/Posts/PostPage/reducer';
+import postFeedPage from 'grommet-cms/containers/Posts/PostFeedPage/reducer';
 import * as dashboardReducers from 'grommet-cms/containers/Dashboard/reducers';
 
 const rootReducer = combineReducers({
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   homepage,
   login,
   assets,
-  posts,
+  post,
+  postFeedPage,
   ...dashboardReducers,
   routing
 });

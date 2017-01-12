@@ -14,7 +14,8 @@ import {
   PostPage,
   DashboardContentBlocks,
   AssetsPage,
-  AssetPage
+  AssetPage,
+  PostFeedPage
 } from 'grommet-cms/containers';
 
 export const getRoutes = (store) => {
@@ -50,6 +51,10 @@ export const getRoutes = (store) => {
         <Route path="post/:slug" component={PostPage} />
         <Route path="blocks" component={DashboardContentBlocks} />
         <Route path="*" component={HomePage} />
+      </Route>
+      <Route path="/posts" component = {App}>
+        <IndexRoute component={PostFeedPage} />
+        <Route path="post/:slug" component={PostPage} />
       </Route>
     </Router>
   );

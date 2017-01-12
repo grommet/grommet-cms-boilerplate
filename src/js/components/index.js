@@ -1,4 +1,7 @@
 /* GENERATOR */
+export ErrorNotification from './ErrorNotification';
+export LoadingIndicator from './LoadingIndicator';
+export WithLoading from './WithLoading';
 export * from './ContentBlocks';
 export * from './Dashboard';
 export Logo from './Logo';
