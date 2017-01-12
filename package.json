@@ -13,6 +13,7 @@
     "url": "https://github.com/grommet/cms"
   },
   "dependencies": {
+    "babel-eslint": "^7.1.1",
     "babel-plugin-module-alias": "^1.6.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-stage-0": "^6.5.0",
@@ -42,6 +43,7 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0",
     "passport-saml": "^0.15.0",
+    "plop": "^1.7.3",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
     "react-ga": "^2.1.2",
@@ -54,7 +56,8 @@
     "redux-router": "^2.1.2",
     "redux-thunk": "^2.1.0",
     "remarkable": "^1.7.0",
-    "request": "^2.75.0"
+    "request": "^2.75.0",
+    "reselect": "^2.5.4"
   },
   "devDependencies": {
     "babel-loader": "^6.2.0",
@@ -90,6 +93,7 @@
     "dev:alias": "gulp dev --useAlias",
     "start": "node server/babel-server.js",
     "prod-start": "NODE_ENV='production' pm2 start server/babel-server.js -i 0 --name grommet-cms",
-    "prod-stop": "pm2 stop grommet-cms"
+    "prod-stop": "pm2 stop grommet-cms",
+    "generator": "plop --plopfile ./config/generators/cli.js"
   }
 }

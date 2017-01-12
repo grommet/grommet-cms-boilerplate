@@ -1,3 +1,4 @@
+/* GENERATOR */
 export * from './ContentBlocks';
 export * from './Dashboard';
 export Logo from './Logo';

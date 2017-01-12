@@ -1,3 +1,4 @@
+/* GENERATOR */
 export App from './App';
 export AssetsPage from './Assets/AssetsPage';
 export AssetPage from './Assets/AssetPage';
