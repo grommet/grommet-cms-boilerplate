@@ -1,6 +1,4 @@
 /* GENERATOR */
-export PostFeedItem from './Post/PostFeedItem';
-export PostFeed from './Post/PostFeed';
 export App from './App';
 export AssetsPage from './Assets/AssetsPage';
 export AssetPage from './Assets/AssetPage';
