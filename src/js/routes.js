@@ -10,8 +10,6 @@ import {
   DashboardHomePage,
   DashboardUserForm,
   DashboardUsersPage,
-  DashboardPressReleasesPage,
-  DashboardPressReleasePage,
   DashboardPostsPage,
   DashboardPostPage,
   DashboardContentBlocks,
@@ -43,8 +41,6 @@ export const getRoutes = (store) => {
         <Route path="homepage" component={DashboardHomePage} onEnter={authRequired} />
         <Route path="users" component={DashboardUsersPage} onEnter={authRequired} />
         <Route path='user/create' component={DashboardUserForm} onEnter={authRequired} />
-        <Route path='press-releases' component={DashboardPressReleasesPage} onEnter={authRequired} />
-        <Route path='press-release/:id' component={DashboardPressReleasePage} onEnter={authRequired} />
         <Route path='posts' component={DashboardPostsPage} onEnter={authRequired} />
         <Route path='post/:id' component={DashboardPostPage} onEnter={authRequired} />
       </Route>

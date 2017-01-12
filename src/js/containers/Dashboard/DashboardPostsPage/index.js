@@ -115,8 +115,7 @@ export class DashboardPostsPage extends Component {
 
 DashboardPostsPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  request: PropTypes.bool,
-  posts: PropTypes.array
+  request: PropTypes.bool
 };
 
 function mapStateToProps (state, props) {

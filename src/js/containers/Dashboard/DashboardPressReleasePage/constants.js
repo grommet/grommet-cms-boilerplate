@@ -1,4 +1,0 @@
-//@flow
-export const PRESS_RELEASE_REQUEST: string = 'PRESS_RELEASE_REQUEST';
-export const PRESS_RELEASE_ERROR: string = 'PRESS_RELEASE_ERROR';
-export const PRESS_RELEASE_SUCCESS: string = 'PRESS_RELEASE_SUCCESS';
