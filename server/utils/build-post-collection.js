@@ -4,13 +4,13 @@ import colors from 'colors/safe';
 const POSTS = [
   {
     author: 'John Doe',
-    title: 'My First Post',
+    title: 'Hello World',
     slug: 'my-first-post',
-    image: '/img/dashboard/posts/hello-world-cover.jpeg',
+    image: '/img/dashboard/posts/hello-world-cover.jpg',
     date: '01/01/2017',
     contentBlocks: [
       {
-        content: "My first blog post!",
+        content: "This is my first blog post!",
         blockType: "BlockHeading",
         edit: false,
         id: "f15e4fba-b794-4589-9f20-97ff13e6de82"

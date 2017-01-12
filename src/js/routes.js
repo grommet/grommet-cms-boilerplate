@@ -4,7 +4,6 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import {
   App,
   HomePage,
-  PressReleasePage,
   DashboardContainer,
   LoginPage,
   DashboardHomePage,
@@ -12,6 +11,7 @@ import {
   DashboardUsersPage,
   DashboardPostsPage,
   DashboardPostPage,
+  PostPage,
   DashboardContentBlocks,
   AssetsPage,
   AssetPage
@@ -47,7 +47,7 @@ export const getRoutes = (store) => {
 
       <Route path="/" component={App}>
         <IndexRoute component={HomePage} />
-        <Route path="posts/:slug" component={PressReleasePage} />
+        <Route path="post/:slug" component={PostPage} />
         <Route path="blocks" component={DashboardContentBlocks} />
         <Route path="*" component={HomePage} />
       </Route>
