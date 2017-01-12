@@ -1,4 +1,5 @@
 /* GENERATOR */
+export Button from './Button';
 export * from './ContentBlocks';
 export * from './Dashboard';
 export Logo from './Logo';

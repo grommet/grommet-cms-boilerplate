@@ -12,23 +12,29 @@ import Box from 'grommet/components/Box';
 {{/if}}
 
 {{#if wantPropTypes}}
-const {{ properCase name }} = (props) => (
-  <Box>
+export default function {{ properCase name }}(props) {
+  return (
+    <Box>
 
-  </Box>
-);
+    </Box>
+  );
+}
 {{else if wantFlowTypes}}
-const {{ properCase name }} = (props: {}) => (
-  <Box>
+export default function {{ properCase name }}(props: {}) {
+  return (
+    <Box>
 
-  </Box>
-);
+    </Box>
+  );
+}
 {{else}}
-const {{ properCase name }} = () => (
-  <Box>
+export default function {{ properCase name }}() {
+  return (
+    <Box>
 
-  </Box>
-);
+    </Box>
+  );
+}
 {{/if}}
 
 {{#if wantPropTypes}}
@@ -36,5 +42,3 @@ const {{ properCase name }} = () => (
 
 };
 {{/if}}
-
-export default {{ properCase name }};
