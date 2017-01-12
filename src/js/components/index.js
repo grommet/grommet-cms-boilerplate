@@ -1,3 +1,4 @@
+/* GENERATOR */
 export * from './ContentBlocks';
 export * from './Dashboard';
 export HPELogo from './HPELogo';
