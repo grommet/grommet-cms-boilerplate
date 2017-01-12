@@ -12,6 +12,9 @@ import {
   DashboardUsersPage,
   DashboardPressReleasesPage,
   DashboardPressReleasePage,
+  DashboardPostsPage,
+  DashboardPostPage,
+  DashboardContentBlocks,
   AssetsPage,
   AssetPage
 } from 'grommet-cms/containers';
@@ -42,11 +45,14 @@ export const getRoutes = (store) => {
         <Route path='user/create' component={DashboardUserForm} onEnter={authRequired} />
         <Route path='press-releases' component={DashboardPressReleasesPage} onEnter={authRequired} />
         <Route path='press-release/:id' component={DashboardPressReleasePage} onEnter={authRequired} />
+        <Route path='posts' component={DashboardPostsPage} onEnter={authRequired} />
+        <Route path='post/:id' component={DashboardPostPage} onEnter={authRequired} />
       </Route>
 
       <Route path="/" component={App}>
         <IndexRoute component={HomePage} />
         <Route path="posts/:slug" component={PressReleasePage} />
+        <Route path="blocks" component={DashboardContentBlocks} />
         <Route path="*" component={HomePage} />
       </Route>
     </Router>

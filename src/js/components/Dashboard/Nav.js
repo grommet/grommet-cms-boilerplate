@@ -26,6 +26,7 @@ export default function Nav({ onLogoutClick }) {
         <Menu label="Menu" inline={true} direction="row">
           <Anchor path="/dashboard/homepage" label="Home Page" />
           <Anchor path="/dashboard/press-releases" label="Press Releases" />
+          <Anchor path="/dashboard/posts" label="Posts" />
           <Anchor path="/dashboard/assets" label="Assets" />
           <Anchor path="/dashboard/users" label="Users" />
         </Menu>

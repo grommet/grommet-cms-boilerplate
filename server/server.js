@@ -28,6 +28,7 @@ import api from './routes/api';
 import usersApi from './routes/users';
 import fileApi from './routes/file';
 import pressReleasesApi from './routes/pressReleases';
+import postsApi from './routes/posts';
 
 // Session memory store.
 import session from 'express-session';
@@ -99,6 +100,7 @@ app.use('/', api);
 app.use('/', usersApi);
 app.use('/', fileApi);
 app.use('/', pressReleasesApi);
+app.use('/', postsApi);
 
 // Defining the empty index key hides index.html in the dist folder.
 // This provides for a cleaner dev/production environment

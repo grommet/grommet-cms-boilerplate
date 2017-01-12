@@ -15,4 +15,6 @@ export DashboardPressReleasePage from './Dashboard/DashboardPressReleasePage';
 export DashboardPressReleasesPage from './Dashboard/DashboardPressReleasesPage';
 export DashboardUserForm from './Dashboard/DashboardUserForm';
 export DashboardUsersPage from './Dashboard/DashboardUsersPage';
+export DashboardPostsPage from './Dashboard/DashboardPostsPage';
+export DashboardPostPage from './Dashboard/DashboardPostPage';
 export * from './Dashboard/DashboardBlockForm';

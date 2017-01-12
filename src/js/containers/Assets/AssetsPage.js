@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+
 import { connect } from 'react-redux';
 import { getAssets, deleteAsset } from './actions';
+
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import Heading from 'grommet/components/Heading';
