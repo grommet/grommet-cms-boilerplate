@@ -12,8 +12,24 @@
     "type": "git",
     "url": "https://github.com/grommet/cms"
   },
+  "jest": {
+    "transform": {
+      ".*": "<rootDir>/config/testing/preprocessor.js"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "bower_components",
+      "shared"
+    ]
+  },
   "dependencies": {
     "babel-eslint": "^7.1.1",
+    "babel-jest": "^18.0.0",
     "babel-plugin-module-alias": "^1.6.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-stage-0": "^6.5.0",
@@ -23,7 +39,10 @@
     "colors": "^1.1.2",
     "compression": "^1.4.4",
     "cookie-parser": "^1.4.3",
+    "cross-env": "^3.1.4",
     "ejs": "^2.4.2",
+    "enzyme": "^2.7.0",
+    "enzyme-to-json": "^1.4.5",
     "eslint-plugin-flowtype-errors": "^2.0.3",
     "express": "^4.10.6",
     "express-sanitized": "^0.5.1",
@@ -32,6 +51,8 @@
     "grommet": "https://github.com/grommet/grommet/tarball/stable",
     "history": "^1.17.0",
     "isomorphic-fetch": "^2.2.1",
+    "jest": "^18.1.0",
+    "jest-cli": "^18.1.0",
     "mkdirp": "^0.5.1",
     "mongoose": "4.5.5",
     "mongoose-auto-increment": "^5.0.1",
@@ -45,6 +66,7 @@
     "passport-saml": "^0.15.0",
     "plop": "^1.7.3",
     "react": "^15.0.2",
+    "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.0.2",
     "react-ga": "^2.1.2",
     "react-helmet": "^3.1.0",
@@ -57,7 +79,8 @@
     "redux-thunk": "^2.1.0",
     "remarkable": "^1.7.0",
     "request": "^2.75.0",
-    "reselect": "^2.5.4"
+    "reselect": "^2.5.4",
+    "sinon": "^1.17.7"
   },
   "devDependencies": {
     "babel-loader": "^6.2.0",
@@ -88,6 +111,7 @@
     "webpack-stream": "^3.2.0"
   },
   "scripts": {
+    "test": "cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=test node --harmony_proxies node_modules/.bin/jest",
     "build": "gulp dist",
     "dev": "gulp dev",
     "dev:alias": "gulp dev --useAlias",
