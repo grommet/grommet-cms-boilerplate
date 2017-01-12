@@ -6,12 +6,12 @@ import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
 
-import FileUpload from '../DashboardFileUpload';
+import { DashboardFileUpload } from 'grommet-cms/containers';
 
 export class CardParagraphForm extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       content: props.content || '',
       image: props.image || '',
@@ -68,14 +68,14 @@ export class CardParagraphForm extends Component {
   }
 
   render() {
-    const { 
+    const {
       content, heading, image, label, linkText, linkUrl
     } = this.state;
     const submit = (this._validateForm(this.state))
       ? this._onSubmit
       : undefined;
 
-    const fileUpload = <FileUpload />;
+    const fileUpload = <DashboardFileUpload />;
     return (
       <Box colorIndex="light-2" pad="medium">
         <Form compact={false} onSubmit={submit}>
@@ -107,10 +107,10 @@ export class CardParagraphForm extends Component {
               </FormField>
               {fileUpload}
             </fieldset>
-            <Button onClick={submit} primary={false} type="submit" 
+            <Button onClick={submit} primary={false} type="submit"
               label="Done" />
           </FormFields>
-        </Form> 
+        </Form>
       </Box>
     );
   }
