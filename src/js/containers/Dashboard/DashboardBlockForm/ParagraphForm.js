@@ -45,10 +45,10 @@ export class ParagraphForm extends Component {
                   value={content} onChange={this._onChange} rows="10" />
               </FormField>
             </fieldset>
-            <Button onClick={this._onSubmit} primary={false} type="submit" 
+            <Button onClick={this._onSubmit} primary={false} type="submit"
               label="Done" />
           </FormFields>
-        </Form> 
+        </Form>
       </Box>
     );
   }

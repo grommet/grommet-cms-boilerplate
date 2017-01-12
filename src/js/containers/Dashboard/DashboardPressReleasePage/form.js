@@ -8,7 +8,7 @@ import FormField from 'grommet/components/FormField';
 import FormFields from 'grommet/components/FormFields';
 import Heading from 'grommet/components/Heading';
 import Select from 'grommet/components/Select';
-import FileUpload from '../DashboardFileUpload';
+import { DashboardFileUpload } from 'grommet-cms/containers';
 import DashboardContentBlocks from '../DashboardContentBlocks';
 import { formatDate } from 'grommet-cms/utils';
 
@@ -149,7 +149,7 @@ export class PressReleaseForm extends Component {
             </fieldset>
           </FormFields>
         </Form>
-        <FileUpload />
+        <DashboardFileUpload />
         {blocks}
         <Box pad="small" />
         <Button label="submit" onClick={onSubmitClick} primary={true}

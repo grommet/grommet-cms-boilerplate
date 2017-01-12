@@ -6,7 +6,7 @@ import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
 
-import FileUpload from '../DashboardFileUpload';
+import { DashboardFileUpload } from 'grommet-cms/containers';
 
 export class VideoForm extends Component {
   constructor(props) {
@@ -59,7 +59,7 @@ export class VideoForm extends Component {
       ? this._onSubmit
       : undefined;
 
-    const fileUpload = <FileUpload />;
+    const fileUpload = <DashboardFileUpload />;
     return (
       <Box colorIndex="light-2" pad="medium">
         <Form compact={false} onSubmit={submit}>
@@ -83,10 +83,10 @@ export class VideoForm extends Component {
               </FormField>
               {fileUpload}
             </fieldset>
-            <Button onClick={submit} primary={false} type="submit" 
+            <Button onClick={submit} primary={false} type="submit"
               label="Done" />
           </FormFields>
-        </Form> 
+        </Form>
       </Box>
     );
   }
