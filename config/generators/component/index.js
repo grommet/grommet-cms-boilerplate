@@ -24,7 +24,7 @@ module.exports = {
       type: 'input',
       name: 'name',
       message: 'What is the name of the component?',
-      default: 'Button',
+      default: 'Post',
       validate: (value) => {
         if ((/.+/).test(value)) {
           return true;
