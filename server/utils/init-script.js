@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import colors from 'colors/safe';
 import User from '../models/User';
-import { buildPressCollection } from './build-press-collection';
+import buildPostCollection from './build-post-collection';
 
 // Use native promises
 mongoose.Promise = global.Promise;
@@ -29,6 +29,6 @@ function callback(err, user) {
 }
 
 export function initScript() {
-  //buildPressCollection();
+  buildPostCollection();
   generateTempAdminUser();
 };

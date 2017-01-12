@@ -7,19 +7,17 @@ import Form from 'grommet/components/Form';
 import FormField from 'grommet/components/FormField';
 import FormFields from 'grommet/components/FormFields';
 import Heading from 'grommet/components/Heading';
-import Select from 'grommet/components/Select';
 import { DashboardFileUpload } from 'grommet-cms/containers';
-import DashboardContentBlocks from '../DashboardContentBlocks';
+import DashboardContentBlocks from 'grommet-cms/containers/Dashboard/DashboardContentBlocks';
 import { formatDate } from 'grommet-cms/utils';
 
-export class PressReleaseForm extends Component {
+export class PostForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       post: {},
       title: '',
-      postType: 'Press Release',
       image: '',
       id: '',
       contentBlocks: '',
@@ -38,11 +36,9 @@ export class PressReleaseForm extends Component {
         title: this.props.post.title,
         date: formatDate(this.props.post.date),
         post: this.props.post,
-        postType: this.props.post.postType || 'Press Release',
         image: this.props.post.image,
         contentBlocks: this.props.post.contentBlocks,
         id: this.props.post._id,
-        link: this.props.post.link,
         date: this.props.post.date
       });
   }
@@ -68,8 +64,8 @@ export class PressReleaseForm extends Component {
   }
 
   _validatePost(state) {
-    const { title, postType, date } = state;
-    return (title && postType && date) ? true : false;
+    const { title, date } = state;
+    return (title && date) ? true : false;
   }
 
   _onSubmit(event) {
@@ -77,12 +73,6 @@ export class PressReleaseForm extends Component {
 
     let dataToSubmit = Object.assign({}, this.state);
     dataToSubmit.contentBlocks = this.props.contentBlocks;
-
-    // Remove any extreneous form data.
-    if (dataToSubmit.postType === 'Press Release')
-      delete dataToSubmit.link;
-    else
-      delete dataToSubmit.contentBlocks;
 
     this.props.onSubmit(dataToSubmit);
   }
@@ -92,42 +82,17 @@ export class PressReleaseForm extends Component {
       ? this._onSubmit
       : null;
 
-    const { postType, image, title, link } = this.state;
+    const { image, title } = this.state;
     const date = formatDate(this.state.date);
-
-    const linkBlock = (postType === 'Related Article')
-      ? <FormField label="External Link" htmlFor={"link"}>
-          <input id="link" name="link" type="text"
-            value={link} onChange={this._onChange} />
-        </FormField>
-      : undefined;
-
-    const blocks = (postType === 'Press Release')
-      ? <Box>
-          <Heading>
-            Content Blocks
-          </Heading>
-          <DashboardContentBlocks blocks={this.state.contentBlocks} />
-        </Box>
-      : undefined;
 
     return (
       <span>
         <Heading>
-          Press Release
+          Post
         </Heading>
         <Form onSubmit={onSubmitClick}>
           <FormFields>
             <fieldset>
-              <FormField label="Post Type" htmlFor="postType">
-                <Select
-                  id="postType"
-                  inline={false}
-                  options={["Press Release", "Related Article"]}
-                  value={postType}
-                  onChange={this._onChange}
-                />
-              </FormField>
               <FormField label="Title" htmlFor="title">
                 <input id="title" name="title" type="text"
                   value={title} onChange={this._onChange} />
@@ -145,12 +110,16 @@ export class PressReleaseForm extends Component {
                 <input id="image" name="image" type="text"
                   value={image} onChange={this._onChange} />
               </FormField>
-              {linkBlock}
             </fieldset>
           </FormFields>
         </Form>
         <DashboardFileUpload />
-        {blocks}
+        <Box>
+          <Heading>
+            Content Blocks
+          </Heading>
+          <DashboardContentBlocks blocks={this.state.contentBlocks} />
+        </Box>
         <Box pad="small" />
         <Button label="submit" onClick={onSubmitClick} primary={true}
           type="submit" />
@@ -159,7 +128,7 @@ export class PressReleaseForm extends Component {
   }
 };
 
-PressReleaseForm.propTypes = {
+PostForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   post: PropTypes.object,
   title: PropTypes.string
@@ -171,4 +140,4 @@ function mapStateToProps(state, props) {
   return { url, contentBlocks };
 }
 
-export default connect(mapStateToProps)(PressReleaseForm);
+export default connect(mapStateToProps)(PostForm);
