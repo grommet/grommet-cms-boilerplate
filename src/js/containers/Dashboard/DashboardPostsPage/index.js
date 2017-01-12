@@ -26,6 +26,7 @@ export class DashboardPostsPage extends Component {
     this._onCreateClick = this._onCreateClick.bind(this);
     this._confirmDelete = this._confirmDelete.bind(this);
     this._onDeleteSubmit = this._onDeleteSubmit.bind(this);
+    this._onLayerClose = this._onLayerClose.bind(this);
   }
 
   componentWillMount() {
