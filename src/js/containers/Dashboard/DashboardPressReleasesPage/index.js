@@ -8,6 +8,8 @@ import { browserHistory } from 'react-router';
 import List from 'grommet-cms/components/Dashboard/List';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
+import Heading from 'grommet/components/Heading';
+import SpinningIcon from 'grommet/components/icons/Spinning';
 import ConfirmLayer from 'grommet-cms/components/Dashboard/ConfirmLayer';
 import { PageHeader } from 'grommet-cms/components/Dashboard';
 
@@ -70,10 +72,27 @@ export class DashboardPressReleasesPage extends Component {
     });
   }
 
+  _renderLoader(request) {
+    return (request)
+      ? <SpinningIcon />
+      : <Box pad="medium">
+          <Heading tag="h2">
+            Click 'Add Post' to add your first post.
+          </Heading>
+        </Box>;
+  }
+
   render() {
-    let layer = (this.state.layer)
+    const { posts, request } = this.props;
+
+    const layer = (this.state.layer)
       ? <ConfirmLayer onSubmit={this._onDeleteSubmit} onClose={this._onLayerClose} />
       : null;
+
+    const list = (posts.length > 0 && !request)
+      ? <List list={this.props.posts} route="press-release" titleKey="title"
+            onDelete={this._confirmDelete} links={true} />
+      : this._renderLoader(request);
 
     return (
       <Box direction="column">
@@ -86,9 +105,8 @@ export class DashboardPressReleasesPage extends Component {
             </Button>
           }
         />
-        <Box>
-          <List list={this.props.posts} route="press-release" titleKey="title"
-            onDelete={this._confirmDelete} links={true} />
+        <Box align="center" pad="medium">
+          {list}
         </Box>
       </Box>
     );
