@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 
 import { connect } from 'react-redux';
-import { getPressRelease, submitPressRelease } from './actions';
+import { getPost, submitPost } from 'grommet-cms/containers/Posts/actions';
 
-import PressReleaseForm from './form';
+import PostForm from './form';
 import Box from 'grommet/components/Box';
 import SpinningIcon from 'grommet/components/icons/Spinning';
 
-export class DashboardPressReleasePage extends Component {
+export class DashboardPostPage extends Component {
   constructor(props) {
     super(props);
 
@@ -19,25 +19,26 @@ export class DashboardPressReleasePage extends Component {
   }
 
   componentWillMount() {
-    if(this.props.params.id !== 'create')
-      this.props.dispatch(getPressRelease(this.props.params.id));
+    const { id } = this.props.params;
+    if (id && id !== 'create')
+      this.props.dispatch(getPost(id));
   }
 
   _onSubmit(formData) {
     if(!this.props.request)
-      this.props.dispatch(submitPressRelease(formData));
+      this.props.dispatch(submitPost(formData));
   }
 
   render() {
     let form = (!this.props.request 
-      && this.props.params.id !== 'create'
-      && this.props.post.title !== undefined) 
-      ? <PressReleaseForm post={this.props.post} onSubmit={this._onSubmit} />
+      && this.props.post
+      && this.props.params.id !== 'create') 
+      ? <PostForm post={this.props.post} onSubmit={this._onSubmit} />
       : <span><SpinningIcon /> Loading</span>;
 
     // New post form
     if (this.props.params.id == 'create') 
-      form = (<PressReleaseForm post={{}} onSubmit={this._onSubmit} />);
+      form = (<PostForm post={{}} onSubmit={this._onSubmit} />);
 
     let error = (this.props.error)
       ? <span>{this.props.error}</span>
@@ -52,7 +53,7 @@ export class DashboardPressReleasePage extends Component {
   }
 };
 
-DashboardPressReleasePage.propTypes = {
+DashboardPostPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string
@@ -60,7 +61,7 @@ DashboardPressReleasePage.propTypes = {
 };
 
 function mapStateToProps(state, props) {
-  const { post, error, request } = state.pressRelease;
+  const { post, error, request } = state.posts;
   return {
     post,
     error,
@@ -68,4 +69,4 @@ function mapStateToProps(state, props) {
   };
 };
 
-export default connect(mapStateToProps)(DashboardPressReleasePage);
+export default connect(mapStateToProps)(DashboardPostPage);

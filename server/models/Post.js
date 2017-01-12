@@ -1,9 +1,8 @@
 import mongoose, { Schema } from 'mongoose';
 
-const PressRelease = new Schema({
+const Post = new Schema({
   title: String,
   image: String,
-  postType: String,
   link: String,
   contentBlocks: Array,
   slug: String,
@@ -11,4 +10,4 @@ const PressRelease = new Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-export default mongoose.model('PressRelease', PressRelease);
+export default mongoose.model('Post', Post);

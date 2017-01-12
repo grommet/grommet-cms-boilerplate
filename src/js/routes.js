@@ -4,14 +4,15 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import {
   App,
   HomePage,
-  PressReleasePage,
   DashboardContainer,
   LoginPage,
   DashboardHomePage,
   DashboardUserForm,
   DashboardUsersPage,
-  DashboardPressReleasesPage,
-  DashboardPressReleasePage,
+  DashboardPostsPage,
+  DashboardPostPage,
+  PostPage,
+  DashboardContentBlocks,
   AssetsPage,
   AssetPage
 } from 'grommet-cms/containers';
@@ -40,13 +41,14 @@ export const getRoutes = (store) => {
         <Route path="homepage" component={DashboardHomePage} onEnter={authRequired} />
         <Route path="users" component={DashboardUsersPage} onEnter={authRequired} />
         <Route path='user/create' component={DashboardUserForm} onEnter={authRequired} />
-        <Route path='press-releases' component={DashboardPressReleasesPage} onEnter={authRequired} />
-        <Route path='press-release/:id' component={DashboardPressReleasePage} onEnter={authRequired} />
+        <Route path='posts' component={DashboardPostsPage} onEnter={authRequired} />
+        <Route path='post/:id' component={DashboardPostPage} onEnter={authRequired} />
       </Route>
 
       <Route path="/" component={App}>
         <IndexRoute component={HomePage} />
-        <Route path="posts/:slug" component={PressReleasePage} />
+        <Route path="post/:slug" component={PostPage} />
+        <Route path="blocks" component={DashboardContentBlocks} />
         <Route path="*" component={HomePage} />
       </Route>
     </Router>
