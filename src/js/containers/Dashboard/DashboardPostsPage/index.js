@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import { connect } from 'react-redux';
-import { getPosts, deletePost } from 'grommet-cms/containers/Posts/actions';
+import { getPosts, deletePost } from 'grommet-cms/containers/Posts/PostPage/actions';
 import { blockAddList } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
 import { browserHistory } from 'react-router';
 
@@ -98,8 +98,8 @@ export class DashboardPostsPage extends Component {
     return (
       <Box direction="column">
         {layer}
-        <PageHeader 
-          title="Posts" 
+        <PageHeader
+          title="Posts"
           controls={
             <Button path="/dashboard/post/create">
               Add Post

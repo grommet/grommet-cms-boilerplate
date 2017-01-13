@@ -31,8 +31,10 @@ export default function UserForm(props) {
               value={props.password} onChange={props.onChange} />
           </FormField>
         </fieldset>
-        <Button onClick={props.onSubmit} primary={true} type="submit"
-          label={props.submitMessage} />
+        <Box align="center">
+          <Button onClick={props.onSubmit} primary={true} type="submit"
+            label={props.submitMessage} />
+        </Box>
       </FormFields>
     </Form>
   );

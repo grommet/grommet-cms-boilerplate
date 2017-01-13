@@ -1,4 +1,6 @@
 /* GENERATOR */
+export PostFeedPage from './Posts/PostFeedPage';
+export PostPage from './Posts/PostPage';
 export App from './App';
 export AssetsPage from './Assets/AssetsPage';
 export AssetPage from './Assets/AssetPage';
@@ -15,5 +17,4 @@ export DashboardUserForm from './Dashboard/DashboardUserForm';
 export DashboardUsersPage from './Dashboard/DashboardUsersPage';
 export DashboardPostsPage from './Dashboard/DashboardPostsPage';
 export DashboardPostPage from './Dashboard/DashboardPostPage';
-export PostPage from './Posts/PostPage';
 export * from './Dashboard/DashboardBlockForm';

@@ -6,9 +6,9 @@ import DateTime from 'grommet/components/DateTime';
 import Form from 'grommet/components/Form';
 import FormField from 'grommet/components/FormField';
 import FormFields from 'grommet/components/FormFields';
-import Heading from 'grommet/components/Heading';
-import { DashboardFileUpload } from 'grommet-cms/containers';
-import DashboardContentBlocks from 'grommet-cms/containers/Dashboard/DashboardContentBlocks';
+import Section from 'grommet/components/Section';
+import Footer from 'grommet/components/Footer';
+import { DashboardFileUpload, DashboardContentBlocks } from 'grommet-cms/containers';
 import { formatDate } from 'grommet-cms/utils';
 
 export class PostForm extends Component {
@@ -18,6 +18,7 @@ export class PostForm extends Component {
     this.state = {
       post: {},
       title: '',
+      subtitle: '',
       image: '',
       id: '',
       contentBlocks: '',
@@ -41,6 +42,13 @@ export class PostForm extends Component {
         id: this.props.post._id,
         date: this.props.post.date
       });
+    else {
+      const today = new Date();
+      const date = `${today.getDate}/${today.getMonth() + 1}/${today.getFullYear()}`;
+      this.setState({
+        date
+      });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -82,48 +90,79 @@ export class PostForm extends Component {
       ? this._onSubmit
       : null;
 
-    const { image, title } = this.state;
+    const { image, title, subtitle } = this.state;
     const date = formatDate(this.state.date);
 
     return (
-      <span>
-        <Heading>
-          Post
-        </Heading>
-        <Form onSubmit={onSubmitClick}>
-          <FormFields>
-            <fieldset>
-              <FormField label="Title" htmlFor="title">
-                <input id="title" name="title" type="text"
-                  value={title} onChange={this._onChange} />
-              </FormField>
-              <FormField label="Date" htmlFor="date">
-                <FormField>
-                    <DateTime id="date"
+      <Box>
+        <Section pad="medium" align="center">
+          <Form onSubmit={onSubmitClick} pad="medium">
+            <FormFields>
+              <fieldset>
+                <FormField label="Headline" htmlFor="title">
+                  <input
+                    id="title"
+                    name="title"
+                    type="text"
+                    value={title}
+                    onChange={this._onChange}
+                  />
+                </FormField>
+                <FormField label="Subheading" htmlFor="title">
+                  <input
+                    id="subtitle"
+                    name="subtitle"
+                    type="text"
+                    value={subtitle}
+                    onChange={this._onChange}
+                  />
+                </FormField>
+                <FormField label="Date" htmlFor="date">
+                  <FormField>
+                    <DateTime
+                      id="date"
                       name="date"
                       format="M/D/YYYY"
                       onChange={this._onDateChange}
-                      value={date} />
+                      value={date}
+                    />
                   </FormField>
-              </FormField>
-              <FormField label="Thumbnail Image File Path" htmlFor="image">
-                <input id="image" name="image" type="text"
-                  value={image} onChange={this._onChange} />
-              </FormField>
-            </fieldset>
-          </FormFields>
-        </Form>
-        <DashboardFileUpload />
-        <Box>
-          <Heading>
-            Content Blocks
-          </Heading>
-          <DashboardContentBlocks blocks={this.state.contentBlocks} />
-        </Box>
-        <Box pad="small" />
-        <Button label="submit" onClick={onSubmitClick} primary={true}
-          type="submit" />
-      </span>
+                </FormField>
+                <FormField label="Background Image" htmlFor="image">
+                  <input
+                    id="image"
+                    name="image"
+                    type="text"
+                    value={image}
+                    onChange={this._onChange}
+                  />
+                </FormField>
+              </fieldset>
+            </FormFields>
+          </Form>
+          <Footer
+            className="dashboard__post-form__button-row"
+            align="center"
+            pad={{ horizontal: 'medium' }}
+          >
+            <Box align="start">
+              <DashboardFileUpload />
+            </Box>
+          </Footer>
+        </Section>
+        <Section pad="large">
+          <Box pad="large">
+            <DashboardContentBlocks blocks={this.state.contentBlocks} />
+            <Box pad="small" />
+            <Button
+              label="submit"
+              onClick={onSubmitClick}
+              primary={true}
+              type="submit"
+            />
+          </Box>
+        </Section>
+      </Box>
     );
   }
 };

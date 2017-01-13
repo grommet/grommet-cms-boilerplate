@@ -50,3 +50,4 @@ dist
 **iconsMap**
 **.publish**
 server/server-routes.js
+flow-typed
