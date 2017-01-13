@@ -40,7 +40,7 @@ describe('postFeedPageReducer', () => {
       loadingError: null
     };
     const stateAfter = {
-      isLoading: true,
+      isLoading: false,
       loadingError
     };
     expect(

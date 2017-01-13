@@ -51,7 +51,7 @@ class PostFeedPage extends React.Component {
     }
     return null;
   }
-  componentWillMount() {
+  componentDidMount() {
     this.props.actions.getPosts();
   }
   props: PostFeedPageProps;
