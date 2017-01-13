@@ -7,6 +7,7 @@ import Form from 'grommet/components/Form';
 import FormField from 'grommet/components/FormField';
 import FormFields from 'grommet/components/FormFields';
 import Section from 'grommet/components/Section';
+import Footer from 'grommet/components/Footer';
 import { DashboardFileUpload, DashboardContentBlocks } from 'grommet-cms/containers';
 import { formatDate } from 'grommet-cms/utils';
 
@@ -46,7 +47,7 @@ export class PostForm extends Component {
       const date = `${today.getDate}/${today.getMonth() + 1}/${today.getFullYear()}`;
       this.setState({
         date
-      });  
+      });
     }
   }
 
@@ -139,9 +140,15 @@ export class PostForm extends Component {
               </fieldset>
             </FormFields>
           </Form>
-          <Box pad={{ horizontal: 'large' }} align="end">
-            <DashboardFileUpload />
-          </Box>
+          <Footer
+            className="dashboard__post-form__button-row"
+            align="center"
+            pad={{ horizontal: 'medium' }}
+          >
+            <Box align="start">
+              <DashboardFileUpload />
+            </Box>
+          </Footer>
         </Section>
         <Section pad="large">
           <Box pad="large">

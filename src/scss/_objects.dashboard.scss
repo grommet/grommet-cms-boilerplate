@@ -30,10 +30,13 @@
   }
   .post-preview--hero__headline {
     height: 4rem;
-    max-width: 100vw;
+    max-width: 80%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     margin-bottom: 0px;
+  }
+  .dashboard__post-form__button-row {
+    max-width: 480px !important;
   }
 }
