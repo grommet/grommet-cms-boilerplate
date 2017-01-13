@@ -3,3 +3,4 @@ export const POSTS_ERROR = 'POSTS_ERROR';
 export const POST_SUCCESS = 'POST_SUCCESS';
 export const POSTS_SUCCESS = 'POSTS_SUCCESS';
 export const POSTS_DELETE_SUCCESS = 'POSTS_DELETE_SUCCESS';
+export const SET_POST = 'SET_POST';

@@ -16,7 +16,7 @@ export class Dashboard extends Component {
     const hasLeftAnchor = path.indexOf('post') >= 0;
     const leftAnchor = hasLeftAnchor ?
       <BackAnchor
-        label="Posts"
+        label="All Posts"
         onClick={router.goBack}
       />
     :

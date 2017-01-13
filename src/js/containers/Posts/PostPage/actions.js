@@ -35,6 +35,15 @@ export function postDeleteSuccess() {
   };
 }
 
+export function setPost(post) {
+  return function(dispatch) {
+    dispatch({
+      type: ActionTypes.SET_POST,
+      post
+    });
+  };
+}
+
 // Delete post.
 export function deletePost(id) {
   return (dispatch, getState) => {
@@ -110,7 +119,7 @@ export function getPost(id, title) {
     const url = (!title)
       ? `${apiUrl}/post/${id}`
       : `${apiUrl}/post/title/${title}`;
-      
+
     return fetch(url, {
       method: 'GET',
       headers: new Headers({

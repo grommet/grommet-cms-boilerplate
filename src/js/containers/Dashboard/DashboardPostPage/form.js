@@ -12,91 +12,48 @@ import { DashboardFileUpload, DashboardContentBlocks } from 'grommet-cms/contain
 import { formatDate } from 'grommet-cms/utils';
 
 export class PostForm extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      post: {},
-      title: '',
-      subtitle: '',
-      image: '',
-      id: '',
-      contentBlocks: '',
-      link: '',
-      date: ''
-    };
-
-    this._onChange = this._onChange.bind(this);
-    this._onDateChange = this._onDateChange.bind(this);
+  constructor() {
+    super();
     this._onSubmit = this._onSubmit.bind(this);
+    this._validatePost = this._validatePost.bind(this);
   }
-
   componentWillMount() {
-    if (this.props.post.hasOwnProperty('title'))
-      this.setState({
-        title: this.props.post.title,
-        date: formatDate(this.props.post.date),
-        post: this.props.post,
-        image: this.props.post.image,
-        contentBlocks: this.props.post.contentBlocks,
-        id: this.props.post._id,
-        date: this.props.post.date
-      });
-    else {
-      const today = new Date();
-      const date = `${today.getDate}/${today.getMonth() + 1}/${today.getFullYear()}`;
-      this.setState({
-        date
-      });
+    const { onCreatePost } = this.props;
+    if (!this.props.post.hasOwnProperty('title')) {
+      if (typeof onCreatePost === 'function') {
+        const contentBlocks = [];
+        const date = new Date();
+        onCreatePost({ date, contentBlocks, id: '', subtitle: '', image: '' });
+      }
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.url !== this.props.url && this.props.url !== '') {
-      this.setState({
-        image: `${this.props.url}`
-      });
+  componentWillReceiveProps({ url }) {
+    if (url !== this.props.url) {
+      this.props.onChange({ target: { id: 'image', value: url } });
     }
   }
 
-  _onChange({target, option}) {
-    const key = target.id;
-    const val = option || target.value;
-    let obj  = {};
-    obj[key] = val;
-    this.setState(obj);
-  }
-
-  _onDateChange(date) {
-    this.setState({date});
-  }
-
-  _validatePost(state) {
-    const { title, date } = state;
+  _validatePost() {
+    const { title, date } = this.props.post;
     return (title && date) ? true : false;
   }
 
-  _onSubmit(event) {
-    event.preventDefault();
-
-    let dataToSubmit = Object.assign({}, this.state);
-    dataToSubmit.contentBlocks = this.props.contentBlocks;
-
-    this.props.onSubmit(dataToSubmit);
+  _onSubmit() {
+    if (this._validatePost()) {
+      this.props.onSubmit();
+    }
   }
 
   render() {
-    const onSubmitClick = (this._validatePost(this.state))
-      ? this._onSubmit
-      : null;
 
-    const { image, title, subtitle } = this.state;
-    const date = formatDate(this.state.date);
-
+    const { image, title, subtitle } = this.props.post;
+    const date = formatDate(this.props.post.date);
+    const { onChange } = this.props;
     return (
       <Box>
         <Section pad="medium" align="center">
-          <Form onSubmit={onSubmitClick} pad="medium">
+          <Form pad="medium">
             <FormFields>
               <fieldset>
                 <FormField label="Headline" htmlFor="title">
@@ -105,7 +62,7 @@ export class PostForm extends Component {
                     name="title"
                     type="text"
                     value={title}
-                    onChange={this._onChange}
+                    onChange={onChange}
                   />
                 </FormField>
                 <FormField label="Subheading" htmlFor="title">
@@ -114,7 +71,7 @@ export class PostForm extends Component {
                     name="subtitle"
                     type="text"
                     value={subtitle}
-                    onChange={this._onChange}
+                    onChange={onChange}
                   />
                 </FormField>
                 <FormField label="Date" htmlFor="date">
@@ -123,7 +80,7 @@ export class PostForm extends Component {
                       id="date"
                       name="date"
                       format="M/D/YYYY"
-                      onChange={this._onDateChange}
+                      onChange={(dataString) => onChange({ target: { id: 'date', value: new Date(dataString) } })}
                       value={date}
                     />
                   </FormField>
@@ -134,7 +91,7 @@ export class PostForm extends Component {
                     name="image"
                     type="text"
                     value={image}
-                    onChange={this._onChange}
+                    onChange={onChange}
                   />
                 </FormField>
               </fieldset>
@@ -152,11 +109,11 @@ export class PostForm extends Component {
         </Section>
         <Section pad="large">
           <Box pad="large">
-            <DashboardContentBlocks blocks={this.state.contentBlocks} />
+            <DashboardContentBlocks blocks={this.props.post.contentBlocks} />
             <Box pad="small" />
             <Button
               label="submit"
-              onClick={onSubmitClick}
+              onClick={this._onSubmit}
               primary={true}
               type="submit"
             />
@@ -170,13 +127,16 @@ export class PostForm extends Component {
 PostForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   post: PropTypes.object,
-  title: PropTypes.string
+  title: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  onCreatePost: PropTypes.func,
+  url: PropTypes.string
 };
 
 function mapStateToProps(state, props) {
   const { url } = state.fileUpload;
   const { contentBlocks } = state;
-  return { url, contentBlocks };
+  return { contentBlocks, url };
 }
 
 export default connect(mapStateToProps)(PostForm);
