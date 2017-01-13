@@ -120,6 +120,7 @@
     "start": "node server/babel-server.js",
     "prod-start": "NODE_ENV='production' pm2 start server/babel-server.js -i 0 --name grommet-cms",
     "prod-stop": "pm2 stop grommet-cms",
-    "generator": "plop --plopfile ./config/generators/cli.js"
+    "generator": "plop --plopfile ./config/generators/cli.js",
+    "setup": "flow-typed install && npm install"
   }
 }
