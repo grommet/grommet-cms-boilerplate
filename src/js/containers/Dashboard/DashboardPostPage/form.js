@@ -17,6 +17,7 @@ export class PostForm extends Component {
     this._onSubmit = this._onSubmit.bind(this);
     this._validatePost = this._validatePost.bind(this);
   }
+  
   componentWillMount() {
     const { onCreatePost } = this.props;
     if (!this.props.post.hasOwnProperty('title')) {
@@ -46,7 +47,6 @@ export class PostForm extends Component {
   }
 
   render() {
-
     const { image, title, subtitle } = this.props.post;
     const date = formatDate(this.props.post.date);
     const { onChange } = this.props;
