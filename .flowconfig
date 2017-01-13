@@ -11,5 +11,6 @@ src
 flow-typed/npm
 
 [options]
-module.name_mapper='\(react-redux\)' -> '<PROJECT_ROOT>/config/flow/GeneralStub.js.flow'
-module.name_mapper='\(react\)' -> '<PROJECT_ROOT>/config/flow/GeneralStub.js.flow'
+module.name_mapper='\(react-redux\)' -> '<PROJECT_ROOT>/config/flow/GeneralStub.js'
+module.name_mapper='\(react\)' -> '<PROJECT_ROOT>/config/flow/GeneralStub.js'
+module.name_mapper=`\(grommet-cms\)` => '<PROJECT_ROOT>/config/flow/GeneralStub.js'

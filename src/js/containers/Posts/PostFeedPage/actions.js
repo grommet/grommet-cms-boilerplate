@@ -18,10 +18,14 @@ export const loadDataFailure = (error: { message: string }): PostFeedPageAction 
   error
 });
 
+export const clearErrors = (): PostFeedPageAction => ({
+  type: T.CLEAR_ERRORS
+});
+
 export const getPosts = (page: number = 0) =>
   (dispatch: (action: any) => void, getState: any) => {
     let { url } = getState().api;
-    const postsUrl = `${url}/posts?page={page}`;
+    const postsUrl = `${url}/posts?page=${page}`;
     dispatch(loadDataInitiation());
     Request.get(postsUrl)
       .then(res => {

@@ -50,11 +50,10 @@ export const getRoutes = (store) => {
         <IndexRoute component={HomePage} />
         <Route path="post/:slug" component={PostPage} />
         <Route path="blocks" component={DashboardContentBlocks} />
-        <Route path="*" component={HomePage} />
-      </Route>
-      <Route path="/posts" component = {App}>
-        <IndexRoute component={PostFeedPage} />
-        <Route path="post/:slug" component={PostPage} />
+        <Route path="/posts">
+          <IndexRoute component={PostFeedPage} />
+          <Route path="post/:slug" component={PostPage} />
+        </Route>
       </Route>
     </Router>
   );

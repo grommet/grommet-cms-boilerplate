@@ -30,6 +30,11 @@ const postFeedPageReducer = (
         isLoading: false,
         loadingError: action.error
       };
+    case T.CLEAR_ERRORS:
+      return {
+        ...state,
+        loadingError: null
+      };
     default:
       return state;
   }

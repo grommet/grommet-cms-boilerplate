@@ -1,4 +1,3 @@
-import expect from 'expect';
 import * as T from '../constants';
 import postFeedPageReducer, { initialState } from '../reducer';
 
@@ -35,19 +34,33 @@ describe('postFeedPageReducer', () => {
     ).toEqual(stateAfter);
   });
   it('should handle reducer for action LOAD_DATA_FAILURE', () => {
-    const error = new Error('Ooops');
+    const loadingError = new Error('Ooops');
     const stateBefore = {
       isLoading: true,
-      error: null
+      loadingError: null
     };
     const stateAfter = {
       isLoading: true,
-      error
+      loadingError
     };
     expect(
       postFeedPageReducer(stateBefore, {
         type: T.LOAD_DATA_FAILURE,
-        error
+        error: loadingError
+      })
+    ).toEqual(stateAfter);
+  });
+  it('should handle reducer for action CLEAR_ERRORS', () => {
+    const loadingError = new Error('Ooops');
+    const stateBefore = {
+      loadingError
+    };
+    const stateAfter = {
+      loadingError: null
+    };
+    expect(
+      postFeedPageReducer(stateBefore, {
+        type: T.CLEAR_ERRORS
       })
     ).toEqual(stateAfter);
   });

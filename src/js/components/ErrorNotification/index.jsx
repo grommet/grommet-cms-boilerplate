@@ -7,7 +7,7 @@ import Section from 'grommet/components/Section';
 import Box from 'grommet/components/Box';
 
 export default function ErrorNotification(props: {
-  errors: Array<{ message: string}> },
+  errors: Array<{ message: string }> },
   onClose: Function
 ) {
   return (

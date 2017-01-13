@@ -1,4 +1,3 @@
-import expect from 'expect';
 import * as A from '../actions';
 import * as T from '../constants';
 
