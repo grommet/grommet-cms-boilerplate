@@ -6,10 +6,13 @@ import DateTime from 'grommet/components/DateTime';
 import Form from 'grommet/components/Form';
 import FormField from 'grommet/components/FormField';
 import FormFields from 'grommet/components/FormFields';
-import Heading from 'grommet/components/Heading';
-import { DashboardFileUpload } from 'grommet-cms/containers';
-import DashboardContentBlocks from 'grommet-cms/containers/Dashboard/DashboardContentBlocks';
+import Hero from 'grommet/components/Hero';
+import Split from 'grommet/components/Split';
+import Image from 'grommet/components/Image';
+import Headline from 'grommet/components/Headline';
+import { DashboardFileUpload, DashboardContentBlocks } from 'grommet-cms/containers';
 import { formatDate } from 'grommet-cms/utils';
+import { PageHeader } from 'grommet-cms/components/Dashboard';
 
 export class PostForm extends Component {
   constructor(props) {
@@ -18,6 +21,7 @@ export class PostForm extends Component {
     this.state = {
       post: {},
       title: '',
+      subtitle: '',
       image: '',
       id: '',
       contentBlocks: '',
@@ -82,47 +86,88 @@ export class PostForm extends Component {
       ? this._onSubmit
       : null;
 
-    const { image, title } = this.state;
+    const { image, title, subtitle } = this.state;
     const date = formatDate(this.state.date);
 
     return (
       <span>
-        <Heading>
-          Post
-        </Heading>
-        <Form onSubmit={onSubmitClick}>
-          <FormFields>
-            <fieldset>
-              <FormField label="Title" htmlFor="title">
-                <input id="title" name="title" type="text"
-                  value={title} onChange={this._onChange} />
-              </FormField>
-              <FormField label="Date" htmlFor="date">
-                <FormField>
-                    <DateTime id="date"
-                      name="date"
-                      format="M/D/YYYY"
-                      onChange={this._onDateChange}
-                      value={date} />
-                  </FormField>
-              </FormField>
-              <FormField label="Thumbnail Image File Path" htmlFor="image">
-                <input id="image" name="image" type="text"
-                  value={image} onChange={this._onChange} />
-              </FormField>
-            </fieldset>
-          </FormFields>
-        </Form>
-        <DashboardFileUpload />
-        <Box>
-          <Heading>
-            Content Blocks
-          </Heading>
-          <DashboardContentBlocks blocks={this.state.contentBlocks} />
-        </Box>
-        <Box pad="small" />
-        <Button label="submit" onClick={onSubmitClick} primary={true}
-          type="submit" />
+        <Split>
+          <Box>
+            <PageHeader
+              title="Edit Marquee"
+            />
+            <Box pad="large">
+              <Form onSubmit={onSubmitClick} pad={{ horizontal: 'large' }}>
+                <FormFields>
+                  <fieldset>
+                    <FormField label="Title" htmlFor="title">
+                      <input id="title" name="title" type="text"
+                        value={title} onChange={this._onChange} />
+                    </FormField>
+                    <FormField label="Title" htmlFor="title">
+                      <input
+                        id="subtitle"
+                        name="subtitle"
+                        type="text"
+                        value={subtitle}
+                        onChange={this._onChange}
+                      />
+                    </FormField>
+                    <FormField label="Date" htmlFor="date">
+                      <FormField>
+                        <DateTime
+                          id="date"
+                          name="date"
+                          format="M/D/YYYY"
+                          onChange={this._onDateChange}
+                          value={date}
+                        />
+                      </FormField>
+                    </FormField>
+                    <FormField label="Thumbnail Image File Path" htmlFor="image">
+                      <input id="image" name="image" type="text"
+                        value={image} onChange={this._onChange} />
+                    </FormField>
+                  </fieldset>
+                </FormFields>
+              </Form>
+              <Box pad={{ horizontal: 'large' }} align="end">
+                <DashboardFileUpload />
+              </Box>
+            </Box>
+            <Box pad="large">
+              <Box pad="large">
+                <DashboardContentBlocks blocks={this.state.contentBlocks} />
+                <Box pad="small" />
+                <Button
+                  label="submit"
+                  onClick={onSubmitClick}
+                  primary={true}
+                  type="submit"
+                />
+              </Box>
+            </Box>
+          </Box>
+          <Box>
+            <PageHeader
+              title="Content Preview"
+            />
+            <Hero
+              className="post-preview--hero"
+              size="small"
+              backgroundColorIndex="grey-2-a"
+              background={image ? <Image src={image} fit="cover" /> : null}
+            >
+              <Box direction="row" pad="medium">
+                <Box colorIndex="grey-2-a" basis="1/2" pad="medium">
+                  <Headline size="medium" strong className="post-preview--hero__headline">
+                    {title}
+                  </Headline>
+                </Box>
+              </Box>
+            </Hero>
+          </Box>
+        </Split>
       </span>
     );
   }

@@ -45,7 +45,7 @@ export class DashboardPostPage extends Component {
       : null;
 
     return (
-      <Box pad="medium">
+      <Box>
         {form}
         {error}
       </Box>

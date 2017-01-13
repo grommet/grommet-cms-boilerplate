@@ -113,7 +113,9 @@
     "webpack-stream": "^3.2.0"
   },
   "scripts": {
-    "test": "cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=test node --harmony_proxies node_modules/.bin/jest",
+    "test": "cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=test node --harmony node_modules/.bin/jest",
+    "test:update": "npm run test -- -u",
+    "test:watch": "npm run test -w",
     "build": "gulp dist",
     "dev": "gulp dev",
     "dev:alias": "gulp dev --useAlias",

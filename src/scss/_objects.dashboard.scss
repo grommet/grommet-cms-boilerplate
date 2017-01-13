@@ -34,4 +34,16 @@
     justify-content: center;
     flex-direction: column;
   }
+  .post-preview--hero {
+    align-items: flex-start !important;
+  }
+  .post-preview--hero__headline {
+    height: 4rem;
+    max-width: 100vw;
+    width: 550px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0px;
+  }
 }
