@@ -37,6 +37,9 @@ export class DashboardFileUpload extends Component {
     if (this.state.file !== '') {
       const formData = {file: this.state.file};
       this.props.dispatch(fileUpload(formData));
+      if (typeof this.props.onImgPost === 'function') {
+        this.props.onImgPost(this.state.file);
+      }
     } else {
       this.props.dispatch(fileError('A file must be selected.'));
     }

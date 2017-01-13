@@ -1,21 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getPost, submitPost } from 'grommet-cms/containers/Posts/PostPage/actions';
+import { getPost, submitPost, setPost } from 'grommet-cms/containers/Posts/PostPage/actions';
 import PostForm from './form';
 import Box from 'grommet/components/Box';
 import Split from 'grommet/components/Split';
-import SpinningIcon from 'grommet/components/icons/Spinning';
-import { PageHeader, PostPreview } from 'grommet-cms/components';
+import { PageHeader, PostPreview, LoadingIndicator } from 'grommet-cms/components';
 
 export class DashboardPostPage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      post: {}
-    };
-
     this._onSubmit = this._onSubmit.bind(this);
+    this._onPostChange = this._onPostChange.bind(this);
+    this._onCreatePost = this._onCreatePost.bind(this);
   }
 
   componentWillMount() {
@@ -24,9 +21,31 @@ export class DashboardPostPage extends Component {
       this.props.dispatch(getPost(id));
   }
 
-  _onSubmit(formData) {
+  _onSubmit() {
     if(!this.props.request)
-      this.props.dispatch(submitPost(formData));
+      this.props.dispatch(submitPost(this.props.post));
+  }
+
+  _onCreatePost(post) {
+    this.props.dispatch(setPost(post));
+  }
+
+  _onPostChange({ target, option }) {
+    const { post } = this.props;
+    const key = target.id;
+    const val = option || target.value;
+    let newPost;
+    if (post) {
+      newPost = {
+        ...post,
+        [key]: post.key != null ? `${post[key]}${val}` : val
+      };
+    } else {
+      newPost = {
+        [key]: val
+      };
+    }
+    this.props.dispatch(setPost(newPost));
   }
 
   render() {
@@ -34,12 +53,23 @@ export class DashboardPostPage extends Component {
     let form = (!this.props.request
       && post
       && this.props.params.id !== 'create')
-      ? <PostForm post={post} onSubmit={this._onSubmit} />
-      : <span><SpinningIcon /> Loading</span>;
+      ? <PostForm
+          onChange={this._onPostChange}
+          post={post}
+          onSubmit={this._onSubmit}
+        />
+      : <LoadingIndicator />;
 
     // New post form
     if (this.props.params.id == 'create')
-      form = (<PostForm post={{}} onSubmit={this._onSubmit} />);
+      form = (
+        <PostForm
+          onCreatePost={this._onCreatePost}
+          onChange={this._onPostChange}
+          post={post || {}}
+          onSubmit={this._onSubmit}
+        />
+      );
 
     const error = (this.props.error)
       ? <span>{this.props.error}</span>

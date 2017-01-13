@@ -3,11 +3,17 @@ import * as ActionTypes from './constants';
 const initialState = {
   request: false,
   error: '',
-  posts: []
+  posts: [],
+  post: {}
 };
 
 function posts(state = initialState, action) {
   switch(action.type) {
+    case ActionTypes.SET_POST:
+      return {
+        ...state,
+        post: action.post
+      };
     case ActionTypes.POSTS_REQUEST:
       return {
         ...state,
