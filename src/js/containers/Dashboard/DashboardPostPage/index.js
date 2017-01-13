@@ -5,7 +5,7 @@ import PostForm from './form';
 import Box from 'grommet/components/Box';
 import Split from 'grommet/components/Split';
 import SpinningIcon from 'grommet/components/icons/Spinning';
-import { PageHeader, PostPreview } from 'grommet-cms/components';
+import { PageHeader, PostPreview, LoadingIndicator } from 'grommet-cms/components';
 
 export class DashboardPostPage extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ export class DashboardPostPage extends Component {
       && post
       && this.props.params.id !== 'create')
       ? <PostForm post={post} onSubmit={this._onSubmit} />
-      : <span><SpinningIcon /> Loading</span>;
+    : <LoadingIndicator />;
 
     // New post form
     if (this.props.params.id == 'create')

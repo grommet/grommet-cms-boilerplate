@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory, Redirect } from 'react-router';
 
 import {
   App,
@@ -44,6 +44,7 @@ export const getRoutes = (store) => {
         <Route path='user/create' component={DashboardUserForm} onEnter={authRequired} />
         <Route path='posts' component={DashboardPostsPage} onEnter={authRequired} />
         <Route path='post/:id' component={DashboardPostPage} onEnter={authRequired} />
+        <Redirect from='post/:id' to='/posts/post/:id' />
       </Route>
 
       <Route path="/" component={App}>
