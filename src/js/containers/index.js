@@ -1,4 +1,5 @@
 /* GENERATOR */
+export DashboardContainer from './DashboardContainer';
 export PostFeedPage from './Posts/PostFeedPage';
 export PostPage from './Posts/PostPage';
 export App from './App';
@@ -8,7 +9,6 @@ export ContentBlocks from './ContentBlocks';
 export EntryOrder from './EntryOrder';
 export HomePage from './HomePage';
 export LoginPage from './LoginPage';
-export DashboardContainer from './Dashboard/DashboardContainer';
 export DashboardContentBlock from './Dashboard/DashboardContentBlock';
 export DashboardContentBlocks from './Dashboard/DashboardContentBlocks';
 export DashboardFileUpload from './Dashboard/DashboardFileUpload';
