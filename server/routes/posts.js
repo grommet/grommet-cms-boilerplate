@@ -49,14 +49,14 @@ router.get('/api/post/:id', function(req, res) {
 });
 
 // Get Post by slug
-router.get('/api/post/title/:slug', function(req, res) { 
+router.get('/api/post/title/:slug', function(req, res) {
   Post.findOne({'slug': req.params.slug }).exec(function(err, posts) {
     if (err) {
       return res.status(400).send(err);
     }
 
     res.status(200).send(posts);
-    
+
   });
 });
 
@@ -64,6 +64,7 @@ router.get('/api/post/title/:slug', function(req, res) {
 router.post('/api/post/create', isAuthed, function(req, res) {
   Post.create({
     title: req.body.title || '',
+    subtitle: req.body.subtitle || '',
     date: new Date(req.body.date).toISOString(),
     slug: slugify(req.body.title),
     contentBlocks: req.body.contentBlocks || [],
@@ -86,6 +87,7 @@ router.post('/api/post/:id', isAuthed, function (req, res) {
     }
 
     post.title = req.body.title;
+    post.subtitle = req.body.subtitle;
     post.date = new Date(req.body.date).toISOString();
     post.slug = slugify(req.body.title);
     post.contentBlocks = req.body.contentBlocks;
@@ -100,7 +102,7 @@ router.post('/api/post/:id', isAuthed, function (req, res) {
 });
 
 // Delete Post
-router.post('/api/post/:id/delete', isAuthed, function(req, res) { 
+router.post('/api/post/:id/delete', isAuthed, function(req, res) {
   Post.findOne({'_id' : req.params.id }).remove().exec(function(err) {
     if (err) {
       return res.status(400).send(err);

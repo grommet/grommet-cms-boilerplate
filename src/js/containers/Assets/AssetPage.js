@@ -100,19 +100,21 @@ export class AssetPage extends Component {
         </FormField>;
 
     return (
-      <Form onSubmit={this._onSubmit.bind(this, this.state)}>
-        <FormFields>
-          <fieldset>
-            <FormField label="Title (alt text for images)" htmlFor={"title"}>
-              <input id={"title"} name="title" type="text"
-                onChange={this._onChange} value={title}/>
-            </FormField>
-            {preview}
-          </fieldset>
-          <p>{this.props.error}</p>
-          <Button onClick={this._onSubmit.bind(this, this.state)} primary={true} label="Submit" />
-        </FormFields>
-      </Form>
+      <Box pad="medium">
+        <Form onSubmit={this._onSubmit.bind(this, this.state)}>
+          <FormFields>
+            <fieldset>
+              <FormField label="Title (alt text for images)" htmlFor={"title"}>
+                <input id={"title"} name="title" type="text"
+                  onChange={this._onChange} value={title}/>
+              </FormField>
+              {preview}
+            </fieldset>
+            <p>{this.props.error}</p>
+            <Button onClick={this._onSubmit.bind(this, this.state)} primary={true} label="Submit" />
+          </FormFields>
+        </Form>
+      </Box>
     );
   }
 };

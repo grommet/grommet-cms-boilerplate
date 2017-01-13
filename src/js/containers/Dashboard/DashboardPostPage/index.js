@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-
 import { connect } from 'react-redux';
 import { getPost, submitPost } from 'grommet-cms/containers/Posts/PostPage/actions';
-
 import PostForm from './form';
 import Box from 'grommet/components/Box';
+import Split from 'grommet/components/Split';
 import SpinningIcon from 'grommet/components/icons/Spinning';
+import { PageHeader, PostPreview } from 'grommet-cms/components';
 
 export class DashboardPostPage extends Component {
   constructor(props) {
@@ -30,23 +30,39 @@ export class DashboardPostPage extends Component {
   }
 
   render() {
+    const { post } = this.props;
     let form = (!this.props.request
-      && this.props.post
+      && post
       && this.props.params.id !== 'create')
-      ? <PostForm post={this.props.post} onSubmit={this._onSubmit} />
+      ? <PostForm post={post} onSubmit={this._onSubmit} />
       : <span><SpinningIcon /> Loading</span>;
 
     // New post form
     if (this.props.params.id == 'create')
       form = (<PostForm post={{}} onSubmit={this._onSubmit} />);
 
-    let error = (this.props.error)
+    const error = (this.props.error)
       ? <span>{this.props.error}</span>
       : null;
 
     return (
       <Box>
-        {form}
+        <Split separator>
+          <Box>
+            <PageHeader
+              title="Edit Marquee"
+            />
+            {form}
+          </Box>
+          <Box>
+            <PageHeader
+              title="Preview"
+            />
+            <PostPreview
+              post={post}
+            />
+          </Box>
+        </Split>
         {error}
       </Box>
     );
@@ -62,7 +78,9 @@ DashboardPostPage.propTypes = {
 
 function mapStateToProps(state, props) {
   const { post, error, request } = state.posts;
+  const { contentBlocks } = state;
   return {
+    contentBlocks,
     post,
     error,
     request

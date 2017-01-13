@@ -1,4 +1,5 @@
 /* GENERATOR */
+export PostPreview from './PostPreview';
 export ErrorNotification from './ErrorNotification';
 export LoadingIndicator from './LoadingIndicator';
 export WithLoading from './WithLoading';
