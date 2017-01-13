@@ -1,5 +1,5 @@
 /* GENERATOR */
-export DashboardContainer from './DashboardContainer';
+export DashboardContainer from './Dashboard/DashboardContainer';
 export PostFeedPage from './Posts/PostFeedPage';
 export PostPage from './Posts/PostPage';
 export App from './App';
