@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { logout } from 'grommet-cms/containers/LoginPage/actions';
 import Helmet from 'react-helmet';
+import Box from 'grommet/components/Box';
 import GrommetApp from 'grommet/components/App';
 import {
   DashboardNav,
@@ -36,7 +37,9 @@ export class Dashboard extends Component {
           titleTemplate="HPE Labs | %s" />
         {nav}
         {error}
-        {this.props.children}
+        <Box align="center" justify="center">
+          {this.props.children}
+        </Box>
       </GrommetApp>
     );
   }

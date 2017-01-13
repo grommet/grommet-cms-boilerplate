@@ -14,7 +14,7 @@ export default function Nav({ onLogoutClick }) {
       className={CLASS_ROOT} 
       justify="between" 
       pad={{ horizontal: 'medium', vertical: 'none' }}
-      colorIndex="neutral-1"
+      colorIndex="neutral-4"
       align="center"
       size="small">
       <Heading tag="h4" strong={true} margin="none">
@@ -24,7 +24,6 @@ export default function Nav({ onLogoutClick }) {
       <Box direction="row" responsive={false} align="center"
         pad={{ between: 'medium' }}>
         <Menu label="Menu" inline={true} direction="row">
-          <Anchor path="/dashboard/homepage" label="Home Page" />
           <Anchor path="/dashboard/posts" label="Posts" />
           <Anchor path="/dashboard/assets" label="Assets" />
           <Anchor path="/dashboard/users" label="Users" />

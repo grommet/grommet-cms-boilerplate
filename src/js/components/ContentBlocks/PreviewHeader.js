@@ -1,10 +1,9 @@
 import React, { PropTypes } from 'react';
+
+import Anchor from 'grommet/components/Anchor';
 import Box from 'grommet/components/Box';
 import Heading from 'grommet/components/Heading';
-import DeleteIcon from 'grommet/components/icons/base/Close';
-import EditIcon from 'grommet/components/icons/base/Edit';
-import UpIcon from 'grommet/components/icons/base/Up';
-import DownIcon from 'grommet/components/icons/base/Down';
+import Menu from 'grommet/components/Menu';
 
 export default function PreviewHeader ({ edit, onClose, onEdit, onMove, title }) {
   return (
@@ -14,13 +13,19 @@ export default function PreviewHeader ({ edit, onClose, onEdit, onMove, title })
       </Heading>
 
       <Box align="end" flex="grow">
-        <Box pad={{ between: 'medium' }} direction="row"
-        responsive={false}>
-          {(!edit) ? <EditIcon onClick={onEdit} /> : undefined}
-          <UpIcon onClick={onMove.bind(this, 'up')}/>
-          <DownIcon onClick={onMove.bind(this, 'down')}/>
-          <DeleteIcon onClick={onClose} />
-        </Box>
+        <Menu responsive={true}
+          inline={false}>
+          <Anchor onClick={onMove.bind(this, 'up')}>
+            Move Up
+          </Anchor>
+          <Anchor onClick={onMove.bind(this, 'down')}>
+            Move Down
+          </Anchor>
+          {(!edit) ? <Anchor onClick={onEdit}>Edit</Anchor> : undefined}
+          <Anchor onClick={onClose}>
+            Delete
+          </Anchor>
+        </Menu>
       </Box>
     </Box>
   );
