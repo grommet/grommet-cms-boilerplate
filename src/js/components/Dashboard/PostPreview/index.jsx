@@ -6,6 +6,7 @@ import Box from 'grommet/components/Box';
 import Headline from 'grommet/components/Headline';
 import Label from 'grommet/components/Label';
 import Section from 'grommet/components/Section';
+// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
 import { ContentBlocks } from 'grommet-cms/containers';
 import type ContentBlockType from './flowTypes';
 

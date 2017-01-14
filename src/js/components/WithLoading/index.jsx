@@ -2,6 +2,7 @@
 import React, { PropTypes } from 'react';
 import Box from 'grommet/components/Box';
 import Section from 'grommet/components/Section';
+// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
 import { LoadingIndicator } from 'grommet-cms/components';
 
 export default function WithLoading(props: {
