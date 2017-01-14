@@ -77,20 +77,18 @@ export class DashboardPostPage extends Component {
 
     return (
       <Box>
-        <Split separator>
+        <Split
+          separator
+          priority="left"
+          showOnResponsive="priority"
+        >
           <Box>
-            <PageHeader
-              title="Edit Marquee"
-            />
+            <PageHeader title="Edit Marquee" />
             {form}
           </Box>
           <Box>
-            <PageHeader
-              title="Preview"
-            />
-            <PostPreview
-              post={post}
-            />
+            <PageHeader title="Preview" />
+            <PostPreview post={post} />
           </Box>
         </Split>
         {error}

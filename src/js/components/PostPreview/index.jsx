@@ -24,7 +24,7 @@ export default function PostPreview(props: {
           <Hero
             className="post-preview--hero"
             size="medium"
-            backgroundColorIndex="grey-2-a"
+            colorIndex="grey-2-a"
             background={post.image ? <Image src={post.image} fit="cover" /> : null}
           >
             <Box direction="row" pad="medium">

@@ -28,6 +28,10 @@
   .post-preview--hero {
     align-items: flex-start !important;
   }
+  .post-preview--hero__box {
+    background-color: #666666 !important;
+    height: calc(50vh - 140px);
+  }
   $font-size: 4rem;
   $line-height: 0.85;
   $lines-to-show: 3;
