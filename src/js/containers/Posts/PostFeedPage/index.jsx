@@ -5,9 +5,11 @@ import Section from 'grommet/components/Section';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { bindActionCreators } from 'redux';
+// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
 import { WithLoading, ErrorNotification } from 'grommet-cms/components';
-import Columns from 'grommet/components/Columns';
+// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
 import ContentBlocks from 'grommet-cms/containers/ContentBlocks';
+import Columns from 'grommet/components/Columns';
 import * as PostFeedPageActionCreators from './actions';
 import { selectPosts, selectError, selectIsLoading } from './selectors';
 import type { PostFeedPageProps } from './flowTypes';

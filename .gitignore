@@ -51,3 +51,4 @@ dist
 **.publish**
 server/server-routes.js
 flow-typed
+.vscode
