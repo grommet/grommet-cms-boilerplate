@@ -17,21 +17,33 @@ export class PostForm extends Component {
     this._onSubmit = this._onSubmit.bind(this);
     this._validatePost = this._validatePost.bind(this);
   }
-  
+
   componentWillMount() {
     const { onCreatePost } = this.props;
     if (!this.props.post.hasOwnProperty('title')) {
       if (typeof onCreatePost === 'function') {
         const contentBlocks = [];
         const date = new Date();
-        onCreatePost({ date, contentBlocks, id: '', subtitle: '', image: '' });
+        onCreatePost({
+          date,
+          contentBlocks,
+          id: '',
+          title: '',
+          subtitle: '',
+          image: ''
+        });
       }
     }
   }
 
   componentWillReceiveProps({ url }) {
     if (url !== this.props.url) {
-      this.props.onChange({ target: { id: 'image', value: url } });
+      this.props.onChange({
+        target: {
+          id: 'image',
+          value: url
+        }
+      });
     }
   }
 
@@ -47,9 +59,9 @@ export class PostForm extends Component {
   }
 
   render() {
-    const { image, title, subtitle } = this.props.post;
-    const date = formatDate(this.props.post.date);
-    const { onChange } = this.props;
+    const { onChange, post } = this.props;
+    const { image, title, subtitle, contentBlocks, date } = post;
+    const date = formatDate(date);
     return (
       <Box>
         <Section pad="medium" align="center">
@@ -109,7 +121,7 @@ export class PostForm extends Component {
         </Section>
         <Section pad="large">
           <Box pad="large">
-            <DashboardContentBlocks blocks={this.props.post.contentBlocks} />
+            <DashboardContentBlocks blocks={contentBlocks} />
             <Box pad="small" />
             <Button
               label="submit"
@@ -135,8 +147,7 @@ PostForm.propTypes = {
 
 function mapStateToProps(state, props) {
   const { url } = state.fileUpload;
-  const { contentBlocks } = state;
-  return { contentBlocks, url };
+  return { url };
 }
 
 export default connect(mapStateToProps)(PostForm);
