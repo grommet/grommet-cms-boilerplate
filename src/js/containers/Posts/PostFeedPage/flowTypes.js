@@ -11,7 +11,7 @@ export type PostFeedPageState = {
 }
 
 export type PostFeedPageAction = {
-  type: LOAD_DATA_INITIATION_TYPE | LOAD_DATA_SUCCESS_TYPE | LOAD_DATA_FAILURE_TYPE,
+  type: LOAD_DATA_INITIATION_TYPE | LOAD_DATA_SUCCESS_TYPE | LOAD_DATA_FAILURE_TYPE | CLEAR_ERRORS_TYPE,
   error?: ?{ message: string },
   posts?: ?Array<PostType>
 }

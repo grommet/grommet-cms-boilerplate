@@ -1,5 +1,5 @@
 [include]
-src
+./src/
 
 [ignore]
 .*/node_modules/.*
@@ -13,4 +13,6 @@ flow-typed/npm
 [options]
 module.name_mapper='\(react-redux\)' -> '<PROJECT_ROOT>/config/flow/GeneralStub.js'
 module.name_mapper='\(react\)' -> '<PROJECT_ROOT>/config/flow/GeneralStub.js'
-module.name_mapper=`\(grommet-cms\)` => '<PROJECT_ROOT>/config/flow/GeneralStub.js'
+module.name_mapper='^grommet-cms\/containers\/(.*)$' -> '<PROJECT_ROOT>/src/js/containers/\1'
+module.name_mapper='^grommet-cms\/components\/(.*)$' -> '<PROJECT_ROOT>/src/js/components/\1'
+module.name_mapper='\(react-helmet\)' -> '<PROJECT_ROOT>/config/flow/GeneralStub.js'
