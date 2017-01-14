@@ -5,6 +5,7 @@ import Image from 'grommet/components/Image';
 import Box from 'grommet/components/Box';
 import Headline from 'grommet/components/Headline';
 import Label from 'grommet/components/Label';
+import Section from 'grommet/components/Section';
 import { ContentBlocks } from 'grommet-cms/containers';
 import type ContentBlockType from './flowTypes';
 
@@ -40,7 +41,9 @@ export default function PostPreview(props: {
               }
             </Box>
           </Hero>
-          <ContentBlocks blocks={post.contentBlocks} />
+          <Section pad="medium">
+            <ContentBlocks blocks={post.contentBlocks} />
+          </Section>
         </Box>
       }
     </Box>

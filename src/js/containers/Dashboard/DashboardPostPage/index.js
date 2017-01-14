@@ -21,6 +21,16 @@ export class DashboardPostPage extends Component {
       this.props.dispatch(getPost(id));
   }
 
+  componentWillReceiveProps({ contentBlocks }) {
+    if (contentBlocks !== this.props.contentBlocks) {
+      const post = {
+        ...this.props.post,
+        contentBlocks
+      };
+      this.props.dispatch(setPost(post));
+    }
+  }
+
   _onSubmit() {
     if(!this.props.request)
       this.props.dispatch(submitPost(this.props.post));
@@ -101,7 +111,10 @@ DashboardPostPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string
-  })
+  }),
+  contentBlocks: PropTypes.arrayOf(
+    PropTypes.object.isRequired
+  )
 };
 
 function mapStateToProps(state, props) {

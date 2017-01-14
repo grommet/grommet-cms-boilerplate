@@ -93,7 +93,11 @@ export class DashboardContentBlock extends Component {
       : 'light-2';
 
     return (
-      <Box full="horizontal" colorIndex={color} pad="small">
+      <Box
+        full="horizontal"
+        colorIndex={color}
+        pad="small"
+      >
         <PreviewHeader
           title={title}
           edit={edit}
