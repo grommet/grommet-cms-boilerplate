@@ -25,13 +25,16 @@
     justify-content: center;
     flex-direction: column;
   }
+
   .post-preview--hero {
     align-items: flex-start !important;
   }
+
   .post-preview--hero__box {
     background-color: #666666 !important;
     height: calc(50vh - 140px);
   }
+
   $font-size: 4rem;
   $line-height: 0.85;
   $lines-to-show: 3;
@@ -49,7 +52,14 @@
     font-size: $font-size !important;
     -webkit-line-clamp: 3;
   }
+
   .dashboard__post-form__button-row {
     max-width: 480px !important;
   }
+
+  .dashboard--content-blocks__button-footer {
+    width: 100%;
+    justify-content: space-around;
+  }
+  
 }

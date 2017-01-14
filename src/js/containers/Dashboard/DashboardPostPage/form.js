@@ -8,6 +8,8 @@ import FormField from 'grommet/components/FormField';
 import FormFields from 'grommet/components/FormFields';
 import Section from 'grommet/components/Section';
 import Footer from 'grommet/components/Footer';
+import Menu from 'grommet/components/Menu';
+import { blockAdd } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
 import { DashboardFileUpload, DashboardContentBlocks } from 'grommet-cms/containers';
 import { formatDate } from 'grommet-cms/utils';
 
@@ -16,6 +18,8 @@ export class PostForm extends Component {
     super();
     this._onSubmit = this._onSubmit.bind(this);
     this._validatePost = this._validatePost.bind(this);
+    this._setHeroImage = this._setHeroImage.bind(this);
+    this._onCreateBlockClick = this._onCreateBlockClick.bind(this);
   }
 
   componentWillMount() {
@@ -36,8 +40,8 @@ export class PostForm extends Component {
     }
   }
 
-  componentWillReceiveProps({ url }) {
-    if (url !== this.props.url) {
+  _setHeroImage() {
+    if (this.props.url) {
       this.props.onChange({
         target: {
           id: 'image',
@@ -45,6 +49,10 @@ export class PostForm extends Component {
         }
       });
     }
+  }
+
+  _onCreateBlockClick() {
+    this.props.dispatch(blockAdd());
   }
 
   _validatePost() {
@@ -61,7 +69,7 @@ export class PostForm extends Component {
   render() {
     const { onChange, post } = this.props;
     const { image, title, subtitle, contentBlocks, date } = post;
-    const date = formatDate(date);
+    const formattedDate = formatDate(date);
     return (
       <Box>
         <Section pad="medium" align="center">
@@ -92,8 +100,15 @@ export class PostForm extends Component {
                       id="date"
                       name="date"
                       format="M/D/YYYY"
-                      onChange={(dataString) => onChange({ target: { id: 'date', value: new Date(dataString) } })}
-                      value={date}
+                      value={formattedDate}
+                      onChange={(dataString) =>
+                        onChange({
+                          target: {
+                            id: 'date',
+                            value: new Date(dataString)
+                          }
+                        })
+                      }
                     />
                   </FormField>
                 </FormField>
@@ -115,20 +130,33 @@ export class PostForm extends Component {
             pad={{ horizontal: 'medium' }}
           >
             <Box align="start">
-              <DashboardFileUpload />
+              <DashboardFileUpload onImgPost={this._setHeroImage} />
             </Box>
           </Footer>
         </Section>
-        <Section pad="large">
-          <Box pad="large">
+        <Section pad="medium">
+          <Box pad="small">
             <DashboardContentBlocks blocks={contentBlocks} />
-            <Box pad="small" />
-            <Button
-              label="submit"
-              onClick={this._onSubmit}
-              primary={true}
-              type="submit"
-            />
+            <Footer align="center" justify="center" pad="large">
+              <Menu
+                className="dashboard--content-blocks__button-footer"
+                direction="row"
+                inline
+                responsive={false}
+              >
+                <Button
+                  label="submit"
+                  onClick={this._onSubmit}
+                  primary={true}
+                  type="submit"
+                />
+                <Button
+                  label="add block"
+                  onClick={this._onCreateBlockClick}
+                  primary={false}
+                />
+              </Menu>
+            </Footer>
           </Box>
         </Section>
       </Box>
@@ -142,7 +170,8 @@ PostForm.propTypes = {
   title: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onCreatePost: PropTypes.func,
-  url: PropTypes.string
+  url: PropTypes.string,
+  dispatch: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state, props) {

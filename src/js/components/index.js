@@ -1,6 +1,6 @@
 /* GENERATOR */
 export BackAnchor from './BackAnchor';
-export PostPreview from './PostPreview';
+export PostPreview from './Dashboard/PostPreview';
 export ErrorNotification from './ErrorNotification';
 export LoadingIndicator from './LoadingIndicator';
 export WithLoading from './WithLoading';
