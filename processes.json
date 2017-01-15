@@ -1,6 +1,6 @@
 {
   "apps" : [{
-    "name"       : "labs-web",
+    "name"       : "grommet-cms",
     "script"     : "server/babel-server.js",
     "instances"  : 1,
     "exec_mode"  : "cluster_mode",
