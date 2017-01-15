@@ -50,7 +50,7 @@ export class Dashboard extends Component {
       <GrommetApp className="dashboard" centered={false}>
         <Helmet
           title="Dashboard"
-          titleTemplate="HPE Labs | %s" />
+          titleTemplate="Grommet CMS | %s" />
         {Dashboard.renderNav(this.props, this.context.router, this._onLogoutClick)}
         {error}
         <Box align="center" justify="center">
