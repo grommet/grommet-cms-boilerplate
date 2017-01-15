@@ -98,7 +98,7 @@ export class PostForm extends Component {
                     id="title"
                     name="title"
                     type="text"
-                    value={title}
+                    value={title || ''}
                     onChange={onChange}
                   />
                 </FormField>
@@ -107,7 +107,7 @@ export class PostForm extends Component {
                     id="subtitle"
                     name="subtitle"
                     type="text"
-                    value={subtitle}
+                    value={subtitle || ''}
                     onChange={onChange}
                   />
                 </FormField>
@@ -117,7 +117,7 @@ export class PostForm extends Component {
                       id="date"
                       name="date"
                       format="M/D/YYYY"
-                      value={formattedDate}
+                      value={formattedDate || ''}
                       onChange={(dataString) =>
                         onChange({
                           target: {
@@ -134,7 +134,7 @@ export class PostForm extends Component {
                     id="image"
                     name="image"
                     type="text"
-                    value={image}
+                    value={image || ''}
                     onChange={onChange}
                   />
                 </FormField>
