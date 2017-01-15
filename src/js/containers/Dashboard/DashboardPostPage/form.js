@@ -20,6 +20,10 @@ export class PostForm extends Component {
     this._validatePost = this._validatePost.bind(this);
     this._setHeroImage = this._setHeroImage.bind(this);
     this._onCreateBlockClick = this._onCreateBlockClick.bind(this);
+    this._setShouldUpdateHero = this._setShouldUpdateHero.bind(this);
+    this.state = {
+      shouldUpdateHero: false
+    };
   }
 
   componentWillMount() {
@@ -40,15 +44,28 @@ export class PostForm extends Component {
     }
   }
 
-  _setHeroImage() {
-    if (this.props.url) {
-      this.props.onChange({
-        target: {
-          id: 'image',
-          value: url
-        }
+  componentWillReceiveProps({ url }) {
+    if (url !== this.props.url && this.state.shouldUpdateHero) {
+      this.setState({
+        shouldUpdateHero: false
       });
+      this._setHeroImage(url);
     }
+  }
+
+  _setHeroImage(url) {
+    this.props.onChange({
+      target: {
+        id: 'image',
+        value: url
+      }
+    });
+  }
+
+  _setShouldUpdateHero() {
+    this.setState({
+      shouldUpdateHero: true
+    });
   }
 
   _onCreateBlockClick() {
@@ -130,7 +147,9 @@ export class PostForm extends Component {
             pad={{ horizontal: 'medium' }}
           >
             <Box align="start">
-              <DashboardFileUpload onImgPost={this._setHeroImage} />
+              <DashboardFileUpload
+                onImgPost={this._setShouldUpdateHero} 
+              />
             </Box>
           </Footer>
         </Section>
