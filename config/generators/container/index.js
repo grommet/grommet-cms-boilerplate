@@ -72,7 +72,7 @@ module.exports = {
     const rootPath = path.resolve(process.cwd(), `./src/js/containers/index.js`);
     const actions = [{
       type: 'add',
-      path: `${containerPath}/index.jsx`,
+      path: `${containerPath}/index.js`,
       templateFile: './container/index.js.hbs',
       abortOnFail: true
     }, {
@@ -129,7 +129,7 @@ module.exports = {
       if (data.wantJestTests) {
         actions.push({
           type: 'add',
-          path: `${containerPath}/tests/index.test.jsx`,
+          path: `${containerPath}/tests/index.test.js`,
           templateFile: './container/test.js.hbs',
           abortOnFail: true
         });
