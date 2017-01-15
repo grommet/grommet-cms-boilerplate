@@ -77,18 +77,22 @@ class PostFeedPage extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  loadingError: selectError(state),
-  isLoading: selectIsLoading(state),
-  posts: selectPosts(state)
-});
+function mapStateToProps(state) {
+  return {
+    loadingError: selectError(state),
+    isLoading: selectIsLoading(state),
+    posts: selectPosts(state)
+  };
+}
 
-const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(
-    PostFeedPageActionCreators,
-    dispatch
-  )
-});
+function mapDispatchToProps(dispatch: any) {
+  return {
+    actions: bindActionCreators(
+      PostFeedPageActionCreators,
+      dispatch
+    )
+  };
+}
 
 export default connect(
   mapStateToProps,

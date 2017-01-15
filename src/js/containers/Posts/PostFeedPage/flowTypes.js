@@ -17,7 +17,13 @@ export type PostFeedPageAction = {
 }
 
 export type PostFeedPageProps = {
-  actions: any,
+  actions: {
+    loadDataInitiation: () => PostFeedPageAction,
+    loadDataSuccess: (posts: Array<PostType>) => PostFeedPageAction,
+    loadDataFailure: (error: { message: string }) => PostFeedPageAction,
+    clearErrors: () => PostFeedPageAction,
+    getPosts: Function
+  },
   loadingError?: ?{ message: string },
   isLoading: boolean,
   posts?: ?Array<PostType>

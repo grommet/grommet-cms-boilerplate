@@ -8,7 +8,7 @@
 .*/lib/.*
 
 [libs]
-flow-typed/npm
+flow-typed
 
 [options]
 module.system.node.resolve_dirname=node_modules
