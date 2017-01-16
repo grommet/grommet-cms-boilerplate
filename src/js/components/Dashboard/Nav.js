@@ -21,7 +21,7 @@ export default function Nav({
       animateIcon={typeof logo !== 'undefined'}
       align="center"
       icon={logo}
-      path="/dashboard"
+      path="/dashboard/homepage"
       label={
         <Heading
           style={{ margin: '0px 0px 0 10px' }}
