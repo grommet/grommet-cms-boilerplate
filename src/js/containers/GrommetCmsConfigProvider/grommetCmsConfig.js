@@ -9,7 +9,8 @@ export default {
     contact: {
       copyright: '© 2017 Grommet Labs',
       email: 'hello@grommet.io',
-      phone: '123-456-7890'
+      phone: '123-456-7890',
+      website: 'https://grommet.io'
     },
     leftNavLinks: [
       {

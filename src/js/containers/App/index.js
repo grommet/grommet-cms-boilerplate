@@ -30,7 +30,8 @@ App.contextTypes = {
       contact: {
         copyright: React.PropTypes.string.isRequired,
         email: React.PropTypes.string.isRequired,
-        phone: React.PropTypes.string.isRequired
+        phone: React.PropTypes.string.isRequired,
+        website: React.PropTypes.string.isRequired
       },
       leftNavLinks: React.PropTypes.arrayOf(
         React.PropTypes.shape({

@@ -17,7 +17,7 @@ class HomePage extends Component {
 
   render() {
     return (
-      <Box align="center" colorIndex="light-1">
+      <Box align="center" colorIndex="light-1" full>
         <Helmet title="Home" />
         <Section size={{ width: 'xxlarge' }} align="center">
           <Heading>

@@ -1,7 +1,3 @@
-.post-feed-item {
-  &--anchor {
-    a:hover {
-      text-decoration: none !important;
-    }
-  }
+.post-feed-item--anchor:hover {
+  text-decoration: none !important;
 }

@@ -9,7 +9,8 @@ export default function Footer(props: {
   logo: HTMLElement | React$Element<any>,
   contact: {
     copyright: string,
-    email: string
+    email: string,
+    website: string
   }
 }) {
   const { logo, contact } = props;
@@ -23,7 +24,8 @@ export default function Footer(props: {
           <Heading align="center" tag="h3">{contact.copyright}</Heading>
         </Box>
         <Box justify="center">
-          <Anchor align="center" href={`mailto:${contact.email}`}>{contact.email}</Anchor>
+          <Anchor align="end" href={`mailto:${contact.email}`}>Get in touch</Anchor>
+          <Anchor align="end" href={contact.website}>{contact.website}</Anchor>
         </Box>
       </Box>
     </FooterComponent>
