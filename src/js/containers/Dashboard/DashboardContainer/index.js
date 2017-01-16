@@ -22,7 +22,7 @@ export class Dashboard extends Component {
   }
 
   _renderNav() {
-    const { cms } = this.context.config;
+    const { config, router } = this.context;
     const path = this.props.location.pathname.split('/');
     const hasLeftAnchor = path.indexOf('post') >= 0;
     const leftAnchor = hasLeftAnchor ?
@@ -35,7 +35,7 @@ export class Dashboard extends Component {
     if (this.props.loggedIn) {
       return (
         <DashboardNav
-          {...cms}
+          {...config.cms}
           leftAnchor={leftAnchor}
           onLogoutClick={this._onLogoutClick}
         />
