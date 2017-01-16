@@ -5,16 +5,11 @@ import PostForm from './form';
 import Box from 'grommet/components/Box';
 import Split from 'grommet/components/Split';
 import { PageHeader, PostPreview, LoadingIndicator } from 'grommet-cms/components';
-import DashboardAssetsLayer from 'grommet-cms/containers/Dashboard/DashboardAssetsLayer';
 
 export class DashboardPostPage extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      assetsLayer: false
-    };
-
+    
     this._onSubmit = this._onSubmit.bind(this);
     this._onPostChange = this._onPostChange.bind(this);
     this._onCreatePost = this._onCreatePost.bind(this);
@@ -92,7 +87,6 @@ export class DashboardPostPage extends Component {
 
     return (
       <Box>
-        <DashboardAssetsLayer />
         <Split
           separator
           priority="left"

@@ -1,5 +1,7 @@
+/* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
 import { submitAsset, getAsset, assetsError } from 'grommet-cms/containers/Assets/actions';
 import Anchor from 'grommet/components/Anchor';
 import Box from 'grommet/components/Box';
@@ -10,10 +12,29 @@ import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import TrashIcon from 'grommet/components/icons/base/Trash';
 import DocumentIcon from 'grommet/components/icons/base/Document';
+// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
 import { isImage } from 'grommet-cms/utils';
+// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
+import type { Asset } from 'grommet-cms/containers/Assets/flowTypes';
+
+type Props = {
+  error: string,
+  posts: Asset,
+  request: boolean
+};
 
 export class DashboardAssetPage extends Component {
-  constructor(props) {
+  state: {
+    title: string,
+    path: string,
+    id: string
+  };
+
+  _onChange: () => void;
+  _onSubmit: () => void;
+  _removeAssetClick: () => void;
+
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -33,7 +54,7 @@ export class DashboardAssetPage extends Component {
       this.props.dispatch(getAsset(id));
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     const { title, path, _id } = nextProps.posts;
     if (_id)
       this.setState({
@@ -43,7 +64,7 @@ export class DashboardAssetPage extends Component {
       });
   }
 
-  _onChange(event) {
+  _onChange(event: Event) {
     if (event.target instanceof HTMLInputElement) {
       const key = event.target.id;
       const val = (event.target.files)
@@ -57,10 +78,20 @@ export class DashboardAssetPage extends Component {
     }
   }
 
-  _onSubmit(formData) {
+  _onSubmit(formData: Object) {
     if (formData.hasOwnProperty('file') || formData.hasOwnProperty('id') ) {
       const dataToSubmit = Object.assign({}, formData);
-      this.props.dispatch(submitAsset(dataToSubmit));
+      // If the form is embedded we don't want to forward to the AssetsPage after
+      // a successful post.
+      const { onSubmit } = this.props;
+      const forwardWhenDone = (onSubmit) 
+        ? false
+        : true;
+
+      this.props.dispatch(submitAsset(dataToSubmit, forwardWhenDone))
+        .then(() => {
+          if (onSubmit) onSubmit();
+        });
     } else {
       this.props.dispatch(assetsError('A file must be selected.'));
     }
@@ -100,7 +131,7 @@ export class DashboardAssetPage extends Component {
         </FormField>;
 
     return (
-      <Box pad="medium">
+      <Box pad="medium" alignSelf="center">
         <Form onSubmit={this._onSubmit.bind(this, this.state)}>
           <FormFields>
             <fieldset>
@@ -111,7 +142,8 @@ export class DashboardAssetPage extends Component {
               {preview}
             </fieldset>
             <p>{this.props.error}</p>
-            <Button onClick={this._onSubmit.bind(this, this.state)} primary={true} label="Submit" />
+            <Button onClick={this._onSubmit.bind(this, this.state)} 
+              primary={true} label="Submit" />
           </FormFields>
         </Form>
       </Box>

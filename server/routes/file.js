@@ -70,7 +70,7 @@ router.post('/api/file/create', isAuthed, upload.single('file'),
         console.log(`File error: ${err}, ${post}`);
         return res.status(400).send(err);
       }
-      return res.status(200).send({ path: filePath });
+      return res.status(200).send(post);
     });
   }
 );

@@ -60,7 +60,7 @@ export function deleteAsset(id) {
 }
 
 // Create Asset.
-export function submitAsset(data) {
+export function submitAsset(data, forwardWhenDone = true) {
   const endPoint = (!data.id)
     ? 'file/create'
     : `file/edit/${data.id}`;
@@ -74,7 +74,7 @@ export function submitAsset(data) {
     let { url } = getState().api;
 
     dispatch(assetsRequest());
-    fetch(`${url}/${endPoint}`, {
+    return fetch(`${url}/${endPoint}`, {
       method: 'POST',
       credentials: 'include',
       body: formData,
@@ -96,7 +96,7 @@ export function submitAsset(data) {
             dispatch(assetsError(statusText));
           } else {
             dispatch(assetsSuccess(json));
-            browserHistory.push('/dashboard/assets');
+            if (forwardWhenDone) browserHistory.push('/dashboard/assets');
           }
         },
         err => {
