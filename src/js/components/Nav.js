@@ -6,7 +6,7 @@ import Header from 'grommet/components/Header';
 import Menu from 'grommet/components/Menu';
 
 type NavLinks = Array<{ 
-  label?: ?string,
+  label: string,
   path: string
 }>;
 
@@ -32,20 +32,18 @@ export default function Nav (props: {
           {titleElement}
           <Menu inline={true} direction="row" responsive={false} align="center">
             {leftNavLinks.map((item, i) =>
-              <Anchor 
+              <Anchor
+                {...item}
                 key={i}
-                path={item.path}
-                label={item.label || ''}
               />
             )}
           </Menu>
         </Box>
         <Menu inline={true} direction="row" responsive={false} align="center">
           {rightNavLinks.map((item, i) =>
-            <Anchor 
+            <Anchor
+              {...item}
               key={i}
-              path={item.path}
-              label={item.label || ''}
             />
           )}
         </Menu>
