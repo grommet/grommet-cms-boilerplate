@@ -7,18 +7,24 @@ import Anchor from 'grommet/components/Anchor';
 
 export default function Footer(props: {
   logo: HTMLElement | React$Element<any>,
-  title: string,
   contact: {
+    copyright: string,
     email: string
   }
 }) {
-  const { logo, title, contact } = props;
+  const { logo, contact } = props;
   return (
     <FooterComponent primary colorIndex="brand">
-      <Box direction="row" pad="large">
-        {logo}
-        <Heading align="center">{title}</Heading>
-        <Anchor align="center" href={`mailto:${contact.email}`}>{contact.email}</Anchor>
+      <Box direction="row" pad="large" full="horizontal">
+        <Box justify="center">
+          {logo}
+        </Box>
+        <Box flex justify="center">
+          <Heading align="center" tag="h3">{contact.copyright}</Heading>
+        </Box>
+        <Box justify="center">
+          <Anchor align="center" href={`mailto:${contact.email}`}>{contact.email}</Anchor>
+        </Box>
       </Box>
     </FooterComponent>
   );

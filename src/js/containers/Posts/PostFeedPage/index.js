@@ -40,7 +40,7 @@ class PostFeedPage extends React.Component {
       loadingError
     } = this.props;
     return (
-      <WithLoading isLoading={isLoading}>
+      <WithLoading isLoading={isLoading} fullHeight>
         <Helmet title="Post Feed" />
         <Section full="horizontal" pad="none">
           {posts && posts.length ? posts.map((item, i) => 

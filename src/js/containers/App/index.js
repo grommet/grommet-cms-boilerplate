@@ -13,7 +13,9 @@ class App extends React.Component {
           title="Home"
           titleTemplate="Grommet | %s" />
         <Nav {...this.context.config.frontend} />
-        {this.props.children}
+        <main>
+          {this.props.children}
+        </main>
         <Footer {...this.context.config.frontend} />
       </GrommetApp>
     );
@@ -26,8 +28,9 @@ App.contextTypes = {
       title: React.PropTypes.string,
       logo: React.element,
       contact: {
-        email: React.PropTypes.string,
-        phone: React.PropTypes.string
+        copyright: React.PropTypes.string.isRequired,
+        email: React.PropTypes.string.isRequired,
+        phone: React.PropTypes.string.isRequired
       },
       leftNavLinks: React.PropTypes.arrayOf(
         React.PropTypes.shape({
