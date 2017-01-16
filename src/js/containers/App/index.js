@@ -1,7 +1,7 @@
 // (C) Copyright 2014-2015 Hewlett Packard Enterprise Development LP
 
 import React from 'react';
-import GrommetApp from 'grommet/components/App';
+import { App as GrommetApp, Nav, Footer } from 'grommet/components';
 import Helmet from 'react-helmet';
 import Nav from 'grommet-cms/components/Nav';
 
@@ -14,6 +14,7 @@ class App extends React.Component {
           titleTemplate="Grommet | %s" />
         <Nav {...this.context.config.frontend} />
         {this.props.children}
+        <Footer {...this.context.config.frontend} />
       </GrommetApp>
     );
   }

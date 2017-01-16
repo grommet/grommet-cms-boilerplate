@@ -1,4 +1,6 @@
 /* GENERATOR */
+export Footer from './Footer';
+export PostFeedItem from './PostFeedItem';
 export BackAnchor from './BackAnchor';
 export PostPreview from './Dashboard/PostPreview';
 export ErrorNotification from './ErrorNotification';

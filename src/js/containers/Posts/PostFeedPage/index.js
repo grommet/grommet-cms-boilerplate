@@ -1,48 +1,18 @@
 /* @flow */
 import React from 'react';
-import Box from 'grommet/components/Box';
 import Section from 'grommet/components/Section';
+import Heading from 'grommet/components/Heading';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { bindActionCreators } from 'redux';
 // $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
-import { WithLoading, ErrorNotification } from 'grommet-cms/components';
-// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
-import ContentBlocks from 'grommet-cms/containers/ContentBlocks';
-import Columns from 'grommet/components/Columns';
+import { WithLoading, ErrorNotification, PostFeedItem } from 'grommet-cms/components';
 import * as PostFeedPageActionCreators from './actions';
 import { selectPosts, selectError, selectIsLoading } from './selectors';
 import type { PostFeedPageProps } from './flowTypes';
 
 class PostFeedPage extends React.Component {
   props: PostFeedPageProps;
-  static renderPost(post, i) {
-    return (
-      <Box
-        key={i}
-        size="medium"
-      >
-        <ContentBlocks blocks={post.contentBlocks} />
-      </Box>
-    );
-  }
-  static renderPosts(posts) {
-    if (posts && posts.length > 0) {
-      return (
-        <Columns
-          masonry
-          maxCount={3}
-          justify="center"
-          size="medium"
-        >
-          {posts.map((post, i) =>
-            PostFeedPage.renderPost(post, i)
-          )}
-        </Columns>
-      );
-    }
-    return null;
-  }
   constructor() {
     super();
     // $FlowFixMe contravariant issue when calling bind
@@ -72,10 +42,20 @@ class PostFeedPage extends React.Component {
     return (
       <WithLoading isLoading={isLoading}>
         <Helmet title="Post Feed" />
-        <Section full="horizontal" pad={{ vertical: "medium" }}>
-          <Box full="horizontal" direction="column" responsive pad={{ vertical: "medium"}}>
-            {PostFeedPage.renderPosts(posts)}
-          </Box>
+        <Section full="horizontal" pad="none">
+          {posts && posts.length ? posts.map((item, i) => 
+            <PostFeedItem
+              key={i}
+              colorIndex={['grey-1-a', 'grey-2-a', 'grey-3-a', 'grey-4-a'][i % 4]}
+              post={item}
+              postPath="/post/"
+            />
+          )
+        :
+          <Heading>
+            No posts
+          </Heading>
+        }
         </Section>
         {this.renderError(loadingError)}
       </WithLoading>
