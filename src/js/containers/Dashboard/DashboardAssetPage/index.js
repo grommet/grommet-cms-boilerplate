@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { submitAsset, getAsset, assetsError } from './actions';
+import { submitAsset, getAsset, assetsError } from 'grommet-cms/containers/Assets/actions';
 import Anchor from 'grommet/components/Anchor';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
@@ -12,7 +12,7 @@ import TrashIcon from 'grommet/components/icons/base/Trash';
 import DocumentIcon from 'grommet/components/icons/base/Document';
 import { isImage } from 'grommet-cms/utils';
 
-export class AssetPage extends Component {
+export class DashboardAssetPage extends Component {
   constructor(props) {
     super(props);
 
@@ -35,7 +35,7 @@ export class AssetPage extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { title, path, _id } = nextProps.posts;
-    if (title)
+    if (_id)
       this.setState({
         title,
         path,
@@ -128,4 +128,4 @@ function mapStateToProps(state, props) {
   };
 }
 
-export default connect(mapStateToProps)(AssetPage);
+export default connect(mapStateToProps)(DashboardAssetPage);
