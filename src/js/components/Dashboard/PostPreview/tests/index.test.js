@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 import React from 'react';
 import PostPreview from '../index';
-import props from './__mocks__/props';
+import props from './__mocks__/postPreviewMocks';
 
 describe('<PostPreview />', () => {
   it('should render with default props', () => {

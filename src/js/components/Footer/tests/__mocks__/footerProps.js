@@ -1,16 +1,6 @@
 export default {
   "title": "Grommet CMS",
-  "logo": {
-    "key": null,
-    "ref": null,
-    "props": {
-      "invert": true,
-      "size": "small",
-      "a11yTitle": "Grommet"
-    },
-    "_owner": null,
-    "_store": {}
-  },
+  "logo": "",
   "favicon": "",
   "contact": {
     "copyright": "© 2017 Grommet Labs",
