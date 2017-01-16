@@ -45,11 +45,19 @@ export class LoginPage extends Component {
       <Box full="vertical" pad="large" align="center" justify="center">
         <UserForm title="Login" username={this.state.username}
           password={this.state.password} onChange={this._onChange}
-          onSubmit={onSubmitClick} hasLogo />
+          onSubmit={onSubmitClick} logo={this.context.config.cms.formLogo} hasLogo />
           {loginError}
       </Box>
     );
   }
+};
+
+LoginPage.contextTypes = {
+  config: React.PropTypes.shape({
+    cms: React.PropTypes.shape({
+      formLogo: React.PropTypes.element.isRequired
+    })
+  })
 };
 
 LoginPage.propTypes = {

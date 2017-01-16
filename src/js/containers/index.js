@@ -18,3 +18,4 @@ export DashboardUsersPage from './Dashboard/DashboardUsersPage';
 export DashboardPostsPage from './Dashboard/DashboardPostsPage';
 export DashboardPostPage from './Dashboard/DashboardPostPage';
 export * from './Dashboard/DashboardBlockForm';
+export GrommetCmsConfigProvider from './GrommetCmsConfigProvider';
