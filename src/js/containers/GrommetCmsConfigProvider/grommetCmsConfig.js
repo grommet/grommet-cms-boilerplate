@@ -28,7 +28,7 @@ export default {
   cms: {
     title: 'Grommet CMS',
     logo: <GrommetLogo invert size="small" />,
-    formLogo: <GrommetLogo size="xlarge" />,
+    formLogo: <GrommetLogo size="large" />,
     navLinks: [
       {
         path: '/dashboard/posts',
