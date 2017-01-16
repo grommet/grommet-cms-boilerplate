@@ -1,9 +1,9 @@
 // (C) Copyright 2014-2015 Hewlett Packard Enterprise Development LP
 
 import React from 'react';
-import { App as GrommetApp, Nav, Footer } from 'grommet/components';
+import GrommetApp from 'grommet/components/App';
 import Helmet from 'react-helmet';
-import Nav from 'grommet-cms/components/Nav';
+import { Nav, Footer } from 'grommet-cms/components';
 
 class App extends React.Component {
   render() {
