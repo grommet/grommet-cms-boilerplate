@@ -11,8 +11,19 @@ import {
 } from 'grommet-cms/components';
 
 export class Dashboard extends Component {
-  static renderNav(props, router, onLogoutClick) {
-    const path = props.location.pathname.split('/');
+  constructor(props) {
+    super(props);
+    this._renderNav = this._renderNav.bind(this);
+    this._onLogoutClick = this._onLogoutClick.bind(this);
+  }
+
+  _onLogoutClick() {
+    this.props.dispatch(logout());
+  }
+
+  _renderNav() {
+    const { cms } = this.context.config;
+    const path = this.props.location.pathname.split('/');
     const hasLeftAnchor = path.indexOf('post') >= 0;
     const leftAnchor = hasLeftAnchor ?
       <BackAnchor
@@ -21,24 +32,18 @@ export class Dashboard extends Component {
       />
     :
       null;
-    if (props.loggedIn) {
+    if (this.props.loggedIn) {
       return (
         <DashboardNav
+          title={cms.title}
+          logo={cms.logo}
+          navLinks={cms.navLinks}
           leftAnchor={leftAnchor}
-          onLogoutClick={onLogoutClick}
+          onLogoutClick={this._onLogoutClick}
         />
       );
     }
     return null;
-  }
-  constructor(props) {
-    super(props);
-
-    this._onLogoutClick = this._onLogoutClick.bind(this);
-  }
-
-  _onLogoutClick() {
-    this.props.dispatch(logout());
   }
 
   render() {
@@ -51,7 +56,7 @@ export class Dashboard extends Component {
         <Helmet
           title="Dashboard"
           titleTemplate="Grommet CMS | %s" />
-        {Dashboard.renderNav(this.props, this.context.router, this._onLogoutClick)}
+        {this._renderNav()}
         {error}
         <Box align="center" justify="center">
           {this.props.children}
@@ -65,7 +70,19 @@ Dashboard.contextTypes = {
   router: PropTypes.shape({
     push: PropTypes.func.isRequired,
     goBack: PropTypes.func.isRequired
-  }).isRequired
+  }).isRequired,
+  config: React.PropTypes.shape({
+    cms: React.PropTypes.shape({
+      title: React.PropTypes.string.isRequired,
+      logo: React.PropTypes.element,
+      navLinks: React.PropTypes.arrayOf(
+        React.PropTypes.shape({
+          label: React.PropTypes.string,
+          path: React.PropTypes.string.isRequired
+        })
+      ).isRequired
+    })
+  })
 };
 
 Dashboard.propTypes = {

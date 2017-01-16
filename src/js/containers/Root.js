@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { getRoutes } from '../routes';
 import { Router, applyRouterMiddleware } from 'react-router';
 import { useScroll } from 'react-router-scroll';
+import GrommetCmsConfigProvider from 'grommet-cms/containers/GrommetCmsConfigProvider';
 //import ReactGA from 'react-ga';
 
 export default class Root extends Component { // eslint-disable-line react/prefer-stateless-function
@@ -23,12 +24,14 @@ export default class Root extends Component { // eslint-disable-line react/prefe
     const { store, history } = this.props;
     return (
       <Provider store={store}>
-        <Router 
-          history={history} 
-          routes={getRoutes(store)} 
-          render={applyRouterMiddleware(useScroll())}
-          onUpdate={this._logPageView}
-        />
+        <GrommetCmsConfigProvider>
+          <Router 
+            history={history} 
+            routes={getRoutes(store)} 
+            render={applyRouterMiddleware(useScroll())}
+            onUpdate={this._logPageView}
+          />
+        </GrommetCmsConfigProvider>
       </Provider>
     );
   }
