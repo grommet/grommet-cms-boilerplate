@@ -19,7 +19,6 @@ export default {
     ],
     rightNavLinks: [
       {
-        show: (state) => state.login.loggedIn,
         path: '/dashboard',
         label: 'Dashboard'
       }

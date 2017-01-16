@@ -35,9 +35,7 @@ export class Dashboard extends Component {
     if (this.props.loggedIn) {
       return (
         <DashboardNav
-          title={cms.title}
-          logo={cms.logo}
-          navLinks={cms.navLinks}
+          {...cms}
           leftAnchor={leftAnchor}
           onLogoutClick={this._onLogoutClick}
         />
