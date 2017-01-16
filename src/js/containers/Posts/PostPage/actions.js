@@ -152,9 +152,9 @@ export function getPost(id, title) {
 
 // Create post.
 export function submitPost(post) {
-  const endPoint = (post.id === '')
+  const endPoint = (post._id === '')
     ? 'post/create'
-    : `post/${post.id}`;
+    : `post/${post._id}`;
 
   return (dispatch, getState) => {
     dispatch(postsRequest());
