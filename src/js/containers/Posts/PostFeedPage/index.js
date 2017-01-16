@@ -15,17 +15,7 @@ import { selectPosts, selectError, selectIsLoading } from './selectors';
 import type { PostFeedPageProps } from './flowTypes';
 
 class PostFeedPage extends React.Component {
-  static renderError(error) {
-    if (error) {
-      return (
-        <ErrorNotification
-          errors={[error]}
-          onClose={e => e}
-        />
-      );
-    }
-    return null;
-  }
+  props: PostFeedPageProps;
   static renderPost(post, i) {
     return (
       <Box
@@ -53,10 +43,26 @@ class PostFeedPage extends React.Component {
     }
     return null;
   }
+  constructor() {
+    super();
+    // $FlowFixMe contravariant issue when calling bind
+    this.renderError = this.renderError.bind(this);
+  }
   componentDidMount() {
     this.props.actions.getPosts();
   }
-  props: PostFeedPageProps;
+  renderError() {
+    const { loadingError } = this.props;
+    if (loadingError) {
+      return (
+        <ErrorNotification
+          errors={[loadingError]}
+          onClose={this.props.actions.clearErrors}
+        />
+      );
+    }
+    return null;
+  }
   render() {
     const {
       posts,
@@ -71,7 +77,7 @@ class PostFeedPage extends React.Component {
             {PostFeedPage.renderPosts(posts)}
           </Box>
         </Section>
-        {PostFeedPage.renderError(loadingError)}
+        {this.renderError(loadingError)}
       </WithLoading>
     );
   }

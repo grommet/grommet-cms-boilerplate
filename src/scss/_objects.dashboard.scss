@@ -38,6 +38,7 @@
   $font-size: 4rem;
   $line-height: 0.85;
   $lines-to-show: 3;
+  
   .post-preview--hero__headline {
     max-height: $font-size * $lines-to-show * $line-height;
     max-width: 80%;

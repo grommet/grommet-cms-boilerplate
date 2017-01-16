@@ -7,16 +7,16 @@ import Section from 'grommet/components/Section';
 import Box from 'grommet/components/Box';
 
 export default function ErrorNotification(props: {
-  errors: Array<{ message: string }> },
-  onClose: Function
-) {
+  onClose: Function,
+  errors: Array<{ message: string }> 
+}) {
   return (
-    <Section className="error-notification">
+    <Section pad="medium">
       {props.errors.length > 0 && props.errors.map((error, i) =>
-        <Box key={i}>
+        <Box key={i} className="error-notification">
           <Button
             plain
-            onClick={onClose}
+            onClick={() => props.onClose(i)}
             className="error-notification__closer-button"
             a11yTitle="Close Alert"
           >
@@ -29,7 +29,6 @@ export default function ErrorNotification(props: {
             a11yTitle="Submission Failed"
             size="small"
             message={error.message}
-            state="Active"
           />
         </Box>
       )}
