@@ -31,7 +31,7 @@ export default function Nav (props: {
   return (
     <Header className="mobile-hide" size="large" colorIndex="neutral-4"
       justify="center" separator="bottom" pad={{ horizontal: 'medium' }}>
-      <Box size={{ width: 'xxlarge' }} direction="row" justify="between" responsive={false}>
+      <Box full="horizontal" direction="row" justify="between" responsive={false}>
         <Box direction="row">
           {titleElement}
           <Menu inline={true} direction="row" responsive={false} align="center">
