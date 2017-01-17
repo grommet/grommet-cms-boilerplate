@@ -35,7 +35,7 @@ export class PostForm extends Component {
         onCreatePost({
           date,
           contentBlocks,
-          id: '',
+          _id: '',
           title: '',
           subtitle: '',
           image: ''
