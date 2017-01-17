@@ -31,12 +31,12 @@ class HomePage extends Component {
       this.setState({
         heroVisible: true
       });
-    }, 1500);
+    }, 1000);
     setTimeout(() => {
       this.setState({
         paragraphVisible: true
       });
-    }, 3000);
+    }, 2000);
   }
 
   render() {
@@ -83,8 +83,8 @@ class HomePage extends Component {
                   with World Class UX`}
               </Heading>
             </Box>
-            <Box pad="large" align="center">
-              <Paragraph size="large" align="center" margin="none">
+            <Box pad="medium" align="center">
+              <Paragraph size="medium" align="center">
                 Grommet CMS combines a fully featured content management system
                 with the world's most advanced UX framework to provide you with all the
                 <Anchor path="https://grommet.github.io/docs/learn">{' guidance'}</Anchor>,
