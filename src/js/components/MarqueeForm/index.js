@@ -1,9 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-
-import { connect } from 'react-redux';
 import { blockAdd } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
-import { DashboardContentBlocks } from 'grommet-cms/containers';
-
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import DateTime from 'grommet/components/DateTime';
@@ -12,12 +8,11 @@ import FormField from 'grommet/components/FormField';
 import FormFields from 'grommet/components/FormFields';
 import Section from 'grommet/components/Section';
 import Footer from 'grommet/components/Footer';
-import Menu from 'grommet/components/Menu';
 import ImageIcon from 'grommet/components/icons/base/Image';
 import DashboardAssetsLayer from 'grommet-cms/containers/Dashboard/DashboardAssetsLayer';
 import { formatDate } from 'grommet-cms/utils';
 
-export class PostForm extends Component {
+export default class MarqueeForm extends Component {
   constructor() {
     super();
     this._onSubmit = this._onSubmit.bind(this);
@@ -115,7 +110,7 @@ export class PostForm extends Component {
 
   render() {
     const { onChange, post } = this.props;
-    const { image, title, subtitle, contentBlocks, date } = post;
+    const { image, title, subtitle, date } = post;
     const formattedDate = formatDate(date);
     const assetsLayer = (this.state.assetsLayer)
       ? <DashboardAssetsLayer 
@@ -196,19 +191,11 @@ export class PostForm extends Component {
   }
 };
 
-PostForm.propTypes = {
+MarqueeForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   post: PropTypes.object,
   title: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onCreatePost: PropTypes.func,
-  url: PropTypes.string,
-  dispatch: PropTypes.func.isRequired
+  url: PropTypes.string
 };
-
-function mapStateToProps(state, props) {
-  const { url } = state.fileUpload;
-  return { url };
-}
-
-export default connect(mapStateToProps)(PostForm);

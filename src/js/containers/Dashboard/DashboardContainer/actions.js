@@ -6,3 +6,11 @@ export function dashboardError(error) {
     error
   };
 }
+
+export function dashboardSetLeftNavAnchor({ label, onClick }) {
+  return {
+    type: ActionTypes.DASHBOARD_SET_LEFT_NAV_ANCHOR,
+    label,
+    onClick
+  };
+};

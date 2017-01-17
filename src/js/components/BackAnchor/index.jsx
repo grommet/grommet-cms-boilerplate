@@ -5,15 +5,15 @@ import Anchor from 'grommet/components/Anchor';
 import LinkPreviousIcon from 'grommet/components/icons/base/LinkPrevious';
 
 export default function BackAnchor(props: {
-  onClick: Function,
-  label: string
+  title: string,
+  onClick: Function
 }) {
   return (
     <Box>
       <Anchor
-        label={props.label}
-        icon={<LinkPreviousIcon />}
+        label={props.title}
         onClick={props.onClick}
+        icon={<LinkPreviousIcon />}
       />
     </Box>
   );

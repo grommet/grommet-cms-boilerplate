@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { dashboardSetLeftNavAnchor } from 'grommet-cms/containers/Dashboard/DashboardContainer/actions';
 import { getPost, submitPost, setPost } from 'grommet-cms/containers/Posts/PostPage/actions';
 // import PostForm from './form';
-import PostSections from './sections';
 import Box from 'grommet/components/Box';
 import Split from 'grommet/components/Split';
-import { PageHeader, PostPreview, ErrorNotification } from 'grommet-cms/components';
+import Animate from 'grommet/components/Animate';
+import { PageHeader, PostPreview, ErrorNotification, PostList, PostListItemDetail } from 'grommet-cms/components';
 
 export class DashboardPostPage extends Component {
   constructor(props) {
@@ -16,6 +17,12 @@ export class DashboardPostPage extends Component {
     this._onCreatePost = this._onCreatePost.bind(this);
     this._onClearError = this._onClearError.bind(this);
     this._onSectionMenuItemClick = this._onSectionMenuItemClick.bind(this);
+    this._onAddSection = this._onAddSection.bind(this);
+    this._onSelectSection = this._onSelectSection.bind(this);
+    this._onClickBackAnchor = this._onClickBackAnchor.bind(this);
+    this.state = {
+      selectedSection: null
+    };
   }
 
   componentWillMount() {
@@ -43,8 +50,36 @@ export class DashboardPostPage extends Component {
     // placeholder
   }
 
-  _onSectionMenuItemClick(i) {
-    
+  _onSectionMenuItemClick(name, i) {
+    // placeholder
+  }
+
+  _onAddSection() {
+    // placeholder
+  }
+
+  _onClickBackAnchor() {
+    this.props.dispatch(
+      dashboardSetLeftNavAnchor({
+        label: null,
+        onClick: null
+      })
+    );
+    this.setState({
+      selectedSection: null
+    });
+  }
+
+  _onSelectSection(i) {
+    this.props.dispatch(
+      dashboardSetLeftNavAnchor({
+        label: this.props.post.sections[i].name,
+        onClick: this._onClickBackAnchor
+      })
+    );
+    this.setState({
+      selectedSection: i
+    });
   }
 
   _onCreatePost(post) {
@@ -71,7 +106,7 @@ export class DashboardPostPage extends Component {
 
   render() {
     const { post, error } = this.props;
-
+    const { selectedSection } = this.state;
     return (
       <Box>
         <Split
@@ -80,34 +115,51 @@ export class DashboardPostPage extends Component {
           showOnResponsive="priority"
         >
           <Box>
-            {post && 
-              <PostSections
-                onMenuItemClick={this._onSectionMenuItemClick}
-                onAddSection={e => e}
-                sections={post.sections.sort((a, b) => a.order - b.order)}
-              /> 
-            }
+            <Animate 
+              keep
+              enter={{ animation: 'slide-right', duration: 1000, delay: 0 }}
+              visible={selectedSection == null}
+            >
+              {post && selectedSection == null &&
+                <PostList
+                  onSelectSection={this._onSelectSection}
+                  onMenuItemClick={this._onSectionMenuItemClick}
+                  onAddSection={this._onAddSection}
+                  sections={post.sections.sort((a, b) => a.order - b.order)}
+                />
+              }
+            </Animate>
+            <Animate 
+              keep
+              enter={{ animation: 'slide-left', duration: 1000, delay: 0 }}
+              visible={typeof selectedSection === 'number'}
+            >
+              {post && selectedSection &&
+                <PostListItemDetail
+                  item={post.sections[selectedSection]}
+                /> 
+              }
+            </Animate>
           </Box>
           <Box>
             <PageHeader title="Preview" />
             <PostPreview post={post} />
           </Box>
         </Split>
-        {error && <ErrorNotification errors={[error]} onClose={this._onClearError} />}
+        {error && <ErrorNotification errors={[{ message: error }]} onClose={this._onClearError} />}
       </Box>
     );
   }
 };
 
 DashboardPostPage.propTypes = {
+  dashboardSetLeftNavAnchor: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string
   }),
   request: PropTypes.bool.isRequired,
-  error: PropTypes.shape({
-    message: PropTypes.string.isRequired
-  }),
+  error: PropTypes.string,
   post: PropTypes.shape({
     sections: PropTypes.arrayOf(
       PropTypes.shape({
