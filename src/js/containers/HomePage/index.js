@@ -10,6 +10,7 @@ import Heading from 'grommet/components/Heading';
 import Anchor from 'grommet/components/Anchor';
 import Button from 'grommet/components/Button';
 import Footer from 'grommet/components/Footer';
+import GrommetLogo from 'grommet/components/icons/Grommet';
 import { GrommetHero } from 'grommet-cms/components';
 
 class HomePage extends Component {
@@ -44,7 +45,7 @@ class HomePage extends Component {
       <Box align="center" colorIndex="light-1" full>
         <Helmet title="Home" />
         <Section
-          pad="large" 
+          pad="large"
           align="center"
           justify="center"
           style={{ height: '45rem' }}
@@ -54,7 +55,17 @@ class HomePage extends Component {
             keep
             enter={{ animation: "fade", duration: 1000, delay: 100 }}
           >
-            <GrommetHero />
+            <Box className="home-desktop">
+              <GrommetHero />
+            </Box>
+            <Box className="home-mobile" align="center">
+              <GrommetLogo
+                size="large"
+                a11yTitle="Grommet Logo"
+                a11yTitleId="hero_logo" 
+              />
+              <Heading tag="h1">grommet</Heading>
+            </Box>
           </Animate>
           <Animate
             visible={this.state.paragraphVisible}
@@ -87,17 +98,17 @@ class HomePage extends Component {
               <Paragraph size="medium" align="center">
                 Grommet CMS combines a fully featured content management system
                 with the world's most advanced UX framework to provide you with all the
-                <Anchor path="https://grommet.github.io/docs/learn">{' guidance'}</Anchor>,
-                <Anchor path="https://grommet.github.io/docs/components">
+                <Anchor href="https://grommet.github.io/docs/learn">{' guidance'}</Anchor>,
+                <Anchor href="https://grommet.github.io/docs/components">
                   {' components'}
-                </Anchor>, and <Anchor path="https://grommet.github.io/docs/resources">
+                </Anchor>, and <Anchor href="https://grommet.github.io/docs/resources">
                   design resources
                 </Anchor> you need
                 to take your ideas from concept to a real application.
               </Paragraph>
             </Box>
             <Footer justify="center" pad="medium">
-              <Button label="Start" href="/dashboard" />
+              <Button label="Start" path="/dashboard" />
             </Footer>
           </Animate>
         </Section>
