@@ -25,7 +25,7 @@ export class PostPage extends Component {
       ? post.contentBlocks
       : undefined;
     const image = (post && post.image)
-      ? post.image
+      ? post.image.path
       : undefined;
 
     return (

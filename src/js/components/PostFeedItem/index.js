@@ -10,7 +10,7 @@ import { formatPrettyDate } from 'grommet-cms/utils';
 export default function PostFeedItem(props: {
   post: {
     title: string,
-    image: string,
+    image: Object,
     slug: string,
     createdAt: string
   },
@@ -18,12 +18,13 @@ export default function PostFeedItem(props: {
   postPath: string,
 }) {
   const { post, postPath, colorIndex } = props;
+  console.log('image', post.image.path, post);
   return (
     <Anchor className="post-feed-item--anchor" href={`${postPath}${post.slug}`}>
       <Section
         full
         colorIndex={colorIndex}
-        texture={post.image}
+        texture={post.image.path}
         pad="large"
       >
         <Box

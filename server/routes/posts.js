@@ -11,7 +11,7 @@ router.get('/api/posts', function(req, res) {
     : 0;
 
   if (page === 0) {
-    Post.find().sort({
+    Post.find().populate('image').sort({
       date: 'desc'
     }).exec((err, posts) => {
       if (err) {
@@ -25,7 +25,7 @@ router.get('/api/posts', function(req, res) {
     const skip = (page === '1')
       ? 0
       : (page - 1) * limit;
-    Post.find().skip(skip).limit(limit).sort({
+    Post.find().skip(skip).limit(limit).populate('image').sort({
       date: 'desc'
     }).exec((err, posts) => {
       if (err) {
