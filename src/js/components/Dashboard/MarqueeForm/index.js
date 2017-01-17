@@ -9,6 +9,7 @@ import FormFields from 'grommet/components/FormFields';
 import Section from 'grommet/components/Section';
 import Footer from 'grommet/components/Footer';
 import ImageIcon from 'grommet/components/icons/base/Image';
+import Menu from 'grommet/components/Menu';
 import DashboardAssetsLayer from 'grommet-cms/containers/Dashboard/DashboardAssetsLayer';
 import { formatDate } from 'grommet-cms/utils';
 
@@ -27,31 +28,6 @@ export default class MarqueeForm extends Component {
       shouldUpdateHero: false,
       assetsLayer: false
     };
-  }
-
-  componentWillMount() {
-    const { onCreatePost } = this.props;
-    if (!this.props.post.hasOwnProperty('title')) {
-      if (typeof onCreatePost === 'function') {
-        const contentBlocks = [];
-        const date = new Date();
-        onCreatePost({
-          date,
-          contentBlocks,
-          _id: '',
-          title: '',
-          subtitle: '',
-          image: '',
-          sections: [
-            {
-              title: 'Next Next',
-              label: 'Marquee',
-              contentBlocks: []
-            }
-          ]
-        });
-      }
-    }
   }
 
   componentWillReceiveProps({ url }) {
@@ -109,7 +85,7 @@ export default class MarqueeForm extends Component {
   }
 
   render() {
-    const { onChange, post } = this.props;
+    const { onChange, post, onSubmit, onCancel } = this.props;
     const { image, title, subtitle, date } = post;
     const formattedDate = formatDate(date);
     const assetsLayer = (this.state.assetsLayer)
@@ -128,6 +104,7 @@ export default class MarqueeForm extends Component {
               <fieldset>
                 <FormField label="Headline" htmlFor="title">
                   <input
+                    autoFocus
                     id="title"
                     name="title"
                     type="text"
@@ -186,6 +163,32 @@ export default class MarqueeForm extends Component {
             </Box>
           </Footer>
         </Section>
+        <Section pad="medium">
+          <Box pad="small">
+            <Footer align="center" justify="center" pad="large">
+              <Menu
+                align="center"
+                style={{ width: '100%' }}
+                justify="between"
+                direction="row"
+                inline
+                responsive={false}
+              >
+                <Button
+                  label="submit"
+                  onClick={onSubmit}
+                  primary={true}
+                  type="submit"
+                />
+                <Button
+                  label="cancel"
+                  onClick={onCancel}
+                  primary={false}
+                />
+              </Menu>
+            </Footer>
+          </Box>
+        </Section>
       </Box>
     );
   }
@@ -193,9 +196,8 @@ export default class MarqueeForm extends Component {
 
 MarqueeForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
   post: PropTypes.object,
-  title: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  onCreatePost: PropTypes.func,
   url: PropTypes.string
 };

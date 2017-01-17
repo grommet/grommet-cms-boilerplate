@@ -3,7 +3,8 @@ import * as ActionTypes from './constants';
 const initialState = {
   addPostForm: {
     isVisible: false
-  }
+  },
+  redirect: false
 };
 
 function dashboardPosts(state = initialState, action) {
@@ -14,6 +15,11 @@ function dashboardPosts(state = initialState, action) {
         addPostForm: {
           isVisible: !state.addPostForm.isVisible
         }
+      };
+    case ActionTypes.DASHBOARD_POSTS_ADD_POST_REDIRECT:
+      return {
+        ...state,
+        redirect: !state.redirect
       };
     default:
       return state;

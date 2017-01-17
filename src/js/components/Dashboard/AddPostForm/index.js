@@ -2,7 +2,7 @@
 import React from 'react';
 import Layer from 'grommet/components/Layer';
 // $FlowFixMe
-import MarqueeForm from 'grommet-cms/components';
+import { MarqueeForm } from 'grommet-cms/components';
 
 export default function AddPostForm(props: {
   isVisible: boolean,
@@ -17,11 +17,11 @@ export default function AddPostForm(props: {
     },
     url?: string,
     onChange: Function,
-    onCreatePost: Function,
+    onCancel: Function
   }
 }) {
   const { isVisible, onClose, form } = props;
-  const { onSubmit, post, onChange, onCreatePost, url } = form;
+  const { onSubmit, post, onChange, url, onCancel } = form;
   return (
     <Layer
       align="right"
@@ -32,7 +32,7 @@ export default function AddPostForm(props: {
         onSubmit={onSubmit}
         post={post}
         onChange={onChange}
-        onCreatePost={onCreatePost}
+        onCancel={onCancel}
         url={url}
       />
     </Layer>

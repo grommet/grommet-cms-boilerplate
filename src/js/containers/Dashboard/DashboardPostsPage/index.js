@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getPosts, deletePost } from 'grommet-cms/containers/Posts/PostPage/actions';
 import { blockAddList } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
-import { browserHistory } from 'react-router';
 import List from 'grommet-cms/components/Dashboard/List';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
@@ -10,7 +9,8 @@ import Heading from 'grommet/components/Heading';
 import SpinningIcon from 'grommet/components/icons/Spinning';
 import ConfirmLayer from 'grommet-cms/components/Dashboard/ConfirmLayer';
 import { PageHeader, AddPostForm } from 'grommet-cms/components';
-import { toggleAddPostFormVisibility } from './actions';
+import { submitPost, setPost } from 'grommet-cms/containers/Posts/PostPage/actions';
+import { toggleAddPostFormVisibility, addPostRedirect } from './actions';
 
 export class DashboardPostsPage extends Component {
   constructor(props) {
@@ -19,16 +19,17 @@ export class DashboardPostsPage extends Component {
     this.state = {
       layer: false,
       orderLayer: false,
-      postToDelete: null,
-      postForm: false
+      postToDelete: null
     };
-
-    this._onCreateClick = this._onCreateClick.bind(this);
     this._confirmDelete = this._confirmDelete.bind(this);
     this._onDeleteSubmit = this._onDeleteSubmit.bind(this);
     this._onLayerClose = this._onLayerClose.bind(this);
-    this._onAddPost = this._onAddPost.bind(this);
     this._onToggleAddPostForm = this._onToggleAddPostForm.bind(this);
+    this._onCreatePost = this._onCreatePost.bind(this);
+    this._onSubmitPost = this._onSubmitPost.bind(this);
+    this._onCancelPost = this._onCancelPost.bind(this);
+    this._onCreatePost = this._onCreatePost.bind(this);
+    this._onPostChange = this._onPostChange.bind(this);
   }
 
   componentWillMount() {
@@ -43,15 +44,70 @@ export class DashboardPostsPage extends Component {
       this.setState({orderLayer: false});
   }
 
-  _onCreateClick() {
-    browserHistory.push('/dashboard/posts/create');
+  componentWillReceiveProps({ request, newPost, redirect }) {
+    if (!request && request !== this.props.request) {
+      if (redirect) {
+        this.props.dispatch(addPostRedirect());
+        this._onToggleAddPostForm();
+        this.props.dispatch(getPosts());
+      }
+    }
   }
 
-  _onAddPost() {
+  _onSubmitPost() {
+    if(!this.props.request) {
+      const { newPost } = this.props;
+      const post = {
+        ...newPost,
+        sections: [
+          {
+            name: newPost.title,
+            label: 'Marquee',
+            order: 0,
+            contentBlocks: []
+          }
+        ]
+      };
+      this.props.dispatch(addPostRedirect());
+      this.props.dispatch(submitPost(post));
+    }
+  }
 
+  _onCancelPost() {
+    this.props.dispatch(setPost());
+    this._onToggleAddPostForm();
+  }
+
+  _onCreatePost() {
+    const newPost = {
+      _id: '',
+      date: new Date()
+    };
+    this.props.dispatch(setPost(newPost));
+  }
+
+  _onPostChange({ target, option }) {
+    const { newPost } = this.props;
+    const key = target.id;
+    const val = option || target.value;
+    let updatedPost;
+    if (newPost) {
+      updatedPost = {
+        ...newPost,
+        [key]: newPost.key != null ? `${newPost[key]}${val}` : val
+      };
+    } else {
+      updatedPost = {
+        [key]: val
+      };
+    }
+    this.props.dispatch(setPost(updatedPost));
   }
 
   _onToggleAddPostForm() {
+    if (!this.props.addPostForm.isVisible && !this.props.post) {
+      this._onCreatePost();
+    }
     this.props.dispatch(toggleAddPostFormVisibility());
   }
 
@@ -94,7 +150,7 @@ export class DashboardPostsPage extends Component {
   }
 
   render() {
-    const { posts, request, addPostForm } = this.props;
+    const { posts, request, addPostForm, url, newPost } = this.props;
 
     const layer = (this.state.layer)
       ? <ConfirmLayer onSubmit={this._onDeleteSubmit} onClose={this._onLayerClose} />
@@ -107,15 +163,22 @@ export class DashboardPostsPage extends Component {
 
     return (
       <Box direction="column">
-        <AddPostForm 
+        <AddPostForm
           isVisible={addPostForm.isVisible}
           onClose={this._onToggleAddPostForm}
+          form={{
+            onSubmit: this._onSubmitPost,
+            post: newPost || {},
+            url: url,
+            onCancel: this._onCancelPost,
+            onChange: this._onPostChange
+          }}
         />
         {layer}
         <PageHeader
           title="Posts"
           controls={
-            <Button onClick={this._onAddPost}>
+            <Button onClick={this._onToggleAddPostForm}>
               Add Post
             </Button>
           }
@@ -133,16 +196,22 @@ DashboardPostsPage.propTypes = {
   request: PropTypes.bool,
   addPostForm: PropTypes.shape({
     isVisible: PropTypes.bool.isRequired
-  }).isRequired
+  }).isRequired,
+  newPost: PropTypes.object,
+  redirect: PropTypes.bool.isRequired
 };
 
 function mapStateToProps (state, props) {
-  const { request, error, posts } = state.posts;
-  const { addPostForm } = state.dashboardPosts;
+  const { request, error, posts, post } = state.posts;
+  const { addPostForm, redirect } = state.dashboardPosts;
+  const { url } = state.fileUpload;
   return {
     request,
+    url,
+    redirect,
     error,
     posts,
+    newPost: post,
     addPostForm
   };
 };

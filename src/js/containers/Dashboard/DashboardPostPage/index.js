@@ -20,6 +20,7 @@ export class DashboardPostPage extends Component {
     this._onAddSection = this._onAddSection.bind(this);
     this._onSelectSection = this._onSelectSection.bind(this);
     this._onClickBackAnchor = this._onClickBackAnchor.bind(this);
+    this._setDefaultLeftAnchor = this._setDefaultLeftAnchor.bind(this);
     this.state = {
       selectedSection: null
     };
@@ -29,6 +30,16 @@ export class DashboardPostPage extends Component {
     const { id } = this.props.params;
     if (id && id !== 'create')
       this.props.dispatch(getPost(id));
+    this._setDefaultLeftAnchor();
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(
+      dashboardSetLeftNavAnchor({
+        label: null,
+        onClick: null
+      })
+    );
   }
 
   componentWillReceiveProps({ contentBlocks }) {
@@ -58,13 +69,18 @@ export class DashboardPostPage extends Component {
     // placeholder
   }
 
-  _onClickBackAnchor() {
+
+  _setDefaultLeftAnchor() {
     this.props.dispatch(
       dashboardSetLeftNavAnchor({
-        label: null,
-        onClick: null
+        label: 'All Posts',
+        onClick: () => this.context.router.goBack()
       })
     );
+  }
+
+  _onClickBackAnchor() {
+    this._setDefaultLeftAnchor();
     this.setState({
       selectedSection: null
     });
@@ -169,6 +185,10 @@ DashboardPostPage.propTypes = {
       })
     )
   })
+};
+
+DashboardPostPage.contextTypes = {
+  router: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, props) {
