@@ -115,7 +115,7 @@ declare module 'grommet/components/Button' {
     fill?: boolean,
     href?: string,
     icon?: ?React$Element<any>,
-    label?: ?ReactElementOrNode,
+    label?: string | ?ReactElementOrNode,
     method?: "push" | "replace",
     onClick?: Function,
     path?: string,
@@ -448,7 +448,7 @@ declare module 'grommet/components/FormField' {
     help?: ?ReactElementOrNode,
     hidden?: boolean,
     htmlFor?: string,
-    label?: ?ReactElementOrNode,
+    label?: string | ?ReactElementOrNode,
     size?: "medium" | "large",
     strong?: boolean
   }

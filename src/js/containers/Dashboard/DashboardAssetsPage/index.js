@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { getAssets, deleteAsset } from './actions';
+import { getAssets, deleteAsset } from 'grommet-cms/containers/Assets/actions';
 
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import Heading from 'grommet/components/Heading';
 import SpinningIcon from 'grommet/components/icons/Spinning';
-import { AssetTile, PageHeader } from '../../components/Dashboard';
+import { AssetTile, PageHeader } from 'grommet-cms/components/Dashboard';
 
-export class AssetsPage extends Component {
+export class DashboardAssetsPage extends Component {
   componentWillMount() {
     this.props.dispatch(getAssets());
   }
@@ -69,4 +69,4 @@ function mapStateToProps(state, props) {
   };
 }
 
-export default connect(mapStateToProps)(AssetsPage);
+export default connect(mapStateToProps)(DashboardAssetsPage);

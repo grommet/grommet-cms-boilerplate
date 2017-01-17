@@ -5,8 +5,9 @@ const POSTS = [
   {
     author: 'John Doe',
     title: 'Hello World',
+    subtitle: "Blog Post",
     slug: 'my-first-post',
-    image: '/img/dashboard/posts/hello-world-cover.jpg',
+    image: '587d4860b3ae295860c5fcbf',
     date: '01/01/2017',
     contentBlocks: [
       {
