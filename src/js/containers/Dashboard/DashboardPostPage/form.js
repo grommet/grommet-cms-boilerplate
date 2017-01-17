@@ -46,7 +46,14 @@ export class PostForm extends Component {
           _id: '',
           title: '',
           subtitle: '',
-          image: ''
+          image: '',
+          sections: [
+            {
+              title: 'Next Next',
+              label: 'Marquee',
+              contentBlocks: []
+            }
+          ]
         });
       }
     }
@@ -183,31 +190,6 @@ export class PostForm extends Component {
               </Button>
             </Box>
           </Footer>
-        </Section>
-        <Section pad="medium">
-          <Box pad="small">
-            <DashboardContentBlocks blocks={contentBlocks} />
-            <Footer align="center" justify="center" pad="large">
-              <Menu
-                className="dashboard--content-blocks__button-footer"
-                direction="row"
-                inline
-                responsive={false}
-              >
-                <Button
-                  label="submit"
-                  onClick={this._onSubmit}
-                  primary={true}
-                  type="submit"
-                />
-                <Button
-                  label="add block"
-                  onClick={this._onCreateBlockClick}
-                  primary={false}
-                />
-              </Menu>
-            </Footer>
-          </Box>
         </Section>
       </Box>
     );

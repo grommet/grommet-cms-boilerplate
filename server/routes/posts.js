@@ -67,8 +67,8 @@ router.post('/api/post/create', isAuthed, function(req, res) {
     subtitle: req.body.subtitle || '',
     date: new Date(req.body.date).toISOString(),
     slug: slugify(req.body.title),
-    contentBlocks: req.body.contentBlocks || [],
     image: req.body.image._id || '',
+    sections: req.body.sections,
     createdAt: Date.now()
   }, function (err, post) {
     if (err) {

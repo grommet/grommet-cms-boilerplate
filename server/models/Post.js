@@ -5,7 +5,7 @@ const Post = new Schema({
   subtitle: String,
   image: { type: String, ref: 'File' },
   link: String,
-  contentBlocks: Array,
+  sections: Array,
   slug: String,
   date: Date,
   createdAt: { type: Date, default: Date.now }

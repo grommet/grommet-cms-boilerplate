@@ -9,17 +9,60 @@ const POSTS = [
     slug: 'my-first-post',
     image: '587d4860b3ae295860c5fcbf',
     date: '01/01/2017',
-    contentBlocks: [
+    sections: [
       {
-        content: "This is my first blog post!",
-        blockType: "BlockHeading",
-        edit: false,
-        id: "f15e4fba-b794-4589-9f20-97ff13e6de82"
-      },{
-        content: "What an exciting day.",
-        blockType: "BlockParagraph",
-        edit: false,
-        id: "f15e4fba-b794-4589-9f20-97ff13e6de81"
+        name: 'Next Next',
+        id: 'Marquee',
+        order: 0,
+        contentBlocks: [
+          {
+            content: "This is my first blog post!",
+            blockType: "BlockHeading",
+            edit: false,
+            id: "f15e4fba-b794-4589-9f20-97ff13e6de82"
+          },{
+            content: "What an exciting day.",
+            blockType: "BlockParagraph",
+            edit: false,
+            id: "f15e4fba-b794-4589-9f20-97ff13e6de81"
+          }
+        ]
+      },
+      {
+        name: 'Memory in the middle',
+        id: 'Section 1',
+        order: 1,
+        contentBlocks: [
+          {
+            content: "This is my first blog post!",
+            blockType: "BlockHeading",
+            edit: false,
+            id: "f15e4fba-b794-4589-9f20-97ff13e6de82"
+          },{
+            content: "What an exciting day.",
+            blockType: "BlockParagraph",
+            edit: false,
+            id: "f15e4fba-b794-4589-9f20-97ff13e6de81"
+          }
+        ]
+      },
+      {
+        name: 'The rise of common sense analytics',
+        id: 'Section 2',
+        order: 2,
+        contentBlocks: [
+          {
+            content: "This is my first blog post!",
+            blockType: "BlockHeading",
+            edit: false,
+            id: "f15e4fba-b794-4589-9f20-97ff13e6de82"
+          },{
+            content: "What an exciting day.",
+            blockType: "BlockParagraph",
+            edit: false,
+            id: "f15e4fba-b794-4589-9f20-97ff13e6de81"
+          }
+        ]
       }
     ]
   }
