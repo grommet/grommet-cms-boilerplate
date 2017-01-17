@@ -32,16 +32,24 @@ class Requests {
   }
   static async post(url, body) {
     return new Promise(async (res, rej) => {
-      const headers = Requests.makeHeaders();
-      const json = await Requests.makeRequest(url, 'POST', headers, body);
-      res(json);
+      try {
+        const headers = Requests.makeHeaders();
+        const json = await Requests.makeRequest(url, 'POST', headers, body);
+        res(json);
+      } catch (err) {
+        rej(err);
+      }
     });
   }
   static async put(url, body) {
     return new Promise(async (res, rej) => {
-      const headers = Requests.makeHeaders();
-      const json = await Requests.makeRequest(url, 'PUT', headers, body);
-      res(json);
+      try {
+        const headers = Requests.makeHeaders();
+        const json = await Requests.makeRequest(url, 'PUT', headers, body);
+        res(json); 
+      } catch (err) {
+        rej(err);
+      }
     });
   }
   static async delete(url, body) {

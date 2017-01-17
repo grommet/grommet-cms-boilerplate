@@ -11,7 +11,7 @@ import { ContentBlocks } from 'grommet-cms/containers';
 import type ContentBlockType from './flowTypes';
 
 export default function PostPreview(props: {
-  post?: ?{
+  post?: {
     image: string,
     title: string,
     subtitle?: string,
