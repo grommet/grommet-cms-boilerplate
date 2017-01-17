@@ -18,9 +18,9 @@ export default function PostFeedItem(props: {
   postPath: string,
 }) {
   const { post, postPath, colorIndex } = props;
-  console.log('image', post.image.path, post);
+
   return (
-    <Anchor className="post-feed-item--anchor" href={`${postPath}${post.slug}`}>
+    <Anchor className="post-feed-item--anchor" path={`${postPath}${post.slug}`}>
       <Section
         full
         colorIndex={colorIndex}
