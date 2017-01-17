@@ -1,5 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+
 import { connect } from 'react-redux';
+import { blockAdd } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
+import { DashboardContentBlocks } from 'grommet-cms/containers';
+
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import DateTime from 'grommet/components/DateTime';
@@ -9,8 +13,8 @@ import FormFields from 'grommet/components/FormFields';
 import Section from 'grommet/components/Section';
 import Footer from 'grommet/components/Footer';
 import Menu from 'grommet/components/Menu';
-import { blockAdd } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
-import { DashboardFileUpload, DashboardContentBlocks } from 'grommet-cms/containers';
+import ImageIcon from 'grommet/components/icons/base/Image';
+import DashboardAssetsLayer from 'grommet-cms/containers/Dashboard/DashboardAssetsLayer';
 import { formatDate } from 'grommet-cms/utils';
 
 export class PostForm extends Component {
@@ -21,8 +25,12 @@ export class PostForm extends Component {
     this._setHeroImage = this._setHeroImage.bind(this);
     this._onCreateBlockClick = this._onCreateBlockClick.bind(this);
     this._setShouldUpdateHero = this._setShouldUpdateHero.bind(this);
+    this._toggleAssetsLayer = this._toggleAssetsLayer.bind(this);
+    this._onAssetSelect = this._onAssetSelect.bind(this);
+
     this.state = {
-      shouldUpdateHero: false
+      shouldUpdateHero: false,
+      assetsLayer: false
     };
   }
 
@@ -35,7 +43,7 @@ export class PostForm extends Component {
         onCreatePost({
           date,
           contentBlocks,
-          id: '',
+          _id: '',
           title: '',
           subtitle: '',
           image: ''
@@ -51,6 +59,10 @@ export class PostForm extends Component {
       });
       this._setHeroImage(url);
     }
+  }
+
+  _toggleAssetsLayer() {
+    this.setState({ assetsLayer: !this.state.assetsLayer });
   }
 
   _setHeroImage(url) {
@@ -72,6 +84,17 @@ export class PostForm extends Component {
     this.props.dispatch(blockAdd());
   }
 
+  _onAssetSelect(asset) {
+    this.props.onChange({
+      target: {
+        id: 'image',
+        value: asset
+      }
+    });
+
+    this.setState({ assetsLayer: false });
+  }
+
   _validatePost() {
     const { title, date } = this.props.post;
     return (title && date) ? true : false;
@@ -87,8 +110,16 @@ export class PostForm extends Component {
     const { onChange, post } = this.props;
     const { image, title, subtitle, contentBlocks, date } = post;
     const formattedDate = formatDate(date);
+    const assetsLayer = (this.state.assetsLayer)
+      ? <DashboardAssetsLayer 
+          onAssetSelect={this._onAssetSelect} 
+          onClose={this._toggleAssetsLayer} 
+        />
+      : undefined;
+
     return (
       <Box>
+        {assetsLayer}
         <Section pad="medium" align="center">
           <Form pad="medium">
             <FormFields>
@@ -134,7 +165,7 @@ export class PostForm extends Component {
                     id="image"
                     name="image"
                     type="text"
-                    value={image || ''}
+                    value={(image && image.path) ? image.path : ''}
                     onChange={onChange}
                   />
                 </FormField>
@@ -147,9 +178,9 @@ export class PostForm extends Component {
             pad={{ horizontal: 'medium' }}
           >
             <Box align="start">
-              <DashboardFileUpload
-                onImgPost={this._setShouldUpdateHero} 
-              />
+              <Button icon={<ImageIcon />} onClick={this._toggleAssetsLayer}>
+                Add Asset
+              </Button>
             </Box>
           </Footer>
         </Section>

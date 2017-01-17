@@ -9,7 +9,7 @@ import { PageHeader, PostPreview, LoadingIndicator } from 'grommet-cms/component
 export class DashboardPostPage extends Component {
   constructor(props) {
     super(props);
-
+    
     this._onSubmit = this._onSubmit.bind(this);
     this._onPostChange = this._onPostChange.bind(this);
     this._onCreatePost = this._onCreatePost.bind(this);

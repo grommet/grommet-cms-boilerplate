@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import colors from 'colors/safe';
 import User from '../models/User';
+import buildFileCollection from './build-file-collection';
 import buildPostCollection from './build-post-collection';
 
 // Use native promises
@@ -29,6 +30,7 @@ function callback(err, user) {
 }
 
 export function initScript() {
+  buildFileCollection();
   buildPostCollection();
   generateTempAdminUser();
 };

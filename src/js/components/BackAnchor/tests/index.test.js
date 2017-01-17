@@ -3,7 +3,7 @@ import { shallowToJson } from 'enzyme-to-json';
 import React from 'react';
 import { spy } from 'sinon';
 import BackAnchor from '../index';
-import props from './__mocks__/props';
+import props from './__mocks__/backAnchorMocks';
 
 describe('<BackAnchor />', () => {
   it('should render with default props', () => {

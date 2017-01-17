@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { getPost } from 'grommet-cms/containers/Posts/PostPage/actions';
 import ContentBlocks from 'grommet-cms/containers/ContentBlocks';
+import { WithLoading } from 'grommet-cms/components';
 import Box from 'grommet/components/Box';
 import Headline from 'grommet/components/Headline';
 
@@ -16,7 +17,7 @@ export class PostPage extends Component {
   }
 
   render() {
-    const { post } = this.props;
+    const { post, request } = this.props;
     const title = (post && post.title)
       ? post.title
       : 'Post';
@@ -24,21 +25,30 @@ export class PostPage extends Component {
       ? post.contentBlocks
       : undefined;
     const image = (post && post.image)
-      ? post.image
+      ? post.image.path
       : undefined;
 
     return (
-       <Box className="labs" align="center">
-        <Helmet title={title} />
-        <Box texture={image} full="horizontal" size={{ height: 'medium' }}
-          colorIndex="grey-1" justify="center" align="center">
-          <Headline size="medium" margin="none" strong={true}>
-            {title}
-          </Headline>
+      <WithLoading isLoading={request} fullHeight>
+        <Box className="labs" align="center">
+          <Helmet title={title} />
+          <Box
+            texture={image}
+            full="horizontal"
+            size={{ height: 'medium' }}
+            colorIndex="grey-1"
+            justify="center"
+            align="center"
+          >
+            <Headline size="medium" margin="none" strong={true}>
+              {title}
+            </Headline>
+          </Box>
+          <Box full>
+            <ContentBlocks blocks={blocks} />
+          </Box>
         </Box>
-
-        <ContentBlocks blocks={blocks} />
-      </Box>
+      </WithLoading>
     );
   }
 };

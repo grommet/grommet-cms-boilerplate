@@ -9,10 +9,12 @@ import Section from 'grommet/components/Section';
 // $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
 import { ContentBlocks } from 'grommet-cms/containers';
 import type ContentBlockType from './flowTypes';
+// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
+import type { Asset } from 'grommet-cms/containers/Assets/flowTypes';
 
 export default function PostPreview(props: {
-  post?: {
-    image: string,
+  post?: ?{
+    image: Asset,
     title: string,
     subtitle?: string,
     contentBlocks: Array<ContentBlockType>
@@ -27,7 +29,7 @@ export default function PostPreview(props: {
             className="post-preview--hero"
             size="medium"
             colorIndex="grey-2-a"
-            background={post.image ? <Image src={post.image} fit="cover" /> : null}
+            background={post.image ? <Image src={post.image.path} fit="cover" /> : null}
           >
             <Box direction="row" pad="medium">
               {post.title &&

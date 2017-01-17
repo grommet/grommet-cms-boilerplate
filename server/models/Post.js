@@ -3,7 +3,7 @@ import mongoose, { Schema } from 'mongoose';
 const Post = new Schema({
   title: String,
   subtitle: String,
-  image: String,
+  image: { type: String, ref: 'File' },
   link: String,
   contentBlocks: Array,
   slug: String,

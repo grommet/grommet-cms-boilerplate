@@ -1,4 +1,5 @@
 /* GENERATOR */
+export GrommetHero from './GrommetHero';
 export Footer from './Footer';
 export PostFeedItem from './PostFeedItem';
 export BackAnchor from './BackAnchor';

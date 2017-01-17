@@ -17,14 +17,22 @@ export default function Footer(props: {
   return (
     <FooterComponent primary colorIndex="brand">
       <Box direction="row" pad="large" full="horizontal">
-        <Box justify="center">
+        <Box basis="1/3" justify="center">
           {logo}
         </Box>
-        <Box flex justify="center">
-          <Heading align="center" tag="h3">{contact.copyright}</Heading>
+        <Box basis="1/3" justify="center">
+          <Heading 
+            className="post-feed-item--header"
+            align="center"
+            tag="h3"
+          >
+            {contact.copyright}
+          </Heading>
         </Box>
-        <Box justify="center">
-          <Anchor align="end" href={`mailto:${contact.email}`}>Get in touch</Anchor>
+        <Box basis="1/3" justify="center">
+          <Anchor align="end" href={`mailto:${contact.email}`}>
+            Get in touch
+          </Anchor>
           <Anchor align="end" href={contact.website}>{contact.website}</Anchor>
         </Box>
       </Box>

@@ -2,6 +2,7 @@
 import React from 'react';
 import Section from 'grommet/components/Section';
 import Heading from 'grommet/components/Heading';
+import Box from 'grommet/components/Box';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { bindActionCreators } from 'redux';
@@ -52,9 +53,11 @@ class PostFeedPage extends React.Component {
             />
           )
         :
-          <Heading>
-            No posts
-          </Heading>
+          <Box full pad="large">
+            <Heading align="center">
+              No posts
+            </Heading>
+          </Box>
         }
         </Section>
         {this.renderError(loadingError)}

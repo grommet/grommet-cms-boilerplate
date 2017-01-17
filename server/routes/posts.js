@@ -11,7 +11,7 @@ router.get('/api/posts', function(req, res) {
     : 0;
 
   if (page === 0) {
-    Post.find().sort({
+    Post.find().populate('image').sort({
       date: 'desc'
     }).exec((err, posts) => {
       if (err) {
@@ -25,7 +25,7 @@ router.get('/api/posts', function(req, res) {
     const skip = (page === '1')
       ? 0
       : (page - 1) * limit;
-    Post.find().skip(skip).limit(limit).sort({
+    Post.find().skip(skip).limit(limit).populate('image').sort({
       date: 'desc'
     }).exec((err, posts) => {
       if (err) {
@@ -39,7 +39,7 @@ router.get('/api/posts', function(req, res) {
 
 // Get Post by ID
 router.get('/api/post/:id', function(req, res) {
-  Post.findById(req.params.id, function (err, post) {
+  Post.findOne({'_id': req.params.id }).populate('image').exec(function(err, post) {
     if (err) {
       return res.status(400).send(err);
     }
@@ -50,12 +50,12 @@ router.get('/api/post/:id', function(req, res) {
 
 // Get Post by slug
 router.get('/api/post/title/:slug', function(req, res) {
-  Post.findOne({'slug': req.params.slug }).exec(function(err, posts) {
+  Post.findOne({'slug': req.params.slug }).populate('image').exec(function(err, post) {
     if (err) {
       return res.status(400).send(err);
     }
 
-    res.status(200).send(posts);
+    res.status(200).send(post);
 
   });
 });
@@ -68,7 +68,7 @@ router.post('/api/post/create', isAuthed, function(req, res) {
     date: new Date(req.body.date).toISOString(),
     slug: slugify(req.body.title),
     contentBlocks: req.body.contentBlocks || [],
-    image: req.body.image || '',
+    image: req.body.image._id || '',
     createdAt: Date.now()
   }, function (err, post) {
     if (err) {
@@ -91,7 +91,7 @@ router.post('/api/post/:id', isAuthed, function (req, res) {
     post.date = new Date(req.body.date).toISOString();
     post.slug = slugify(req.body.title);
     post.contentBlocks = req.body.contentBlocks;
-    post.image = req.body.image;
+    post.image = (req.body.image) ? req.body.image._id : undefined;
     post.createdAt = req.body.createdAt;
 
     return post.save(function(err) {
