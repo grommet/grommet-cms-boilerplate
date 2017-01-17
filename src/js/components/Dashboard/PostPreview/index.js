@@ -13,17 +13,20 @@ import type ContentBlockType from './flowTypes';
 import type { Asset } from 'grommet-cms/containers/Assets/flowTypes';
 
 export default function PostPreview(props: {
-  post?: ?{
+  post?: {
     image: Asset,
     title: string,
     subtitle?: string,
-    contentBlocks: Array<ContentBlockType>
-  }
+    sections?: Array<{
+      contentBlocks: Array<ContentBlockType>
+    }>
+  },
+  selectedSection?: number
 }) {
-  const { post } = props;
+  const { post, selectedSection } = props;
   return (
     <Box>
-      {post &&
+      {post && selectedSection == null && 
         <Box>
           <Hero
             className="post-preview--hero"
@@ -44,10 +47,14 @@ export default function PostPreview(props: {
               }
             </Box>
           </Hero>
-          <Section pad="medium">
-            <ContentBlocks blocks={post.contentBlocks} />
-          </Section>
         </Box>
+      }
+      {post && post.sections &&
+        post.sections.filter((_, i) => selectedSection === i).map((item, i) => 
+          <Section pad="medium">
+            <ContentBlocks blocks={item.contentBlocks} />
+          </Section>  
+        )
       }
     </Box>
   );

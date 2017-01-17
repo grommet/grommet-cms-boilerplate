@@ -11,3 +11,5 @@ export PageHeader from './PageHeader';
 export PostListItem from './PostListItem';
 export PostListItemDetail from './PostListItemDetail';
 export PostList from './PostList';
+export MarqueeForm from './MarqueeForm';
+export AddPostForm from './AddPostForm';

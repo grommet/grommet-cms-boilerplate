@@ -27,7 +27,9 @@ export default function PostListItemDetail(props: {
       <PageHeader title={`Edit ${item.name}`} />
       <Section pad="medium">
         <Box pad="small">
-          <DashboardContentBlocks blocks={item.contentBlocks} />
+          {item.contentBlocks && item.contentBlocks.length > 0 &&
+            <DashboardContentBlocks blocks={item.contentBlocks} />
+          }
           <Footer align="center" justify="center" pad="large">
             <Menu
               className="dashboard--content-blocks__button-footer"

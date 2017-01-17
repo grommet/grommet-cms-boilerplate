@@ -73,7 +73,7 @@ export class DashboardPostPage extends Component {
   _onSelectSection(i) {
     this.props.dispatch(
       dashboardSetLeftNavAnchor({
-        label: this.props.post.sections[i].name,
+        label: this.props.post.title,
         onClick: this._onClickBackAnchor
       })
     );
@@ -118,6 +118,7 @@ export class DashboardPostPage extends Component {
             <Animate 
               keep
               enter={{ animation: 'slide-right', duration: 1000, delay: 0 }}
+              leave={{ animation: 'slide-left', duration: 1000, delay: 0 }}
               visible={selectedSection == null}
             >
               {post && selectedSection == null &&
@@ -131,7 +132,8 @@ export class DashboardPostPage extends Component {
             </Animate>
             <Animate 
               keep
-              enter={{ animation: 'slide-left', duration: 1000, delay: 0 }}
+              enter={{ animation: 'slide-left', duration: 1000, delay: 50 }}
+              leave={{ animation: 'slide-left', duration: 1000, delay: 50 }}
               visible={typeof selectedSection === 'number'}
             >
               {post && selectedSection &&
@@ -143,7 +145,7 @@ export class DashboardPostPage extends Component {
           </Box>
           <Box>
             <PageHeader title="Preview" />
-            <PostPreview post={post} />
+            <PostPreview selectedSection={selectedSection} post={post} />
           </Box>
         </Split>
         {error && <ErrorNotification errors={[{ message: error }]} onClose={this._onClearError} />}

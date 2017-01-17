@@ -1,17 +1,16 @@
 import React, { Component, PropTypes } from 'react';
-
 import { connect } from 'react-redux';
 import { getPosts, deletePost } from 'grommet-cms/containers/Posts/PostPage/actions';
 import { blockAddList } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
 import { browserHistory } from 'react-router';
-
 import List from 'grommet-cms/components/Dashboard/List';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import Heading from 'grommet/components/Heading';
 import SpinningIcon from 'grommet/components/icons/Spinning';
 import ConfirmLayer from 'grommet-cms/components/Dashboard/ConfirmLayer';
-import { PageHeader } from 'grommet-cms/components/Dashboard';
+import { PageHeader, AddPostForm } from 'grommet-cms/components';
+import { toggleAddPostFormVisibility } from './actions';
 
 export class DashboardPostsPage extends Component {
   constructor(props) {
@@ -20,13 +19,16 @@ export class DashboardPostsPage extends Component {
     this.state = {
       layer: false,
       orderLayer: false,
-      postToDelete: null
+      postToDelete: null,
+      postForm: false
     };
 
     this._onCreateClick = this._onCreateClick.bind(this);
     this._confirmDelete = this._confirmDelete.bind(this);
     this._onDeleteSubmit = this._onDeleteSubmit.bind(this);
     this._onLayerClose = this._onLayerClose.bind(this);
+    this._onAddPost = this._onAddPost.bind(this);
+    this._onToggleAddPostForm = this._onToggleAddPostForm.bind(this);
   }
 
   componentWillMount() {
@@ -43,6 +45,14 @@ export class DashboardPostsPage extends Component {
 
   _onCreateClick() {
     browserHistory.push('/dashboard/posts/create');
+  }
+
+  _onAddPost() {
+
+  }
+
+  _onToggleAddPostForm() {
+    this.props.dispatch(toggleAddPostFormVisibility());
   }
 
   _onOrderClick() {
@@ -84,7 +94,7 @@ export class DashboardPostsPage extends Component {
   }
 
   render() {
-    const { posts, request } = this.props;
+    const { posts, request, addPostForm } = this.props;
 
     const layer = (this.state.layer)
       ? <ConfirmLayer onSubmit={this._onDeleteSubmit} onClose={this._onLayerClose} />
@@ -97,11 +107,15 @@ export class DashboardPostsPage extends Component {
 
     return (
       <Box direction="column">
+        <AddPostForm 
+          isVisible={addPostForm.isVisible}
+          onClose={this._onToggleAddPostForm}
+        />
         {layer}
         <PageHeader
           title="Posts"
           controls={
-            <Button path="/dashboard/post/create">
+            <Button onClick={this._onAddPost}>
               Add Post
             </Button>
           }
@@ -116,15 +130,20 @@ export class DashboardPostsPage extends Component {
 
 DashboardPostsPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  request: PropTypes.bool
+  request: PropTypes.bool,
+  addPostForm: PropTypes.shape({
+    isVisible: PropTypes.bool.isRequired
+  }).isRequired
 };
 
 function mapStateToProps (state, props) {
   const { request, error, posts } = state.posts;
+  const { addPostForm } = state.dashboardPosts;
   return {
     request,
     error,
-    posts
+    posts,
+    addPostForm
   };
 };
 
