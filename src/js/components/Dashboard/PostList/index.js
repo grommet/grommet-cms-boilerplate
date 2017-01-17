@@ -26,24 +26,27 @@ export default class PostList extends Component {
     return (
       <Box>
         <PageHeader
-          onClick={onAddSection}
           title="Edit Page" 
-          controls={<Button plain label="Add Section" />} 
+          controls={
+            <Button onClick={onAddSection} plain label="Add Section" />
+          } 
         />
         <List selectable onSelect={onSelectSection}>
-          {sections ? sections.map((item, i) => 
-            <PostListItem 
-              key={i}
-              onMenuItemClick={(name) => onMenuItemClick(name, i)}
-              item={item}
-            />
-          )
-        : 
-          (
-            <Box>
-              <Heading tag="h2">No Sections yet</Heading>
-            </Box>
-          )}
+          {sections ?
+            sections.map((item, i) => 
+              <PostListItem 
+                key={i}
+                onMenuItemClick={(name) => onMenuItemClick(name, i)}
+                item={item}
+              />
+            )
+          : 
+            (
+              <Box>
+                <Heading tag="h2">No Sections yet</Heading>
+              </Box>
+            )
+          }
         </List>
       </Box>
     );

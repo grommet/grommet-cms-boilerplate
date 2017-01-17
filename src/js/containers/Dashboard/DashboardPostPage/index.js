@@ -171,7 +171,6 @@ export class DashboardPostPage extends Component {
 };
 
 DashboardPostPage.propTypes = {
-  dashboardSetLeftNavAnchor: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string
@@ -181,7 +180,9 @@ DashboardPostPage.propTypes = {
   post: PropTypes.shape({
     sections: PropTypes.arrayOf(
       PropTypes.shape({
-
+        order: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired
       })
     )
   })

@@ -29,8 +29,10 @@ export default function PostListItem(props: {
           <Heading tag="h3">{item.name}</Heading>
           <Heading tag="h5">{item.id}</Heading>
         </Box>
-        <Box align="end">
+        <Box align="end" justify="center" style={{ zIndex: 10 }}>
           <Menu
+            onClick={(e) => e.stopPropagation()}
+            closeOnClick={false}
             responsive={true}
             inline={false}
             dropAlign={{ right: 'right'}}

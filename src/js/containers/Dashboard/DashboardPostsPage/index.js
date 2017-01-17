@@ -44,13 +44,16 @@ export class DashboardPostsPage extends Component {
       this.setState({orderLayer: false});
   }
 
-  componentWillReceiveProps({ request, newPost, redirect }) {
+  componentWillReceiveProps({ request, posts, redirect }) {
     if (!request && request !== this.props.request) {
       if (redirect) {
         this.props.dispatch(addPostRedirect());
         this._onToggleAddPostForm();
         this.props.dispatch(getPosts());
       }
+    }
+    if (posts) {
+
     }
   }
 
@@ -62,7 +65,7 @@ export class DashboardPostsPage extends Component {
         sections: [
           {
             name: newPost.title,
-            label: 'Marquee',
+            id: 'Marquee',
             order: 0,
             contentBlocks: []
           }
