@@ -1,15 +1,16 @@
 import React from 'react';
-import GrommetIcon from 'grommet/components/icons/base/BrandGrommetOutline';
 import GrommetLogo from 'grommet/components/icons/Grommet';
 
 export default {
   frontend: {
-    title: '',
-    logo: <GrommetIcon size="large" />,
+    title: 'Grommet CMS',
+    logo: <GrommetLogo invert size="small" />,
     favicon: '',
     contact: {
+      copyright: '© 2017 Grommet Labs',
       email: 'hello@grommet.io',
-      phone: '123-456-7890'
+      phone: '123-456-7890',
+      website: 'https://grommet.io'
     },
     leftNavLinks: [
       {

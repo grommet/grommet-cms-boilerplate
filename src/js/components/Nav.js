@@ -17,13 +17,17 @@ export default function Nav (props: {
   logo?: HTMLElement | React$Element<any>
 }) {
   const { leftNavLinks, rightNavLinks, logo, title } = props;
-  const titleElement = (title || logo) ? (
-    <Anchor
-      icon={logo}
-      path="/"
-      label={title}
-    />
-  ) : null;
+  const titleElement = (title || logo) ?
+    (
+      <Box direction="column" justify="center">
+        <Anchor
+          icon={logo}
+          path="/"
+        />
+      </Box>
+    )
+  : 
+    null;
   return (
     <Header className="mobile-hide" size="large" colorIndex="neutral-4"
       justify="center" separator="bottom" pad={{ horizontal: 'medium' }}>

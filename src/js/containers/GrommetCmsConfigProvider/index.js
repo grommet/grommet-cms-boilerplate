@@ -14,8 +14,10 @@ type ConfigurationProps = {
       title: string,
       logo: HTMLElement | React$Element<any>,
       contact: {
+        copyright: string,
         email: string,
-        phone: string
+        phone: string,
+        website: string
       },
       leftNavLinks: Array<NavLinkType>,
       rightNavLinks: Array<NavLinkType>,

@@ -1,15 +1,13 @@
 import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 import React from 'react';
-import PostPreview from '../index';
-import props from './__mocks__/postPreviewMocks';
+import Footer from '../index';
+import props from './__mocks__/footerProps';
 
-describe('<PostPreview />', () => {
+describe('<Footer />', () => {
   it('should render with default props', () => {
     const wrapper = shallow(
-      <PostPreview
-        {...props}
-      />
+      <Footer {...props} />
     );
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });

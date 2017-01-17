@@ -3,7 +3,7 @@
 import React from 'react';
 import GrommetApp from 'grommet/components/App';
 import Helmet from 'react-helmet';
-import Nav from 'grommet-cms/components/Nav';
+import { Nav, Footer } from 'grommet-cms/components';
 
 class App extends React.Component {
   render() {
@@ -13,7 +13,10 @@ class App extends React.Component {
           title="Home"
           titleTemplate="Grommet | %s" />
         <Nav {...this.context.config.frontend} />
-        {this.props.children}
+        <main>
+          {this.props.children}
+        </main>
+        <Footer {...this.context.config.frontend} />
       </GrommetApp>
     );
   }
@@ -25,8 +28,10 @@ App.contextTypes = {
       title: React.PropTypes.string,
       logo: React.element,
       contact: {
-        email: React.PropTypes.string,
-        phone: React.PropTypes.string
+        copyright: React.PropTypes.string.isRequired,
+        email: React.PropTypes.string.isRequired,
+        phone: React.PropTypes.string.isRequired,
+        website: React.PropTypes.string.isRequired
       },
       leftNavLinks: React.PropTypes.arrayOf(
         React.PropTypes.shape({
