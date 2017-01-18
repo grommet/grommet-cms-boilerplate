@@ -85,7 +85,7 @@ export default class MarqueeForm extends Component {
   }
 
   render() {
-    const { onChange, post, onSubmit, onCancel } = this.props;
+    const { onChange, post, onCancel } = this.props;
     const { image, title, subtitle, date } = post;
     const formattedDate = formatDate(date);
     const assetsLayer = (this.state.assetsLayer)

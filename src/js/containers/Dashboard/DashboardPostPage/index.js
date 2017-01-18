@@ -99,7 +99,7 @@ export class DashboardPostPage extends Component {
         ...this.props.post.sections.slice(i + 1)
       ]
     };
-    this._onSubmit(post);
+    this.props.dispatch(setPost(post));
   }
 
   _onClearError() {
@@ -263,6 +263,7 @@ DashboardPostPage.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string
   }).isRequired,
+  contentBlocks: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string
@@ -287,11 +288,13 @@ DashboardPostPage.contextTypes = {
 function mapStateToProps(state, props) {
   const { post, error, request } = state.posts;
   const { sectionForm } = state.dashboardPost;
+  const { contentBlocks } = state;
   return {
     post,
     error,
     request,
-    sectionForm
+    sectionForm,
+    contentBlocks
   };
 };
 

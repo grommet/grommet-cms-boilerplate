@@ -50,30 +50,28 @@ export default function PostSectionForm(props: {
           </FormFields>
         </Form>
         <Section pad="medium">
-          <Box pad="small">
-            <Footer align="center" justify="center" pad="large">
-              <Menu
-                align="center"
-                style={{ width: '100%' }}
-                justify="between"
-                direction="row"
-                inline
-                responsive={false}
-              >
-                <Button
-                  label="submit"
-                  onClick={onSubmit}
-                  primary={true}
-                  type="submit"
-                />
-                <Button
-                  label="cancel"
-                  onClick={onClose}
-                  primary={false}
-                />
-              </Menu>
-            </Footer>
-          </Box>
+          <Footer align="center" justify="center" pad="large">
+            <Menu
+              align="center"
+              style={{ width: '100%' }}
+              justify="between"
+              direction="row"
+              inline
+              responsive={false}
+            >
+              <Button
+                label="submit"
+                onClick={onSubmit}
+                primary={true}
+                type="submit"
+              />
+              <Button
+                label="cancel"
+                onClick={onClose}
+                primary={false}
+              />
+            </Menu>
+          </Footer>
         </Section>
       </Section>
     </Layer>

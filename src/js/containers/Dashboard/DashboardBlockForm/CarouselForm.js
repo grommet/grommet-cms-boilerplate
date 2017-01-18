@@ -8,7 +8,7 @@ import TrashIcon from 'grommet/components/icons/base/Trash';
 import CarouselSlideForm from './CarouselSlideForm';
 import { ConfirmLayer } from 'grommet-cms/components/Dashboard';
 
-export class CarouselForm extends Component {
+class CarouselForm extends Component {
   constructor(props) {
     super(props);
 
