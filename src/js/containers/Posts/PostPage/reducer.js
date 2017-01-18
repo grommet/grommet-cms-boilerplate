@@ -7,8 +7,82 @@ const initialState = {
   post: {}
 };
 
+function postSectionsReducer(state = [], action) {
+  switch (action.type) {
+    case ActionTypes.POST_ADD_SECTION:
+      return [
+        ...state,
+        action.section
+      ];
+    case ActionTypes.POST_DELETE_SECTION:
+      return [
+        ...state.slice(0, action.index),
+        ...state.slice(action.index + 1)
+      ];
+    case ActionTypes.POST_MOVE_UP_SECTION:
+      return [
+        ...state.slice(0, action.index - 1),
+        {
+          ...state[action.index - 1],
+          order: action.index
+        },
+        {
+          ...state[action.index],
+          order: action.index - 1
+        },
+        ...state.slice(action.index + 1)
+      ];
+    case ActionTypes.POST_MOVE_DOWN_SECTION:
+      return [
+        ...state.slice(0, action.index),
+        {
+          ...state[action.index],
+          order: action.index + 1
+        },
+        {
+          ...state[action.index + 1],
+          order: action.index
+        },
+        ...state.slice(action.index + 2)
+      ];
+    default: return state;
+  }
+}
+
 function posts(state = initialState, action) {
   switch(action.type) {
+    case ActionTypes.POST_ADD_SECTION:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          sections: postSectionsReducer(state.post.sections, action)
+        }
+      };
+    case ActionTypes.POST_DELETE_SECTION:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          sections: postSectionsReducer(state.post.sections, action)
+        }
+      };
+    case ActionTypes.POST_MOVE_UP_SECTION:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          sections: postSectionsReducer(state.post.sections, action)
+        }
+      };
+    case ActionTypes.POST_MOVE_DOWN_SECTION:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          sections: postSectionsReducer(state.post.sections, action)
+        }
+      };
     case ActionTypes.SET_POST:
       return {
         ...state,

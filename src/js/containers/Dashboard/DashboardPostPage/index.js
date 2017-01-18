@@ -1,12 +1,28 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { dashboardSetLeftNavAnchor } from 'grommet-cms/containers/Dashboard/DashboardContainer/actions';
-import { getPost, submitPost, setPost } from 'grommet-cms/containers/Posts/PostPage/actions';
+import { 
+  getPost,
+  submitPost,
+  setPost,
+  postDeleteSection,
+  postAddSection,
+  postMoveSectionUp,
+  postMoveSectionDown
+} from 'grommet-cms/containers/Posts/PostPage/actions';
 // import PostForm from './form';
 import Box from 'grommet/components/Box';
 import Split from 'grommet/components/Split';
 import Animate from 'grommet/components/Animate';
-import { PageHeader, PostPreview, ErrorNotification, PostList, PostListItemDetail } from 'grommet-cms/components';
+import { 
+  PageHeader,
+  PostPreview,
+  ErrorNotification,
+  PostList,
+  PostListItemDetail,
+  PostSectionForm
+} from 'grommet-cms/components';
+import { toggleSectionForm, postSectionFormInput } from './actions';
 
 export class DashboardPostPage extends Component {
   constructor(props) {
@@ -21,6 +37,8 @@ export class DashboardPostPage extends Component {
     this._onSelectSection = this._onSelectSection.bind(this);
     this._onClickBackAnchor = this._onClickBackAnchor.bind(this);
     this._setDefaultLeftAnchor = this._setDefaultLeftAnchor.bind(this);
+    this._onClearSectionForm = this._onClearSectionForm.bind(this);
+    this._onSubmitSectionForm = this._onSubmitSectionForm.bind(this);
     this.state = {
       selectedSection: null
     };
@@ -42,13 +60,15 @@ export class DashboardPostPage extends Component {
     );
   }
 
-  componentWillReceiveProps({ contentBlocks }) {
-    if (contentBlocks !== this.props.contentBlocks) {
-      const post = {
-        ...this.props.post,
-        contentBlocks
-      };
-      this.props.dispatch(setPost(post));
+  componentWillReceiveProps({ sectionForm }) {
+    const { selectedSection, id, name } = sectionForm;
+    if (selectedSection !== null) {
+      if (id === '' && name === '') {
+        const postSection = this.props.post.sections[selectedSection];
+        if (postSection) {
+          this.props.dispatch(postSectionFormInput(postSection.id, postSection.name));
+        }
+      }
     }
   }
 
@@ -62,61 +82,25 @@ export class DashboardPostPage extends Component {
   }
 
   _onSectionMenuItemClick(name, i) {
-    const { post } = this.props;
-    let newPost;
     switch (name) {
       case 'DELETE':
-        newPost = {
-          ...post,
-          sections: [
-            ...post.sections.slice(0, i),
-            ...post.sections.slice(i + 1)
-          ]
-        };
+        this.props.dispatch(postDeleteSection(i));
         break;
       case 'MOVE_UP':
-        newPost = {
-          ...post,
-          sections: [
-            ...post.sections.slice(0, i - 1),
-            {
-              ...post.sections[i - 1],
-              order: i
-            },
-            {
-              ...post.sections[i],
-              order: i - 1
-            },
-            ...post.sections.slice(i + 1)
-          ]
-        };
+        this.props.dispatch(postMoveSectionUp(i));
         break;
       case 'MOVE_DOWN':
-        newPost = {
-          ...post,
-          sections: [
-            ...post.sections.slice(0, i),
-            {
-              ...post.sections[i],
-              order: i + 1
-            },
-            {
-              ...post.sections[i + 1],
-              order: i
-            },
-            ...post.sections.slice(i + 2)
-          ]
-        };
+        this.props.dispatch(postMoveSectionDown(i));
         break;
+      case 'EDIT':
+        this.props.dispatch(toggleSectionForm(i));
       default: break;
     };
-    this.props.dispatch(setPost(newPost));
   }
 
   _onAddSection() {
-    // placeholder
+    this.props.dispatch(toggleSectionForm());
   }
-
 
   _setDefaultLeftAnchor() {
     this.props.dispatch(
@@ -168,8 +152,17 @@ export class DashboardPostPage extends Component {
     this.props.dispatch(setPost(newPost));
   }
 
+  _onClearSectionForm() {
+    this.props.dispatch(toggleSectionForm());
+    this.props.dispatch(postSectionFormInput('', ''));
+  }
+
+  _onSubmitSectionForm() {
+
+  }
+
   render() {
-    const { post, error } = this.props;
+    const { post, error, sectionForm, dispatch } = this.props;
     const { selectedSection } = this.state;
     return (
       <Box>
@@ -213,12 +206,23 @@ export class DashboardPostPage extends Component {
           </Box>
         </Split>
         {error && <ErrorNotification errors={[{ message: error }]} onClose={this._onClearError} />}
+        <PostSectionForm
+          {...sectionForm}
+          onClose={this._onClearSectionForm}
+          onChange={(name, id) => dispatch(postSectionFormInput(name, id))}
+          onSubmit={this._onSubmitSectionForm}
+        />
       </Box>
     );
   }
 };
 
 DashboardPostPage.propTypes = {
+  sectionForm: PropTypes.shape({
+    isVisible: PropTypes.bool.isRequired,
+    id: PropTypes.string,
+    name: PropTypes.string
+  }).isRequired,
   dispatch: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string
@@ -242,10 +246,12 @@ DashboardPostPage.contextTypes = {
 
 function mapStateToProps(state, props) {
   const { post, error, request } = state.posts;
+  const { sectionForm } = state.dashboardPost;
   return {
     post,
     error,
-    request
+    request,
+    sectionForm
   };
 };
 

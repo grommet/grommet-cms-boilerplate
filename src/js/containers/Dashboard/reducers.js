@@ -5,3 +5,4 @@ export users from './DashboardUsersPage/reducer';
 export user from './DashboardUserForm/reducer';
 export contentBlocks from './DashboardContentBlocks/reducer';
 export dashboardPosts from './DashboardPostsPage/reducer';
+export dashboardPost from './DashboardPostPage/reducer';

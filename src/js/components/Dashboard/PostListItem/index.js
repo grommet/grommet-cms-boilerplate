@@ -4,6 +4,7 @@ import Box from 'grommet/components/Box';
 import ListItem from 'grommet/components/ListItem';
 import Menu from 'grommet/components/Menu';
 import TrashIcon from 'grommet/components/icons/base/Trash';
+import EditIcon from 'grommet/components/icons/base/Edit';
 import UpIcon from 'grommet/components/icons/base/Up';
 import DownIcon from 'grommet/components/icons/base/Down';
 import Anchor from 'grommet/components/Anchor';
@@ -40,6 +41,11 @@ export default function PostListItem(props: {
             dropAlign={{ right: 'right'}}
           >
             <Anchor 
+              icon={<EditIcon size="small" />}
+              label="Edit"
+              onClick={() => onMenuItemClick('EDIT')}
+            />
+            <Anchor 
               icon={<TrashIcon size="small" />}
               label="Delete"
               onClick={() => onMenuItemClick('DELETE')}
@@ -59,7 +65,7 @@ export default function PostListItem(props: {
               label="Move Down"
               disabled={item.order === totalItems - 1}
               onClick={() => {
-                if (item.order !== totalItems) {
+                if (item.order !== totalItems - 1) {
                   onMenuItemClick('MOVE_DOWN');
                 }
               }}

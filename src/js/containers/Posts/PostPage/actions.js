@@ -44,6 +44,26 @@ export function setPost(post) {
   };
 }
 
+export const postDeleteSection = (index) => ({
+  type: ActionTypes.POST_DELETE_SECTION,
+  index
+});
+
+export const postAddSection = (section) => ({
+  type: ActionTypes.POST_ADD_SECTION,
+  section
+});
+
+export const postMoveSectionUp = (index) => ({
+  type: ActionTypes.POST_MOVE_UP_SECTION,
+  index
+});
+
+export const postMoveSectionDown = (index) => ({
+  type: ActionTypes.POST_MOVE_DOWN_SECTION,
+  index
+});
+
 // Delete post.
 export function deletePost(id) {
   return (dispatch, getState) => {
@@ -172,8 +192,7 @@ export function submitPost(post) {
           if (status >= 400) {
             dispatch(postsError(statusText));
           } else {
-            dispatch(postsSuccess(statusText));
-            browserHistory.push('/dashboard/posts');
+            dispatch(postSuccess(post));
           }
         },
         err => {
