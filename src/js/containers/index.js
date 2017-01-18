@@ -18,5 +18,5 @@ export DashboardPostPage from './Dashboard/DashboardPostPage';
 export DashboardAssetsPage from './Dashboard/DashboardAssetsPage';
 export DashboardAssetPage from './Dashboard/DashboardAssetPage';
 export DashboardAssetsLayer from './Dashboard/DashboardAssetsLayer';
-export * from './Dashboard/DashboardBlockForm';
 export GrommetCmsConfigProvider from './GrommetCmsConfigProvider';
+export * from './Dashboard/DashboardBlockForm';

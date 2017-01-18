@@ -7,7 +7,7 @@ export type DashboardPostPageState = {
     isVisible: boolean,
     id?: string,
     name?: string,
-    selectedSection?: number
+    selectedSection: ?number
   }
 }
 

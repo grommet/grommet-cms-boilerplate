@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-fetch';
-import { browserHistory } from 'react-router';
 import * as ActionTypes from './constants';
 
 export function postsRequest() {
@@ -43,6 +42,10 @@ export function setPost(post) {
     });
   };
 }
+
+export const postClearError = () => ({
+  type: ActionTypes.POST_CLEAR_ERROR
+});
 
 export const postDeleteSection = (index) => ({
   type: ActionTypes.POST_DELETE_SECTION,

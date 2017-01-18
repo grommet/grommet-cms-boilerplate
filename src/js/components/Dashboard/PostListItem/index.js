@@ -42,7 +42,7 @@ export default function PostListItem(props: {
           >
             <Anchor 
               icon={<EditIcon size="small" />}
-              label="Edit"
+              label="Edit Title"
               onClick={() => onMenuItemClick('EDIT')}
             />
             <Anchor 

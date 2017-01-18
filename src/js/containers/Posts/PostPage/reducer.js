@@ -12,7 +12,11 @@ function postSectionsReducer(state = [], action) {
     case ActionTypes.POST_ADD_SECTION:
       return [
         ...state,
-        action.section
+        {
+          name: action.section.name,
+          id: action.section.id,
+          order: state.length
+        }
       ];
     case ActionTypes.POST_DELETE_SECTION:
       return [
@@ -51,6 +55,11 @@ function postSectionsReducer(state = [], action) {
 
 function posts(state = initialState, action) {
   switch(action.type) {
+    case ActionTypes.POST_CLEAR_ERROR:
+      return {
+        ...state,
+        error: ''
+      };
     case ActionTypes.POST_ADD_SECTION:
       return {
         ...state,

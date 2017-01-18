@@ -8,7 +8,8 @@ import {
   postDeleteSection,
   postAddSection,
   postMoveSectionUp,
-  postMoveSectionDown
+  postMoveSectionDown,
+  postClearError
 } from 'grommet-cms/containers/Posts/PostPage/actions';
 // import PostForm from './form';
 import Box from 'grommet/components/Box';
@@ -39,6 +40,7 @@ export class DashboardPostPage extends Component {
     this._setDefaultLeftAnchor = this._setDefaultLeftAnchor.bind(this);
     this._onClearSectionForm = this._onClearSectionForm.bind(this);
     this._onSubmitSectionForm = this._onSubmitSectionForm.bind(this);
+    this._onSubmitContentBlocks = this._onSubmitContentBlocks.bind(this);
     this.state = {
       selectedSection: null
     };
@@ -60,7 +62,7 @@ export class DashboardPostPage extends Component {
     );
   }
 
-  componentWillReceiveProps({ sectionForm }) {
+  componentWillReceiveProps({ sectionForm, contentBlocks }) {
     const { selectedSection, id, name } = sectionForm;
     if (selectedSection !== null) {
       if (id === '' && name === '') {
@@ -72,13 +74,29 @@ export class DashboardPostPage extends Component {
     }
   }
 
-  _onSubmit() {
+  _onSubmit(post = this.props.post) {
     if(!this.props.request)
-      this.props.dispatch(submitPost(this.props.post));
+      this.props.dispatch(submitPost(post));
+  }
+
+  _onSubmitContentBlocks() {
+    const i = this.state.selectedSection;
+    const post = {
+      ...this.props.post,
+      sections: [
+        ...this.props.post.sections.slice(0, i),
+        {
+          ...this.props.post.sections[i],
+          contentBlocks: this.props.contentBlocks
+        },
+        ...this.props.post.sections.slice(i + 1)
+      ]
+    };
+    this._onSubmit(post);
   }
 
   _onClearError() {
-    // placeholder
+    this.props.dispatch(postClearError());
   }
 
   _onSectionMenuItemClick(name, i) {
@@ -158,7 +176,9 @@ export class DashboardPostPage extends Component {
   }
 
   _onSubmitSectionForm() {
-
+    this.props.dispatch(postAddSection({
+      ...this.props.sectionForm
+    }));
   }
 
   render() {
@@ -195,6 +215,8 @@ export class DashboardPostPage extends Component {
             >
               {post && selectedSection &&
                 <PostListItemDetail
+                  onSubmit={this._onSubmitContentBlocks}
+                  onCreateBlockClick={e => e}
                   item={post.sections[selectedSection]}
                 /> 
               }
