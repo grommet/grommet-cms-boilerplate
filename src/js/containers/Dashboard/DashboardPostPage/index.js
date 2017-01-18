@@ -221,7 +221,7 @@ export class DashboardPostPage extends Component {
                   onSelectSection={this._onSelectSection}
                   onMenuItemClick={this._onSectionMenuItemClick}
                   onAddSection={this._onAddSection}
-                  sections={post.sections.sort((a, b) => a.order - b.order)}
+                  sections={post.sections ? post.sections.sort((a, b) => a.order - b.order) : null}
                 />
               }
             </Animate>

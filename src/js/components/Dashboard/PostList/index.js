@@ -43,8 +43,9 @@ export default class PostList extends Component {
             )
           : 
             (
-              <Box>
+              <Box align="center" pad="medium">
                 <Heading tag="h2">No Sections yet</Heading>
+                <Button label="Add One" onClick={onAddSection} />
               </Box>
             )
           }

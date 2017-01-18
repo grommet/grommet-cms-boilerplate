@@ -43,7 +43,7 @@ export class PostPage extends Component {
               {title}
             </Headline>
           </Box>
-          <Box>
+          <Box full>
             {sections && sections.map((item, i) => 
               <Section key={i} pad="large">
                 <ContentBlocks blocks={item.contentBlocks} /> 
