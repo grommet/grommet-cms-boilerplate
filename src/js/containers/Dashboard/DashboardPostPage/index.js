@@ -62,7 +62,55 @@ export class DashboardPostPage extends Component {
   }
 
   _onSectionMenuItemClick(name, i) {
-    // placeholder
+    const { post } = this.props;
+    let newPost;
+    switch (name) {
+      case 'DELETE':
+        newPost = {
+          ...post,
+          sections: [
+            ...post.sections.slice(0, i),
+            ...post.sections.slice(i + 1)
+          ]
+        };
+        break;
+      case 'MOVE_UP':
+        newPost = {
+          ...post,
+          sections: [
+            ...post.sections.slice(0, i - 1),
+            {
+              ...post.sections[i - 1],
+              order: i
+            },
+            {
+              ...post.sections[i],
+              order: i - 1
+            },
+            ...post.sections.slice(i + 1)
+          ]
+        };
+        break;
+      case 'MOVE_DOWN':
+        newPost = {
+          ...post,
+          sections: [
+            ...post.sections.slice(0, i),
+            {
+              ...post.sections[i],
+              order: i + 1
+            },
+            {
+              ...post.sections[i + 1],
+              order: i
+            },
+            ...post.sections.slice(i + 2)
+          ]
+        };
+        break;
+      default: break;
+    };
+    this.props.dispatch(setPost(newPost));
   }
 
   _onAddSection() {

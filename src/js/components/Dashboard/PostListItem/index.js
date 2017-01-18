@@ -12,11 +12,13 @@ import Heading from 'grommet/components/Heading';
 export default function PostListItem(props: {
   item: {
     name: string,
-    id: string
+    id: string,
+    order: number
   },
-  onMenuItemClick: (name: string) => void
+  onMenuItemClick: (name: string) => void,
+  totalItems: number
 }) {
-  const { item, onMenuItemClick } = props;
+  const { item, onMenuItemClick, totalItems } = props;
   return (
     <ListItem separator="horizontal">
       <Box 
@@ -32,7 +34,7 @@ export default function PostListItem(props: {
         <Box align="end" justify="center" style={{ zIndex: 10 }}>
           <Menu
             onClick={(e) => e.stopPropagation()}
-            closeOnClick={false}
+            closeOnClick
             responsive={true}
             inline={false}
             dropAlign={{ right: 'right'}}
@@ -45,12 +47,22 @@ export default function PostListItem(props: {
             <Anchor 
               icon={<UpIcon size="small" />}
               label="Move Up"
-              onClick={() => onMenuItemClick('MOVE_UP')}
+              disabled={item.order === 0}
+              onClick={() => {
+                if (item.order !== 0) {
+                  onMenuItemClick('MOVE_UP');
+                }
+              }}
             />
             <Anchor 
               icon={<DownIcon size="small" />}
               label="Move Down"
-              onClick={() => onMenuItemClick('MOVE_DOWN')}
+              disabled={item.order === totalItems - 1}
+              onClick={() => {
+                if (item.order !== totalItems) {
+                  onMenuItemClick('MOVE_DOWN');
+                }
+              }}
             />
           </Menu>
         </Box>
@@ -58,7 +70,3 @@ export default function PostListItem(props: {
     </ListItem>
   );
 }
-
-PostListItem.propTypes = {
-
-};

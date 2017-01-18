@@ -36,6 +36,7 @@ export default class PostList extends Component {
             sections.map((item, i) => 
               <PostListItem 
                 key={i}
+                totalItems={sections.length}
                 onMenuItemClick={(name) => onMenuItemClick(name, i)}
                 item={item}
               />
