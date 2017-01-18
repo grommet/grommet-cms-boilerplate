@@ -97,7 +97,7 @@ class HomePage extends Component {
             <Box pad="medium" align="center">
               <Paragraph size="medium" align="center">
                 Grommet CMS combines a fully featured content management system
-                with the world's most advanced UX framework to provide you with all the
+                {" with the world's most advanced UX framework to provide you with all the"}
                 <Anchor href="https://grommet.github.io/docs/learn">{' guidance'}</Anchor>,
                 <Anchor href="https://grommet.github.io/docs/components">
                   {' components'}
