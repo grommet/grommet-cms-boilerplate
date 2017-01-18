@@ -176,7 +176,7 @@ export default class MarqueeForm extends Component {
               >
                 <Button
                   label="submit"
-                  onClick={onSubmit}
+                  onClick={this._onSubmit}
                   primary={true}
                   type="submit"
                 />

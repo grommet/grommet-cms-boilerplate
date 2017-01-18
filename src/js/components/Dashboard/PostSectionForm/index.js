@@ -48,6 +48,7 @@ export default function PostSectionForm(props: {
               />
             </FormField>
           </FormFields>
+        </Form>
         <Section pad="medium">
           <Box pad="small">
             <Footer align="center" justify="center" pad="large">
@@ -74,7 +75,6 @@ export default function PostSectionForm(props: {
             </Footer>
           </Box>
         </Section>
-        </Form>
       </Section>
     </Layer>
   );

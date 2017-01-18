@@ -52,9 +52,17 @@ export const postDeleteSection = (index) => ({
   index
 });
 
-export const postAddSection = (section) => ({
+export const postAddSection = ({ name, id }) => ({
   type: ActionTypes.POST_ADD_SECTION,
-  section
+  name,
+  id
+});
+
+export const postEditSection = ({ name, id, selectedSection }) => ({
+  type: ActionTypes.POST_EDIT_SECTION,
+  name,
+  id,
+  selectedSection
 });
 
 export const postMoveSectionUp = (index) => ({

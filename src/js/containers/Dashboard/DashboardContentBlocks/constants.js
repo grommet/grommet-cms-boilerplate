@@ -9,7 +9,7 @@ import {
   QuoteForm,
   VideoForm,
   CarouselForm
-} from 'grommet-cms/containers';
+} from '../DashboardBlockForm';
 import {
   BlockParagraphPreview,
   BlockHeadingPreview,

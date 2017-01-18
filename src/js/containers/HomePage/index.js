@@ -47,8 +47,8 @@ class HomePage extends Component {
         <Section
           pad="large"
           align="center"
-          justify="center"
-          style={{ height: '45rem' }}
+          justify="start"
+          style={{ height: 'calc(100vh - 96px)', marginTop: 100 }}
         >
           <Animate
             visible={this.state.heroVisible}
@@ -77,12 +77,12 @@ class HomePage extends Component {
             </Paragraph>
           </Animate>
         </Section>
-        <Section colorIndex="light-2" full="horizontal" pad="large" align="center">
           <Animate
             visible="scroll"
             keep
             enter={{ animation: "fade", duration: 1000, delay: 100 }}
           >
+          <Section colorIndex="light-2" full="horizontal" pad="large" align="center">
             <Box style={{ marginTop: 60 }}>
               <Headline strong align="center">
                 Grommet CMS
@@ -110,8 +110,8 @@ class HomePage extends Component {
             <Footer justify="center" pad="medium">
               <Button label="Start" path="/dashboard" />
             </Footer>
-          </Animate>
-        </Section>
+          </Section>
+        </Animate>
       </Box>
     );
   }

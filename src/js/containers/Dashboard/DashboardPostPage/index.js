@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { dashboardSetLeftNavAnchor } from 'grommet-cms/containers/Dashboard/DashboardContainer/actions';
+import { blockAdd } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
 import { 
   getPost,
   submitPost,
@@ -9,7 +10,8 @@ import {
   postAddSection,
   postMoveSectionUp,
   postMoveSectionDown,
-  postClearError
+  postClearError,
+  postEditSection
 } from 'grommet-cms/containers/Posts/PostPage/actions';
 // import PostForm from './form';
 import Box from 'grommet/components/Box';
@@ -41,6 +43,7 @@ export class DashboardPostPage extends Component {
     this._onClearSectionForm = this._onClearSectionForm.bind(this);
     this._onSubmitSectionForm = this._onSubmitSectionForm.bind(this);
     this._onSubmitContentBlocks = this._onSubmitContentBlocks.bind(this);
+    this._onCreateBlock = this._onCreateBlock.bind(this);
     this.state = {
       selectedSection: null
     };
@@ -62,15 +65,19 @@ export class DashboardPostPage extends Component {
     );
   }
 
-  componentWillReceiveProps({ sectionForm, contentBlocks }) {
+  componentWillReceiveProps({ sectionForm, contentBlocks, post }) {
     const { selectedSection, id, name } = sectionForm;
-    if (selectedSection !== null) {
+    if (selectedSection !== null && this.props.post) {
       if (id === '' && name === '') {
-        const postSection = this.props.post.sections[selectedSection];
+        const { sections } = this.props.post;
+        const postSection = sections[selectedSection];
         if (postSection) {
-          this.props.dispatch(postSectionFormInput(postSection.id, postSection.name));
+          this.props.dispatch(postSectionFormInput(postSection.name, postSection.id));
         }
       }
+    }
+    if (post !== this.props.post && !this.props.request) {
+      this._onSubmit(post);
     }
   }
 
@@ -117,7 +124,7 @@ export class DashboardPostPage extends Component {
   }
 
   _onAddSection() {
-    this.props.dispatch(toggleSectionForm());
+    this.props.dispatch(toggleSectionForm(null));
   }
 
   _setDefaultLeftAnchor() {
@@ -152,6 +159,10 @@ export class DashboardPostPage extends Component {
     this.props.dispatch(setPost(post));
   }
 
+  _onCreateBlock() {
+    this.props.dispatch(blockAdd());
+  }
+
   _onPostChange({ target, option }) {
     const { post } = this.props;
     const key = target.id;
@@ -171,14 +182,21 @@ export class DashboardPostPage extends Component {
   }
 
   _onClearSectionForm() {
-    this.props.dispatch(toggleSectionForm());
+    this.props.dispatch(toggleSectionForm(null));
     this.props.dispatch(postSectionFormInput('', ''));
   }
 
   _onSubmitSectionForm() {
-    this.props.dispatch(postAddSection({
-      ...this.props.sectionForm
-    }));
+    if (this.props.sectionForm.selectedSection !== null) {
+      this.props.dispatch(postEditSection({
+        ...this.props.sectionForm
+      }));
+    } else {
+      this.props.dispatch(postAddSection({
+        ...this.props.sectionForm
+      }));
+    }
+    this.props.dispatch(toggleSectionForm(null));
   }
 
   render() {
@@ -216,7 +234,7 @@ export class DashboardPostPage extends Component {
               {post && selectedSection &&
                 <PostListItemDetail
                   onSubmit={this._onSubmitContentBlocks}
-                  onCreateBlockClick={e => e}
+                  onCreateBlockClick={this._onCreateBlock}
                   item={post.sections[selectedSection]}
                 /> 
               }

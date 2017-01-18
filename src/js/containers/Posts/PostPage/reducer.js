@@ -13,9 +13,10 @@ function postSectionsReducer(state = [], action) {
       return [
         ...state,
         {
-          name: action.section.name,
-          id: action.section.id,
-          order: state.length
+          name: action.name,
+          id: action.id,
+          order: state.length,
+          contentBlocks: []
         }
       ];
     case ActionTypes.POST_DELETE_SECTION:
@@ -49,6 +50,17 @@ function postSectionsReducer(state = [], action) {
         },
         ...state.slice(action.index + 2)
       ];
+    case ActionTypes.POST_EDIT_SECTION:
+      return [
+        ...state.slice(0, action.selectedSection),
+        {
+          ...state[action.selectedSection],
+          name: action.name,
+          id: action.id,
+          order: action.selectedSection
+        },
+        ...state.slice(action.selectedSection + 1)
+      ];
     default: return state;
   }
 }
@@ -59,6 +71,14 @@ function posts(state = initialState, action) {
       return {
         ...state,
         error: ''
+      };
+    case ActionTypes.POST_EDIT_SECTION:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          sections: postSectionsReducer(state.post.sections, action)
+        }
       };
     case ActionTypes.POST_ADD_SECTION:
       return {
