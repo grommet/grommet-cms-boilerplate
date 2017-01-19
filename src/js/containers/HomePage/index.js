@@ -13,7 +13,7 @@ import Footer from 'grommet/components/Footer';
 import GrommetLogo from 'grommet/components/icons/Grommet';
 import SocialSlackIcon from 'grommet/components/icons/base/SocialSlack';
 import SocialGithubIcon from 'grommet/components/icons/base/SocialGithub';
-
+import Features from './features';
 import { GrommetHero, HomePageIntro } from 'grommet-cms/components';
 
 class HomePage extends Component {
@@ -151,18 +151,14 @@ class HomePage extends Component {
           keep
           enter={{ animation: "fade", duration: 1000, delay: 100 }}
         >
-          <Section colorIndex="light-1" full="horizontal" pad="large" align="center">
+          <Section colorIndex="light-1" full="horizontal" pad="medium" align="center">
             <Box style={{ marginTop: 60 }}>
               <Headline strong align="center">
                 Features
               </Headline>
             </Box>
+            <Features />
           </Section>
-          <Box pad="medium" align="center">
-            <Paragraph size="medium" align="center">
-              This is a placeholder for the features section.
-            </Paragraph>
-          </Box>
         </Animate>
       </Box>
     );
