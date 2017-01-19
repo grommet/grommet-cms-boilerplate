@@ -7,7 +7,6 @@ import FormField from 'grommet/components/FormField';
 import Footer from 'grommet/components/Footer';
 import Button from 'grommet/components/Button';
 import Section from 'grommet/components/Section';
-import Box from 'grommet/components/Box';
 import Menu from 'grommet/components/Menu';
 
 export default function PostSectionForm(props: {
