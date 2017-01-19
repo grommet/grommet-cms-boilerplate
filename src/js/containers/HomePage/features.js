@@ -44,10 +44,10 @@ export default function Features() {
             <Box pad="medium">
               {item.icon}
             </Box>
-            <Heading tag="h3">
+            <Heading tag="h2">
               {item.heading}
             </Heading>
-            <Paragraph>
+            <Paragraph size="medium">
               {item.paragraph}
             </Paragraph>
           </Box>

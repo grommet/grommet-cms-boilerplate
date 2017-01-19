@@ -14,15 +14,12 @@ import GrommetLogo from 'grommet/components/icons/Grommet';
 import SocialSlackIcon from 'grommet/components/icons/base/SocialSlack';
 import SocialGithubIcon from 'grommet/components/icons/base/SocialGithub';
 import GlobeIcon from 'grommet/components/icons/base/Globe';
-import Features from './features';
 import { GrommetHero, HomePageIntro } from 'grommet-cms/components';
+import Features from './features';
+import * as messages from './messages';
 
 class HomePage extends Component {
-  // Server checks for this to perform universal rendering.
-  /*static fetchData() {
-    return undefined;
-  }*/
-
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -64,7 +61,7 @@ class HomePage extends Component {
                 a11yTitle="Grommet Logo"
                 a11yTitleId="hero_logo" 
               />
-              <Heading tag="h1">grommet</Heading>
+              <Heading tag="h1">{messages.MOBILE_LOGO_TEXT}</Heading>
             </Box>
           </Animate>
           <Animate
@@ -73,7 +70,7 @@ class HomePage extends Component {
             enter={{ animation: "slide-up", duration: 1000, delay: 2000 }}
           >
             <Paragraph size="large" align="center" margin="none">
-              Focus on the essential experience
+              {messages.LOGO_TAGLINE}
             </Paragraph>
           </Animate>
           <Animate
@@ -109,12 +106,10 @@ class HomePage extends Component {
               <HomePageIntro />
             </Box>
             <Heading align="center" strong>
-              A CMS made for React.JS
+              {messages.SECTION_TWO_HEADLINE}
             </Heading>
             <Paragraph size="large" align="center" pad="medium">
-              Grommet CMS embraces React JavaScript, which
-              means that all of the components used to build your site
-              are reusable Grommet components.
+              {messages.SECTION_TWO_PARAGRAPH}
             </Paragraph>
           </Section>
         </Animate>
@@ -129,7 +124,7 @@ class HomePage extends Component {
             </Box>
             <Box pad="medium">
               <Headline strong align="center">
-                World Class UX
+                {messages.SECTION_THREE_HEADLINE}
               </Headline>
             </Box>
             <Box pad="medium" align="center">
@@ -152,11 +147,14 @@ class HomePage extends Component {
           keep
           enter={{ animation: "fade", duration: 1000, delay: 100 }}
         >
-          <Section colorIndex="light-1" full="horizontal" pad="medium" align="center">
-            <Box style={{ marginTop: 60 }}>
+          <Section colorIndex="light-1" full="horizontal" pad="large" align="center">
+            <Box align="center" pad="medium">
               <Headline strong align="center">
-                What makes us great
+                {messages.SECTION_FOUR_HEADLINE}
               </Headline>
+              <Paragraph size="large" align="center">
+                {messages.SECTION_FOUR_PARAGRAPH}
+              </Paragraph>
             </Box>
             <Features />
             <Footer justify="center" pad="medium">
