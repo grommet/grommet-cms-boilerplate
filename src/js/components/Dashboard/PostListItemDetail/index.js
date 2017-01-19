@@ -5,6 +5,8 @@ import Section from 'grommet/components/Section';
 import Footer from 'grommet/components/Footer';
 import Menu from 'grommet/components/Menu';
 import Button from 'grommet/components/Button';
+import AddIcon from 'grommet/components/icons/base/Add';
+import Anchor from 'grommet/components/Anchor';
 // import MarqueeForm from 'grommet-cms/components';
 // $FlowFixMe
 import { DashboardContentBlocks } from 'grommet-cms/containers';
@@ -19,12 +21,22 @@ export default function PostListItemDetail(props: {
     contentBlocks: Array<{}>
   },
   onSubmit: Function,
-  onCreateBlockClick: Function
+  onCreateBlockClick: Function,
+  onCancel: Function
 }) {
-  const { item, onSubmit, onCreateBlockClick } = props;
+  const { item, onSubmit, onCreateBlockClick, onCancel } = props;
   return (
     <Box>
-      <PageHeader title={`Edit ${item.name}`} />
+      <PageHeader 
+        title={`Edit ${item.name}`}
+        controls={
+          <Anchor
+            icon={<AddIcon size="small" />}
+            label="Add Block"
+            onClick={onCreateBlockClick}
+          />
+        }
+      />
       <Section pad="medium">
         <Box pad="small">
           <DashboardContentBlocks blocks={item.contentBlocks} />
@@ -42,8 +54,8 @@ export default function PostListItemDetail(props: {
                 type="submit"
               />
               <Button
-                label="add block"
-                onClick={onCreateBlockClick}
+                label="cancel"
+                onClick={onCancel}
                 primary={false}
               />
             </Menu>

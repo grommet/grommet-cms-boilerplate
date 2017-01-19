@@ -47,7 +47,7 @@ export class DashboardPostPage extends Component {
     this._onCreateBlock = this._onCreateBlock.bind(this);
     this._onSubmitMarquee = this._onSubmitMarquee.bind(this);
     this._loadPost = this._loadPost.bind(this);
-    this._onCancelMarquee = this._onCancelMarquee.bind(this);
+    this._onCancel = this._onCancel.bind(this);
     this.state = {
       selectedSection: null,
       isEditingMarquee: false
@@ -113,6 +113,7 @@ export class DashboardPostPage extends Component {
       ]
     };
     this.props.dispatch(setPost(post));
+    this._onClickBackAnchor();
   }
 
   _onClearError() {
@@ -220,7 +221,7 @@ export class DashboardPostPage extends Component {
     this._loadPost();
   }
 
-  _onCancelMarquee() {
+  _onCancel() {
     this._loadPost();
     this._onClickBackAnchor();
   }
@@ -259,6 +260,7 @@ export class DashboardPostPage extends Component {
             >
               {post && selectedSection > 0 &&
                 <PostListItemDetail
+                  onCancel={this._onCancel}
                   onSubmit={this._onSubmitContentBlocks}
                   onCreateBlockClick={this._onCreateBlock}
                   item={post.sections[selectedSection]}
@@ -271,7 +273,7 @@ export class DashboardPostPage extends Component {
                     onSubmit={this._onSubmitMarquee}
                     post={post}
                     onChange={this._onPostChange}
-                    onCancel={this._onCancelMarquee}
+                    onCancel={this._onCancel}
                     url={url}
                   />
                 </Box>

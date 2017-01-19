@@ -4,6 +4,8 @@ import List from 'grommet/components/List';
 import Heading from 'grommet/components/Heading';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
+import AddIcon from 'grommet/components/icons/base/Add';
+import Anchor from 'grommet/components/Anchor';
 // $FlowFixMe
 import { PageHeader, PostListItem } from 'grommet-cms/components';
 
@@ -28,7 +30,11 @@ export default class PostList extends Component {
         <PageHeader
           title="Edit Page" 
           controls={
-            <Button onClick={onAddSection} plain label="Add Section" />
+            <Anchor
+              icon={<AddIcon size="small" />}
+              label="Add Section"
+              onClick={onAddSection}
+            />
           } 
         />
         <List selectable onSelect={onSelectSection}>
