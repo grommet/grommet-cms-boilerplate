@@ -22,15 +22,16 @@ export class Dashboard extends Component {
   }
 
   _renderNav() {
-    const { config, router } = this.context;
-    const path = this.props.location.pathname.split('/');
-    const hasLeftAnchor = path.indexOf('post') >= 0;
-    const leftAnchor = hasLeftAnchor ?
-      <BackAnchor
-        label="All Posts"
-        onClick={router.goBack}
-      />
-    :
+    const { leftNavAnchor } = this.props;
+    const { config } = this.context;
+    const leftAnchor = leftNavAnchor && leftNavAnchor.title ?
+      (
+        <BackAnchor 
+          onClick={leftNavAnchor.onClick}
+          title={leftNavAnchor.title}
+        />
+      )
+      :
       null;
     if (this.props.loggedIn) {
       return (
@@ -85,6 +86,10 @@ Dashboard.contextTypes = {
 
 Dashboard.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  leftNavAnchor: PropTypes.shape({
+    path: PropTypes.string,
+    title: PropTypes.string
+  }),
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
   })
@@ -92,11 +97,12 @@ Dashboard.propTypes = {
 
 function mapStateToProps(state, props) {
   const { loggedIn } = state.login;
-  const { loading, error } = state.dashboard;
+  const { loading, error, leftNavAnchor } = state.dashboard;
   return {
     loggedIn,
     loading,
-    error
+    error,
+    leftNavAnchor
   };
 };
 

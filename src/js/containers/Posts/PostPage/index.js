@@ -5,7 +5,9 @@ import { getPost } from 'grommet-cms/containers/Posts/PostPage/actions';
 import ContentBlocks from 'grommet-cms/containers/ContentBlocks';
 import { WithLoading } from 'grommet-cms/components';
 import Box from 'grommet/components/Box';
+import Section from 'grommet/components/Section';
 import Headline from 'grommet/components/Headline';
+import Label from 'grommet/components/Label';
 
 export class PostPage extends Component {
   constructor(props) {
@@ -18,12 +20,13 @@ export class PostPage extends Component {
 
   render() {
     const { post, request } = this.props;
+    const { sections } = post;
+    const subtitle = (post && post.subtitle)
+      ? post.subtitle
+      : null;
     const title = (post && post.title)
       ? post.title
       : 'Post';
-    const blocks = (post && post.contentBlocks)
-      ? post.contentBlocks
-      : undefined;
     const image = (post && post.image)
       ? post.image.path
       : undefined;
@@ -43,9 +46,16 @@ export class PostPage extends Component {
             <Headline size="medium" margin="none" strong={true}>
               {title}
             </Headline>
+            <Label className="post-feed-item--subtitle">
+              {subtitle}
+            </Label>
           </Box>
           <Box full>
-            <ContentBlocks blocks={blocks} />
+            {sections && sections.map((item, i) => 
+              <Section key={i} pad="large">
+                <ContentBlocks blocks={item.contentBlocks} /> 
+              </Section>
+            )}
           </Box>
         </Box>
       </WithLoading>

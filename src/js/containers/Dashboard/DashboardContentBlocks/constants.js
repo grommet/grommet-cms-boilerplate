@@ -1,15 +1,13 @@
 import React from 'react';
 import Box from 'grommet/components/Box';
 import PlayFillIcon from 'grommet/components/icons/base/PlayFill';
-import {
-  ImageForm,
-  ParagraphForm,
-  ImageParagraphForm,
-  CardParagraphForm,
-  QuoteForm,
-  VideoForm,
-  CarouselForm
-} from 'grommet-cms/containers';
+import ImageForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/ImageForm';
+import ParagraphForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/ParagraphForm';
+import ImageParagraphForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/ImageParagraphForm';
+import CardParagraphForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/CardParagraphForm';
+import QuoteForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/QuoteForm';
+import VideoForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/VideoForm';
+import CarouselForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/CarouselForm';
 import {
   BlockParagraphPreview,
   BlockHeadingPreview,

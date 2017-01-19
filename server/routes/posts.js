@@ -67,8 +67,8 @@ router.post('/api/post/create', isAuthed, function(req, res) {
     subtitle: req.body.subtitle || '',
     date: new Date(req.body.date).toISOString(),
     slug: slugify(req.body.title),
-    contentBlocks: req.body.contentBlocks || [],
     image: req.body.image._id || '',
+    sections: req.body.sections,
     createdAt: Date.now()
   }, function (err, post) {
     if (err) {
@@ -90,7 +90,7 @@ router.post('/api/post/:id', isAuthed, function (req, res) {
     post.subtitle = req.body.subtitle;
     post.date = new Date(req.body.date).toISOString();
     post.slug = slugify(req.body.title);
-    post.contentBlocks = req.body.contentBlocks;
+    post.sections = req.body.sections;
     post.image = (req.body.image) ? req.body.image._id : undefined;
     post.createdAt = req.body.createdAt;
 

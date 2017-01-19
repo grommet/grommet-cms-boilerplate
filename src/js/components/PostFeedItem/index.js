@@ -4,6 +4,7 @@ import Box from 'grommet/components/Box';
 import Anchor from 'grommet/components/Anchor';
 import Heading from 'grommet/components/Heading';
 import Section from 'grommet/components/Section';
+import Label from 'grommet/components/Label';
 // $FlowFixMe grommet-cms required module not found
 import { formatPrettyDate } from 'grommet-cms/utils';
 
@@ -35,7 +36,10 @@ export default function PostFeedItem(props: {
           <Heading strong align="center">
             {post.title}
           </Heading>
-          <Heading align="center" tag="h3">
+          <Label className="post-feed-item--subtitle">
+            {post.subtitle ? post.subtitle : ''}
+          </Label>
+          <Heading align="center" tag="h5">
             {`Posted on ${formatPrettyDate(post.createdAt)}`}
           </Heading>
         </Box>

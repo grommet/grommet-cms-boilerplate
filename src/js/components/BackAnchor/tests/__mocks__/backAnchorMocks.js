@@ -1,3 +1,4 @@
 export default {
-  "label": "Posts"
+  "title": "Posts",
+  "path": "/dashboard/posts"
 };

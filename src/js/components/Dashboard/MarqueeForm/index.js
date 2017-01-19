@@ -1,9 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-
-import { connect } from 'react-redux';
 import { blockAdd } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
-import { DashboardContentBlocks } from 'grommet-cms/containers';
-
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import DateTime from 'grommet/components/DateTime';
@@ -12,12 +8,12 @@ import FormField from 'grommet/components/FormField';
 import FormFields from 'grommet/components/FormFields';
 import Section from 'grommet/components/Section';
 import Footer from 'grommet/components/Footer';
-import Menu from 'grommet/components/Menu';
 import ImageIcon from 'grommet/components/icons/base/Image';
+import Menu from 'grommet/components/Menu';
 import DashboardAssetsLayer from 'grommet-cms/containers/Dashboard/DashboardAssetsLayer';
 import { formatDate } from 'grommet-cms/utils';
 
-export class PostForm extends Component {
+export default class MarqueeForm extends Component {
   constructor() {
     super();
     this._onSubmit = this._onSubmit.bind(this);
@@ -32,24 +28,6 @@ export class PostForm extends Component {
       shouldUpdateHero: false,
       assetsLayer: false
     };
-  }
-
-  componentWillMount() {
-    const { onCreatePost } = this.props;
-    if (!this.props.post.hasOwnProperty('title')) {
-      if (typeof onCreatePost === 'function') {
-        const contentBlocks = [];
-        const date = new Date();
-        onCreatePost({
-          date,
-          contentBlocks,
-          _id: '',
-          title: '',
-          subtitle: '',
-          image: ''
-        });
-      }
-    }
   }
 
   componentWillReceiveProps({ url }) {
@@ -107,8 +85,8 @@ export class PostForm extends Component {
   }
 
   render() {
-    const { onChange, post } = this.props;
-    const { image, title, subtitle, contentBlocks, date } = post;
+    const { onChange, post, onCancel } = this.props;
+    const { image, title, subtitle, date } = post;
     const formattedDate = formatDate(date);
     const assetsLayer = (this.state.assetsLayer)
       ? <DashboardAssetsLayer 
@@ -126,6 +104,7 @@ export class PostForm extends Component {
               <fieldset>
                 <FormField label="Headline" htmlFor="title">
                   <input
+                    autoFocus
                     id="title"
                     name="title"
                     type="text"
@@ -185,48 +164,38 @@ export class PostForm extends Component {
           </Footer>
         </Section>
         <Section pad="medium">
-          <Box pad="small">
-            <DashboardContentBlocks blocks={contentBlocks} />
-            <Footer align="center" justify="center" pad="large">
-              <Menu
-                className="dashboard--content-blocks__button-footer"
-                direction="row"
-                inline
-                responsive={false}
-              >
-                <Button
-                  label="submit"
-                  onClick={this._onSubmit}
-                  primary={true}
-                  type="submit"
-                />
-                <Button
-                  label="add block"
-                  onClick={this._onCreateBlockClick}
-                  primary={false}
-                />
-              </Menu>
-            </Footer>
-          </Box>
+          <Footer align="center" justify="center" pad="medium">
+            <Menu
+              align="center"
+              style={{ width: '100%' }}
+              justify="between"
+              direction="row"
+              inline
+              responsive={false}
+            >
+              <Button
+                label="submit"
+                onClick={this._onSubmit}
+                primary={true}
+                type="submit"
+              />
+              <Button
+                label="cancel"
+                onClick={onCancel}
+                primary={false}
+              />
+            </Menu>
+          </Footer>
         </Section>
       </Box>
     );
   }
 };
 
-PostForm.propTypes = {
+MarqueeForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
   post: PropTypes.object,
-  title: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  onCreatePost: PropTypes.func,
-  url: PropTypes.string,
-  dispatch: PropTypes.func.isRequired
+  url: PropTypes.string
 };
-
-function mapStateToProps(state, props) {
-  const { url } = state.fileUpload;
-  return { url };
-}
-
-export default connect(mapStateToProps)(PostForm);
