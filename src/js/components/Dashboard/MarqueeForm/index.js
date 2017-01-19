@@ -91,7 +91,7 @@ export default class MarqueeForm extends Component {
     const assetsLayer = (this.state.assetsLayer)
       ? <DashboardAssetsLayer 
           onAssetSelect={this._onAssetSelect} 
-          onClose={this._toggleAssetsLayer} 
+          onClose={this._toggleAssetsLayer}
         />
       : undefined;
 

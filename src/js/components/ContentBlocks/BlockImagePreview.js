@@ -7,7 +7,7 @@ export default function BlockImagePreview ({ content, image, imageDesc }) {
   return (
     <Box colorIndex="light-1" direction="row" pad={{ between: 'medium' }}>
       <Box>
-        <Image src={image} />
+        <Image src={image.path} />
         {imageDesc}
       </Box>
       <Box>

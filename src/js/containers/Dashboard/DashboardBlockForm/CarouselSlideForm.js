@@ -1,22 +1,21 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import Button from 'grommet/components/Button';
 import Form from 'grommet/components/Form';
 import FormField from 'grommet/components/FormField';
 import FormFields from 'grommet/components/FormFields';
-import { DashboardFileUpload } from 'grommet-cms/containers';
+import { Assets } from 'grommet-cms/containers';
 
 export class CarouselSlideForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      image: props.data
-        && props.data.image || ''
+      image: props.data ? props.data.image : ''
     };
 
     this._onChange = this._onChange.bind(this);
     this._propsToState = this._propsToState.bind(this);
+    this._onAssetSelect = this._onAssetSelect.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +56,12 @@ export class CarouselSlideForm extends Component {
     this.setState(obj);
   }
 
+  _onAssetSelect(image) {
+    this.setState({
+      image
+    });
+  }
+
   _validate(data) {
     if (!data || !data.image) {
       return false;
@@ -76,14 +81,21 @@ export class CarouselSlideForm extends Component {
         <FormFields>
           <fieldset>
             <FormField label="Image" htmlFor="image">
-              <input id="image" name="image" type="text"
-                value={image} onChange={this._onChange} />
+              <input
+                id="image"
+                name="image"
+                type="text"
+                value={image.path}
+                onChange={this._onChange}
+              />
             </FormField>
-            <DashboardFileUpload title='upload image' />
+            <Assets 
+              onAssetSelect={this._onAssetSelect}
+            />
           </fieldset>
           <Button label="submit" primary={true} onClick={onSubmit} />
         </FormFields>
-    </Form>
+      </Form>
     );
   }
 };
@@ -92,9 +104,4 @@ CarouselSlideForm.propTypes = {
   data: PropTypes.object
 };
 
-function mapStateToProps(state, props) {
-  const { url } = state.fileUpload;
-  return { url };
-}
-
-export default connect(mapStateToProps)(CarouselSlideForm);
+export default CarouselSlideForm;

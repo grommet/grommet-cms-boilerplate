@@ -11,7 +11,7 @@ export default function BlockCardPreview ({ content, image, card }) {
       <Box>
         <Card 
           colorIndex="light-2"
-          thumbnail={image}
+          thumbnail={image.path}
           heading={heading}
           label={label}
           link={

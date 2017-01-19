@@ -22,7 +22,7 @@ const LargeBlock = ({content, image, imageDesc}) =>
       <Box pad="medium" />
       <Box basis="3/4">
         <Box pad={{ vertical: 'small' }}>
-          <Image full="horizontal" src={image} />
+          <Image full="horizontal" src={image.path} />
         </Box>
         <Box pad={{vertical: 'small'}}>
           <Heading tag="h5" strong={true} margin="none">
@@ -47,7 +47,7 @@ const MediumBlock = ({content, image, imageDesc}) =>
       <Box pad="medium" />
       <Box basis="2/3">
         <Box pad={{ vertical: 'small' }}>
-          <Image full="horizontal" src={image} />
+          <Image full="horizontal" src={image.path} />
         </Box>
         <Box pad={{vertical: 'small'}}>
           <Heading tag="h5" strong={true} margin="none">
@@ -72,7 +72,7 @@ const SmallBlock = ({content, image, imageDesc}) =>
       <Box pad="medium" />
       <Box basis="1/3">
         <Box pad={{ vertical: 'small' }}>
-          <Image full="horizontal" src={image} />
+          <Image full="horizontal" src={image.path} />
         </Box>
         <Box pad={{vertical: 'small'}}>
           <Heading tag="h5" strong={true} margin="none">
