@@ -212,7 +212,7 @@ export class DashboardPostPage extends Component {
         ...this.props.sectionForm
       }));
     }
-    this.props.dispatch(toggleSectionForm(null));
+    this._onClearSectionForm();
   }
 
   _onSubmitMarquee() {
