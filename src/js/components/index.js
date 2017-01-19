@@ -16,3 +16,4 @@ export NavAnchor from './NavAnchor';
 export ShareMenu from './ShareMenu';
 export VideoCallout from './VideoCallout';
 export YoutubeLayer from './YoutubeLayer';
+export HomePageIntro from './HomePageIntro';

@@ -23,7 +23,8 @@ import {
   ErrorNotification,
   PostList,
   PostListItemDetail,
-  PostSectionForm
+  PostSectionForm,
+  MarqueeForm
 } from 'grommet-cms/components';
 import { toggleSectionForm, postSectionFormInput } from './actions';
 
@@ -44,15 +45,17 @@ export class DashboardPostPage extends Component {
     this._onSubmitSectionForm = this._onSubmitSectionForm.bind(this);
     this._onSubmitContentBlocks = this._onSubmitContentBlocks.bind(this);
     this._onCreateBlock = this._onCreateBlock.bind(this);
+    this._onSubmitMarquee = this._onSubmitMarquee.bind(this);
+    this._loadPost = this._loadPost.bind(this);
+    this._onCancelMarquee = this._onCancelMarquee.bind(this);
     this.state = {
-      selectedSection: null
+      selectedSection: null,
+      isEditingMarquee: false
     };
   }
 
   componentWillMount() {
-    const { id } = this.props.params;
-    if (id && id !== 'create')
-      this.props.dispatch(getPost(id));
+    this._loadPost();
     this._setDefaultLeftAnchor();
   }
 
@@ -77,13 +80,23 @@ export class DashboardPostPage extends Component {
       }
     }
     if (post !== this.props.post && !this.props.request) {
-      this._onSubmit(post);
+      if (!this.state.isEditingMarquee) {
+        this._onSubmit(post);
+      }
+    }
+  }
+
+  _loadPost() {
+    const { id } = this.props.params;
+    if (id && id !== 'create') {
+      this.props.dispatch(getPost(id));
     }
   }
 
   _onSubmit(post = this.props.post) {
-    if(!this.props.request)
+    if (!this.props.request) {
       this.props.dispatch(submitPost(post));
+    }
   }
 
   _onSubmitContentBlocks() {
@@ -139,7 +152,8 @@ export class DashboardPostPage extends Component {
   _onClickBackAnchor() {
     this._setDefaultLeftAnchor();
     this.setState({
-      selectedSection: null
+      selectedSection: null,
+      isEditingMarquee: false
     });
   }
 
@@ -151,7 +165,8 @@ export class DashboardPostPage extends Component {
       })
     );
     this.setState({
-      selectedSection: i
+      selectedSection: i,
+      isEditingMarquee: i === 0
     });
   }
 
@@ -199,8 +214,19 @@ export class DashboardPostPage extends Component {
     this.props.dispatch(toggleSectionForm(null));
   }
 
+  _onSubmitMarquee() {
+    this._onSubmit();
+    this._onClickBackAnchor();
+    this._loadPost();
+  }
+
+  _onCancelMarquee() {
+    this._loadPost();
+    this._onClickBackAnchor();
+  }
+
   render() {
-    const { post, error, sectionForm, dispatch } = this.props;
+    const { post, error, sectionForm, dispatch, url } = this.props;
     const { selectedSection } = this.state;
     return (
       <Box>
@@ -231,12 +257,24 @@ export class DashboardPostPage extends Component {
               leave={{ animation: 'slide-left', duration: 1000, delay: 50 }}
               visible={typeof selectedSection === 'number'}
             >
-              {post && selectedSection &&
+              {post && selectedSection > 0 &&
                 <PostListItemDetail
                   onSubmit={this._onSubmitContentBlocks}
                   onCreateBlockClick={this._onCreateBlock}
                   item={post.sections[selectedSection]}
                 /> 
+              }
+              {post && selectedSection === 0 &&
+                <Box>
+                  <PageHeader title="Edit Marquee" />
+                  <MarqueeForm
+                    onSubmit={this._onSubmitMarquee}
+                    post={post}
+                    onChange={this._onPostChange}
+                    onCancel={this._onCancelMarquee}
+                    url={url}
+                  />
+                </Box>
               }
             </Animate>
           </Box>
@@ -258,6 +296,7 @@ export class DashboardPostPage extends Component {
 };
 
 DashboardPostPage.propTypes = {
+  url: PropTypes.string,
   sectionForm: PropTypes.shape({
     isVisible: PropTypes.bool.isRequired,
     id: PropTypes.string,
@@ -289,10 +328,12 @@ function mapStateToProps(state, props) {
   const { post, error, request } = state.posts;
   const { sectionForm } = state.dashboardPost;
   const { contentBlocks } = state;
+  const { url } = state.fileUpload;
   return {
     post,
     error,
     request,
+    url,
     sectionForm,
     contentBlocks
   };

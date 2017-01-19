@@ -21,21 +21,23 @@ export default function PostPreview(props: {
   selectedSection?: number
 }) {
   const { post, selectedSection } = props;
-  const renderPostSections = selectedSection && selectedSection > 0;
   return (
     <Box>
       <PostPreviewHeroSection
         post={post}
         selectedSection={selectedSection}
       />
-      {renderPostSections && post &&
-        post.sections && post.sections
+      {(selectedSection && selectedSection > 0) && 
+        (post && post.sections) 
+        ? post.sections
           .filter((_, i) => selectedSection === i)
           .map((item, i) => 
             <Section key={i} pad="medium">
               <ContentBlocks blocks={item.contentBlocks} />
             </Section>
           )
+        :
+          null
       }
     </Box>
   );

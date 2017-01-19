@@ -11,7 +11,7 @@ import Anchor from 'grommet/components/Anchor';
 import Button from 'grommet/components/Button';
 import Footer from 'grommet/components/Footer';
 import GrommetLogo from 'grommet/components/icons/Grommet';
-import { GrommetHero } from 'grommet-cms/components';
+import { GrommetHero, HomePageIntro } from 'grommet-cms/components';
 
 class HomePage extends Component {
   // Server checks for this to perform universal rendering.
@@ -48,7 +48,7 @@ class HomePage extends Component {
           pad="large"
           align="center"
           justify="start"
-          style={{ height: 'calc(100vh - 96px)', marginTop: 100 }}
+          style={{ height: 'calc(80vh - 96px)', marginTop: 100 }}
         >
           <Animate
             visible={this.state.heroVisible}
@@ -77,12 +77,36 @@ class HomePage extends Component {
             </Paragraph>
           </Animate>
         </Section>
-          <Animate
-            visible="scroll"
-            keep
-            enter={{ animation: "fade", duration: 1000, delay: 100 }}
+        <Animate
+          visible="scroll"
+          keep
+          enter={{ animation: "fade", duration: 1000, delay: 100 }}
+        >
+          <Section 
+            align="center" 
+            pad="large" 
+            full="horizontal" 
+            colorIndex="light-2" 
+            style={{ minHeight: '60vh' }}
           >
-          <Section colorIndex="light-2" full="horizontal" pad="large" align="center">
+            <Box pad="large" align="center">
+              <HomePageIntro />
+            </Box>
+            <Heading align="center" strong>
+              A CMS made for React.JS
+            </Heading>
+            <Paragraph size="large" align="center" pad="medium">
+              Both Grommet and Grommet CMS are made with React and component
+              architecture.
+            </Paragraph>
+          </Section>
+        </Animate>
+        <Animate
+          visible="scroll"
+          keep
+          enter={{ animation: "fade", duration: 1000, delay: 100 }}
+        >
+          <Section colorIndex="neutral-1" full="horizontal" pad="large" align="center">
             <Box style={{ marginTop: 60 }}>
               <Headline strong align="center">
                 Grommet CMS
@@ -111,6 +135,24 @@ class HomePage extends Component {
               <Button label="Start" path="/dashboard" />
             </Footer>
           </Section>
+        </Animate>
+        <Animate
+          visible="scroll"
+          keep
+          enter={{ animation: "fade", duration: 1000, delay: 100 }}
+        >
+          <Section colorIndex="light-1" full="horizontal" pad="large" align="center">
+            <Box style={{ marginTop: 60 }}>
+              <Headline strong align="center">
+                Features
+              </Headline>
+            </Box>
+          </Section>
+          <Box pad="medium" align="center">
+            <Paragraph size="medium" align="center">
+              This is a placeholder for the features section.
+            </Paragraph>
+          </Box>
         </Animate>
       </Box>
     );
