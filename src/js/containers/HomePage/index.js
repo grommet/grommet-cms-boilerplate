@@ -129,15 +129,17 @@ class HomePage extends Component {
             </Box>
             <Box pad="medium" align="center">
               <Paragraph size="large" align="center">
-                Grommet CMS combines a fully featured content management system
-                {" with the world's most advanced UX framework to provide you with all the"}
-                <Anchor href="https://grommet.github.io/docs/learn">{' guidance'}</Anchor>,
+                {messages.SECTION_THREE_P1}
+                {messages.SECTION_THREE_P2}
+                <Anchor href="https://grommet.github.io/docs/learn">{messages.SECTION_THREE_GUIDANCE}</Anchor>,
                 <Anchor href="https://grommet.github.io/docs/components">
-                  {' components'}
-                </Anchor>, and <Anchor href="https://grommet.github.io/docs/resources">
-                  design resources
-                </Anchor> you need
-                to take your ideas from concept to a real application.
+                  {messages.SECTION_THREE_COMPONENTS}
+                </Anchor>
+                {messages.SECTION_THREE_AND}
+                <Anchor href="https://grommet.github.io/docs/resources">
+                  {messages.SECTION_THREE_RESOURCES}
+                </Anchor>
+                {messages.SECTION_THREE_P3}
               </Paragraph>
             </Box>
           </Section>
@@ -158,7 +160,7 @@ class HomePage extends Component {
             </Box>
             <Features />
             <Footer justify="center" pad="medium">
-              <Button label="Get Started" path="/dashboard" />
+              <Button label={messages.BUTTON_TEXT} path="/dashboard" />
             </Footer>
           </Section>
         </Animate>
