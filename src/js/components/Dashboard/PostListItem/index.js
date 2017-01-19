@@ -65,7 +65,7 @@ export default function PostListItem(props: {
               label="Move Down"
               disabled={item.order === totalItems - 1 || item.order === 0}
               onClick={() => {
-                if (item.order !== totalItems - 1 && !item.order === 0) {
+                if (item.order !== totalItems - 1 && item.order !== 0) {
                   onMenuItemClick('MOVE_DOWN');
                 }
               }}

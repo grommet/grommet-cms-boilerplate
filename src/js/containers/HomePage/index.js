@@ -11,6 +11,9 @@ import Anchor from 'grommet/components/Anchor';
 import Button from 'grommet/components/Button';
 import Footer from 'grommet/components/Footer';
 import GrommetLogo from 'grommet/components/icons/Grommet';
+import SocialSlackIcon from 'grommet/components/icons/base/SocialSlack';
+import SocialGithubIcon from 'grommet/components/icons/base/SocialGithub';
+
 import { GrommetHero, HomePageIntro } from 'grommet-cms/components';
 
 class HomePage extends Component {
@@ -23,21 +26,17 @@ class HomePage extends Component {
     super(props);
     this.state = {
       heroVisible: false,
-      paragraphVisible: false
+      paragraphVisible: false,
+      linksVisible: false
     };
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        heroVisible: true
-      });
-    }, 1000);
-    setTimeout(() => {
-      this.setState({
-        paragraphVisible: true
-      });
-    }, 2000);
+    this.setState({
+      heroVisible: true,
+      paragraphVisible: true,
+      linksVisible: true
+    });
   }
 
   render() {
@@ -53,7 +52,7 @@ class HomePage extends Component {
           <Animate
             visible={this.state.heroVisible}
             keep
-            enter={{ animation: "fade", duration: 1000, delay: 100 }}
+            enter={{ animation: "slide-up", duration: 1000, delay: 1000 }}
           >
             <Box className="home-desktop">
               <GrommetHero />
@@ -70,11 +69,27 @@ class HomePage extends Component {
           <Animate
             visible={this.state.paragraphVisible}
             keep
-            enter={{ animation: "fade", duration: 1000, delay: 100 }}
+            enter={{ animation: "slide-up", duration: 1000, delay: 2000 }}
           >
             <Paragraph size="large" align="center" margin="none">
               Focus on the essential experience
             </Paragraph>
+          </Animate>
+          <Animate
+            visible={this.state.linksVisible}
+            keep
+            enter={{ animation: "slide-up", duration: 1000, delay: 3000 }}
+          >
+            <Footer justify="center" align="center" responsive={false} pad="large">
+              <Anchor 
+                href="https://github.com/grommet/grommet"
+                icon={<SocialGithubIcon size="small" />}
+              />
+              <Anchor
+                href="http://slackin.grommet.io"
+                icon={<SocialSlackIcon colorIndex="plain" size="small" />}
+              />
+            </Footer>
           </Animate>
         </Section>
         <Animate
@@ -96,8 +111,9 @@ class HomePage extends Component {
               A CMS made for React.JS
             </Heading>
             <Paragraph size="large" align="center" pad="medium">
-              Both Grommet and Grommet CMS are made with React and component
-              architecture.
+              Grommet CMS embraces React JavaScript, which
+              means that all of the components used to build your site
+              are reusable Grommet components.
             </Paragraph>
           </Section>
         </Animate>
@@ -109,17 +125,11 @@ class HomePage extends Component {
           <Section colorIndex="neutral-1" full="horizontal" pad="large" align="center">
             <Box style={{ marginTop: 60 }}>
               <Headline strong align="center">
-                Grommet CMS
+                World Class UX
               </Headline>
             </Box>
-            <Box align="center">
-              <Heading tag="h3" align="center">
-                {`A content management system 
-                  with World Class UX`}
-              </Heading>
-            </Box>
             <Box pad="medium" align="center">
-              <Paragraph size="medium" align="center">
+              <Paragraph size="large" align="center">
                 Grommet CMS combines a fully featured content management system
                 {" with the world's most advanced UX framework to provide you with all the"}
                 <Anchor href="https://grommet.github.io/docs/learn">{' guidance'}</Anchor>,
