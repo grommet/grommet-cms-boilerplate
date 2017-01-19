@@ -1,6 +1,8 @@
 /* @flow */
 import React from 'react';
 import Layer from 'grommet/components/Layer';
+import Header from 'grommet/components/Header';
+import Heading from 'grommet/components/Heading'; 
 // $FlowFixMe
 import { MarqueeForm } from 'grommet-cms/components';
 
@@ -24,10 +26,16 @@ export default function AddPostForm(props: {
   const { onSubmit, post, onChange, url, onCancel } = form;
   return (
     <Layer
+      closer
       align="right"
       onClose={onClose}
       hidden={!isVisible}
     >
+      <Header pad="medium" align="center">
+        <Heading align="center" strong>
+          Add Post
+        </Heading>
+      </Header>
       <MarqueeForm
         onSubmit={onSubmit}
         post={post}

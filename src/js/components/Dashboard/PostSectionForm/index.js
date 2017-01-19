@@ -7,6 +7,8 @@ import FormField from 'grommet/components/FormField';
 import Footer from 'grommet/components/Footer';
 import Button from 'grommet/components/Button';
 import Section from 'grommet/components/Section';
+import Header from 'grommet/components/Header';
+import Heading from 'grommet/components/Heading'; 
 import Menu from 'grommet/components/Menu';
 
 export default function PostSectionForm(props: {
@@ -15,15 +17,22 @@ export default function PostSectionForm(props: {
   onChange: Function,
   name?: string,
   id?: string,
-  onSubmit: Function
+  onSubmit: Function,
+  isEditing: boolean
 }) {
-  const { isVisible, onClose, onChange, name, id, onSubmit } = props;
+  const { isVisible, onClose, onChange, name, id, onSubmit, isEditing } = props;
   return (
     <Layer
+      closer
       align="right"
       onClose={onClose}
       hidden={!isVisible}
     >
+      <Header pad="medium" align="center">
+        <Heading strong align="center">
+          {`${isEditing ? 'Edit' : 'Add'} Section`}
+        </Heading>
+      </Header>
       <Section pad="medium" align="center">
         <Form pad="medium">
           <FormFields>
@@ -49,28 +58,30 @@ export default function PostSectionForm(props: {
           </FormFields>
         </Form>
       </Section>
-      <Footer align="center" justify="center" pad={{ vertical: 'large' }}>
-        <Menu
-          align="center"
-          style={{ width: '100%' }}
-          justify="between"
-          direction="row"
-          inline
-          responsive={false}
-        >
-          <Button
-            label="submit"
-            onClick={onSubmit}
-            primary={true}
-            type="submit"
-          />
-          <Button
-            label="cancel"
-            onClick={onClose}
-            primary={false}
-          />
-        </Menu>
-      </Footer>
+      <Section pad="medium" align="center">
+        <Footer align="center" justify="center" pad="medium">
+          <Menu
+            align="center"
+            style={{ width: '100%' }}
+            justify="between"
+            direction="row"
+            inline
+            responsive={false}
+          >
+            <Button
+              label="submit"
+              onClick={onSubmit}
+              primary={true}
+              type="submit"
+            />
+            <Button
+              label="cancel"
+              onClick={onClose}
+              primary={false}
+            />
+          </Menu>
+        </Footer>
+      </Section>
     </Layer>
   );
 }

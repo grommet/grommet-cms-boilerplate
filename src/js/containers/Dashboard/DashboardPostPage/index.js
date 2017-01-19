@@ -288,6 +288,7 @@ export class DashboardPostPage extends Component {
         {error && <ErrorNotification errors={[{ message: error }]} onClose={this._onClearError} />}
         <PostSectionForm
           {...sectionForm}
+          isEditing={sectionForm.selectedSection !== null}
           onClose={this._onClearSectionForm}
           onChange={(name, id) => dispatch(postSectionFormInput(name, id))}
           onSubmit={this._onSubmitSectionForm}
