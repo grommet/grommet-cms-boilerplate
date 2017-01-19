@@ -55,7 +55,7 @@ export default function PostListItem(props: {
               label="Move Up"
               disabled={item.order === 0}
               onClick={() => {
-                if (item.order !== 0) {
+                if (item.order > 1) {
                   onMenuItemClick('MOVE_UP');
                 }
               }}
@@ -63,9 +63,9 @@ export default function PostListItem(props: {
             <Anchor 
               icon={<DownIcon size="small" />}
               label="Move Down"
-              disabled={item.order === totalItems - 1}
+              disabled={item.order === totalItems - 1 || item.order === 0}
               onClick={() => {
-                if (item.order !== totalItems - 1) {
+                if (item.order !== totalItems - 1 && !item.order === 0) {
                   onMenuItemClick('MOVE_DOWN');
                 }
               }}
