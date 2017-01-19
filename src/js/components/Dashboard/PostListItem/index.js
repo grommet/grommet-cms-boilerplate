@@ -53,7 +53,7 @@ export default function PostListItem(props: {
             <Anchor 
               icon={<UpIcon size="small" />}
               label="Move Up"
-              disabled={item.order === 0}
+              disabled={item.order <= 1}
               onClick={() => {
                 if (item.order > 1) {
                   onMenuItemClick('MOVE_UP');
