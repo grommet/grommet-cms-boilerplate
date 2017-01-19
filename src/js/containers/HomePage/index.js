@@ -13,6 +13,7 @@ import Footer from 'grommet/components/Footer';
 import GrommetLogo from 'grommet/components/icons/Grommet';
 import SocialSlackIcon from 'grommet/components/icons/base/SocialSlack';
 import SocialGithubIcon from 'grommet/components/icons/base/SocialGithub';
+import GlobeIcon from 'grommet/components/icons/base/Globe';
 import Features from './features';
 import { GrommetHero, HomePageIntro } from 'grommet-cms/components';
 
@@ -78,7 +79,7 @@ class HomePage extends Component {
           <Animate
             visible={this.state.linksVisible}
             keep
-            enter={{ animation: "slide-up", duration: 1000, delay: 3000 }}
+            enter={{ animation: "fade", duration: 1000, delay: 3000 }}
           >
             <Footer justify="center" align="center" responsive={false} pad="large">
               <Anchor 
@@ -123,7 +124,10 @@ class HomePage extends Component {
           enter={{ animation: "fade", duration: 1000, delay: 100 }}
         >
           <Section colorIndex="neutral-1" full="horizontal" pad="large" align="center">
-            <Box style={{ marginTop: 60 }}>
+            <Box align="center" pad="medium">
+              <GlobeIcon size="xlarge" />
+            </Box>
+            <Box pad="medium">
               <Headline strong align="center">
                 World Class UX
               </Headline>
@@ -141,9 +145,6 @@ class HomePage extends Component {
                 to take your ideas from concept to a real application.
               </Paragraph>
             </Box>
-            <Footer justify="center" pad="medium">
-              <Button label="Start" path="/dashboard" />
-            </Footer>
           </Section>
         </Animate>
         <Animate
@@ -154,10 +155,13 @@ class HomePage extends Component {
           <Section colorIndex="light-1" full="horizontal" pad="medium" align="center">
             <Box style={{ marginTop: 60 }}>
               <Headline strong align="center">
-                Features
+                What makes us great
               </Headline>
             </Box>
             <Features />
+            <Footer justify="center" pad="medium">
+              <Button label="Get Started" path="/dashboard" />
+            </Footer>
           </Section>
         </Animate>
       </Box>
