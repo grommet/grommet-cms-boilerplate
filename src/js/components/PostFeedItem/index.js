@@ -39,7 +39,7 @@ export default function PostFeedItem(props: {
           <Label className="post-feed-item--subtitle">
             {post.subtitle ? post.subtitle : ''}
           </Label>
-          <Heading align="center" tag="h3">
+          <Heading align="center" tag="h5">
             {`Posted on ${formatPrettyDate(post.createdAt)}`}
           </Heading>
         </Box>
