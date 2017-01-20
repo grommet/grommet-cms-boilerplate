@@ -9,20 +9,24 @@ To run this application, execute the following commands:
   $ npm install
   ```
 
-  2. To start the server run:
+  2. Add .env file. The project comes with a .env.example file which can be renamed to .env. These are your enviroment variables.
+
+  3. Ensure Mongo is running. Upon starting the server the application will automatically build a hello world post and a temporary dashboard user.
+
+  4. To start the server run:
 
   ```bash
   $ npm run build
   $ npm start
   ```
 
-  3. To start the development server:
+  5. To start the development server:
 
   ```bash
   $ npm run dev
   ```
 
-  4. To create the website distribution bundle:
+  6. To create the website distribution bundle:
 
   ```bash
   $ npm run dist
