@@ -39,8 +39,6 @@ rules:
   consistent-return: 2
   no-unused-vars: [2, args: none]
   semi: [2, "always"]
-  no-trailing-spaces: 0
-  max-len: 0
 
   # DISABLED
   no-underscore-dangle: 0
@@ -60,6 +58,8 @@ rules:
   block-scoped-var: 0
   quotes: 0
   jsx-quotes: 0
+  no-trailing-spaces: 0
+  max-len: 0
 
   # REACT DISABLED
   react/display-name: 0
