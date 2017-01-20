@@ -8,8 +8,8 @@ import Image from 'grommet/components/Image';
 
 const CLASS_ROOT = "grommet-cms-header";
 
-export default function Nav({ 
-  onLogoutClick, 
+export default function Nav({
+  onLogoutClick,
   leftAnchor,
   navLinks,
   title,

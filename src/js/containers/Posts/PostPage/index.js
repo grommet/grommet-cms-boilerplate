@@ -34,7 +34,7 @@ export class PostPage extends Component {
 
     return (
       <WithLoading isLoading={request} fullHeight>
-        <Box className="labs" align="center">
+        <Box primary className="labs" align="center">
           <Helmet title={title} />
           <Box
             texture={image}
@@ -58,6 +58,7 @@ export class PostPage extends Component {
                 id={item.id}
                 basis={item.basis}
                 pad={item.padding}
+                wrap={item.wrap}
               >
                 <ContentBlocks blocks={item.contentBlocks} />
               </Section>

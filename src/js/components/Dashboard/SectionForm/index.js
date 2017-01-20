@@ -22,7 +22,9 @@ export default function PostSectionForm(props: {
   isVisible: boolean,
   onClose: Function,
   onChange: Function,
-  name?: string,
+  name: {
+    value: ?string
+  },
   padding: {
     value: ?string,
     options: OptionType[]
@@ -69,7 +71,7 @@ export default function PostSectionForm(props: {
                 id="name"
                 name="name"
                 type="text"
-                value={name}
+                value={name.value}
                 onChange={({ target }) => onChange(target)}
               />
             </FormField>

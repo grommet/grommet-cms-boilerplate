@@ -4,6 +4,7 @@ import Box from 'grommet/components/Box';
 import ListItem from 'grommet/components/ListItem';
 import Menu from 'grommet/components/Menu';
 import TrashIcon from 'grommet/components/icons/base/Trash';
+import ArticleIcon from 'grommet/components/icons/base/Article';
 import EditIcon from 'grommet/components/icons/base/Edit';
 import UpIcon from 'grommet/components/icons/base/Up';
 import DownIcon from 'grommet/components/icons/base/Down';
@@ -22,7 +23,7 @@ export default function PostListItem(props: {
   const { item, onMenuItemClick, totalItems } = props;
   return (
     <ListItem separator="horizontal">
-      <Box 
+      <Box
         full="horizontal"
         pad={{ horizontal: "medium" }}
         direction="row"
@@ -40,17 +41,22 @@ export default function PostListItem(props: {
             inline={false}
             dropAlign={{ right: 'right'}}
           >
-            <Anchor 
-              icon={<EditIcon size="small" />}
-              label="Edit Title"
-              onClick={() => onMenuItemClick('EDIT')}
+            <Anchor
+              icon={<ArticleIcon size="small" />}
+              label="Edit Content"
+              onClick={() => onMenuItemClick('EDIT_CONTENT')}
             />
-            <Anchor 
+            <Anchor
+              icon={<EditIcon size="small" />}
+              label="Edit Section"
+              onClick={() => onMenuItemClick('EDIT_SECTION')}
+            />
+            <Anchor
               icon={<TrashIcon size="small" />}
               label="Delete"
               onClick={() => onMenuItemClick('DELETE')}
             />
-            <Anchor 
+            <Anchor
               icon={<UpIcon size="small" />}
               label="Move Up"
               disabled={item.order <= 1}
@@ -60,7 +66,7 @@ export default function PostListItem(props: {
                 }
               }}
             />
-            <Anchor 
+            <Anchor
               icon={<DownIcon size="small" />}
               label="Move Down"
               disabled={item.order === totalItems - 1 || item.order === 0}

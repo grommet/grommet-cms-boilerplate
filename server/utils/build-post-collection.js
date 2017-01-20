@@ -12,8 +12,11 @@ const POSTS = [
     sections: [
       {
         name: 'Next Next',
-        id: 'Marquee',
+        id: 'next-next-marquee',
         order: 0,
+        basis: 'none',
+        padding: 'none',
+        wrap: false,
         contentBlocks: [
           {
             content: "This is my first blog post!",
@@ -30,8 +33,11 @@ const POSTS = [
       },
       {
         name: 'Memory in the middle',
-        id: 'Section 1',
+        id: 'memory-in-the-middle',
         order: 1,
+        basis: '1/2',
+        padding: 'large',
+        wrap: true,
         contentBlocks: [
           {
             content: "This is my first blog post!",
@@ -48,8 +54,11 @@ const POSTS = [
       },
       {
         name: 'The rise of common sense analytics',
-        id: 'Section 2',
+        id: 'the-rise-of-common-sense-analytics',
         order: 2,
+        basis: 'full',
+        padding: 'none',
+        wrap: true,
         contentBlocks: [
           {
             content: "This is my first blog post!",

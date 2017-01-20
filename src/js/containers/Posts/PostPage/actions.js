@@ -52,18 +52,23 @@ export const postDeleteSection = (index) => ({
   index
 });
 
-export const postAddSection = ({ name, id }) => ({
+export const postAddSection = (sectionForm) => ({
   type: ActionTypes.POST_ADD_SECTION,
-  name,
-  id
+  ...sectionForm
 });
 
-export const postEditSection = ({ name, id, selectedSection }) => ({
+export const postEditSection = (sectionForm) => ({
   type: ActionTypes.POST_EDIT_SECTION,
-  name,
-  id,
-  selectedSection
+  ...sectionForm
 });
+
+export const postEditOrAddSection = (sectionForm) => (dispatch) => {
+  if (sectionForm.selectedSection !== null) {
+    dispatch(postEditSection(sectionForm));
+  } else {
+    dispatch(postAddSection(sectionForm));
+  }
+}
 
 export const postMoveSectionUp = (index) => ({
   type: ActionTypes.POST_MOVE_UP_SECTION,
