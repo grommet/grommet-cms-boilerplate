@@ -17,20 +17,23 @@ const featureData = [
   },
   {
     heading: 'Full Stack',
-    paragraph: `Grommet CMS is a platform from which you can build your application.
-    It's backed by an industry leading database, MongoDB.`,
+    paragraph: `Grommet CMS is a full stack web application
+    platform from which you can build your application.
+    It's backed by an industry leading database, MongoDB, and runs on
+    a rest API using Node and Express.`,
     icon: <DatabaseIcon size="large" colorIndex="brand" />
   },
   {
-    heading: 'Component Architecture',
-    paragraph: `Grommet CMS is built on top of component architecture, which means
-      assembling your application is much like snapping together lego pieces`,
+    heading: 'Components',
+    paragraph: `Grommet CMS is built on top of component architecture, 
+    which means assembling your application is much like snapping 
+    together lego pieces`,
     icon: <ResourcesIcon size="large" colorIndex="brand" />
   },
   {
     heading: 'Accessible',
-    paragraph: `All users matter.  Grommet CMS provides a robust foundation of accessibility
-    features to meet web standards.`,
+    paragraph: `All users matter.  Grommet CMS provides a robust 
+    foundation of accessibility features to meet web standards.`,
     icon: <AccessAccessibilityIcon size="large" colorIndex="brand" />
   }
 ];

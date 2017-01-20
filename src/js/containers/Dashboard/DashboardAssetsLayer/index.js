@@ -59,11 +59,11 @@ export class DashboardAssetsLayer extends Component {
 
   render() {
     const assets = (
-      this.props.posts 
-      && this.props.posts.length > 0 
-      && !this.state.addNewAsset) 
-      ? this.props.posts.map(({_id, path, title}) => 
-        <AssetTile 
+      this.props.posts
+      && this.props.posts.length > 0
+      && !this.state.addNewAsset)
+      ? this.props.posts.map(({_id, path, title}) =>
+        <AssetTile
           id={_id}
           title={title}
           path={path}
@@ -75,7 +75,11 @@ export class DashboardAssetsLayer extends Component {
       : undefined;
 
     const assetForm = (this.state.addNewAsset)
-      ? <AssetForm params={{ id: 'create' }} onSubmit={this._onAssetFormSubmit} />
+      ?
+      <AssetForm
+        params={{ id: 'create' }}
+        onSubmit={this._onAssetFormSubmit}
+      />
       : undefined;
 
     return (
@@ -92,7 +96,7 @@ export class DashboardAssetsLayer extends Component {
           }
         />
         {assetForm}
-        <Box full="horizontal" direction="row" pad="medium" 
+        <Box full="horizontal" direction="row" pad="medium"
           justify="center" wrap={true}>
           {assets}
         </Box>

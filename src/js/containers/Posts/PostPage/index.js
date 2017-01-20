@@ -21,6 +21,7 @@ export class PostPage extends Component {
   render() {
     const { post, request } = this.props;
     const { sections } = post;
+    const filteredSections = sections ? sections.filter((_, i) => i !== 0) : [];
     const subtitle = (post && post.subtitle)
       ? post.subtitle
       : null;
@@ -33,7 +34,7 @@ export class PostPage extends Component {
 
     return (
       <WithLoading isLoading={request} fullHeight>
-        <Box className="labs" align="center">
+        <Box primary className="labs" align="center">
           <Helmet title={title} />
           <Box
             texture={image}
@@ -51,9 +52,15 @@ export class PostPage extends Component {
             </Label>
           </Box>
           <Box full>
-            {sections && sections.map((item, i) => 
-              <Section key={i} pad="large">
-                <ContentBlocks blocks={item.contentBlocks} /> 
+            {filteredSections.map((item, i) =>
+              <Section
+                key={i}
+                id={item.id}
+                basis={item.basis}
+                pad={item.padding}
+                wrap={item.wrap}
+              >
+                <ContentBlocks blocks={item.contentBlocks} />
               </Section>
             )}
           </Box>
@@ -61,7 +68,7 @@ export class PostPage extends Component {
       </WithLoading>
     );
   }
-};
+}
 
 function mapStateToProps(state, props) {
   const { post, error, request } = state.posts;

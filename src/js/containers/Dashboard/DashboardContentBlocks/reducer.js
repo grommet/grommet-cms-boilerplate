@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
-import { 
-  BLOCK_ADD, BLOCK_ADD_LIST, BLOCK_REMOVE, BLOCK_EDIT, BLOCK_TYPE, 
-  BLOCK_SUBMIT, BLOCK_MOVE_UP, BLOCK_MOVE_DOWN
+import {
+  BLOCK_ADD, BLOCK_ADD_LIST, BLOCK_REMOVE, BLOCK_EDIT, BLOCK_TYPE,
+  BLOCK_SUBMIT, BLOCK_MOVE_UP, BLOCK_MOVE_DOWN, BLOCK_CANCEL
 } from './constants';
 
 const initialState = [];
@@ -20,7 +20,7 @@ export function contentBlocks(state = initialState, action) {
         id: uuid(),
         edit: true
       });
-      break; 
+      break;
 
     case BLOCK_ADD_LIST:
       const newList = action.list.slice(0);
@@ -29,7 +29,10 @@ export function contentBlocks(state = initialState, action) {
     case BLOCK_REMOVE:
       newBlocks.splice(blockIndex, 1);
       return newBlocks;
-      break; 
+      break;
+
+    case BLOCK_CANCEL:
+      return initialState;
 
     case BLOCK_EDIT:
       newBlocks[blockIndex].edit = true;
@@ -53,8 +56,8 @@ export function contentBlocks(state = initialState, action) {
         const blockToMove = newBlocks[blockIndex];
         newBlocks.splice(blockIndex, 1);
         newBlocks.splice(blockIndex - 1, 0, blockToMove);
-        return newBlocks; 
-      } else { 
+        return newBlocks;
+      } else {
         return state;
       }
       break;
@@ -64,13 +67,13 @@ export function contentBlocks(state = initialState, action) {
         const blockToMove = newBlocks[blockIndex];
         newBlocks.splice(blockIndex, 1);
         newBlocks.splice(blockIndex + 1, 0, blockToMove);
-        return newBlocks; 
-      } else { 
+        return newBlocks;
+      } else {
         return state;
       }
       break;
 
-    default: 
+    default:
       return state;
   }
 }

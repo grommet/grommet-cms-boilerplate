@@ -1,13 +1,22 @@
 import React from 'react';
-import Box from 'grommet/components/Box';
-import PlayFillIcon from 'grommet/components/icons/base/PlayFill';
-import ImageForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/ImageForm';
-import ParagraphForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/ParagraphForm';
-import ImageParagraphForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/ImageParagraphForm';
-import CardParagraphForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/CardParagraphForm';
-import QuoteForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/QuoteForm';
-import VideoForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/VideoForm';
-import CarouselForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/CarouselForm';
+import Box from
+  'grommet/components/Box';
+import PlayFillIcon from
+  'grommet/components/icons/base/PlayFill';
+import ImageForm from
+  'grommet-cms/containers/Dashboard/DashboardBlockForm/ImageForm';
+import ParagraphForm from
+  'grommet-cms/containers/Dashboard/DashboardBlockForm/ParagraphForm';
+import ImageParagraphForm from
+  'grommet-cms/containers/Dashboard/DashboardBlockForm/ImageParagraphForm';
+import CardParagraphForm from
+  'grommet-cms/containers/Dashboard/DashboardBlockForm/CardParagraphForm';
+import QuoteForm from
+  'grommet-cms/containers/Dashboard/DashboardBlockForm/QuoteForm';
+import VideoForm from
+  'grommet-cms/containers/Dashboard/DashboardBlockForm/VideoForm';
+import CarouselForm from
+  'grommet-cms/containers/Dashboard/DashboardBlockForm/CarouselForm';
 import {
   BlockParagraphPreview,
   BlockHeadingPreview,
@@ -142,3 +151,4 @@ export const BLOCK_MOVE_DOWN = 'BLOCK_MOVE_DOWN';
 export const BLOCK_REMOVE = 'BLOCK_REMOVE';
 export const BLOCK_SUBMIT = 'BLOCK_SUBMIT';
 export const BLOCK_TYPE = 'BLOCK_TYPE';
+export const BLOCK_CANCEL = 'BLOCK_CANCEL';

@@ -14,7 +14,7 @@ const LargeBlock = ({content, image, imageDesc}) =>
     alignSelf="center">
     <Box className="labs__section" direction="row" pad={{horizontal: 'large'}}>
       <Box basis="1/4">
-        <Markdown content={content} components={{ 
+        <Markdown content={content} components={{
           'p': { 'props':  { size: 'large', margin: 'small' } },
           'h2': { 'props':  { strong: true } }
         }}/>
@@ -22,7 +22,7 @@ const LargeBlock = ({content, image, imageDesc}) =>
       <Box pad="medium" />
       <Box basis="3/4">
         <Box pad={{ vertical: 'small' }}>
-          <Image full="horizontal" src={image} />
+          <Image full="horizontal" src={image.path} />
         </Box>
         <Box pad={{vertical: 'small'}}>
           <Heading tag="h5" strong={true} margin="none">
@@ -39,7 +39,7 @@ const MediumBlock = ({content, image, imageDesc}) =>
     alignSelf="center">
     <Box className="labs__section" direction="row" pad={{horizontal: 'large'}}>
       <Box basis="1/3">
-        <Markdown content={content} components={{ 
+        <Markdown content={content} components={{
           'p': { 'props':  { size: 'large', margin: 'small' } },
           'h2': { 'props':  { strong: true } }
         }}/>
@@ -47,7 +47,7 @@ const MediumBlock = ({content, image, imageDesc}) =>
       <Box pad="medium" />
       <Box basis="2/3">
         <Box pad={{ vertical: 'small' }}>
-          <Image full="horizontal" src={image} />
+          <Image full="horizontal" src={image.path} />
         </Box>
         <Box pad={{vertical: 'small'}}>
           <Heading tag="h5" strong={true} margin="none">
@@ -64,7 +64,7 @@ const SmallBlock = ({content, image, imageDesc}) =>
     alignSelf="center">
     <Box className="labs__section" direction="row" pad={{horizontal: 'large'}}>
       <Box basis="2/3">
-        <Markdown content={content} components={{ 
+        <Markdown content={content} components={{
           'p': { 'props':  { size: 'large', margin: 'small' } },
           'h2': { 'props':  { strong: true } }
         }}/>
@@ -72,7 +72,7 @@ const SmallBlock = ({content, image, imageDesc}) =>
       <Box pad="medium" />
       <Box basis="1/3">
         <Box pad={{ vertical: 'small' }}>
-          <Image full="horizontal" src={image} />
+          <Image full="horizontal" src={image.path} />
         </Box>
         <Box pad={{vertical: 'small'}}>
           <Heading tag="h5" strong={true} margin="none">
@@ -83,19 +83,48 @@ const SmallBlock = ({content, image, imageDesc}) =>
     </Box>
   </Section>;
 
-export default function BlockImageParagraph ({ content, image, imageDesc, imageSize }) {
+export default function BlockImageParagraph ({
+  content,
+  image,
+  imageDesc,
+  imageSize
+}) {
   switch(imageSize) {
     case 'Large':
-      return <LargeBlock image={image} imageDesc={imageDesc} content={content} />;
+      return (
+        <LargeBlock
+          image={image}
+          imageDesc={imageDesc}
+          content={content}
+        />
+      );
       break;
     case 'Medium':
-      return <MediumBlock image={image} imageDesc={imageDesc} content={content} />;
+      return (
+        <MediumBlock
+          image={image}
+          imageDesc={imageDesc}
+          content={content}
+        />
+      );
       break;
     case 'Small':
-      return <SmallBlock image={image} imageDesc={imageDesc} content={content} />;
+      return (
+        <SmallBlock
+          image={image}
+          imageDesc={imageDesc}
+          content={content}
+        />
+      );
       break;
     default:
-      return <LargeBlock image={image} imageDesc={imageDesc} content={content} />;
+      return (
+        <LargeBlock
+          image={image}
+          imageDesc={imageDesc}
+          content={content}
+        />
+      );
       break;
   };
 };

@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { blockAddList } from './actions';
 import Box from 'grommet/components/Box';
-import DashboardContentBlock from 'grommet-cms/containers/Dashboard/DashboardContentBlock';
+import DashboardContentBlock from
+  'grommet-cms/containers/Dashboard/DashboardContentBlock';
 
 // This is the main container for the Dashboard Content Blocks.
 
@@ -15,7 +16,8 @@ export class DashboardContentBlocks extends Component {
   }
 
   render() {
-    const blocks = (this.props.contentBlocks && this.props.contentBlocks.length > 0)
+    const blocks =
+      (this.props.contentBlocks && this.props.contentBlocks.length > 0)
       ? this.props.contentBlocks.map(({ id }) =>
         <DashboardContentBlock id={id} key={`block-${id}`} />)
       : <Box pad="medium" colorIndex="light-2">

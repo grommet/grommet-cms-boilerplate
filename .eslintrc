@@ -41,8 +41,6 @@ rules:
   semi: [2, "always"]
 
   # DISABLED
-  max-len: 0
-  #change soon back to max-len: [1, 80]
   no-underscore-dangle: 0
   new-cap: 0
   no-use-before-define: 0
@@ -52,7 +50,6 @@ rules:
   space-unary-ops: 0
   yoda: 0
   no-loop-func: 0
-  no-trailing-spaces: 0
   no-multi-spaces: 0
   no-shadow: 0
   no-alert: 0
@@ -61,6 +58,8 @@ rules:
   block-scoped-var: 0
   quotes: 0
   jsx-quotes: 0
+  no-trailing-spaces: 0
+  max-len: 0
 
   # REACT DISABLED
   react/display-name: 0

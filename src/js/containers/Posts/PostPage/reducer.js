@@ -15,7 +15,10 @@ function postSectionsReducer(state = [], action) {
         {
           name: action.name,
           id: action.id,
-          order: state.length,
+          padding: action.padding,
+          wrap: action.wrap,
+          basis: action.basis,
+          order: state.length || 0,
           contentBlocks: []
         }
       ];
@@ -57,6 +60,9 @@ function postSectionsReducer(state = [], action) {
           ...state[action.selectedSection],
           name: action.name,
           id: action.id,
+          padding: action.padding,
+          wrap: action.wrap,
+          basis: action.basis,
           order: action.selectedSection
         },
         ...state.slice(action.selectedSection + 1)

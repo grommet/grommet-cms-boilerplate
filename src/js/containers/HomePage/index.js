@@ -19,7 +19,7 @@ import Features from './features';
 import * as messages from './messages';
 
 class HomePage extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -50,7 +50,7 @@ class HomePage extends Component {
           <Animate
             visible={this.state.heroVisible}
             keep
-            enter={{ animation: "slide-up", duration: 1000, delay: 1000 }}
+            enter={{ animation: "fade", duration: 1000, delay: 1000 }}
           >
             <Box className="home-desktop">
               <GrommetHero />
@@ -59,7 +59,7 @@ class HomePage extends Component {
               <GrommetLogo
                 size="large"
                 a11yTitle="Grommet Logo"
-                a11yTitleId="hero_logo" 
+                a11yTitleId="hero_logo"
               />
               <Heading tag="h1">{messages.MOBILE_LOGO_TEXT}</Heading>
             </Box>
@@ -67,7 +67,7 @@ class HomePage extends Component {
           <Animate
             visible={this.state.paragraphVisible}
             keep
-            enter={{ animation: "slide-up", duration: 1000, delay: 2000 }}
+            enter={{ animation: "fade", duration: 1000, delay: 2000 }}
           >
             <Paragraph size="large" align="center" margin="none">
               {messages.LOGO_TAGLINE}
@@ -78,8 +78,13 @@ class HomePage extends Component {
             keep
             enter={{ animation: "fade", duration: 1000, delay: 3000 }}
           >
-            <Footer justify="center" align="center" responsive={false} pad="large">
-              <Anchor 
+            <Footer
+              justify="center"
+              align="center"
+              responsive={false}
+              pad="large"
+            >
+              <Anchor
                 href="https://github.com/grommet/grommet"
                 icon={<SocialGithubIcon size="small" />}
               />
@@ -95,11 +100,11 @@ class HomePage extends Component {
           keep
           enter={{ animation: "fade", duration: 1000, delay: 100 }}
         >
-          <Section 
-            align="center" 
-            pad="large" 
-            full="horizontal" 
-            colorIndex="light-2" 
+          <Section
+            align="center"
+            pad="large"
+            full="horizontal"
+            colorIndex="light-2"
             style={{ minHeight: '60vh' }}
           >
             <Box pad="large" align="center">
@@ -118,7 +123,12 @@ class HomePage extends Component {
           keep
           enter={{ animation: "fade", duration: 1000, delay: 100 }}
         >
-          <Section colorIndex="neutral-1" full="horizontal" pad="large" align="center">
+          <Section
+            colorIndex="neutral-1"
+            full="horizontal"
+            pad="large"
+            align="center"
+          >
             <Box align="center" pad="medium">
               <GlobeIcon size="xlarge" />
             </Box>
@@ -129,15 +139,19 @@ class HomePage extends Component {
             </Box>
             <Box pad="medium" align="center">
               <Paragraph size="large" align="center">
-                Grommet CMS combines a fully featured content management system
-                {" with the world's most advanced UX framework to provide you with all the"}
-                <Anchor href="https://grommet.github.io/docs/learn">{' guidance'}</Anchor>,
+                {messages.SECTION_THREE_P1}
+                {messages.SECTION_THREE_P2}
+                <Anchor href="https://grommet.github.io/docs/learn">
+                  {messages.SECTION_THREE_GUIDANCE}
+                </Anchor>,
                 <Anchor href="https://grommet.github.io/docs/components">
-                  {' components'}
-                </Anchor>, and <Anchor href="https://grommet.github.io/docs/resources">
-                  design resources
-                </Anchor> you need
-                to take your ideas from concept to a real application.
+                  {messages.SECTION_THREE_COMPONENTS}
+                </Anchor>
+                {messages.SECTION_THREE_AND}
+                <Anchor href="https://grommet.github.io/docs/resources">
+                  {messages.SECTION_THREE_RESOURCES}
+                </Anchor>
+                {messages.SECTION_THREE_P3}
               </Paragraph>
             </Box>
           </Section>
@@ -147,7 +161,12 @@ class HomePage extends Component {
           keep
           enter={{ animation: "fade", duration: 1000, delay: 100 }}
         >
-          <Section colorIndex="light-1" full="horizontal" pad="large" align="center">
+          <Section
+            colorIndex="light-1"
+            full="horizontal"
+            pad="large"
+            align="center"
+          >
             <Box align="center" pad="medium">
               <Headline strong align="center">
                 {messages.SECTION_FOUR_HEADLINE}
@@ -158,7 +177,7 @@ class HomePage extends Component {
             </Box>
             <Features />
             <Footer justify="center" pad="medium">
-              <Button label="Get Started" path="/dashboard" />
+              <Button label={messages.BUTTON_TEXT} path="/dashboard" />
             </Footer>
           </Section>
         </Animate>

@@ -27,12 +27,17 @@ export default function PostPreview(props: {
         post={post}
         selectedSection={selectedSection}
       />
-      {(selectedSection && selectedSection > 0) && 
-        (post && post.sections) 
+      {(selectedSection && selectedSection > 0) &&
+        (post && post.sections)
         ? post.sections
           .filter((_, i) => selectedSection === i)
-          .map((item, i) => 
-            <Section key={i} pad="medium">
+          .map((item, i) =>
+            <Section
+              key={i}
+              pad={item.padding}
+              basis={item.basis}
+              wrap={item.wrap}
+            >
               <ContentBlocks blocks={item.contentBlocks} />
             </Section>
           )

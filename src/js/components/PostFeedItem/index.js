@@ -24,7 +24,7 @@ export default function PostFeedItem(props: {
       <Section
         full
         colorIndex={colorIndex}
-        texture={post.image.path}
+        texture={post.image ? post.image.path : ''}
         pad="large"
       >
         <Box

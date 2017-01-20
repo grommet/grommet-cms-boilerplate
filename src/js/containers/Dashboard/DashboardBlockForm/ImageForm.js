@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import Box from 'grommet/components/Box';
 import Form from 'grommet/components/Form';
 import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
-import { DashboardFileUpload } from 'grommet-cms/containers';
+import { Assets } from 'grommet-cms/containers';
 
 export class ImageForm extends Component {
   constructor(props) {
@@ -17,6 +16,7 @@ export class ImageForm extends Component {
 
     this._onChange = this._onChange.bind(this);
     this._onSubmit = this._onSubmit.bind(this);
+    this._onAssetSelect = this._onAssetSelect.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -50,13 +50,16 @@ export class ImageForm extends Component {
     this.props.onSubmit(formData);
   }
 
+  _onAssetSelect(asset) {
+    this.setState({ image: asset });
+  }
+
   render() {
     const { image, content } = this.state;
     const submit = (this._validateForm(this.state))
       ? this._onSubmit
       : undefined;
 
-    const fileUpload = <DashboardFileUpload />;
     return (
       <Box colorIndex="light-2" pad="medium">
         <Form compact={false} onSubmit={submit}>
@@ -68,9 +71,11 @@ export class ImageForm extends Component {
               </FormField>
               <FormField label="Image file path" htmlFor="image">
                 <input id="image" name="image" type="text"
-                  value={image} onChange={this._onChange} />
+                  value={image.path} onChange={this._onChange} />
               </FormField>
-              {fileUpload}
+              <Assets
+                onAssetSelect={this._onAssetSelect}
+              />
             </fieldset>
             <Button onClick={submit} primary={false} type="submit"
               label="Done" />
@@ -86,9 +91,4 @@ ImageForm.propTypes = {
   data: PropTypes.object
 };
 
-function mapStateToProps(state, props) {
-  const { url } = state.fileUpload;
-  return { url };
-}
-
-export default connect(mapStateToProps)(ImageForm);
+export default ImageForm;
