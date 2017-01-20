@@ -17,19 +17,7 @@ const POSTS = [
         basis: 'none',
         padding: 'none',
         wrap: false,
-        contentBlocks: [
-          {
-            content: "This is my first blog post!",
-            blockType: "BlockHeading",
-            edit: false,
-            id: "f15e4fba-b794-4589-9f20-97ff13e6de82"
-          },{
-            content: "What an exciting day.",
-            blockType: "BlockParagraph",
-            edit: false,
-            id: "f15e4fba-b794-4589-9f20-97ff13e6de81"
-          }
-        ]
+        contentBlocks: []
       },
       {
         name: 'Memory in the middle',

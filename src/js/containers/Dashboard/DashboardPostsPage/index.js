@@ -1,16 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getPosts, deletePost } from 'grommet-cms/containers/Posts/PostPage/actions';
-import { blockAddList } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
-import List from 'grommet-cms/components/Dashboard/List';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import Heading from 'grommet/components/Heading';
 import SpinningIcon from 'grommet/components/icons/Spinning';
+import List from 'grommet-cms/components/Dashboard/List';
 import ConfirmLayer from 'grommet-cms/components/Dashboard/ConfirmLayer';
 import { PageHeader, AddPostForm } from 'grommet-cms/components';
-import { submitPost, setPost } from 'grommet-cms/containers/Posts/PostPage/actions';
+import { getPosts, deletePost } from
+  'grommet-cms/containers/Posts/PostPage/actions';
+import { blockAddList } from
+  'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
+import { submitPost, setPost } from
+  'grommet-cms/containers/Posts/PostPage/actions';
 import { toggleAddPostFormVisibility, addPostRedirect } from './actions';
+import { slugify } from 'grommet-cms/utils';
 
 export class DashboardPostsPage extends Component {
   constructor(props) {
@@ -65,7 +69,7 @@ export class DashboardPostsPage extends Component {
         sections: [
           {
             name: newPost.title,
-            id: 'Marquee',
+            id: `${slugify(newPost.title)}-marquee`,
             order: 0,
             contentBlocks: []
           }

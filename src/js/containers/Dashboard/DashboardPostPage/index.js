@@ -7,7 +7,8 @@ import {
   dashboardSetLeftNavAnchor
 } from 'grommet-cms/containers/Dashboard/DashboardContainer/actions';
 import {
-  blockAdd
+  blockAdd,
+  blockCancel
 } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
 import {
   getPost,
@@ -56,6 +57,7 @@ export class DashboardPostPage extends Component {
     this._onCancel = this._onCancel.bind(this);
     this._onChangeSectionForm = this._onChangeSectionForm.bind(this);
     this._onSetSectionFormValues = this._onSetSectionFormValues.bind(this);
+    this._onUpdateContentBlocks = this._onUpdateContentBlocks.bind(this);
     this.state = {
       selectedSection: null,
       isEditingMarquee: false,
@@ -87,10 +89,15 @@ export class DashboardPostPage extends Component {
     );
   }
 
-  componentWillReceiveProps({ post }) {
+  componentWillReceiveProps({ post, contentBlocks }) {
     if (post !== this.props.post && !this.props.request) {
       if (!this.state.isEditingMarquee) {
         this._onSubmit(post);
+      }
+    }
+    if (contentBlocks !== this.props.contentBlocks) {
+      if (post && this.state.selectedSection) {
+        this._onUpdateContentBlocks(contentBlocks);
       }
     }
   }
@@ -108,7 +115,7 @@ export class DashboardPostPage extends Component {
     }
   }
 
-  _onSubmitContentBlocks() {
+  _onUpdateContentBlocks(contentBlocks = this.props.contentBlocks) {
     const i = this.state.selectedSection;
     const post = {
       ...this.props.post,
@@ -116,12 +123,16 @@ export class DashboardPostPage extends Component {
         ...this.props.post.sections.slice(0, i),
         {
           ...this.props.post.sections[i],
-          contentBlocks: this.props.contentBlocks
+          contentBlocks
         },
         ...this.props.post.sections.slice(i + 1)
       ]
     };
     this.props.dispatch(setPost(post));
+  }
+
+  _onSubmitContentBlocks() {
+    this._onUpdateContentBlocks();
     this._onClickBackAnchor();
   }
 
@@ -247,6 +258,7 @@ export class DashboardPostPage extends Component {
 
   _onCancel() {
     this._loadPost();
+    this.props.dispatch(blockCancel());
     this._onClickBackAnchor();
   }
 

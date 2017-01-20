@@ -27,7 +27,7 @@ export default function PostListItemDetail(props: {
   const { item, onSubmit, onCreateBlockClick, onCancel } = props;
   return (
     <Box>
-      <PageHeader 
+      <PageHeader
         title={`Edit ${item.name}`}
         controls={
           <Anchor

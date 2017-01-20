@@ -70,7 +70,12 @@ const dashboardPost = (
       };
     case T.POST_SECTION_FORM_INPUT: {
       const name = action.name || '';
-      const value = action.value || '';
+      let value;
+      if (name === 'wrap') {
+        value = !state.sectionForm.wrap.value;
+      } else {
+        value = action.value;
+      }
       const newSectionForm = {
         ...state.sectionForm,
         [`${name}`]: {

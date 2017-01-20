@@ -28,6 +28,10 @@ export const blockType = (id, blockType) => (
   }
 );
 
+export const blockCancel = () => ({
+  type: ActionTypes.BLOCK_CANCEL
+});
+
 export const blockSubmit = (id, content) => (
   {
     type: ActionTypes.BLOCK_SUBMIT,

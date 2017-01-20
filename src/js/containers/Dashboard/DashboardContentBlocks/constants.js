@@ -142,3 +142,4 @@ export const BLOCK_MOVE_DOWN = 'BLOCK_MOVE_DOWN';
 export const BLOCK_REMOVE = 'BLOCK_REMOVE';
 export const BLOCK_SUBMIT = 'BLOCK_SUBMIT';
 export const BLOCK_TYPE = 'BLOCK_TYPE';
+export const BLOCK_CANCEL = 'BLOCK_CANCEL';
