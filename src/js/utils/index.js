@@ -69,7 +69,7 @@ export function decStrNum (n) {
       result = `${result.substring(0,i)}9${result.substring(i+1)}`;
       i --;
     } else {
-      result = `${result.substring(0,i)}${(parseInt(n[i],10)-1).toString()}${result.substring(i+1)}`;
+      result = `${result.substring(0,i)}${(parseInt(n[i],10)-1).toString()}${result.substring(i+1)}`; // eslint-disable-line
       return result;
     }
   }

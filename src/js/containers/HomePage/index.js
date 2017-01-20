@@ -78,7 +78,12 @@ class HomePage extends Component {
             keep
             enter={{ animation: "fade", duration: 1000, delay: 3000 }}
           >
-            <Footer justify="center" align="center" responsive={false} pad="large">
+            <Footer
+              justify="center"
+              align="center"
+              responsive={false}
+              pad="large"
+            >
               <Anchor
                 href="https://github.com/grommet/grommet"
                 icon={<SocialGithubIcon size="small" />}
@@ -118,7 +123,12 @@ class HomePage extends Component {
           keep
           enter={{ animation: "fade", duration: 1000, delay: 100 }}
         >
-          <Section colorIndex="neutral-1" full="horizontal" pad="large" align="center">
+          <Section
+            colorIndex="neutral-1"
+            full="horizontal"
+            pad="large"
+            align="center"
+          >
             <Box align="center" pad="medium">
               <GlobeIcon size="xlarge" />
             </Box>
@@ -131,7 +141,9 @@ class HomePage extends Component {
               <Paragraph size="large" align="center">
                 {messages.SECTION_THREE_P1}
                 {messages.SECTION_THREE_P2}
-                <Anchor href="https://grommet.github.io/docs/learn">{messages.SECTION_THREE_GUIDANCE}</Anchor>,
+                <Anchor href="https://grommet.github.io/docs/learn">
+                  {messages.SECTION_THREE_GUIDANCE}
+                </Anchor>,
                 <Anchor href="https://grommet.github.io/docs/components">
                   {messages.SECTION_THREE_COMPONENTS}
                 </Anchor>
@@ -149,7 +161,12 @@ class HomePage extends Component {
           keep
           enter={{ animation: "fade", duration: 1000, delay: 100 }}
         >
-          <Section colorIndex="light-1" full="horizontal" pad="large" align="center">
+          <Section
+            colorIndex="light-1"
+            full="horizontal"
+            pad="large"
+            align="center"
+          >
             <Box align="center" pad="medium">
               <Headline strong align="center">
                 {messages.SECTION_FOUR_HEADLINE}

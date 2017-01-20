@@ -5,9 +5,12 @@ export const SECTION_TWO_PARAGRAPH = `Grommet CMS embraces React JavaScript, whi
   means that all of the components used to build your site
   are reusable Grommet components.`;
 export const SECTION_THREE_HEADLINE = 'World Class UX';
-export const SECTION_THREE_P1 = 'Grommet CMS combines a fully featured content management system ';
-export const SECTION_THREE_P2 = 'with the world\'s most advanced UX framework to provide you with all the';
-export const SECTION_THREE_P3 = ' you need to take your ideas from concept to a real application.';
+export const SECTION_THREE_P1 =
+  'Grommet CMS combines a fully featured content management system ';
+export const SECTION_THREE_P2 =
+  'with the world\'s most advanced UX framework to provide you with all the';
+export const SECTION_THREE_P3 =
+  ' you need to take your ideas from concept to a real application.';
 export const SECTION_THREE_GUIDANCE = ' guidance';
 export const SECTION_THREE_COMPONENTS = ' components';
 export const SECTION_THREE_AND = ', and';

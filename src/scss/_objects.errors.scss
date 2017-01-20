@@ -1,8 +1,10 @@
+// sass-lint:disable no-important
 .error-notification {
   position: relative;
   margin-left: auto;
   margin-right: auto;
   min-width: 600px;
+  
   @media screen and (max-width: 768px) {
     min-width: 0px;
     width: 100%;
@@ -12,8 +14,10 @@
     position: absolute;
     right: 3px;
     top: 3px;
+
     svg {
       stroke: white !important;
     }
+
   }
 }

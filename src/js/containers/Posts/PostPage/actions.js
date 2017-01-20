@@ -68,7 +68,7 @@ export const postEditOrAddSection = (sectionForm) => (dispatch) => {
   } else {
     dispatch(postAddSection(sectionForm));
   }
-}
+};
 
 export const postMoveSectionUp = (index) => ({
   type: ActionTypes.POST_MOVE_UP_SECTION,

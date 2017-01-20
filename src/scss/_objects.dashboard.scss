@@ -1,3 +1,4 @@
+// sass-lint:disable no-important
 .grommet.dashboard {
   .dashboard__nav nav a {
     text-decoration: none;
@@ -38,13 +39,12 @@
   $font-size: 4rem;
   $line-height: 0.85;
   $lines-to-show: 3;
-  
+
   .post-preview--hero__headline {
     max-height: $font-size * $lines-to-show * $line-height;
     max-width: 80%;
     overflow: hidden;
     display: block;
-    display: -webkit-box;
     text-overflow: ellipsis;
     margin-bottom: 0px;
     font-weight: 800;

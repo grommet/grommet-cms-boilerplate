@@ -75,7 +75,7 @@ export class DashboardAssetsLayer extends Component {
       : undefined;
 
     const assetForm = (this.state.addNewAsset)
-      ? 
+      ?
       <AssetForm
         params={{ id: 'create' }}
         onSubmit={this._onAssetFormSubmit}

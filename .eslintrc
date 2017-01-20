@@ -40,7 +40,7 @@ rules:
   no-unused-vars: [2, args: none]
   semi: [2, "always"]
   no-trailing-spaces: 2
-  max-len: [1, 80]
+  max-len: [1, 100]
 
   # DISABLED
   no-underscore-dangle: 0

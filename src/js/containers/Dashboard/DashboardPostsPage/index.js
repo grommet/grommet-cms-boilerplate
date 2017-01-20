@@ -160,7 +160,11 @@ export class DashboardPostsPage extends Component {
     const { posts, request, addPostForm, url, newPost } = this.props;
 
     const layer = (this.state.layer)
-      ? <ConfirmLayer onSubmit={this._onDeleteSubmit} onClose={this._onLayerClose} />
+      ?
+        <ConfirmLayer
+          onSubmit={this._onDeleteSubmit}
+          onClose={this._onLayerClose}
+        />
       : null;
 
     const list = (Array.isArray(posts) && posts.length > 0 && !request)

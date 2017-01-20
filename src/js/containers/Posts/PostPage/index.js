@@ -68,7 +68,7 @@ export class PostPage extends Component {
       </WithLoading>
     );
   }
-};
+}
 
 function mapStateToProps(state, props) {
   const { post, error, request } = state.posts;
