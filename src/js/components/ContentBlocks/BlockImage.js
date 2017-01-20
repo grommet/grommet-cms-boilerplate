@@ -2,10 +2,10 @@ import React, { PropTypes } from 'react';
 import Box from 'grommet/components/Box';
 import Heading from 'grommet/components/Heading';
 
-export default function BlockImage ({ content, image }) {  
+export default function BlockImage ({ content, image }) {
   return (
     <Box full="horizontal" align="center" pad={{ vertical: 'medium' }}>
-      <Box full="horizontal" size={{height: 'xlarge'}} 
+      <Box full="horizontal" size={{height: 'xlarge'}}
         texture={image.path}
         style={{backgroundPosition: '50% 50%'}} />
       <Box className="labs__section" pad={{horizontal: 'large'}}>

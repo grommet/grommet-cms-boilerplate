@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { blockAdd } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
+import {
+  blockAdd
+} from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import DateTime from 'grommet/components/DateTime';
@@ -10,8 +12,9 @@ import Section from 'grommet/components/Section';
 import Footer from 'grommet/components/Footer';
 import ImageIcon from 'grommet/components/icons/base/Image';
 import Menu from 'grommet/components/Menu';
-import DashboardAssetsLayer from 'grommet-cms/containers/Dashboard/DashboardAssetsLayer';
 import { formatDate } from 'grommet-cms/utils';
+import DashboardAssetsLayer from
+  'grommet-cms/containers/Dashboard/DashboardAssetsLayer';
 
 export default class MarqueeForm extends Component {
   constructor() {
@@ -89,8 +92,8 @@ export default class MarqueeForm extends Component {
     const { image, title, subtitle, date } = post;
     const formattedDate = formatDate(date);
     const assetsLayer = (this.state.assetsLayer)
-      ? <DashboardAssetsLayer 
-          onAssetSelect={this._onAssetSelect} 
+      ? <DashboardAssetsLayer
+          onAssetSelect={this._onAssetSelect}
           onClose={this._toggleAssetsLayer}
         />
       : undefined;

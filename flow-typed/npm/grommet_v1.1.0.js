@@ -330,7 +330,7 @@ declare module 'grommet/components/CheckBox' {
   declare type Grommet$CheckBoxProps = {
     checked?: boolean,
     disabled?: boolean,
-    label?: ?ReactElementOrNode,
+    label?: ?ReactElementOrNode | string,
     name?: string,
     onChange?: Function,
     reverse?: boolean,

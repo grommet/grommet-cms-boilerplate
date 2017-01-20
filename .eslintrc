@@ -39,10 +39,10 @@ rules:
   consistent-return: 2
   no-unused-vars: [2, args: none]
   semi: [2, "always"]
+  no-trailing-spaces: 2
+  max-len: [1, 80]
 
   # DISABLED
-  max-len: 0
-  #change soon back to max-len: [1, 80]
   no-underscore-dangle: 0
   new-cap: 0
   no-use-before-define: 0
@@ -52,7 +52,6 @@ rules:
   space-unary-ops: 0
   yoda: 0
   no-loop-func: 0
-  no-trailing-spaces: 0
   no-multi-spaces: 0
   no-shadow: 0
   no-alert: 0

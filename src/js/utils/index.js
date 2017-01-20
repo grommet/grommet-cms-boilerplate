@@ -19,7 +19,8 @@ export function formatPrettyDate(date) {
   let dateToFormat = new Date(date);
   let slicedDate = dateToFormat.toISOString().slice(0,10);
   let splitDate = slicedDate.split('-');
-  let formattedDate = `${monthNames[dateToFormat.getMonth()]} ${splitDate[2]}, ${splitDate[0]}`;
+  let formattedDate =
+    `${monthNames[dateToFormat.getMonth()]} ${splitDate[2]}, ${splitDate[0]}`;
 
   return formattedDate;
 }
@@ -62,7 +63,7 @@ export function decStrNum (n) {
   n = n.toString();
   let result = n;
   let i = n.length-1;
-  
+
   while (i > -1) {
     if (n[i] === "0") {
       result = `${result.substring(0,i)}9${result.substring(i+1)}`;
@@ -93,4 +94,13 @@ export function getYears () {
 
 export function isImage(path) {
   return (/\.(gif|jpg|jpeg|tiff|png)$/i).test(path);
+}
+
+export function slugify(text) {
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
 }

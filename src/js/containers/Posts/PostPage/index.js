@@ -21,6 +21,7 @@ export class PostPage extends Component {
   render() {
     const { post, request } = this.props;
     const { sections } = post;
+    const filteredSections = sections ? sections.filter((_, i) => i !== 0) : [];
     const subtitle = (post && post.subtitle)
       ? post.subtitle
       : null;
@@ -51,9 +52,14 @@ export class PostPage extends Component {
             </Label>
           </Box>
           <Box full>
-            {sections && sections.map((item, i) => 
-              <Section key={i} pad="large">
-                <ContentBlocks blocks={item.contentBlocks} /> 
+            {filteredSections.map((item, i) =>
+              <Section
+                key={i}
+                id={item.id}
+                basis={item.basis}
+                pad={item.padding}
+              >
+                <ContentBlocks blocks={item.contentBlocks} />
               </Section>
             )}
           </Box>

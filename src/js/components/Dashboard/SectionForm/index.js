@@ -8,19 +8,46 @@ import Footer from 'grommet/components/Footer';
 import Button from 'grommet/components/Button';
 import Section from 'grommet/components/Section';
 import Header from 'grommet/components/Header';
-import Heading from 'grommet/components/Heading'; 
+import Heading from 'grommet/components/Heading';
 import Menu from 'grommet/components/Menu';
+// $FlowFixMe
+import { LayoutForm } from 'grommet-cms/components';
+
+declare type OptionType = {
+  value: any,
+  label: any
+} | string | number;
 
 export default function PostSectionForm(props: {
   isVisible: boolean,
   onClose: Function,
   onChange: Function,
   name?: string,
-  id?: string,
+  padding: {
+    value: ?string,
+    options: OptionType[]
+  },
+  basis: {
+    value: ?string,
+    options: OptionType[]
+  },
+  wrap: {
+    value: boolean
+  },
   onSubmit: Function,
-  isEditing: boolean
+  isEditing: boolean,
 }) {
-  const { isVisible, onClose, onChange, name, id, onSubmit, isEditing } = props;
+  const {
+    isVisible,
+    onClose,
+    onChange,
+    name,
+    onSubmit,
+    isEditing,
+    padding,
+    basis,
+    wrap
+  } = props;
   return (
     <Layer
       closer
@@ -36,25 +63,22 @@ export default function PostSectionForm(props: {
       <Section pad="medium" align="center">
         <Form pad="medium">
           <FormFields>
-            <FormField label="Section Name" htmlFor="name">
+            <FormField label="Name" htmlFor="name">
               <input
                 autoFocus
                 id="name"
                 name="name"
                 type="text"
                 value={name}
-                onChange={(e) => onChange(e.target.value, id)}
+                onChange={({ target }) => onChange(target)}
               />
             </FormField>
-            <FormField label="Section ID" htmlFor="id">
-              <input
-                id="id"
-                name="id"
-                type="text"
-                value={id}
-                onChange={(e) => onChange(name, e.target.value)}
-              />
-            </FormField>
+            <LayoutForm
+              onChange={onChange}
+              padding={padding}
+              basis={basis}
+              wrap={wrap}
+            />
           </FormFields>
         </Form>
       </Section>

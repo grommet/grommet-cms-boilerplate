@@ -1,8 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { dashboardSetLeftNavAnchor } from 'grommet-cms/containers/Dashboard/DashboardContainer/actions';
-import { blockAdd } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
-import { 
+import {
+  dashboardSetLeftNavAnchor
+} from 'grommet-cms/containers/Dashboard/DashboardContainer/actions';
+import {
+  blockAdd
+} from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
+import {
   getPost,
   submitPost,
   setPost,
@@ -13,17 +17,16 @@ import {
   postClearError,
   postEditSection
 } from 'grommet-cms/containers/Posts/PostPage/actions';
-// import PostForm from './form';
 import Box from 'grommet/components/Box';
 import Split from 'grommet/components/Split';
 import Animate from 'grommet/components/Animate';
-import { 
+import {
   PageHeader,
   PostPreview,
   ErrorNotification,
   PostList,
   PostListItemDetail,
-  PostSectionForm,
+  SectionForm,
   MarqueeForm
 } from 'grommet-cms/components';
 import { toggleSectionForm, postSectionFormInput } from './actions';
@@ -31,7 +34,7 @@ import { toggleSectionForm, postSectionFormInput } from './actions';
 export class DashboardPostPage extends Component {
   constructor(props) {
     super(props);
-    
+
     this._onSubmit = this._onSubmit.bind(this);
     this._onPostChange = this._onPostChange.bind(this);
     this._onCreatePost = this._onCreatePost.bind(this);
@@ -48,6 +51,7 @@ export class DashboardPostPage extends Component {
     this._onSubmitMarquee = this._onSubmitMarquee.bind(this);
     this._loadPost = this._loadPost.bind(this);
     this._onCancel = this._onCancel.bind(this);
+    this._onChangeSectionForm = this._onChangeSectionForm.bind(this);
     this.state = {
       selectedSection: null,
       isEditingMarquee: false
@@ -75,7 +79,9 @@ export class DashboardPostPage extends Component {
         const { sections } = this.props.post;
         const postSection = sections[selectedSection];
         if (postSection) {
-          this.props.dispatch(postSectionFormInput(postSection.name, postSection.id));
+          this.props.dispatch(
+            postSectionFormInput(postSection.name, postSection.id)
+          );
         }
       }
     }
@@ -139,6 +145,10 @@ export class DashboardPostPage extends Component {
 
   _onAddSection() {
     this.props.dispatch(toggleSectionForm(null));
+  }
+
+  _onChangeSectionForm({ name, value }) {
+    this.props.dispatch(postSectionFormInput(name, value));
   }
 
   _setDefaultLeftAnchor() {
@@ -227,7 +237,7 @@ export class DashboardPostPage extends Component {
   }
 
   render() {
-    const { post, error, sectionForm, dispatch, url } = this.props;
+    const { post, error, sectionForm, url } = this.props;
     const { selectedSection } = this.state;
     return (
       <Box>
@@ -237,7 +247,7 @@ export class DashboardPostPage extends Component {
           showOnResponsive="priority"
         >
           <Box>
-            <Animate 
+            <Animate
               keep
               enter={{ animation: 'slide-right', duration: 1000, delay: 0 }}
               leave={{ animation: 'slide-left', duration: 1000, delay: 0 }}
@@ -248,11 +258,14 @@ export class DashboardPostPage extends Component {
                   onSelectSection={this._onSelectSection}
                   onMenuItemClick={this._onSectionMenuItemClick}
                   onAddSection={this._onAddSection}
-                  sections={post.sections ? post.sections.sort((a, b) => a.order - b.order) : null}
+                  sections={post.sections
+                    ? post.sections.sort((a, b) => a.order - b.order)
+                    : null
+                  }
                 />
               }
             </Animate>
-            <Animate 
+            <Animate
               keep
               enter={{ animation: 'slide-left', duration: 1000, delay: 50 }}
               leave={{ animation: 'slide-left', duration: 1000, delay: 50 }}
@@ -264,7 +277,7 @@ export class DashboardPostPage extends Component {
                   onSubmit={this._onSubmitContentBlocks}
                   onCreateBlockClick={this._onCreateBlock}
                   item={post.sections[selectedSection]}
-                /> 
+                />
               }
               {post && selectedSection === 0 &&
                 <Box>
@@ -285,12 +298,17 @@ export class DashboardPostPage extends Component {
             <PostPreview selectedSection={selectedSection} post={post} />
           </Box>
         </Split>
-        {error && <ErrorNotification errors={[{ message: error }]} onClose={this._onClearError} />}
-        <PostSectionForm
+        {error &&
+          <ErrorNotification
+            errors={[{ message: error }]}
+            onClose={this._onClearError}
+          />
+        }
+        <SectionForm
           {...sectionForm}
+          onChange={this._onChangeSectionForm}
           isEditing={sectionForm.selectedSection !== null}
           onClose={this._onClearSectionForm}
-          onChange={(name, id) => dispatch(postSectionFormInput(name, id))}
           onSubmit={this._onSubmitSectionForm}
         />
       </Box>
@@ -303,7 +321,18 @@ DashboardPostPage.propTypes = {
   sectionForm: PropTypes.shape({
     isVisible: PropTypes.bool.isRequired,
     id: PropTypes.string,
-    name: PropTypes.string
+    name: PropTypes.string,
+    padding: PropTypes.shape({
+      value: PropTypes.string,
+      options: PropTypes.array
+    }),
+    basis: PropTypes.shape({
+      value: PropTypes.string,
+      options: PropTypes.array
+    }),
+    wrap: PropTypes.shape({
+      value: PropTypes.string
+    })
   }).isRequired,
   contentBlocks: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,

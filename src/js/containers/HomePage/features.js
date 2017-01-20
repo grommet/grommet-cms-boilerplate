@@ -25,14 +25,15 @@ const featureData = [
   },
   {
     heading: 'Components',
-    paragraph: `Grommet CMS is built on top of component architecture, which means
-      assembling your application is much like snapping together lego pieces`,
+    paragraph: `Grommet CMS is built on top of component architecture, 
+    which means assembling your application is much like snapping 
+    together lego pieces`,
     icon: <ResourcesIcon size="large" colorIndex="brand" />
   },
   {
     heading: 'Accessible',
-    paragraph: `All users matter.  Grommet CMS provides a robust foundation of accessibility
-    features to meet web standards.`,
+    paragraph: `All users matter.  Grommet CMS provides a robust 
+    foundation of accessibility features to meet web standards.`,
     icon: <AccessAccessibilityIcon size="large" colorIndex="brand" />
   }
 ];

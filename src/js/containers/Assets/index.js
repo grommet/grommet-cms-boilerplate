@@ -1,12 +1,12 @@
 // @flow
 import React from 'react';
-// $FlowFixMe
-import DashboardAssetsLayer from 'grommet-cms/containers/Dashboard/DashboardAssetsLayer';
 import Footer from 'grommet/components/Footer';
 import Section from 'grommet/components/Section';
 import ImageIcon from 'grommet/components/icons/base/Image';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
+// $FlowFixMe required module not found error
+import DashboardAssetsLayer from 'grommet-cms/containers/Dashboard/DashboardAssetsLayer'; // eslint-disable-line
 import type { Asset } from './flowTypes';
 
 type AssetUploadState = {
@@ -32,30 +32,30 @@ export default class AssetUpload extends React.Component {
       assetLayer: false
     };
   }
-  
+
   _renderAssetLayer() {
     if (this.state.assetLayer) {
       return (
-        <DashboardAssetsLayer 
-          onAssetSelect={this._onAssetSelect} 
+        <DashboardAssetsLayer
+          onAssetSelect={this._onAssetSelect}
           onClose={this._toggleAssetsLayer}
         />
       );
     }
     return null;
   }
-  
+
   _toggleAssetsLayer() {
     this.setState({
       assetLayer: !this.state.assetLayer
     });
   }
-  
+
   _onAssetSelect(asset: Asset) {
     this.props.onAssetSelect(asset);
     this.setState({ assetLayer: false });
   }
-  
+
   render() {
     return (
       <Section>

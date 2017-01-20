@@ -9,7 +9,7 @@ export default function BlockCardPreview ({ content, image, card }) {
   return (
     <Box colorIndex="light-1" direction="row" pad={{ between: 'medium' }}>
       <Box>
-        <Card 
+        <Card
           colorIndex="light-2"
           thumbnail={image.path}
           heading={heading}
@@ -20,7 +20,7 @@ export default function BlockCardPreview ({ content, image, card }) {
         />
       </Box>
       <Box>
-        <Markdown content={content} components={{ 
+        <Markdown content={content} components={{
           'p': { 'props': { 'margin': 'none' } }
         }}/>
       </Box>

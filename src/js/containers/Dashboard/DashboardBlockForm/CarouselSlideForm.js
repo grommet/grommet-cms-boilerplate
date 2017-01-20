@@ -89,7 +89,7 @@ export class CarouselSlideForm extends Component {
                 onChange={this._onChange}
               />
             </FormField>
-            <Assets 
+            <Assets
               onAssetSelect={this._onAssetSelect}
             />
           </fieldset>

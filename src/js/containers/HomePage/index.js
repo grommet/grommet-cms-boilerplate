@@ -19,7 +19,7 @@ import Features from './features';
 import * as messages from './messages';
 
 class HomePage extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -50,7 +50,7 @@ class HomePage extends Component {
           <Animate
             visible={this.state.heroVisible}
             keep
-            enter={{ animation: "slide-up", duration: 1000, delay: 1000 }}
+            enter={{ animation: "fade", duration: 1000, delay: 1000 }}
           >
             <Box className="home-desktop">
               <GrommetHero />
@@ -59,7 +59,7 @@ class HomePage extends Component {
               <GrommetLogo
                 size="large"
                 a11yTitle="Grommet Logo"
-                a11yTitleId="hero_logo" 
+                a11yTitleId="hero_logo"
               />
               <Heading tag="h1">{messages.MOBILE_LOGO_TEXT}</Heading>
             </Box>
@@ -67,7 +67,7 @@ class HomePage extends Component {
           <Animate
             visible={this.state.paragraphVisible}
             keep
-            enter={{ animation: "slide-up", duration: 1000, delay: 2000 }}
+            enter={{ animation: "fade", duration: 1000, delay: 2000 }}
           >
             <Paragraph size="large" align="center" margin="none">
               {messages.LOGO_TAGLINE}
@@ -79,7 +79,7 @@ class HomePage extends Component {
             enter={{ animation: "fade", duration: 1000, delay: 3000 }}
           >
             <Footer justify="center" align="center" responsive={false} pad="large">
-              <Anchor 
+              <Anchor
                 href="https://github.com/grommet/grommet"
                 icon={<SocialGithubIcon size="small" />}
               />
@@ -95,11 +95,11 @@ class HomePage extends Component {
           keep
           enter={{ animation: "fade", duration: 1000, delay: 100 }}
         >
-          <Section 
-            align="center" 
-            pad="large" 
-            full="horizontal" 
-            colorIndex="light-2" 
+          <Section
+            align="center"
+            pad="large"
+            full="horizontal"
+            colorIndex="light-2"
             style={{ minHeight: '60vh' }}
           >
             <Box pad="large" align="center">
