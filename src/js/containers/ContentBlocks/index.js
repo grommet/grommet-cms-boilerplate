@@ -21,7 +21,7 @@ export default class ContentBlocks extends Component {
       : undefined;
 
     return (
-      <Box {...this.props}>
+      <Box>
         {blocks}
       </Box>
     );

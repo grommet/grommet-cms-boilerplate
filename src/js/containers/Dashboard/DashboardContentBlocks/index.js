@@ -47,7 +47,7 @@ export class DashboardContentBlocks extends Component {
 };
 
 DashboardContentBlocks.propTypes = {
-  blocks: PropTypes.object,
+  blocks: PropTypes.array,
   dispatch: PropTypes.func.isRequired
 };
 
