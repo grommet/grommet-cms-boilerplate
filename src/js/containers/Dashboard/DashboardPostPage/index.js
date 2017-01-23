@@ -170,11 +170,7 @@ export class DashboardPostPage extends Component {
   }
 
   _onClickBackAnchor() {
-    this._setDefaultLeftAnchor();
-    this.setState({
-      selectedSection: null,
-      isEditingMarquee: false
-    });
+    this._onCancel();
   }
 
   _onSelectSection(i) {
@@ -247,9 +243,13 @@ export class DashboardPostPage extends Component {
   }
 
   _onCancel() {
-    this._loadPost();
     this.props.dispatch(blockCancel());
-    this._onClickBackAnchor();
+    this._setDefaultLeftAnchor();
+    this.setState({
+      selectedSection: null,
+      isEditingMarquee: false
+    });
+    this._loadPost();
   }
 
   render() {
