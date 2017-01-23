@@ -7,7 +7,7 @@ import Section from 'grommet/components/Section';
 export default function BlockCarousel ({ carousel }) {
   const slides = carousel.map((slide, index) =>
     <Box key={`slide-${index}`}>
-      <Image src={slide.image} full="horizontal" />
+      <Image src={slide.image.path} full="horizontal" />
     </Box>
   );
 

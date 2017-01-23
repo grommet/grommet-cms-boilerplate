@@ -56,9 +56,6 @@ export class DashboardPostsPage extends Component {
         this.props.dispatch(getPosts());
       }
     }
-    if (posts) {
-
-    }
   }
 
   _onSubmitPost() {

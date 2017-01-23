@@ -55,10 +55,6 @@ export class PostPage extends Component {
             {filteredSections.map((item, i) =>
               <Section
                 key={i}
-                id={item.id}
-                basis={item.basis}
-                pad={item.padding}
-                wrap={item.wrap}
               >
                 <ContentBlocks blocks={item.contentBlocks} />
               </Section>

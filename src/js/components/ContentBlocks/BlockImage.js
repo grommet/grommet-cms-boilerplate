@@ -19,5 +19,7 @@ export default function BlockImage ({ content, image }) {
 
 BlockImage.propTypes = {
   content: PropTypes.string,
-  image: PropTypes.string
+  image: PropTypes.shape({
+    path: PropTypes.string
+  })
 };
