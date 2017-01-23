@@ -18,7 +18,8 @@ import {
   postEditOrAddSection,
   postMoveSectionUp,
   postMoveSectionDown,
-  postClearError
+  postClearError,
+  postSetContentBlocks
 } from 'grommet-cms/containers/Posts/PostPage/actions';
 import {
   PageHeader,
@@ -117,18 +118,7 @@ export class DashboardPostPage extends Component {
 
   _onUpdateContentBlocks(contentBlocks = this.props.contentBlocks) {
     const i = this.state.selectedSection;
-    const post = {
-      ...this.props.post,
-      sections: [
-        ...this.props.post.sections.slice(0, i),
-        {
-          ...this.props.post.sections[i],
-          contentBlocks
-        },
-        ...this.props.post.sections.slice(i + 1)
-      ]
-    };
-    this.props.dispatch(setPost(post));
+    this.props.dispatch(postSetContentBlocks(contentBlocks, i));
   }
 
   _onSubmitContentBlocks() {

@@ -70,6 +70,12 @@ export const postEditOrAddSection = (sectionForm) => (dispatch) => {
   }
 };
 
+export const postSetContentBlocks = (contentBlocks, index) => ({
+  type: ActionTypes.POST_SET_CONTENT_BLOCKS,
+  contentBlocks,
+  index
+});
+
 export const postMoveSectionUp = (index) => ({
   type: ActionTypes.POST_MOVE_UP_SECTION,
   index
