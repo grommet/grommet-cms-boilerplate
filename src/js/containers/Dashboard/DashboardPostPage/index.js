@@ -290,10 +290,9 @@ export class DashboardPostPage extends Component {
       if (this.props.post) {
         const section = this.props.post.sections[this.state.selectedSection];
         if (section.contentBlocks && section.contentBlocks.length) {
-
+          return section.contentBlocks
+            .filter((item) => item.edit === true).length > 0;
         }
-        return section.contentBlocks
-          .filter((item) => item.edit === true).length > 0;
       }
     }
     return false;
