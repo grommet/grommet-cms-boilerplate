@@ -76,6 +76,11 @@ export const postSetContentBlocks = (contentBlocks, index) => ({
   index
 });
 
+export const postRemoveUnusedContentBlocksFromSection = (index) => ({
+  type: ActionTypes.POST_REMOVE_UNUSED_CONTENT_BLOCKS,
+  index
+});
+
 export const postMoveSectionUp = (index) => ({
   type: ActionTypes.POST_MOVE_UP_SECTION,
   index

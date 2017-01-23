@@ -19,7 +19,8 @@ import {
   postMoveSectionUp,
   postMoveSectionDown,
   postClearError,
-  postSetContentBlocks
+  postSetContentBlocks,
+  postRemoveUnusedContentBlocksFromSection
 } from 'grommet-cms/containers/Posts/PostPage/actions';
 import {
   PageHeader,
@@ -59,6 +60,7 @@ export class DashboardPostPage extends Component {
     this._onChangeSectionForm = this._onChangeSectionForm.bind(this);
     this._onSetSectionFormValues = this._onSetSectionFormValues.bind(this);
     this._onUpdateContentBlocks = this._onUpdateContentBlocks.bind(this);
+    this._removeUnusedContentBlocks = this._removeUnusedContentBlocks.bind(this);
     this.state = {
       selectedSection: null,
       isEditingMarquee: false,
@@ -238,18 +240,28 @@ export class DashboardPostPage extends Component {
 
   _onSubmitMarquee() {
     this._onSubmit();
-    this._onClickBackAnchor();
-    this._loadPost();
+    this._setDefaultLeftAnchor();
+    this.setState({
+      selectedSection: null,
+      isEditingMarquee: false
+    });
   }
 
   _onCancel() {
     this.props.dispatch(blockCancel());
+    this._removeUnusedContentBlocks();
     this._setDefaultLeftAnchor();
     this.setState({
       selectedSection: null,
       isEditingMarquee: false
     });
     this._loadPost();
+  }
+
+  _removeUnusedContentBlocks() {
+    this.props.dispatch(
+      postRemoveUnusedContentBlocksFromSection(this.state.selectedSection)
+    );
   }
 
   render() {
