@@ -13,7 +13,8 @@ type Props = {
   sections?: Array<{ name: string, id: string }>,
   onMenuItemClick: Function,
   onAddSection: Function,
-  onSelectSection: Function
+  onSelectSection: Function,
+  disabled: boolean
 }
 
 export default class PostList extends Component {
@@ -23,7 +24,8 @@ export default class PostList extends Component {
       sections,
       onMenuItemClick,
       onAddSection,
-      onSelectSection
+      onSelectSection,
+      disabled
     } = this.props;
     return (
       <Box>
@@ -37,7 +39,10 @@ export default class PostList extends Component {
             />
           } 
         />
-        <List selectable onSelect={onSelectSection}>
+        <List
+          selectable={!disabled}
+          onSelect={onSelectSection}
+        >
           {sections ?
             sections.map((item, i) => 
               <PostListItem 

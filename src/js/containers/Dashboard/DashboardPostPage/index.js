@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Box from 'grommet/components/Box';
 import Split from 'grommet/components/Split';
 import Animate from 'grommet/components/Animate';
+import Toast from 'grommet/components/Toast';
 import {
   dashboardSetLeftNavAnchor
 } from 'grommet-cms/containers/Dashboard/DashboardContainer/actions';
@@ -34,9 +35,12 @@ import {
 import {
   toggleSectionForm,
   postSectionFormInput,
-  postSectionFormReset
+  postSectionFormReset,
+  postSectionSetToastMessage,
+  postSectionClearToastMessage
 } from './actions';
 import parseSubmission from './utils';
+import { debounce } from 'grommet-cms/utils';
 
 export class DashboardPostPage extends Component {
   constructor(props) {
@@ -61,6 +65,8 @@ export class DashboardPostPage extends Component {
     this._onSetSectionFormValues = this._onSetSectionFormValues.bind(this);
     this._onUpdateContentBlocks = this._onUpdateContentBlocks.bind(this);
     this._removeUnusedContentBlocks = this._removeUnusedContentBlocks.bind(this);
+    this._checkForUnusedContentBlocks = this._checkForUnusedContentBlocks.bind(this);
+    this._onCloseToast = this._onCloseToast.bind(this);
     this.state = {
       selectedSection: null,
       isEditingMarquee: false,
@@ -95,12 +101,18 @@ export class DashboardPostPage extends Component {
   componentWillReceiveProps({ post, contentBlocks }) {
     if (post !== this.props.post && !this.props.request) {
       if (!this.state.isEditingMarquee) {
-        this._onSubmit(post);
+        debounce(
+          this._onSubmit(post),
+          1000,
+          true
+        );
       }
     }
     if (contentBlocks !== this.props.contentBlocks) {
       if (post && this.state.selectedSection) {
-        this._onUpdateContentBlocks(contentBlocks);
+        if (contentBlocks.length) {
+          this._onUpdateContentBlocks(contentBlocks);
+        }
       }
     }
   }
@@ -113,6 +125,7 @@ export class DashboardPostPage extends Component {
   }
 
   _onSubmit(post = this.props.post) {
+    console.log(`called on submit post ${JSON.stringify(post, null, 2)}`);
     if (!this.props.request) {
       this.props.dispatch(submitPost(post));
     }
@@ -124,8 +137,13 @@ export class DashboardPostPage extends Component {
   }
 
   _onSubmitContentBlocks() {
-    this._onUpdateContentBlocks();
-    this._onClickBackAnchor();
+    if (!this._checkForUnusedContentBlocks()) {
+      this._onUpdateContentBlocks();
+      this._onClickBackAnchor();
+    } else {
+      const message = 'Please remove unused content blocks before submitting.';
+      this.props.dispatch(postSectionSetToastMessage(message));
+    }
   }
 
   _onClearError() {
@@ -255,7 +273,10 @@ export class DashboardPostPage extends Component {
       selectedSection: null,
       isEditingMarquee: false
     });
-    this._loadPost();
+  }
+
+  _onCloseToast() {
+    this.props.dispatch(postSectionClearToastMessage());
   }
 
   _removeUnusedContentBlocks() {
@@ -264,8 +285,22 @@ export class DashboardPostPage extends Component {
     );
   }
 
+  _checkForUnusedContentBlocks() {
+    if (this.state.selectedSection) {
+      if (this.props.post) {
+        const section = this.props.post.sections[this.state.selectedSection];
+        if (section.contentBlocks && section.contentBlocks.length) {
+
+        }
+        return section.contentBlocks
+          .filter((item) => item.edit === true).length > 0;
+      }
+    }
+    return false;
+  }
+
   render() {
-    const { post, error, sectionForm, url } = this.props;
+    const { post, error, sectionForm, url, toastMessage, request } = this.props;
     const { selectedSection, shouldAnimate } = this.state;
     return (
       <Box primary pad="none">
@@ -287,6 +322,7 @@ export class DashboardPostPage extends Component {
             >
               {post && selectedSection == null &&
                 <PostList
+                  disabled={request}
                   onSelectSection={this._onSelectSection}
                   onMenuItemClick={this._onSectionMenuItemClick}
                   onAddSection={this._onAddSection}
@@ -343,6 +379,14 @@ export class DashboardPostPage extends Component {
           onClose={() => this._onSetSectionFormValues(null)}
           onSubmit={this._onSubmitSectionForm}
         />
+        {toastMessage && 
+          <Toast
+            onClose={this._onCloseToast}
+            status="warning"
+          >
+            {toastMessage}
+          </Toast>
+        }
       </Box>
     );
   }
@@ -374,6 +418,7 @@ DashboardPostPage.propTypes = {
   }),
   request: PropTypes.bool.isRequired,
   error: PropTypes.string,
+  toastMessage: PropTypes.string,
   post: PropTypes.shape({
     sections: PropTypes.arrayOf(
       PropTypes.shape({
@@ -391,7 +436,7 @@ DashboardPostPage.contextTypes = {
 
 function mapStateToProps(state, props) {
   const { post, error, request } = state.posts;
-  const { sectionForm } = state.dashboardPost;
+  const { sectionForm, toastMessage } = state.dashboardPost;
   const { contentBlocks } = state;
   const { url } = state.fileUpload;
   return {
@@ -400,7 +445,8 @@ function mapStateToProps(state, props) {
     request,
     url,
     sectionForm,
-    contentBlocks
+    contentBlocks,
+    toastMessage
   };
 };
 

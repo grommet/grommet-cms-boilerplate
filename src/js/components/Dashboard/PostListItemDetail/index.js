@@ -22,7 +22,7 @@ export default function PostListItemDetail(props: {
   },
   onSubmit: Function,
   onCreateBlockClick: Function,
-  onCancel: Function
+  onCancel: Function,
 }) {
   const { item, onSubmit, onCreateBlockClick, onCancel } = props;
   return (

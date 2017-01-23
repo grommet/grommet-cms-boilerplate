@@ -15,7 +15,7 @@ function postSectionsReducer(state = [], action) {
         {
           ...state[action.index],
           contentBlocks: state[action.index].contentBlocks
-            .filter((item) => item.edit === false)
+            .filter((item) => item.edit !== true)
         },
         ...state.slice(action.index + 1)
       ];
