@@ -125,7 +125,6 @@ export class DashboardPostPage extends Component {
   }
 
   _onSubmit(post = this.props.post) {
-    console.log(`called on submit post ${JSON.stringify(post, null, 2)}`);
     if (!this.props.request) {
       this.props.dispatch(submitPost(post));
     }
@@ -138,7 +137,6 @@ export class DashboardPostPage extends Component {
 
   _onSubmitContentBlocks() {
     if (!this._checkForUnusedContentBlocks()) {
-      this._onUpdateContentBlocks();
       this._onClickBackAnchor();
     } else {
       const message = 'Please remove unused content blocks before submitting.';
