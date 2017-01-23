@@ -6,6 +6,7 @@ import AccessAccessibilityIcon from 'grommet/components/icons/base/AccessAccessi
 import Box from 'grommet/components/Box';
 import Heading from 'grommet/components/Heading';
 import Paragraph from 'grommet/components/Paragraph';
+import Animate from 'grommet/components/Animate';
 
 const featureData = [
   {
@@ -40,21 +41,32 @@ const featureData = [
 
 export default function Features() {
   return (
-    <Box direction="row" wrap pad="medium">
-      {featureData.map((item, i) =>
-        <Box key={i} align="center" size="small" basis="1/2">
-          <Box margin="small" pad="small" flex align="center">
-            <Box pad="medium">
-              {item.icon}
+    <Box direction="row" wrap pad="medium" align="center" justify="center">
+      {featureData.map((item, index) =>
+        <Animate
+          key={index}
+          visible="scroll"
+          keep
+          enter={{
+            animation: 'slide-up',
+            duration: 1000,
+            delay: (100 + (200 * index))
+          }}
+        >
+          <Box align="center" style={{ maxWidth: 300 }} basis="1/2">
+            <Box margin="small" pad="small" flex align="center">
+              <Box pad="medium">
+                {item.icon}
+              </Box>
+              <Heading tag="h2">
+                {item.heading}
+              </Heading>
+              <Paragraph size="medium">
+                {item.paragraph}
+              </Paragraph>
             </Box>
-            <Heading tag="h2">
-              {item.heading}
-            </Heading>
-            <Paragraph size="medium">
-              {item.paragraph}
-            </Paragraph>
           </Box>
-        </Box>
+        </Animate>
       )}
     </Box>
   );

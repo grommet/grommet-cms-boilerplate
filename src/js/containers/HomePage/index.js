@@ -50,7 +50,7 @@ class HomePage extends Component {
           <Animate
             visible={this.state.heroVisible}
             keep
-            enter={{ animation: "fade", duration: 1000, delay: 1000 }}
+            enter={{ animation: "fade", duration: 1000, delay: 300 }}
           >
             <Box className="home-desktop">
               <GrommetHero />
@@ -67,7 +67,7 @@ class HomePage extends Component {
           <Animate
             visible={this.state.paragraphVisible}
             keep
-            enter={{ animation: "fade", duration: 1000, delay: 2000 }}
+            enter={{ animation: "fade", duration: 1000, delay: 300 }}
           >
             <Paragraph size="large" align="center" margin="none">
               {messages.LOGO_TAGLINE}
@@ -76,7 +76,7 @@ class HomePage extends Component {
           <Animate
             visible={this.state.linksVisible}
             keep
-            enter={{ animation: "fade", duration: 1000, delay: 3000 }}
+            enter={{ animation: "fade", duration: 1000, delay: 300 }}
           >
             <Footer
               justify="center"
