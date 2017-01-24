@@ -4,17 +4,19 @@ import Heading from 'grommet/components/Heading';
 
 export default function BlockImage ({ content, image }) {
   return (
-    <Box>
+    <div>
       <Box
+        full="horizontal"
+        size={{ height: 'xlarge' }}
         texture={image.path}
-        style={{backgroundPosition: '50% 50%'}}
+        style={{ backgroundPosition: '50% 50%' }}
       />
       <Box className="labs__section" pad={{horizontal: 'large'}}>
         <Heading tag="h5" strong={true} margin="small">
           {content}
         </Heading>
       </Box>
-    </Box>
+    </div>
   );
 };
 

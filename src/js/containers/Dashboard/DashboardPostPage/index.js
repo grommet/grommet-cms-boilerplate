@@ -122,14 +122,11 @@ export class DashboardPostPage extends Component {
     }
     if (contentBlocks !== this.props.contentBlocks) {
       if (post && this.state.selectedSection) {
-        if (contentBlocks.length) {
-          this._onUpdateContentBlocks(contentBlocks);
-        }
+        this._onUpdateContentBlocks(contentBlocks);
       }
     }
     if ((boxLayoutForm.selectedContentBlockId && boxLayoutForm.isVisible) &&
-      (boxLayoutForm.selectedContentBlockId !==
-        this.props.boxLayoutForm.selectedContentBlockId)
+      (!this.props.boxLayoutForm.selectedContentBlockId)
     ) {
       this._onSetBoxLayoutFormValues(boxLayoutForm.selectedContentBlockId);
     }
@@ -272,12 +269,14 @@ export class DashboardPostPage extends Component {
 
   _onSetBoxLayoutFormValues(id = null) {
     if (id != null) {
-      const layoutItems = this.props.contentBlocks
-        .filter(item => item.id === id)[0]
-        .layout;
-      layoutItems.forEach((item, i) => {
-        this._onChangeBoxLayoutForm({ name: item.name, value: item.value });
-      });
+      const selectedBlock = this.props.contentBlocks
+        .filter(item => item.id === id)[0];
+      if (selectedBlock && selectedBlock.layout) {
+        const layoutItems = selectedBlock.layout;
+        layoutItems.forEach((item, i) => {
+          this._onChangeBoxLayoutForm({ name: item.name, value: item.value });
+        });
+      }
     } else {
       this.props.dispatch(toggleBoxLayoutForm(null));
       this.props.dispatch(postBoxLayoutFormReset());
@@ -290,8 +289,11 @@ export class DashboardPostPage extends Component {
 
   _onSubmitBoxLayoutForm() {
     const { boxLayoutFormSubmission, boxLayoutForm } = this.props;
-    this.props.dispatch
-      (blockSetContentBlockLayout(boxLayoutForm.selectedContentBlockId, boxLayoutFormSubmission)
+    this.props.dispatch(
+      blockSetContentBlockLayout(
+        boxLayoutForm.selectedContentBlockId,
+        boxLayoutFormSubmission
+      )
     );
     this._onSetBoxLayoutFormValues();
   }
