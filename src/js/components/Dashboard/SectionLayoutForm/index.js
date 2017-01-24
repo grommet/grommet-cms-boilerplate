@@ -48,7 +48,7 @@ export default function SectionLayoutForm(props: {
   return (
     <Layer
       closer
-      align="right"
+      align="left"
       onClose={onClose}
       hidden={!isVisible}
     >

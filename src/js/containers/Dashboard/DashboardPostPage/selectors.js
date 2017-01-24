@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { slugify } from 'grommet-cms/utils';
 
 export const selectDashboardPost = () => state => state.dashboardPost;
 
@@ -8,10 +9,11 @@ export const selectPostSectionFormSubmission = createSelector(
     const { name, fields } = dashboardPost.sectionLayoutForm;
     return {
       name: name.value,
+      id: slugify(name.value),
       layout: fields.map((field, i) => 
         ({
-          value: item.value,
-          name: item.name
+          value: field.value,
+          name: field.name
         })
       )
     };

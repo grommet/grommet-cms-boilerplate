@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { BLOCK_TYPE_MAP } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/constants';
+import {
+  BLOCK_TYPE_MAP
+} from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/constants';
+import { ContentLayoutEngine } from 'grommet-cms/components';
 
 export default class ContentBlocks extends Component {
   _renderBlocks(blocks) {
@@ -20,9 +23,17 @@ export default class ContentBlocks extends Component {
       : undefined;
 
     return (
-      <div>
+      <ContentLayoutEngine
+        layout={this.props.layout}
+        blocks={this.props.blocks}
+      >
         {blocks}
-      </div>
+      </ContentLayoutEngine>
     );
   }
+};
+
+ContentBlocks.propTypes = {
+  blocks: React.PropTypes.object,
+  layout: React.PropTypes.array.isRequired
 };

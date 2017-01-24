@@ -3,20 +3,20 @@ import React, { Component } from 'react';
 import Box from 'grommet/components/Box';
 import Section from 'grommet/components/Section';
 import type { LayoutProps } from './flowTypes';
+import assignedLayoutProps from './utils';
 
-class Layout extends Component {
+export default class ContentLayoutEngine extends Component {
   props: LayoutProps;
   render() {
-    const { children, section, box } = this.props;
-    const childNodes = Array.isArray(children) ? children : [children];
+    const { blocks, layout, children } = this.props;
     return (
       <Section
-        {...section}
+        {...assignedLayoutProps(layout)}
       >
-        {childNodes && childNodes.map((item, i) =>
+        {children.map((item, i) =>
           <Box
             key={i}
-            {...box}
+            {...assignedLayoutProps(this.props.blocks[i].layout)}
           >
             {item}
           </Box>
@@ -25,5 +25,3 @@ class Layout extends Component {
     );
   }
 }
-
-export default Layout;

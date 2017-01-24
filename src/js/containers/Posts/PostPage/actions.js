@@ -57,7 +57,7 @@ export const postAddSection = (section) => ({
   ...section
 });
 
-export const postEditSection = (section) => ({
+export const postEditSection = (section, index) => ({
   type: ActionTypes.POST_EDIT_SECTION,
   ...section,
   index

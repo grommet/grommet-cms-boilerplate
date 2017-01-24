@@ -76,6 +76,7 @@ function postSectionsReducer(state = [], action) {
         {
           ...state[action.index],
           name: action.name,
+          id: action.id,
           layout: action.layout
         },
         ...state.slice(action.index + 1)

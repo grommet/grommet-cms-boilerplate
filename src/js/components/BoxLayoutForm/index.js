@@ -36,7 +36,7 @@ export default function BoxLayoutForm(props: {
   return (
     <Layer
       closer
-      align="right"
+      align="left"
       onClose={onClose}
       hidden={!isVisible}
     >

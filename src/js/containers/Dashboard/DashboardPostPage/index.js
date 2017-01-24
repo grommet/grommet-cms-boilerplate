@@ -251,7 +251,11 @@ export class DashboardPostPage extends Component {
   }
 
   _onSubmitSectionForm() {
-    postEditOrAddSection(postSectionLayoutSubmission)(this.props.dispatch);
+    const { postSectionLayoutSubmission, dispatch, sectionLayoutForm } = this.props;
+    postEditOrAddSection(
+      postSectionLayoutSubmission,
+      sectionLayoutForm.selectedSection
+    )(dispatch);
     this._onSetSectionFormValues();
   }
 
