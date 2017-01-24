@@ -1,7 +1,8 @@
 import { v4 as uuid } from 'uuid';
 import {
   BLOCK_ADD, BLOCK_ADD_LIST, BLOCK_REMOVE, BLOCK_EDIT, BLOCK_TYPE,
-  BLOCK_SUBMIT, BLOCK_MOVE_UP, BLOCK_MOVE_DOWN, BLOCK_CANCEL
+  BLOCK_SUBMIT, BLOCK_MOVE_UP, BLOCK_MOVE_DOWN, BLOCK_CANCEL,
+  BLOCK_SET_CONTENT_BLOCK_LAYOUT
 } from './constants';
 
 const initialState = [];
@@ -36,6 +37,10 @@ export function contentBlocks(state = initialState, action) {
 
     case BLOCK_EDIT:
       newBlocks[blockIndex].edit = true;
+      return newBlocks;
+
+    case BLOCK_SET_CONTENT_BLOCK_LAYOUT:
+      newBlocks[blockIndex].layout = action.layout;
       return newBlocks;
 
     case BLOCK_TYPE:

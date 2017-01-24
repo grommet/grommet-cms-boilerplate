@@ -9,7 +9,9 @@ import {
 } from 'grommet-cms/containers/Dashboard/DashboardContainer/actions';
 import {
   blockAdd,
-  blockCancel
+  blockCancel,
+  blockAddList,
+  blockSetContentBlockLayout
 } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
 import {
   getPost,
@@ -108,7 +110,7 @@ export class DashboardPostPage extends Component {
     );
   }
 
-  componentWillReceiveProps({ post, contentBlocks }) {
+  componentWillReceiveProps({ post, contentBlocks, boxLayoutForm }) {
     if (post !== this.props.post && !this.props.request) {
       if (!this.state.isEditingMarquee) {
         debounce(
@@ -124,6 +126,12 @@ export class DashboardPostPage extends Component {
           this._onUpdateContentBlocks(contentBlocks);
         }
       }
+    }
+    if ((boxLayoutForm.selectedContentBlockId && boxLayoutForm.isVisible) &&
+      (boxLayoutForm.selectedContentBlockId !==
+        this.props.boxLayoutForm.selectedContentBlockId)
+    ) {
+      this._onSetBoxLayoutFormValues(boxLayoutForm.selectedContentBlockId);
     }
   }
 
@@ -262,9 +270,14 @@ export class DashboardPostPage extends Component {
     this._onSetSectionFormValues();
   }
 
-  _onSetBoxLayoutFormValues(index = null) {
-    if (index != null) {
-      // todo, handle setting the values
+  _onSetBoxLayoutFormValues(id = null) {
+    if (id != null) {
+      const layoutItems = this.props.contentBlocks
+        .filter(item => item.id === id)[0]
+        .layout;
+      layoutItems.forEach((item, i) => {
+        this._onChangeBoxLayoutForm({ name: item.name, value: item.value });
+      });
     } else {
       this.props.dispatch(toggleBoxLayoutForm(null));
       this.props.dispatch(postBoxLayoutFormReset());
@@ -277,21 +290,10 @@ export class DashboardPostPage extends Component {
 
   _onSubmitBoxLayoutForm() {
     const { boxLayoutFormSubmission, boxLayoutForm } = this.props;
-    const selectedContentBlock = this.props.contentBlocks
-      .filter((item) => item.id === boxLayoutForm.selectedContentBlockId)[0];
-    const index = this.props.contentBlocks.indexOf(selectedContentBlock);
-    const newContentBlocks = [
-      ...this.props.contentBlocks.slice(0, index),
-      {
-        ...selectedContentBlock,
-        layout: boxLayoutFormSubmission
-      },
-      ...this.props.contentBlocks.slice(index + 1)
-    ];
-    this.props.dispatch(
-      postSetContentBlocks(newContentBlocks, this.state.selectedSection)
+    this.props.dispatch
+      (blockSetContentBlockLayout(boxLayoutForm.selectedContentBlockId, boxLayoutFormSubmission)
     );
-    this._onSetSectionFormValues();
+    this._onSetBoxLayoutFormValues();
   }
 
   _onSubmitMarquee() {
@@ -453,7 +455,7 @@ DashboardPostPage.propTypes = {
     id: PropTypes.string
   }),
   postSectionLayoutSubmission: PropTypes.object,
-  boxLayoutFormSubmission: PropTypes.object,
+  boxLayoutFormSubmission: PropTypes.array,
   request: PropTypes.bool.isRequired,
   error: PropTypes.string,
   toastMessage: PropTypes.string,

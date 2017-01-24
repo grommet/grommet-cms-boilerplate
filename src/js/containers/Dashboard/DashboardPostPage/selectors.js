@@ -24,13 +24,11 @@ export const selectBoxLayoutFormSubmission = createSelector(
   selectDashboardPost(),
   dashboardPost => {
     const { fields } = dashboardPost.boxLayoutForm;
-    return {
-      layout: fields.map((field, i) =>
-        ({
-          value: field.value,
-          name: field.name
-        })
-      )
-    };
+    return fields.map((field, i) =>
+      ({
+        value: field.value,
+        name: field.name
+      })
+    );
   }
 );
