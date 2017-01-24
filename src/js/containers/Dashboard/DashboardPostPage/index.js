@@ -10,7 +10,6 @@ import {
 import {
   blockAdd,
   blockCancel,
-  blockAddList,
   blockSetContentBlockLayout
 } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
 import {
@@ -79,6 +78,7 @@ export class DashboardPostPage extends Component {
     this._onChangeBoxLayoutForm = this._onChangeBoxLayoutForm.bind(this);
     this._onSetBoxLayoutFormValues = this._onSetBoxLayoutFormValues.bind(this);
     this._onSubmitBoxLayoutForm = this._onSubmitBoxLayoutForm.bind(this);
+    this._onBackToMasterView = this._onBackToMasterView.bind(this);
     this.state = {
       selectedSection: null,
       isEditingMarquee: false,
@@ -122,7 +122,11 @@ export class DashboardPostPage extends Component {
     }
     if (contentBlocks !== this.props.contentBlocks) {
       if (post && this.state.selectedSection) {
-        this._onUpdateContentBlocks(contentBlocks);
+        if (contentBlocks.length) {
+          this._onUpdateContentBlocks(contentBlocks);
+        } else {
+          this._onUpdateContentBlocks();
+        }
       }
     }
     if ((boxLayoutForm.selectedContentBlockId && boxLayoutForm.isVisible) &&
@@ -199,7 +203,7 @@ export class DashboardPostPage extends Component {
   }
 
   _onClickBackAnchor() {
-    this._onCancel();
+    this._onBackToMasterView();
   }
 
   _onSelectSection(i) {
@@ -308,13 +312,19 @@ export class DashboardPostPage extends Component {
   }
 
   _onCancel() {
-    this.props.dispatch(blockCancel());
+    this._onBackToMasterView(true);
+  }
+
+  _onBackToMasterView(cancel = false) {
     this._removeUnusedContentBlocks();
     this._setDefaultLeftAnchor();
     this.setState({
       selectedSection: null,
       isEditingMarquee: false
     });
+    if (cancel) {
+      this.props.dispatch(blockCancel());
+    }
   }
 
   _onCloseToast() {
