@@ -1,6 +1,6 @@
 const parseBooleans = (str) => {
   if (str === 'true' || str === 'false') {
-    return new Boolean(str);
+    return str === 'true';
   };
   return str;
 };

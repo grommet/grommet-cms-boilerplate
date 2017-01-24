@@ -44,7 +44,10 @@ import {
   toggleBoxLayoutForm
 } from './actions';
 import { debounce } from 'grommet-cms/utils';
-import { selectPostSectionFormSubmission } from './selectors';
+import {
+  selectPostSectionFormSubmission,
+  selectBoxLayoutFormSubmission
+} from './selectors';
 
 export class DashboardPostPage extends Component {
   constructor(props) {
@@ -273,7 +276,21 @@ export class DashboardPostPage extends Component {
   }
 
   _onSubmitBoxLayoutForm() {
-    // TODO: parse box form to submit it.
+    const { boxLayoutFormSubmission, boxLayoutForm } = this.props;
+    const selectedContentBlock = this.props.contentBlocks
+      .filter((item) => item.id === boxLayoutForm.selectedContentBlockId)[0];
+    const index = this.props.contentBlocks.indexOf(selectedContentBlock);
+    const newContentBlocks = [
+      ...this.props.contentBlocks.slice(0, index),
+      {
+        ...selectedContentBlock,
+        layout: boxLayoutFormSubmission
+      },
+      ...this.props.contentBlocks.slice(index + 1)
+    ];
+    this.props.dispatch(
+      postSetContentBlocks(newContentBlocks, this.state.selectedSection)
+    );
     this._onSetSectionFormValues();
   }
 
@@ -436,6 +453,7 @@ DashboardPostPage.propTypes = {
     id: PropTypes.string
   }),
   postSectionLayoutSubmission: PropTypes.object,
+  boxLayoutFormSubmission: PropTypes.object,
   request: PropTypes.bool.isRequired,
   error: PropTypes.string,
   toastMessage: PropTypes.string,
@@ -468,7 +486,8 @@ function mapStateToProps(state, props) {
     boxLayoutForm,
     contentBlocks,
     toastMessage,
-    postSectionLayoutSubmission: selectPostSectionFormSubmission(state)
+    postSectionLayoutSubmission: selectPostSectionFormSubmission(state),
+    boxLayoutFormSubmission: selectBoxLayoutFormSubmission(state)
   };
 };
 

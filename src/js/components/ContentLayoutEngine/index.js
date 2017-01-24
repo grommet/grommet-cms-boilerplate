@@ -16,7 +16,7 @@ export default class ContentLayoutEngine extends Component {
         {children.map((item, i) =>
           <Box
             key={i}
-            {...assignedLayoutProps(this.props.blocks[i].layout)}
+            {...assignedLayoutProps(blocks[i].layout)}
           >
             {item}
           </Box>

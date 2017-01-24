@@ -1,7 +1,6 @@
 /* @flow */
 import React from 'react';
 import Box from 'grommet/components/Box';
-import Section from 'grommet/components/Section';
 // $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
 import { ContentBlocks } from 'grommet-cms/containers';
 import type ContentBlockType from './flowTypes';
