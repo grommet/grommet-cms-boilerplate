@@ -174,8 +174,8 @@ export class DashboardPostPage extends Component {
     this.props.dispatch(toggleSectionForm(null));
   }
 
-  _onChangeSectionForm({ name, value }) {
-    this.props.dispatch(postSectionFormInput(name, value));
+  _onChangeSectionForm({ name, value, sectionIndex }) {
+    this.props.dispatch(postSectionFormInput(name, value, sectionIndex));
   }
 
   _setDefaultLeftAnchor() {
@@ -297,7 +297,7 @@ export class DashboardPostPage extends Component {
   }
 
   render() {
-    const { post, error, sectionForm, url, toastMessage, request } = this.props;
+    const { post, error, layoutForm, url, toastMessage, request } = this.props;
     const { selectedSection, shouldAnimate } = this.state;
     return (
       <Box primary pad="none">
@@ -370,9 +370,9 @@ export class DashboardPostPage extends Component {
           />
         }
         <SectionForm
-          {...sectionForm}
+          {...layoutForm}
           onChange={this._onChangeSectionForm}
-          isEditing={sectionForm.selectedSection !== null}
+          isEditing={layoutForm.selectedSection !== null}
           onClose={() => this._onSetSectionFormValues(null)}
           onSubmit={this._onSubmitSectionForm}
         />
@@ -391,23 +391,7 @@ export class DashboardPostPage extends Component {
 
 DashboardPostPage.propTypes = {
   url: PropTypes.string,
-  sectionForm: PropTypes.shape({
-    isVisible: PropTypes.bool.isRequired,
-    name: PropTypes.shape({
-      value: PropTypes.string
-    }),
-    padding: PropTypes.shape({
-      value: PropTypes.string,
-      options: PropTypes.array
-    }),
-    basis: PropTypes.shape({
-      value: PropTypes.string,
-      options: PropTypes.array
-    }),
-    wrap: PropTypes.shape({
-      value: PropTypes.bool.isRequired
-    })
-  }).isRequired,
+  layoutForm: PropTypes.object,
   contentBlocks: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
   params: PropTypes.shape({
@@ -433,7 +417,7 @@ DashboardPostPage.contextTypes = {
 
 function mapStateToProps(state, props) {
   const { post, error, request } = state.posts;
-  const { sectionForm, toastMessage } = state.dashboardPost;
+  const { layoutForm, toastMessage } = state.dashboardPost;
   const { contentBlocks } = state;
   const { url } = state.fileUpload;
   return {
@@ -441,7 +425,7 @@ function mapStateToProps(state, props) {
     error,
     request,
     url,
-    sectionForm,
+    layoutForm,
     contentBlocks,
     toastMessage
   };

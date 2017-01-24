@@ -19,36 +19,33 @@ declare type OptionType = {
 } | string | number;
 
 export default function PostSectionForm(props: {
-  isVisible: boolean,
   onClose: Function,
   onChange: Function,
-  name: {
-    value: ?string
-  },
-  padding: {
-    value: ?string,
-    options: OptionType[]
-  },
-  basis: {
-    value: ?string,
-    options: OptionType[]
-  },
-  wrap: {
-    value: boolean
-  },
   onSubmit: Function,
   isEditing: boolean,
+  isVisible: boolean,
+  name: {
+    value: string
+  },
+  sections: Array<{
+    title: string,
+    fields: Array<{
+      label: string,
+      name: string,
+      type: "Select",
+      options: Array<string>,
+      value: ?string
+    }>
+  }>
 }) {
   const {
-    isVisible,
     onClose,
     onChange,
-    name,
     onSubmit,
     isEditing,
-    padding,
-    basis,
-    wrap
+    isVisible,
+    name,
+    sections
   } = props;
   return (
     <Layer
@@ -65,21 +62,21 @@ export default function PostSectionForm(props: {
       <Section pad="medium" align="center">
         <Form pad="medium">
           <FormFields>
-            <FormField label="Name" htmlFor="name">
-              <input
-                autoFocus
-                id="name"
-                name="name"
-                type="text"
-                value={name.value}
-                onChange={({ target }) => onChange(target)}
-              />
-            </FormField>
+            <fieldset>
+              <FormField label="Name" htmlFor="name">
+                <input
+                  autoFocus
+                  id="name"
+                  name="name"
+                  type="text"
+                  value={name.value}
+                  onChange={({ target }) => onChange(target)}
+                />
+              </FormField>
+            </fieldset>
             <LayoutForm
+              sections={sections}
               onChange={onChange}
-              padding={padding}
-              basis={basis}
-              wrap={wrap}
             />
           </FormFields>
         </Form>

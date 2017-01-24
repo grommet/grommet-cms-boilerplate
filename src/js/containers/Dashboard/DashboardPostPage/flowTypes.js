@@ -22,36 +22,27 @@ export type SectionFormSubmission = {
   wrap: boolean
 }
 
-export type SectionForm = {
+export type LayoutForm = {
   isVisible: boolean,
   name: {
-    value: ?string
+    value: string
   },
   selectedSection: ?number,
-  padding: {
-    value: string,
-    options: ['none', 'small', 'medium', 'large']
-  },
-  basis: {
-    value: string,
-    options: [
-      'xsmall', 'small',
-      'medium', 'large',
-      'xlarge', 'xxlarge',
-      'full', '1/2',
-      '1/3', '2/3',
-      '1/4', '3/4',
-      'none'
-    ]
-  },
-  wrap: {
-    value: boolean
-  }
+  sections: Array<{
+    title: string,
+    fields: Array<{
+      label: string,
+      name: string,
+      type: "Select",
+      options: Array<string>,
+      value: ?string
+    }>
+  }>
 }
 
 export type DashboardPostPageState = {
   toastMessage: ?string,
-  sectionForm: SectionForm
+  layoutForm: LayoutForm
 }
 
 export type DashboardPostPageAction = {
@@ -62,5 +53,6 @@ export type DashboardPostPageAction = {
   value?: string,
   index?: ?number,
   options?: any,
-  message?: string
+  message?: string,
+  sectionIndex?: number
 }

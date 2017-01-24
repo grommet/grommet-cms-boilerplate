@@ -17,3 +17,4 @@ export ShareMenu from './ShareMenu';
 export VideoCallout from './VideoCallout';
 export YoutubeLayer from './YoutubeLayer';
 export HomePageIntro from './HomePageIntro';
+export ContentLayoutEngine from './ContentLayoutEngine';

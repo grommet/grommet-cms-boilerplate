@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Box from 'grommet/components/Box';
 import { BLOCK_TYPE_MAP } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/constants';
 
 export default class ContentBlocks extends Component {
@@ -21,9 +20,9 @@ export default class ContentBlocks extends Component {
       : undefined;
 
     return (
-      <Box>
+      <div>
         {blocks}
-      </Box>
+      </div>
     );
   }
 };

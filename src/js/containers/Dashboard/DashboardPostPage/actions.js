@@ -8,10 +8,11 @@ export const toggleSectionForm =
     index
   });
 
-export const postSectionFormInput =
-  (name?: string, value?: string): DashboardPostPageAction => ({
+export const postSectionFormInput = 
+  (name?: string, value?: string, sectionIndex: number): DashboardPostPageAction => ({
     type: T.POST_SECTION_FORM_INPUT,
     name: name || '',
+    sectionIndex,
     value: value || ''
   });
 
@@ -20,7 +21,6 @@ export const postSectionFormReset =
     type: T.POST_SECTION_FORM_RESET,
     options
   });
-
 
 export const postSectionSetToastMessage = 
   (message: string): DashboardPostPageAction => ({

@@ -46,10 +46,17 @@ export default function PostPreviewHeroSection(props: {
             }
           </Box>
         </Hero>
-        {post.sections && post.sections.length > 0 && post.sections.map((item, i) =>
-          <Section key={i} pad="medium">
-            <ContentBlocks blocks={item.contentBlocks} />
-          </Section>  
+        {post.sections &&
+          post.sections.length > 0 &&
+            post.sections.map((item, i) =>
+              <Section
+                key={i}
+                wrap={item.wrap}
+                pad={item.padding}
+                basis={item.basis}
+              >
+                <ContentBlocks blocks={item.contentBlocks} />
+              </Section>
         )}
       </Box>
     );

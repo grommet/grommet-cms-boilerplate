@@ -34,9 +34,6 @@ export default function PostPreview(props: {
           .map((item, i) =>
             <Section
               key={i}
-              pad={item.padding}
-              basis={item.basis}
-              wrap={item.wrap}
             >
               <ContentBlocks blocks={item.contentBlocks} />
             </Section>
