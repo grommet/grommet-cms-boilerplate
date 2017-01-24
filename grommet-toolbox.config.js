@@ -3,7 +3,7 @@
 import path from 'path';
 
 export default {
-  devTool: 'source-map',
+  devTool: 'eval',
   base: '.',
   publicPath: '',
   dist: path.resolve(__dirname, 'dist/'),
