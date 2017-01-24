@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { findDOMNode } from 'react-dom';
 import Box from 'grommet/components/Box';
 import { PreviewHeader, BlockSelector } from 'grommet-cms/components';
+import {
+  toggleBoxLayoutForm 
+} from 'grommet-cms/containers/Dashboard/DashboardPostPage/actions';
 import { BLOCK_TYPE_MAP } from '../DashboardContentBlocks/constants';
 import {
   blockEdit,
@@ -21,8 +24,8 @@ export class DashboardContentBlock extends Component {
     this._onBlockSubmit = this._onBlockSubmit.bind(this);
     this._onEditClick = this._onEditClick.bind(this);
     this._onCloseClick = this._onCloseClick.bind(this);
+    this._onLayoutClick = this._onLayoutClick.bind(this);
   }
-
 
   componentDidMount() {
     const { edit } = this.props;
@@ -53,6 +56,10 @@ export class DashboardContentBlock extends Component {
       this.props.dispatch(blockMoveUp(id));
     if (direction === 'down')
       this.props.dispatch(blockMoveDown(id));
+  }
+
+  _onLayoutClick(id) {
+    this.props.dispatch(toggleBoxLayoutForm(id));
   }
 
   render() {
@@ -117,6 +124,7 @@ export class DashboardContentBlock extends Component {
         <PreviewHeader
           title={title}
           edit={edit}
+          onLayoutClick={this._onLayoutClick.bind(this, id)}
           onClose={this._onCloseClick.bind(this, id)}
           onMove={this._onBlockMove.bind(this, id)}
           onEdit={this._onEditClick.bind(this, id)}

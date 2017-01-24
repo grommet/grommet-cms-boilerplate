@@ -18,7 +18,7 @@ declare type OptionType = {
   label: any
 } | string | number;
 
-export default function PostSectionForm(props: {
+export default function SectionLayoutForm(props: {
   onClose: Function,
   onChange: Function,
   onSubmit: Function,
@@ -27,15 +27,13 @@ export default function PostSectionForm(props: {
   name: {
     value: string
   },
-  sections: Array<{
-    title: string,
-    fields: Array<{
-      label: string,
-      name: string,
-      type: "Select",
-      options: Array<string>,
-      value: ?string
-    }>
+  title: string,
+  fields: Array<{
+    label: string,
+    name: string,
+    type: "Select",
+    options: Array<string>,
+    value: ?string
   }>
 }) {
   const {
@@ -45,7 +43,7 @@ export default function PostSectionForm(props: {
     isEditing,
     isVisible,
     name,
-    sections
+    ...sectionLayoutForm
   } = props;
   return (
     <Layer
@@ -75,7 +73,7 @@ export default function PostSectionForm(props: {
               </FormField>
             </fieldset>
             <LayoutForm
-              sections={sections}
+              {...sectionLayoutForm}
               onChange={onChange}
             />
           </FormFields>

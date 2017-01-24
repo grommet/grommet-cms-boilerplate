@@ -1,4 +1,5 @@
 /* GENERATOR */
+export BoxLayoutForm from './BoxLayoutForm';
 export GrommetHero from './GrommetHero';
 export Footer from './Footer';
 export PostFeedItem from './PostFeedItem';

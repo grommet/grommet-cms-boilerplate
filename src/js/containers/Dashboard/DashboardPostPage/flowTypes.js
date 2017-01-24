@@ -9,6 +9,14 @@ export type POST_SECTION_SET_MESSAGE_TYPE =
   'DASHBOARD_POST_PAGE/POST_SECTION_SET_MESSAGE';
 export type POST_SECTION_CLEAR_MESSAGE_TYPE = 
   'DASHBOARD_POST_PAGE/POST_SECTION_CLEAR_MESSAGE';
+export type POST_TOGGLE_BOX_LAYOUT_FORM_TYPE =
+  'DASHBOARD_POST_PAGE/POST_TOGGLE_BOX_LAYOUT_FORM';
+export type POST_BOX_LAYOUT_FORM_INPUT_TYPE =
+  'DASHBOARD_POST_PAGE/POST_BOX_LAYOUT_FORM_INPUT';
+export type SHOW_BOX_LAYOUT_FORM_TYPE =
+  'DASHBOARD_POST_PAGE/SHOW_BOX_LAYOUT_FORM';
+export type POST_BOX_LAYOUT_FORM_RESET_TYPE =
+  'DASHBOARD_POST_PAGE/POST_BOX_LAYOUT_FORM_RESET';
 
 export type PaddingOptions = 'none' | 'small' | 'medium' | 'large';
 export type BasisOptions = 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge' |
@@ -22,14 +30,15 @@ export type SectionFormSubmission = {
   wrap: boolean
 }
 
-export type LayoutForm = {
-  isVisible: boolean,
-  name: {
-    value: string
-  },
-  selectedSection: ?number,
-  sections: Array<{
+export type DashboardPostPageState = {
+  toastMessage: ?string,
+  sectionLayoutForm: {
     title: string,
+    isVisible: boolean,
+    selectedSection: ?number,
+    name: {
+      value: string
+    },
     fields: Array<{
       label: string,
       name: string,
@@ -37,22 +46,28 @@ export type LayoutForm = {
       options: Array<string>,
       value: ?string
     }>
-  }>
-}
-
-export type DashboardPostPageState = {
-  toastMessage: ?string,
-  layoutForm: LayoutForm
+  },
+  boxLayoutForm: {
+    title: string,
+    isVisible: boolean,
+    selectedContentBlockId: ?number,
+    fields: Array<{
+      label: string,
+      name: string,
+      type: "Select",
+      options: Array<string>,
+      value: ?string
+    }>
+  },
 }
 
 export type DashboardPostPageAction = {
   type: SHOW_SECTION_FORM_TYPE |  POST_SECTION_FORM_INPUT_TYPE | 
     POST_SECTION_FORM_RESET_TYPE | POST_SECTION_SET_MESSAGE_TYPE | 
-      POST_SECTION_CLEAR_MESSAGE_TYPE,
+      POST_SECTION_CLEAR_MESSAGE_TYPE | POST_BOX_LAYOUT_FORM_INPUT_TYPE |
+        SHOW_BOX_LAYOUT_FORM_TYPE | POST_BOX_LAYOUT_FORM_RESET_TYPE,
   name?: string,
   value?: string,
   index?: ?number,
-  options?: any,
-  message?: string,
-  sectionIndex?: number
+  message?: string
 }

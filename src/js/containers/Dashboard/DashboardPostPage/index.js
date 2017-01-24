@@ -29,18 +29,22 @@ import {
   ErrorNotification,
   PostList,
   PostListItemDetail,
-  SectionForm,
-  MarqueeForm
+  SectionLayoutForm,
+  MarqueeForm,
+  BoxLayoutForm
 } from 'grommet-cms/components';
 import {
   toggleSectionForm,
   postSectionFormInput,
   postSectionFormReset,
   postSectionSetToastMessage,
-  postSectionClearToastMessage
+  postSectionClearToastMessage,
+  postBoxLayoutFormReset,
+  postBoxLayoutFormInput,
+  toggleBoxLayoutForm
 } from './actions';
-import parseSubmission from './utils';
 import { debounce } from 'grommet-cms/utils';
+import { selectPostSectionFormSubmission } from './selectors';
 
 export class DashboardPostPage extends Component {
   constructor(props) {
@@ -67,6 +71,9 @@ export class DashboardPostPage extends Component {
     this._removeUnusedContentBlocks = this._removeUnusedContentBlocks.bind(this);
     this._checkForUnusedContentBlocks = this._checkForUnusedContentBlocks.bind(this);
     this._onCloseToast = this._onCloseToast.bind(this);
+    this._onChangeBoxLayoutForm = this._onChangeBoxLayoutForm.bind(this);
+    this._onSetBoxLayoutFormValues = this._onSetBoxLayoutFormValues.bind(this);
+    this._onSubmitBoxLayoutForm = this._onSubmitBoxLayoutForm.bind(this);
     this.state = {
       selectedSection: null,
       isEditingMarquee: false,
@@ -174,10 +181,6 @@ export class DashboardPostPage extends Component {
     this.props.dispatch(toggleSectionForm(null));
   }
 
-  _onChangeSectionForm({ name, value, sectionIndex }) {
-    this.props.dispatch(postSectionFormInput(name, value, sectionIndex));
-  }
-
   _setDefaultLeftAnchor() {
     this.props.dispatch(
       dashboardSetLeftNavAnchor({
@@ -231,26 +234,42 @@ export class DashboardPostPage extends Component {
   }
 
   _onSetSectionFormValues(index = null) {
-    let options = null;
     if (index != null) {
-      options = [this.props.post.sections[index]].map((item) =>
-        ({
-          padding: item.padding,
-          basis: item.basis,
-          wrap: item.wrap,
-          name: item.name,
-          id: item.id
-        })
-      )[0];
+      const section = this.props.post.sections[index];
+      this._onChangeSectionForm({ name: 'name', value: section.name });
+      section.layout.forEach((item, i) => {
+        this._onChangeSectionForm({ name: item.name, value: item.value });
+      });
     } else {
       this.props.dispatch(toggleSectionForm(null));
+      this.props.dispatch(postSectionFormReset());
     }
-    this.props.dispatch(postSectionFormReset(options));
+  }
+
+  _onChangeSectionForm({ name, value }) {
+    this.props.dispatch(postSectionFormInput(name, value));
   }
 
   _onSubmitSectionForm() {
-    const sectionForm = parseSubmission(this.props.sectionForm);
-    postEditOrAddSection(sectionForm)(this.props.dispatch);
+    postEditOrAddSection(postSectionLayoutSubmission)(this.props.dispatch);
+    this._onSetSectionFormValues();
+  }
+
+  _onSetBoxLayoutFormValues(index = null) {
+    if (index != null) {
+      // todo, handle setting the values
+    } else {
+      this.props.dispatch(toggleBoxLayoutForm(null));
+      this.props.dispatch(postBoxLayoutFormReset());
+    }
+  }
+
+  _onChangeBoxLayoutForm({ name, value }) {
+    this.props.dispatch(postBoxLayoutFormInput(name, value));
+  }
+
+  _onSubmitBoxLayoutForm() {
+    // TODO: parse box form to submit it.
     this._onSetSectionFormValues();
   }
 
@@ -297,7 +316,15 @@ export class DashboardPostPage extends Component {
   }
 
   render() {
-    const { post, error, layoutForm, url, toastMessage, request } = this.props;
+    const {
+      post,
+      error,
+      sectionLayoutForm,
+      boxLayoutForm,
+      url,
+      toastMessage,
+      request
+    } = this.props;
     const { selectedSection, shouldAnimate } = this.state;
     return (
       <Box primary pad="none">
@@ -369,12 +396,18 @@ export class DashboardPostPage extends Component {
             onClose={this._onClearError}
           />
         }
-        <SectionForm
-          {...layoutForm}
+        <SectionLayoutForm
+          {...sectionLayoutForm}
           onChange={this._onChangeSectionForm}
-          isEditing={layoutForm.selectedSection !== null}
+          isEditing={sectionLayoutForm.selectedSection !== null}
           onClose={() => this._onSetSectionFormValues(null)}
           onSubmit={this._onSubmitSectionForm}
+        />
+        <BoxLayoutForm
+          {...boxLayoutForm}
+          onChange={this._onChangeBoxLayoutForm}
+          onClose={() => this._onSetBoxLayoutFormValues(null)}
+          onSubmit={this._onSubmitBoxLayoutForm}
         />
         {toastMessage && 
           <Toast
@@ -391,12 +424,14 @@ export class DashboardPostPage extends Component {
 
 DashboardPostPage.propTypes = {
   url: PropTypes.string,
-  layoutForm: PropTypes.object,
+  sectionLayoutForm: PropTypes.object,
+  boxLayoutForm: PropTypes.object,
   contentBlocks: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string
   }),
+  postSectionLayoutSubmission: PropTypes.object,
   request: PropTypes.bool.isRequired,
   error: PropTypes.string,
   toastMessage: PropTypes.string,
@@ -417,7 +452,7 @@ DashboardPostPage.contextTypes = {
 
 function mapStateToProps(state, props) {
   const { post, error, request } = state.posts;
-  const { layoutForm, toastMessage } = state.dashboardPost;
+  const { sectionLayoutForm, boxLayoutForm, toastMessage } = state.dashboardPost;
   const { contentBlocks } = state;
   const { url } = state.fileUpload;
   return {
@@ -425,9 +460,11 @@ function mapStateToProps(state, props) {
     error,
     request,
     url,
-    layoutForm,
+    sectionLayoutForm,
+    boxLayoutForm,
     contentBlocks,
-    toastMessage
+    toastMessage,
+    postSectionLayoutSubmission: selectPostSectionFormSubmission(state)
   };
 };
 
