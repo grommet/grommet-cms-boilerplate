@@ -131,6 +131,8 @@ export default function BlockImageParagraph ({
 
 BlockImageParagraph.propTypes = {
   content: PropTypes.string,
-  image: PropTypes.string,
+  image: PropTypes.shape({
+    path: PropTypes.string.isRequired
+  }),
   imageDesc: PropTypes.string
 };

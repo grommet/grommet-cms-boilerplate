@@ -6,6 +6,7 @@ import type {
 } from './flowTypes';
 
 export const initialState: DashboardPostPageState = {
+  toastMessage: null,
   sectionForm: {
     isVisible: false,
     name: {
@@ -39,6 +40,16 @@ const dashboardPost = (
   action: DashboardPostPageAction
 ): DashboardPostPageState => {
   switch (action.type) {
+    case T.POST_SECTION_SET_MESSAGE:
+      return {
+        ...state,
+        toastMessage: action.message
+      };
+    case T.POST_SECTION_CLEAR_MESSAGE:
+      return {
+        ...state,
+        toastMessage: null
+      };
     case T.POST_SECTION_FORM_RESET: {
       let newSectionForm = initialState.sectionForm;
       const { options } = action;

@@ -5,6 +5,10 @@ export type POST_SECTION_FORM_INPUT_TYPE =
   'DASHBOARD_POST_PAGE/POST_SECTION_FORM_INPUT';
 export type POST_SECTION_FORM_RESET_TYPE =
   'DASHBOARD_POST_PAGE/POST_SECTION_FORM_RESET';
+export type POST_SECTION_SET_MESSAGE_TYPE = 
+  'DASHBOARD_POST_PAGE/POST_SECTION_SET_MESSAGE';
+export type POST_SECTION_CLEAR_MESSAGE_TYPE = 
+  'DASHBOARD_POST_PAGE/POST_SECTION_CLEAR_MESSAGE';
 
 export type PaddingOptions = 'none' | 'small' | 'medium' | 'large';
 export type BasisOptions = 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge' |
@@ -46,12 +50,17 @@ export type SectionForm = {
 }
 
 export type DashboardPostPageState = {
+  toastMessage: ?string,
   sectionForm: SectionForm
 }
 
 export type DashboardPostPageAction = {
-  type: SHOW_SECTION_FORM_TYPE | POST_SECTION_FORM_INPUT_TYPE,
+  type: SHOW_SECTION_FORM_TYPE |  POST_SECTION_FORM_INPUT_TYPE | 
+    POST_SECTION_FORM_RESET_TYPE | POST_SECTION_SET_MESSAGE_TYPE | 
+      POST_SECTION_CLEAR_MESSAGE_TYPE,
   name?: string,
   value?: string,
-  index?: ?number
+  index?: ?number,
+  options?: any,
+  message?: string
 }

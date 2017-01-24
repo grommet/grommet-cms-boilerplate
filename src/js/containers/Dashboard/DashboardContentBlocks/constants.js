@@ -18,13 +18,6 @@ import VideoForm from
 import CarouselForm from
   'grommet-cms/containers/Dashboard/DashboardBlockForm/CarouselForm';
 import {
-  BlockParagraphPreview,
-  BlockHeadingPreview,
-  BlockImagePreview,
-  BlockCardPreview,
-  BlockQuotePreview,
-  BlockVideoPreview,
-  BlockCarouselPreview,
   BlockHeading,
   BlockParagraph,
   BlockImage,
@@ -32,13 +25,14 @@ import {
   BlockCard,
   BlockQuote,
   BlockVideo,
-  BlockCarousel
+  BlockCarousel,
+  GenericPreview
 } from 'grommet-cms/components';
 
 export const BLOCK_TYPE_MAP = {
   BlockParagraph: {
     element: <BlockParagraph />,
-    preview: <BlockParagraphPreview />,
+    preview: <GenericPreview />,
     form: <ParagraphForm />,
     name: 'Paragraph',
     wireframe: (
@@ -52,7 +46,7 @@ export const BLOCK_TYPE_MAP = {
   },
   BlockHeading: {
     element: <BlockHeading />,
-    preview: <BlockHeadingPreview />,
+    preview: <GenericPreview />,
     form: <ParagraphForm />,
     name: 'Heading',
     wireframe: (
@@ -64,7 +58,7 @@ export const BLOCK_TYPE_MAP = {
   },
   BlockImage: {
     element: <BlockImage />,
-    preview: <BlockImagePreview />,
+    preview: <GenericPreview />,
     form: <ImageForm />,
     name: 'Image',
     wireframe: (
@@ -76,7 +70,7 @@ export const BLOCK_TYPE_MAP = {
   },
   BlockImageParagraph: {
     element: <BlockImageParagraph />,
-    preview: <BlockImagePreview />,
+    preview: <GenericPreview />,
     form: <ImageParagraphForm />,
     name: 'Image + Paragraph',
     wireframe: (
@@ -88,7 +82,7 @@ export const BLOCK_TYPE_MAP = {
   },
   BlockCardParagraph: {
     element: <BlockCard />,
-    preview: <BlockCardPreview />,
+    preview: <GenericPreview />,
     form: <CardParagraphForm />,
     name: 'Card + Paragraph',
     wireframe: (
@@ -100,7 +94,7 @@ export const BLOCK_TYPE_MAP = {
   },
   BlockQuote: {
     element: <BlockQuote />,
-    preview: <BlockQuotePreview />,
+    preview: <GenericPreview />,
     form: <QuoteForm />,
     name: 'Quote',
     wireframe: (
@@ -113,7 +107,7 @@ export const BLOCK_TYPE_MAP = {
   },
   BlockVideo: {
     element: <BlockVideo />,
-    preview: <BlockVideoPreview />,
+    preview: <GenericPreview />,
     form: <VideoForm />,
     name: 'Video',
     wireframe: (
@@ -127,7 +121,7 @@ export const BLOCK_TYPE_MAP = {
   },
   BlockCarousel: {
     element: <BlockCarousel />,
-    preview: <BlockCarouselPreview />,
+    preview: <GenericPreview />,
     form: <CarouselForm />,
     name: 'Carousel',
     wireframe: (

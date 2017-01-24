@@ -15,3 +15,4 @@ export BlockSelector from './BlockSelector';
 export BlockVideo from './BlockVideo';
 export BlockVideoPreview from './BlockVideoPreview';
 export PreviewHeader from './PreviewHeader';
+export GenericPreview from './GenericPreview';

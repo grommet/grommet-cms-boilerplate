@@ -9,6 +9,25 @@ const initialState = {
 
 function postSectionsReducer(state = [], action) {
   switch (action.type) {
+    case ActionTypes.POST_REMOVE_UNUSED_CONTENT_BLOCKS:
+      return [
+        ...state.slice(0, action.index),
+        {
+          ...state[action.index],
+          contentBlocks: state[action.index].contentBlocks
+            .filter((item) => item.edit !== true)
+        },
+        ...state.slice(action.index + 1)
+      ];
+    case ActionTypes.POST_SET_CONTENT_BLOCKS:
+      return [
+        ...state.slice(0, action.index),
+        {
+          ...state[action.index],
+          contentBlocks: action.contentBlocks
+        },
+        ...state.slice(action.index + 1)
+      ];
     case ActionTypes.POST_ADD_SECTION:
       return [
         ...state,
@@ -73,6 +92,22 @@ function postSectionsReducer(state = [], action) {
 
 function posts(state = initialState, action) {
   switch(action.type) {
+    case ActionTypes.POST_REMOVE_UNUSED_CONTENT_BLOCKS:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          sections: postSectionsReducer(state.post.sections, action)
+        }
+      };
+    case ActionTypes.POST_SET_CONTENT_BLOCKS:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          sections: postSectionsReducer(state.post.sections, action)
+        }
+      };
     case ActionTypes.POST_CLEAR_ERROR:
       return {
         ...state,

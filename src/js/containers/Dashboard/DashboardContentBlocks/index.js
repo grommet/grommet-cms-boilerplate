@@ -1,13 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { blockAddList } from './actions';
 import Box from 'grommet/components/Box';
+import List from 'grommet/components/List';
+import ListItem from 'grommet/components/ListItem';
 import DashboardContentBlock from
   'grommet-cms/containers/Dashboard/DashboardContentBlock';
-
-// This is the main container for the Dashboard Content Blocks.
+import { blockAddList } from './actions';
 
 export class DashboardContentBlocks extends Component {
+
+  constructor() {
+    super();
+    this._renderBlocks = this._renderBlocks.bind(this);
+  }
 
   componentWillMount() {
     // Check if parent component passed in blocks.
@@ -15,27 +20,34 @@ export class DashboardContentBlocks extends Component {
       this.props.dispatch(blockAddList(this.props.blocks));
   }
 
-  render() {
-    const blocks =
-      (this.props.contentBlocks && this.props.contentBlocks.length > 0)
-      ? this.props.contentBlocks.map(({ id }) =>
-        <DashboardContentBlock id={id} key={`block-${id}`} />)
-      : <Box pad="medium" colorIndex="light-2">
-          No content blocks found
-        </Box>;
+  _renderBlocks() {
+    if (this.props.contentBlocks) {
+      if (this.props.contentBlocks.length > 0) {
+        return (
+          <Box>
+            {this.props.contentBlocks.map(({ id }) =>
+              <ListItem key={id}>
+                <DashboardContentBlock id={id} />
+              </ListItem>
+            )}
+          </Box>
+        );
+      }
+    }
+    return null;
+  }
 
+  render() {
     return (
-      <Box justify="center" align="start"
-        size={{width: "xxlarge"}}>
-        <Box pad={{ between: 'small' }}>
-          {blocks}
-        </Box>
-      </Box>
+      <List>
+        {this._renderBlocks()}
+      </List>
     );
   }
 };
 
 DashboardContentBlocks.propTypes = {
+  blocks: PropTypes.array,
   dispatch: PropTypes.func.isRequired
 };
 

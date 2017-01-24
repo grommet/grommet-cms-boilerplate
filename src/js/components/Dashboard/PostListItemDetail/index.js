@@ -22,7 +22,7 @@ export default function PostListItemDetail(props: {
   },
   onSubmit: Function,
   onCreateBlockClick: Function,
-  onCancel: Function
+  onCancel: Function,
 }) {
   const { item, onSubmit, onCreateBlockClick, onCancel } = props;
   return (
@@ -37,30 +37,28 @@ export default function PostListItemDetail(props: {
           />
         }
       />
-      <Section pad="medium">
-        <Box pad="small">
-          <DashboardContentBlocks blocks={item.contentBlocks} />
-          <Footer align="center" justify="center" pad="large">
-            <Menu
-              className="dashboard--content-blocks__button-footer"
-              direction="row"
-              inline
-              responsive={false}
-            >
-              <Button
-                label="submit"
-                onClick={onSubmit}
-                primary={true}
-                type="submit"
-              />
-              <Button
-                label="cancel"
-                onClick={onCancel}
-                primary={false}
-              />
-            </Menu>
-          </Footer>
-        </Box>
+      <Section>
+        <DashboardContentBlocks blocks={item.contentBlocks} />
+        <Footer align="center" justify="center" pad="large">
+          <Menu
+            className="dashboard--content-blocks__button-footer"
+            direction="row"
+            inline
+            responsive={false}
+          >
+            <Button
+              label="submit"
+              onClick={onSubmit}
+              primary={true}
+              type="submit"
+            />
+            <Button
+              label="cancel"
+              onClick={onCancel}
+              primary={false}
+            />
+          </Menu>
+        </Footer>
       </Section>
     </Box>
   );

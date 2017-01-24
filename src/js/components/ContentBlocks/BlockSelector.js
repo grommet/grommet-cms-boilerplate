@@ -5,7 +5,7 @@ import Heading from 'grommet/components/Heading';
 
 const Block = ({ title, onClick, wireframe }) => 
   <Button onClick={onClick}>
-    <Box align="center" pad={{ vertical: 'small', horizontal: 'medium' }}>
+    <Box align="center" pad={{ vertical: 'small', horizontal: 'small' }}>
       <Box size={{ height: 'small', width: 'small' }} colorIndex="grey-4"
         pad={{
           horizontal: 'medium',
@@ -29,7 +29,7 @@ export default function BlockSelector ({ onClick, blockMap }) {
 
   return (
     <Box full="horizontal">
-      <Box pad="medium" colorIndex="light-2">
+      <Box pad={{ vertical: 'small' }} colorIndex="light-2">
         <Box direction="row" wrap={true} justify="center">
           {blocks}
         </Box>
