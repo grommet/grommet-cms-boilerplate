@@ -1,5 +1,7 @@
 # Grommet CMS
 
+## Getting Started
+
 This is the source code for the Grommet CMS boilerplate.
 To run this application, execute the following commands:
 
@@ -10,6 +12,19 @@ To run this application, execute the following commands:
   ```
 
   2. Add .env file. The project comes with a .env.example file which can be renamed to .env. These are your enviroment variables.
+  The .env.example file contains most of the setup you will need.  If you need more granular control, you have the ability to add / edit     these values.
+  
+  Below are the default .env values:
+  
+  ```
+  # Environment variables for database connection.
+  DB="grommet-cms-dev" // the name of your mongo databas
+  NODE_ENV="development" // the default NODE_ENV
+  DB_USER="" // The DB user name
+  DB_PW="" // the db password
+  BASE_URL="http://localhost:8003" // base url for your front end
+  API_URL="http://localhost:8000/api" // base url for your API.
+```
 
   3. Ensure Mongo is running. Upon starting the server the application will automatically build a hello world post and a temporary dashboard user.
 
