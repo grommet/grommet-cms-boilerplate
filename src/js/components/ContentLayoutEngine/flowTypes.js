@@ -1,7 +1,6 @@
 /* @flow */
 import type {
   ContentBlockType
-  // $FlowFixMe required module not found
 } from 'grommet-cms/components/Dashboard/PostPreview/flowTypes';
 
 type LayoutType = {

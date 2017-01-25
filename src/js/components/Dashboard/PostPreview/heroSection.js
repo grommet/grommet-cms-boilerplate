@@ -5,10 +5,8 @@ import Image from 'grommet/components/Image';
 import Box from 'grommet/components/Box';
 import Headline from 'grommet/components/Headline';
 import Label from 'grommet/components/Label';
-// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
 import { ContentBlocks } from 'grommet-cms/containers';
 import type ContentBlockType from './flowTypes';
-// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
 import type { Asset } from 'grommet-cms/containers/Assets/flowTypes';
 
 export default function PostPreviewHeroSection(props: {

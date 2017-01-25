@@ -10,7 +10,6 @@ import Section from 'grommet/components/Section';
 import Header from 'grommet/components/Header';
 import Heading from 'grommet/components/Heading';
 import Menu from 'grommet/components/Menu';
-// $FlowFixMe
 import { LayoutForm, ViewMoreViewLess } from 'grommet-cms/components';
 
 declare type OptionType = {
