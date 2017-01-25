@@ -444,8 +444,8 @@ declare module 'grommet/components/FormattedMessage' {
 
 declare module 'grommet/components/FormField' {
   declare type Grommet$FormFieldProps = {
-    error?: ?ReactElementOrNode,
-    help?: ?ReactElementOrNode,
+    error?: ?ReactElementOrNode | string,
+    help?: ?ReactElementOrNode | string,
     hidden?: boolean,
     htmlFor?: string,
     label?: string | ?ReactElementOrNode,
