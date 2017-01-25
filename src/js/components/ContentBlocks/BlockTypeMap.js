@@ -29,7 +29,7 @@ import {
   BlockColorSwatchWireframe
 } from 'grommet-cms/components';
 
-export const BLOCK_TYPE_MAP = {
+export default {
   BlockParagraph: {
     element: <BlockParagraph />,
     preview: <GenericPreview />,

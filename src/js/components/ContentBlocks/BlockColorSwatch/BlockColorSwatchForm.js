@@ -7,7 +7,7 @@ import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
 import Button from 'grommet/components/Button';
 import Footer from 'grommet/components/Footer';
-import ColorTypeList from '../Shared/ColorTypeList';
+import ColorTypeList from './internal/ColorTypeList';
 
 type BlockColorSwatchFormState = {
   nameInput: string,

@@ -1,3 +1,4 @@
+export BlockTypeMap from './BlockTypeMap';
 export * from './Shared';
 export * from './BlockColorSwatch';
 export * from './BlockCard';
@@ -8,4 +9,3 @@ export * from './BlockParagraph';
 export * from './BlockQuote';
 export * from './BlockVideo';
 export * from './BlockImageParagraph';
-export BlockTypeMap from './BlockTypeMap';
