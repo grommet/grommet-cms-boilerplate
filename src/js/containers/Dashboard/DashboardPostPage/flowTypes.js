@@ -17,6 +17,8 @@ export type SHOW_BOX_LAYOUT_FORM_TYPE =
   'DASHBOARD_POST_PAGE/SHOW_BOX_LAYOUT_FORM';
 export type POST_BOX_LAYOUT_FORM_RESET_TYPE =
   'DASHBOARD_POST_PAGE/POST_BOX_LAYOUT_FORM_RESET';
+export type POST_TOGGLE_ADVANCED_LAYOUT_TYPE =
+  'DASHBOARD_POST_PAGE/POST_TOGGLE_ADVANCED_LAYOUT';
 
 export type PaddingOptions = 'none' | 'small' | 'medium' | 'large';
 export type BasisOptions = 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge' |
@@ -33,6 +35,7 @@ export type SectionFormSubmission = {
 export type DashboardPostPageState = {
   toastMessage: ?string,
   sectionLayoutForm: {
+    showAdvancedLayoutOptions: boolean,
     title: string,
     isVisible: boolean,
     selectedSection: ?number,
@@ -65,7 +68,8 @@ export type DashboardPostPageAction = {
   type: SHOW_SECTION_FORM_TYPE |  POST_SECTION_FORM_INPUT_TYPE | 
     POST_SECTION_FORM_RESET_TYPE | POST_SECTION_SET_MESSAGE_TYPE | 
       POST_SECTION_CLEAR_MESSAGE_TYPE | POST_BOX_LAYOUT_FORM_INPUT_TYPE |
-        SHOW_BOX_LAYOUT_FORM_TYPE | POST_BOX_LAYOUT_FORM_RESET_TYPE,
+        SHOW_BOX_LAYOUT_FORM_TYPE | POST_BOX_LAYOUT_FORM_RESET_TYPE |
+        POST_TOGGLE_ADVANCED_LAYOUT_TYPE,
   name?: string,
   value?: string,
   index?: ?number,

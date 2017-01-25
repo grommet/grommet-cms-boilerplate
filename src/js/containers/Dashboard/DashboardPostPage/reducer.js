@@ -8,6 +8,7 @@ import type {
 export const initialState: DashboardPostPageState = {
   toastMessage: null,
   sectionLayoutForm: {
+    showAdvancedLayoutOptions: false,
     isVisible: false,
     title: "Section Layout",
     selectedSection: null,
@@ -101,6 +102,15 @@ const dashboardPost = (
   action: DashboardPostPageAction
 ): DashboardPostPageState => {
   switch (action.type) {
+    case T.POST_TOGGLE_ADVANCED_LAYOUT:
+      return {
+        ...state,
+        sectionLayoutForm: {
+          ...state.sectionLayoutForm,
+          showAdvancedLayoutOptions: 
+            !state.sectionLayoutForm.showAdvancedLayoutOptions
+        }
+      };
     case T.POST_SECTION_SET_MESSAGE:
       return {
         ...state,

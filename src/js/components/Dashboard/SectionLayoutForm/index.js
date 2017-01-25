@@ -11,7 +11,7 @@ import Header from 'grommet/components/Header';
 import Heading from 'grommet/components/Heading';
 import Menu from 'grommet/components/Menu';
 // $FlowFixMe
-import { LayoutForm } from 'grommet-cms/components';
+import { LayoutForm, ViewMoreViewLess } from 'grommet-cms/components';
 
 declare type OptionType = {
   value: any,
@@ -34,7 +34,9 @@ export default function SectionLayoutForm(props: {
     type: "Select",
     options: Array<string>,
     value: ?string
-  }>
+  }>,
+  showAdvancedLayout: boolean,
+  onShowMore: Function
 }) {
   const {
     onClose,
@@ -43,6 +45,8 @@ export default function SectionLayoutForm(props: {
     isEditing,
     isVisible,
     name,
+    showAdvancedLayout,
+    onShowMore,
     ...sectionLayoutForm
   } = props;
   return (
@@ -72,10 +76,15 @@ export default function SectionLayoutForm(props: {
                 />
               </FormField>
             </fieldset>
-            <LayoutForm
-              {...sectionLayoutForm}
-              onChange={onChange}
-            />
+            <ViewMoreViewLess
+              onShowMore={onShowMore}
+              isShowingMore={showAdvancedLayout}
+            >
+              <LayoutForm
+                {...sectionLayoutForm}
+                onChange={onChange}
+              />
+            </ViewMoreViewLess>
           </FormFields>
         </Form>
       </Section>

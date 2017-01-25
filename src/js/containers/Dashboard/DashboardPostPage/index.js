@@ -42,12 +42,14 @@ import {
   postSectionClearToastMessage,
   postBoxLayoutFormReset,
   postBoxLayoutFormInput,
-  toggleBoxLayoutForm
+  toggleBoxLayoutForm,
+  postToggleAdvancedLayout
 } from './actions';
 import { debounce } from 'grommet-cms/utils';
 import {
   selectPostSectionFormSubmission,
-  selectBoxLayoutFormSubmission
+  selectBoxLayoutFormSubmission,
+  selectAdvancedLayoutOptions
 } from './selectors';
 
 export class DashboardPostPage extends Component {
@@ -79,6 +81,7 @@ export class DashboardPostPage extends Component {
     this._onSetBoxLayoutFormValues = this._onSetBoxLayoutFormValues.bind(this);
     this._onSubmitBoxLayoutForm = this._onSubmitBoxLayoutForm.bind(this);
     this._onBackToMasterView = this._onBackToMasterView.bind(this);
+    this._onToggleSectionOptions = this._onToggleSectionOptions.bind(this);
     this.state = {
       selectedSection: null,
       isEditingMarquee: false,
@@ -271,6 +274,10 @@ export class DashboardPostPage extends Component {
     this._onSetSectionFormValues();
   }
 
+  _onToggleSectionOptions() {
+    this.props.dispatch(postToggleAdvancedLayout());
+  }
+
   _onSetBoxLayoutFormValues(id = null) {
     if (id != null) {
       const selectedBlock = this.props.contentBlocks
@@ -358,7 +365,8 @@ export class DashboardPostPage extends Component {
       boxLayoutForm,
       url,
       toastMessage,
-      request
+      request,
+      showSectionLayoutOptions
     } = this.props;
     const { selectedSection, shouldAnimate } = this.state;
     return (
@@ -433,6 +441,8 @@ export class DashboardPostPage extends Component {
         }
         <SectionLayoutForm
           {...sectionLayoutForm}
+          onShowMore={this._onToggleSectionOptions}
+          showAdvancedLayout={showSectionLayoutOptions}
           onChange={this._onChangeSectionForm}
           isEditing={sectionLayoutForm.selectedSection !== null}
           onClose={() => this._onSetSectionFormValues(null)}
@@ -471,6 +481,7 @@ DashboardPostPage.propTypes = {
   request: PropTypes.bool.isRequired,
   error: PropTypes.string,
   toastMessage: PropTypes.string,
+  showSectionLayoutOptions: PropTypes.bool.isRequired,
   post: PropTypes.shape({
     sections: PropTypes.arrayOf(
       PropTypes.shape({
@@ -501,7 +512,8 @@ function mapStateToProps(state, props) {
     contentBlocks,
     toastMessage,
     postSectionLayoutSubmission: selectPostSectionFormSubmission(state),
-    boxLayoutFormSubmission: selectBoxLayoutFormSubmission(state)
+    boxLayoutFormSubmission: selectBoxLayoutFormSubmission(state),
+    showSectionLayoutOptions: selectAdvancedLayoutOptions(state)
   };
 };
 

@@ -48,3 +48,6 @@ export const postBoxLayoutFormReset =
     type: T.POST_BOX_LAYOUT_FORM_RESET
   });
   
+export const postToggleAdvancedLayout = (): DashboardPostPageAction => ({
+  type: T.POST_TOGGLE_ADVANCED_LAYOUT
+});

@@ -1,4 +1,5 @@
 /* GENERATOR */
+export ViewMoreViewLess from './ViewMoreViewLess';
 export GrommetHero from './GrommetHero';
 export Footer from './Footer';
 export PostFeedItem from './PostFeedItem';
