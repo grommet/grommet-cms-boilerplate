@@ -1,11 +1,13 @@
 import React from 'react';
-import ImageForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/ImageForm';
-import ParagraphForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/ParagraphForm';
-import ImageParagraphForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/ImageParagraphForm';
-import CardParagraphForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/CardParagraphForm';
-import QuoteForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/QuoteForm';
-import VideoForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/VideoForm';
-import CarouselForm from 'grommet-cms/containers/Dashboard/DashboardBlockForm/CarouselForm';
+import {
+  ImageForm,
+  ParagraphForm,
+  ImageParagraphForm,
+  CardParagraphForm,
+  QuoteForm,
+  VideoForm,
+  CarouselForm
+} from 'grommet-cms/containers/Dashboard/DashboardBlockForm';
 import {
   BlockHeading,
   BlockHeadingWireframe,
@@ -27,7 +29,7 @@ import {
   BlockColorSwatch,
   BlockColorSwatchForm,
   BlockColorSwatchWireframe
-} from 'grommet-cms/components';
+} from './index';
 
 export default {
   BlockParagraph: {
