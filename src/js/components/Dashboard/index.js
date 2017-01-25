@@ -15,3 +15,4 @@ export MarqueeForm from './MarqueeForm';
 export AddPostForm from './AddPostForm';
 export SectionLayoutForm from './SectionLayoutForm';
 export LayoutForm from './LayoutForm';
+export BoxLayoutForm from './BoxLayoutForm';

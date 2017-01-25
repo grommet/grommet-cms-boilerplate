@@ -61,7 +61,7 @@ export default class BlockCard extends Component {
             </Box>
             <Box basis="1/3" pad="large">
               <Card
-                thumbnail={image}
+                thumbnail={image.path}
                 label={label}
                 heading={
                   <Box pad={{vertical: 'small'}}>
