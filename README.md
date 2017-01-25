@@ -55,14 +55,14 @@ where <type_of_component> is one of: component, container or page.
 ### Generator Options
 
 - Container `npm run generate:container`
-  - Name: the name of the container, i.e. `Dashboard`
-  - Connected / Not connected ES6 Class containers (higher order)
-  - SCSS Modules
-  - [Styled Components](https://github.com/styled-components/styled-components)
-  - Reducers, actions and constants
-  - GraphQL: The generator can add collocated queries and mutations using GraphQL / ApolloClient.  Accept the option to use this feature.
-  - Tests for all of the above
-  - README.md file that documents the container
+  - What should it be called? Default: `Dashboard`
+  - What directory would you like your container in? (relative path) Default: `./src/js/containers`
+  - Do you want actions/constants/reducer for this container? (Y/n)
+  - Do you want to use reselect? (Y/n)
+    - Adds a `selectors` file that allows you to create [memoized selectors](https://github.com/reactjs/reselect). See [here](https://medium.com/front-end-hacking/performance-optimizing-a-react-single-page-app-part-2-92a0f0c83202#.1zw1ibyrw) for why this can help your app's performance.
+  - Should the container have FlowTypes instead of PropTypes? (Y/n)
+  - Should the component have an accompanying jest test file? (y/N)
+
 - Component `npm run generate:component`
   - Select the type of component: Stateless functional components (recommended) / ES6 Class
   - What directory would you like your component in? (relative), defaults to `./src/js/components`
