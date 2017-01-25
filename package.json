@@ -38,6 +38,7 @@
     "babel-register": "^6.11.6",
     "body-parser": "^1.15.2",
     "clone-stats": "0.0.1",
+    "color-convert": "^1.9.0",
     "colors": "^1.1.2",
     "compression": "^1.4.4",
     "cookie-parser": "^1.4.3",
