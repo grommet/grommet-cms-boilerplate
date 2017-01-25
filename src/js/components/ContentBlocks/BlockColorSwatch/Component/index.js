@@ -10,6 +10,9 @@ export default function Component(props: {
   }
 }) {
   const { color } = props;
+  if (!color) {
+    return null;
+  }
   return (
     <Box>
       <Box

@@ -160,6 +160,7 @@ function mapStateToProps(state, props) {
       imageSize,
       label,
       linkUrl,
+      color,
       source
     } = block;
     return {
@@ -172,6 +173,7 @@ function mapStateToProps(state, props) {
       imageDesc,
       imageSize,
       label,
+      color,
       linkUrl,
       source
     };

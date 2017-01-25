@@ -11,35 +11,74 @@ import ColorTypeList from '../Shared/ColorTypeList';
 
 type BlockColorSwatchFormState = {
   nameInput: string,
-  colorInput: string
+  colorInput: string,
+  error: ?string
 };
 
 type BlockColorSwatchFormProps = {
-  onSubmit: Function
+  onSubmit: Function,
+  color?: {
+    name: ?string,
+    hex: ?string
+  }
 };
 
 export default class BlockColorSwatchForm extends React.Component {
   state: BlockColorSwatchFormState;
   props: BlockColorSwatchFormProps;
-  constructor() {
-    super();
+  constructor(props: BlockColorSwatchFormProps) {
+    super(props);
     (this:any)._onChange = this._onChange.bind(this);
     (this:any)._onSubmit = this._onSubmit.bind(this);
+    (this:any)._formIsValid = this._formIsValid.bind(this);
+    let nameInput = '';
+    let colorInput = '#000000';
+    const { color } = props;
+    if (color) {
+      if (color.name) {
+        nameInput = color.name;
+      }
+      if (color.hex) {
+        colorInput = color.hex;
+      }
+    }
     this.state = {
-      nameInput: '',
-      colorInput: '#ff0000'
+      nameInput,
+      error: null,
+      colorInput
     };
   }
   
   _onChange({ target }: any) {
     this.setState({
-      [`${target.id}`]: target.value
+      [`${target.id}`]: target.value,
+      error: this.state.nameInput
+        ? null
+        : this.state.error
     });
   }
 
   _onSubmit(event: any) {
     event.preventDefault();
-    this.props.onSubmit(this.state);
+    const { colorInput, nameInput } = this.state;
+    if (this._formIsValid()) {
+      this.props.onSubmit({
+        color: {
+          hex: colorInput,
+          name: nameInput
+        }
+      });
+    } else {
+      this.setState({
+        error: 'Please enter a valid name'
+      });
+    }
+  }
+
+  _formIsValid() {
+    const hexRE = /(0x)?[0-9a-f]+/i;
+    const { colorInput, nameInput } = this.state;
+    return hexRE.test(colorInput) && nameInput.length > 0;
   }
 
   render() {
@@ -55,6 +94,7 @@ export default class BlockColorSwatchForm extends React.Component {
               <FormField
                 label="Color Name"
                 htmlFor="nameInput"
+                error={this.state.error}
               >
                 <TextInput
                   onDOMChange={this._onChange}
