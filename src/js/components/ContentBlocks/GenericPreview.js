@@ -14,7 +14,7 @@ export default function GenericPreview(props: {
       full="horizontal"
     >
       <Heading tag="h3">
-        {props.content}
+        {props.content.slice(0, 50)}
       </Heading>  
     </Box>
   );

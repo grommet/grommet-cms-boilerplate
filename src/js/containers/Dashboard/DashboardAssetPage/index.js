@@ -1,8 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
-import { submitAsset, getAsset, assetsError } from 'grommet-cms/containers/Assets/actions';
 import Anchor from 'grommet/components/Anchor';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
@@ -12,10 +10,13 @@ import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import TrashIcon from 'grommet/components/icons/base/Trash';
 import DocumentIcon from 'grommet/components/icons/base/Document';
-// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
 import { isImage } from 'grommet-cms/utils';
-// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
 import type { Asset } from 'grommet-cms/containers/Assets/flowTypes';
+import {
+  submitAsset,
+  getAsset,
+  assetsError
+} from 'grommet-cms/containers/Assets/actions';
 
 type Props = {
   error: string,

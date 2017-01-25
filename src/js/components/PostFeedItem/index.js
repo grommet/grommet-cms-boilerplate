@@ -5,7 +5,6 @@ import Anchor from 'grommet/components/Anchor';
 import Heading from 'grommet/components/Heading';
 import Section from 'grommet/components/Section';
 import Label from 'grommet/components/Label';
-// $FlowFixMe grommet-cms required module not found
 import { formatPrettyDate } from 'grommet-cms/utils';
 
 export default function PostFeedItem(props: {

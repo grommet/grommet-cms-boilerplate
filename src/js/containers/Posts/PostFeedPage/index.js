@@ -6,8 +6,11 @@ import Box from 'grommet/components/Box';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { bindActionCreators } from 'redux';
-// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
-import { WithLoading, ErrorNotification, PostFeedItem } from 'grommet-cms/components';
+import {
+  WithLoading,
+  ErrorNotification,
+  PostFeedItem
+} from 'grommet-cms/components';
 import * as PostFeedPageActionCreators from './actions';
 import { selectPosts, selectError, selectIsLoading } from './selectors';
 import type { PostFeedPageProps } from './flowTypes';

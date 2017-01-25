@@ -5,8 +5,7 @@ import Form from 'grommet/components/Form';
 import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
-
-import { DashboardFileUpload } from 'grommet-cms/containers';
+import { Assets } from 'grommet-cms/containers';
 
 export class CardParagraphForm extends Component {
   constructor(props) {
@@ -23,6 +22,7 @@ export class CardParagraphForm extends Component {
 
     this._onChange = this._onChange.bind(this);
     this._onSubmit = this._onSubmit.bind(this);
+    this._onAssetSelect = this._onAssetSelect.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -41,6 +41,10 @@ export class CardParagraphForm extends Component {
     obj[key] = val;
 
     this.setState(obj);
+  }
+
+  _onAssetSelect(asset) {
+    this.setState({ image: asset });
   }
 
   _validateForm({ image }) {
@@ -75,7 +79,6 @@ export class CardParagraphForm extends Component {
       ? this._onSubmit
       : undefined;
 
-    const fileUpload = <DashboardFileUpload />;
     return (
       <Box colorIndex="light-2" pad="medium">
         <Form compact={false} onSubmit={submit}>
@@ -103,9 +106,11 @@ export class CardParagraphForm extends Component {
               </FormField>
               <FormField label="Card thumbnail path" htmlFor="image">
                 <input id="image" name="image" type="text"
-                  value={image} onChange={this._onChange} />
+                  value={image.path} onChange={this._onChange} />
               </FormField>
-              {fileUpload}
+              <Assets
+                onAssetSelect={this._onAssetSelect}
+              />
             </fieldset>
             <Button onClick={submit} primary={false} type="submit"
               label="Done" />

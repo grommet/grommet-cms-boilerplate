@@ -5,6 +5,20 @@ export type POST_SECTION_FORM_INPUT_TYPE =
   'DASHBOARD_POST_PAGE/POST_SECTION_FORM_INPUT';
 export type POST_SECTION_FORM_RESET_TYPE =
   'DASHBOARD_POST_PAGE/POST_SECTION_FORM_RESET';
+export type POST_SECTION_SET_MESSAGE_TYPE = 
+  'DASHBOARD_POST_PAGE/POST_SECTION_SET_MESSAGE';
+export type POST_SECTION_CLEAR_MESSAGE_TYPE = 
+  'DASHBOARD_POST_PAGE/POST_SECTION_CLEAR_MESSAGE';
+export type POST_TOGGLE_BOX_LAYOUT_FORM_TYPE =
+  'DASHBOARD_POST_PAGE/POST_TOGGLE_BOX_LAYOUT_FORM';
+export type POST_BOX_LAYOUT_FORM_INPUT_TYPE =
+  'DASHBOARD_POST_PAGE/POST_BOX_LAYOUT_FORM_INPUT';
+export type SHOW_BOX_LAYOUT_FORM_TYPE =
+  'DASHBOARD_POST_PAGE/SHOW_BOX_LAYOUT_FORM';
+export type POST_BOX_LAYOUT_FORM_RESET_TYPE =
+  'DASHBOARD_POST_PAGE/POST_BOX_LAYOUT_FORM_RESET';
+export type POST_TOGGLE_ADVANCED_LAYOUT_TYPE =
+  'DASHBOARD_POST_PAGE/POST_TOGGLE_ADVANCED_LAYOUT';
 
 export type PaddingOptions = 'none' | 'small' | 'medium' | 'large';
 export type BasisOptions = 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge' |
@@ -18,40 +32,46 @@ export type SectionFormSubmission = {
   wrap: boolean
 }
 
-export type SectionForm = {
-  isVisible: boolean,
-  name: {
-    value: ?string
-  },
-  selectedSection: ?number,
-  padding: {
-    value: string,
-    options: ['none', 'small', 'medium', 'large']
-  },
-  basis: {
-    value: string,
-    options: [
-      'xsmall', 'small',
-      'medium', 'large',
-      'xlarge', 'xxlarge',
-      'full', '1/2',
-      '1/3', '2/3',
-      '1/4', '3/4',
-      'none'
-    ]
-  },
-  wrap: {
-    value: boolean
-  }
-}
-
 export type DashboardPostPageState = {
-  sectionForm: SectionForm
+  toastMessage: ?string,
+  sectionLayoutForm: {
+    showAdvancedLayoutOptions: boolean,
+    title: string,
+    isVisible: boolean,
+    selectedSection: ?number,
+    name: {
+      value: string
+    },
+    fields: Array<{
+      label: string,
+      name: string,
+      type: "Select",
+      options: Array<string>,
+      value: ?string
+    }>
+  },
+  boxLayoutForm: {
+    title: string,
+    isVisible: boolean,
+    selectedContentBlockId: ?number,
+    fields: Array<{
+      label: string,
+      name: string,
+      type: "Select",
+      options: Array<string>,
+      value: ?string
+    }>
+  },
 }
 
 export type DashboardPostPageAction = {
-  type: SHOW_SECTION_FORM_TYPE | POST_SECTION_FORM_INPUT_TYPE,
+  type: SHOW_SECTION_FORM_TYPE |  POST_SECTION_FORM_INPUT_TYPE | 
+    POST_SECTION_FORM_RESET_TYPE | POST_SECTION_SET_MESSAGE_TYPE | 
+      POST_SECTION_CLEAR_MESSAGE_TYPE | POST_BOX_LAYOUT_FORM_INPUT_TYPE |
+        SHOW_BOX_LAYOUT_FORM_TYPE | POST_BOX_LAYOUT_FORM_RESET_TYPE |
+        POST_TOGGLE_ADVANCED_LAYOUT_TYPE,
   name?: string,
   value?: string,
-  index?: ?number
+  index?: ?number,
+  message?: string
 }

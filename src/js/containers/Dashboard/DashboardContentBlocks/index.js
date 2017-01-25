@@ -1,13 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { blockAddList } from './actions';
 import Box from 'grommet/components/Box';
 import List from 'grommet/components/List';
 import ListItem from 'grommet/components/ListItem';
 import DashboardContentBlock from
   'grommet-cms/containers/Dashboard/DashboardContentBlock';
-
-// This is the main container for the Dashboard Content Blocks.
+import { blockAddList } from './actions';
 
 export class DashboardContentBlocks extends Component {
 
@@ -49,6 +47,7 @@ export class DashboardContentBlocks extends Component {
 };
 
 DashboardContentBlocks.propTypes = {
+  blocks: PropTypes.array,
   dispatch: PropTypes.func.isRequired
 };
 

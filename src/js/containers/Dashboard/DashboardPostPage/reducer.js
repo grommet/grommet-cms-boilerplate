@@ -6,31 +6,94 @@ import type {
 } from './flowTypes';
 
 export const initialState: DashboardPostPageState = {
-  sectionForm: {
+  toastMessage: null,
+  sectionLayoutForm: {
+    showAdvancedLayoutOptions: false,
     isVisible: false,
+    title: "Section Layout",
+    selectedSection: null,
     name: {
       value: ''
     },
-    selectedSection: null,
-    padding: {
-      value: 'none',
-      options: ['none', 'small', 'medium', 'large']
-    },
-    basis: {
-      value: 'none',
-      options: [
-        'xsmall', 'small',
-        'medium', 'large',
-        'xlarge', 'xxlarge',
-        'full', '1/2',
-        '1/3', '2/3',
-        '1/4', '3/4',
-        'none'
-      ]
-    },
-    wrap: {
-      value: false
-    }
+    fields: [
+      {
+        label: "Padding",
+        name: "pad",
+        type: "Select",
+        options: ["small", "medium", "large", "none"],
+        value: 'none'
+      },
+      {
+        label: "Flex Basis",
+        name: "basis",
+        type: "Select",
+        options: ["xsmall", "small", "medium", "large", "xlarge", "xxlarge", "full", "1/2", "1/3", "2/3", "1/4", "3/4"],
+        value: 'full'
+      },
+      {
+        label: "Flex Direction",
+        name: "direction",
+        type: "Select",
+        options: ["row", "column"],
+        value: 'column'
+      },
+      {
+        label: "Justify Content",
+        name: "justify",
+        type: "Select",
+        options: ["start", "center", "between", "end"],
+        value: 'center'
+      },
+      {
+        label: "Align Items",
+        name: "align",
+        type: "Select",
+        options: ["start", "center", "end", "baseline", "stretch"],
+        value: 'center'
+      },
+      {
+        label: "Full",
+        name: "full",
+        type: "Select",
+        options: ["horizontal", "vertical", "true", "false"],
+        value: 'false'
+      },
+      {
+        label: 'Wrap',
+        name: 'wrap',
+        type: 'Select',
+        options: ["true", "false"],
+        value: 'false'
+      }
+    ]
+  },
+  boxLayoutForm: {
+    selectedContentBlockId: null,
+    isVisible: false,
+    title: "Box Layout",
+    fields: [
+      {
+        label: "Padding",
+        name: "pad",
+        type: "Select",
+        options: ["small", "medium", "large", "none"],
+        value: 'none'
+      },
+      {
+        label: "Size",
+        name: "size",
+        type: "Select",
+        options: ["auto", "xsmall", "small", "medium", "large", "xlarge", "xxlarge", "full"],
+        value: 'auto'
+      },
+      {
+        label: "Flex",
+        name: "flex",
+        type: "Select",
+        options: ["grow", "shrink", "true", "false"],
+        value: 'false'
+      }
+    ]
   }
 };
 
@@ -39,53 +102,101 @@ const dashboardPost = (
   action: DashboardPostPageAction
 ): DashboardPostPageState => {
   switch (action.type) {
-    case T.POST_SECTION_FORM_RESET: {
-      let newSectionForm = initialState.sectionForm;
-      const { options } = action;
-      if (options) {
-        Object.keys(options).forEach((item, i) => {
-          const value = options[`${item}`];
-          newSectionForm = {
-            ...newSectionForm,
-            [`${item}`]: {
-              ...state.sectionForm[`${item}`],
-              value
-            }
-          };
-        });
-      }
+    case T.POST_TOGGLE_ADVANCED_LAYOUT:
       return {
         ...state,
-        sectionForm: newSectionForm
+        sectionLayoutForm: {
+          ...state.sectionLayoutForm,
+          showAdvancedLayoutOptions: 
+            !state.sectionLayoutForm.showAdvancedLayoutOptions
+        }
       };
-    }
+    case T.POST_SECTION_SET_MESSAGE:
+      return {
+        ...state,
+        toastMessage: action.message
+      };
+    case T.POST_SECTION_CLEAR_MESSAGE:
+      return {
+        ...state,
+        toastMessage: null
+      };
+    case T.POST_SECTION_FORM_RESET:
+      return {
+        ...state,
+        sectionLayoutForm: initialState.sectionLayoutForm
+      };
+    case T.POST_BOX_LAYOUT_FORM_RESET:
+      return {
+        ...state,
+        boxLayoutForm: initialState.boxLayoutForm
+      };
+    case T.SHOW_BOX_LAYOUT_FORM:
+      return {
+        ...state,
+        boxLayoutForm: {
+          ...state.boxLayoutForm,
+          isVisible: !state.boxLayoutForm.isVisible,
+          selectedContentBlockId: action.index
+        }
+      };
     case T.SHOW_SECTION_FORM:
       return {
         ...state,
-        sectionForm: {
-          ...state.sectionForm,
-          isVisible: !state.sectionForm.isVisible,
+        sectionLayoutForm: {
+          ...state.sectionLayoutForm,
+          isVisible: !state.sectionLayoutForm.isVisible,
           selectedSection: action.index
         }
       };
     case T.POST_SECTION_FORM_INPUT: {
-      const name = action.name || '';
-      let value;
-      if (name === 'wrap') {
-        value = !state.sectionForm.wrap.value;
+      if (action.name === 'name') {
+        return {
+          ...state,
+          sectionLayoutForm: {
+            ...state.sectionLayoutForm,
+            name: {
+              value: action.value || ''
+            }
+          }
+        };
       } else {
-        value = action.value;
+        const field = state.sectionLayoutForm.fields
+          .filter((item) => item.name === action.name)[0];
+        const index = state.sectionLayoutForm.fields.indexOf(field);
+        return {
+          ...state,
+          sectionLayoutForm: {
+            ...state.sectionLayoutForm,
+            fields: [
+              ...state.sectionLayoutForm.fields.slice(0, index),
+              {
+                ...state.sectionLayoutForm.fields[index],
+                value: action.value || ''
+              },
+              ...state.sectionLayoutForm.fields.slice(index + 1)
+            ]
+          }
+        };
       }
-      const newSectionForm = {
-        ...state.sectionForm,
-        [`${name}`]: {
-          ...state.sectionForm[`${name}`],
-          value
-        }
-      };
+    }
+    case T.POST_BOX_LAYOUT_FORM_INPUT: {
+      const field = state.boxLayoutForm.fields
+        .filter((item) => item.name === action.name)[0];
+      const index = state.boxLayoutForm.fields.indexOf(field);
       return {
         ...state,
-        sectionForm: newSectionForm
+        boxLayoutForm: {
+          ...state.boxLayoutForm,
+          fields: [
+            ...state.boxLayoutForm.fields.slice(0, index),
+            {
+              ...state.boxLayoutForm.fields[index],
+              value: action.value
+            },
+            ...state.boxLayoutForm.fields.slice(index + 1)
+          ]
+        }
       };
     }
     default:

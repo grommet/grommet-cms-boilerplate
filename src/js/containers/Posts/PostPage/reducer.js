@@ -9,15 +9,32 @@ const initialState = {
 
 function postSectionsReducer(state = [], action) {
   switch (action.type) {
+    case ActionTypes.POST_REMOVE_UNUSED_CONTENT_BLOCKS:
+      return [
+        ...state.slice(0, action.index),
+        {
+          ...state[action.index],
+          contentBlocks: state[action.index].contentBlocks
+            .filter((item) => item.edit !== true)
+        },
+        ...state.slice(action.index + 1)
+      ];
+    case ActionTypes.POST_SET_CONTENT_BLOCKS:
+      return [
+        ...state.slice(0, action.index),
+        {
+          ...state[action.index],
+          contentBlocks: action.contentBlocks
+        },
+        ...state.slice(action.index + 1)
+      ];
     case ActionTypes.POST_ADD_SECTION:
       return [
         ...state,
         {
           name: action.name,
           id: action.id,
-          padding: action.padding,
-          wrap: action.wrap,
-          basis: action.basis,
+          layout: action.layout,
           order: state.length || 0,
           contentBlocks: []
         }
@@ -55,17 +72,14 @@ function postSectionsReducer(state = [], action) {
       ];
     case ActionTypes.POST_EDIT_SECTION:
       return [
-        ...state.slice(0, action.selectedSection),
+        ...state.slice(0, action.index),
         {
-          ...state[action.selectedSection],
+          ...state[action.index],
           name: action.name,
           id: action.id,
-          padding: action.padding,
-          wrap: action.wrap,
-          basis: action.basis,
-          order: action.selectedSection
+          layout: action.layout
         },
-        ...state.slice(action.selectedSection + 1)
+        ...state.slice(action.index + 1)
       ];
     default: return state;
   }
@@ -73,6 +87,22 @@ function postSectionsReducer(state = [], action) {
 
 function posts(state = initialState, action) {
   switch(action.type) {
+    case ActionTypes.POST_REMOVE_UNUSED_CONTENT_BLOCKS:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          sections: postSectionsReducer(state.post.sections, action)
+        }
+      };
+    case ActionTypes.POST_SET_CONTENT_BLOCKS:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          sections: postSectionsReducer(state.post.sections, action)
+        }
+      };
     case ActionTypes.POST_CLEAR_ERROR:
       return {
         ...state,

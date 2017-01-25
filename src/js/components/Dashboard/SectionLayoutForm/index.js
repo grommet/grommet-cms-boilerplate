@@ -10,50 +10,48 @@ import Section from 'grommet/components/Section';
 import Header from 'grommet/components/Header';
 import Heading from 'grommet/components/Heading';
 import Menu from 'grommet/components/Menu';
-// $FlowFixMe
-import { LayoutForm } from 'grommet-cms/components';
+import { LayoutForm, ViewMoreViewLess } from 'grommet-cms/components';
 
 declare type OptionType = {
   value: any,
   label: any
 } | string | number;
 
-export default function PostSectionForm(props: {
-  isVisible: boolean,
+export default function SectionLayoutForm(props: {
   onClose: Function,
   onChange: Function,
-  name: {
-    value: ?string
-  },
-  padding: {
-    value: ?string,
-    options: OptionType[]
-  },
-  basis: {
-    value: ?string,
-    options: OptionType[]
-  },
-  wrap: {
-    value: boolean
-  },
   onSubmit: Function,
   isEditing: boolean,
+  isVisible: boolean,
+  name: {
+    value: string
+  },
+  title: string,
+  fields: Array<{
+    label: string,
+    name: string,
+    type: "Select",
+    options: Array<string>,
+    value: ?string
+  }>,
+  showAdvancedLayout: boolean,
+  onShowMore: Function
 }) {
   const {
-    isVisible,
     onClose,
     onChange,
-    name,
     onSubmit,
     isEditing,
-    padding,
-    basis,
-    wrap
+    isVisible,
+    name,
+    showAdvancedLayout,
+    onShowMore,
+    ...sectionLayoutForm
   } = props;
   return (
     <Layer
       closer
-      align="right"
+      align="left"
       onClose={onClose}
       hidden={!isVisible}
     >
@@ -63,24 +61,29 @@ export default function PostSectionForm(props: {
         </Heading>
       </Header>
       <Section pad="medium" align="center">
-        <Form pad="medium">
+        <Form pad="medium" className="dashboad--section-layout-form__scroll">
           <FormFields>
-            <FormField label="Name" htmlFor="name">
-              <input
-                autoFocus
-                id="name"
-                name="name"
-                type="text"
-                value={name.value}
-                onChange={({ target }) => onChange(target)}
+            <fieldset>
+              <FormField label="Name" htmlFor="name">
+                <input
+                  autoFocus
+                  id="name"
+                  name="name"
+                  type="text"
+                  value={name.value}
+                  onChange={({ target }) => onChange(target)}
+                />
+              </FormField>
+            </fieldset>
+            <ViewMoreViewLess
+              onShowMore={onShowMore}
+              isShowingMore={showAdvancedLayout}
+            >
+              <LayoutForm
+                {...sectionLayoutForm}
+                onChange={onChange}
               />
-            </FormField>
-            <LayoutForm
-              onChange={onChange}
-              padding={padding}
-              basis={basis}
-              wrap={wrap}
-            />
+            </ViewMoreViewLess>
           </FormFields>
         </Form>
       </Section>

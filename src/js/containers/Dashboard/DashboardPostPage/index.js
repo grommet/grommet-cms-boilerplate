@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import Box from 'grommet/components/Box';
 import Split from 'grommet/components/Split';
 import Animate from 'grommet/components/Animate';
+import Toast from 'grommet/components/Toast';
 import {
   dashboardSetLeftNavAnchor
 } from 'grommet-cms/containers/Dashboard/DashboardContainer/actions';
 import {
   blockAdd,
-  blockCancel
+  blockCancel,
+  blockSetContentBlockLayout
 } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
 import {
   getPost,
@@ -18,7 +20,9 @@ import {
   postEditOrAddSection,
   postMoveSectionUp,
   postMoveSectionDown,
-  postClearError
+  postClearError,
+  postSetContentBlocks,
+  postRemoveUnusedContentBlocksFromSection
 } from 'grommet-cms/containers/Posts/PostPage/actions';
 import {
   PageHeader,
@@ -26,15 +30,27 @@ import {
   ErrorNotification,
   PostList,
   PostListItemDetail,
-  SectionForm,
-  MarqueeForm
+  SectionLayoutForm,
+  MarqueeForm,
+  BoxLayoutForm
 } from 'grommet-cms/components';
 import {
   toggleSectionForm,
   postSectionFormInput,
-  postSectionFormReset
+  postSectionFormReset,
+  postSectionSetToastMessage,
+  postSectionClearToastMessage,
+  postBoxLayoutFormReset,
+  postBoxLayoutFormInput,
+  toggleBoxLayoutForm,
+  postToggleAdvancedLayout
 } from './actions';
-import parseSubmission from './utils';
+import { debounce } from 'grommet-cms/utils';
+import {
+  selectPostSectionFormSubmission,
+  selectBoxLayoutFormSubmission,
+  selectAdvancedLayoutOptions
+} from './selectors';
 
 export class DashboardPostPage extends Component {
   constructor(props) {
@@ -58,6 +74,14 @@ export class DashboardPostPage extends Component {
     this._onChangeSectionForm = this._onChangeSectionForm.bind(this);
     this._onSetSectionFormValues = this._onSetSectionFormValues.bind(this);
     this._onUpdateContentBlocks = this._onUpdateContentBlocks.bind(this);
+    this._removeUnusedContentBlocks = this._removeUnusedContentBlocks.bind(this);
+    this._checkForUnusedContentBlocks = this._checkForUnusedContentBlocks.bind(this);
+    this._onCloseToast = this._onCloseToast.bind(this);
+    this._onChangeBoxLayoutForm = this._onChangeBoxLayoutForm.bind(this);
+    this._onSetBoxLayoutFormValues = this._onSetBoxLayoutFormValues.bind(this);
+    this._onSubmitBoxLayoutForm = this._onSubmitBoxLayoutForm.bind(this);
+    this._onBackToMasterView = this._onBackToMasterView.bind(this);
+    this._onToggleSectionOptions = this._onToggleSectionOptions.bind(this);
     this.state = {
       selectedSection: null,
       isEditingMarquee: false,
@@ -89,16 +113,29 @@ export class DashboardPostPage extends Component {
     );
   }
 
-  componentWillReceiveProps({ post, contentBlocks }) {
+  componentWillReceiveProps({ post, contentBlocks, boxLayoutForm }) {
     if (post !== this.props.post && !this.props.request) {
       if (!this.state.isEditingMarquee) {
-        this._onSubmit(post);
+        debounce(
+          this._onSubmit(post),
+          1000,
+          true
+        );
       }
     }
     if (contentBlocks !== this.props.contentBlocks) {
       if (post && this.state.selectedSection) {
-        this._onUpdateContentBlocks(contentBlocks);
+        if (contentBlocks.length) {
+          this._onUpdateContentBlocks(contentBlocks);
+        } else {
+          this._onUpdateContentBlocks();
+        }
       }
+    }
+    if ((boxLayoutForm.selectedContentBlockId && boxLayoutForm.isVisible) &&
+      (!this.props.boxLayoutForm.selectedContentBlockId)
+    ) {
+      this._onSetBoxLayoutFormValues(boxLayoutForm.selectedContentBlockId);
     }
   }
 
@@ -117,23 +154,16 @@ export class DashboardPostPage extends Component {
 
   _onUpdateContentBlocks(contentBlocks = this.props.contentBlocks) {
     const i = this.state.selectedSection;
-    const post = {
-      ...this.props.post,
-      sections: [
-        ...this.props.post.sections.slice(0, i),
-        {
-          ...this.props.post.sections[i],
-          contentBlocks
-        },
-        ...this.props.post.sections.slice(i + 1)
-      ]
-    };
-    this.props.dispatch(setPost(post));
+    this.props.dispatch(postSetContentBlocks(contentBlocks, i));
   }
 
   _onSubmitContentBlocks() {
-    this._onUpdateContentBlocks();
-    this._onClickBackAnchor();
+    if (!this._checkForUnusedContentBlocks()) {
+      this._onClickBackAnchor();
+    } else {
+      const message = 'Please remove unused content blocks before submitting.';
+      this.props.dispatch(postSectionSetToastMessage(message));
+    }
   }
 
   _onClearError() {
@@ -166,10 +196,6 @@ export class DashboardPostPage extends Component {
     this.props.dispatch(toggleSectionForm(null));
   }
 
-  _onChangeSectionForm({ name, value }) {
-    this.props.dispatch(postSectionFormInput(name, value));
-  }
-
   _setDefaultLeftAnchor() {
     this.props.dispatch(
       dashboardSetLeftNavAnchor({
@@ -180,11 +206,7 @@ export class DashboardPostPage extends Component {
   }
 
   _onClickBackAnchor() {
-    this._setDefaultLeftAnchor();
-    this.setState({
-      selectedSection: null,
-      isEditingMarquee: false
-    });
+    this._onBackToMasterView();
   }
 
   _onSelectSection(i) {
@@ -227,43 +249,125 @@ export class DashboardPostPage extends Component {
   }
 
   _onSetSectionFormValues(index = null) {
-    let options = null;
     if (index != null) {
-      options = [this.props.post.sections[index]].map((item) =>
-        ({
-          padding: item.padding,
-          basis: item.basis,
-          wrap: item.wrap,
-          name: item.name,
-          id: item.id
-        })
-      )[0];
+      const section = this.props.post.sections[index];
+      this._onChangeSectionForm({ name: 'name', value: section.name });
+      section.layout.forEach((item, i) => {
+        this._onChangeSectionForm({ name: item.name, value: item.value });
+      });
     } else {
       this.props.dispatch(toggleSectionForm(null));
+      this.props.dispatch(postSectionFormReset());
     }
-    this.props.dispatch(postSectionFormReset(options));
+  }
+
+  _onChangeSectionForm({ name, value }) {
+    this.props.dispatch(postSectionFormInput(name, value));
   }
 
   _onSubmitSectionForm() {
-    const sectionForm = parseSubmission(this.props.sectionForm);
-    postEditOrAddSection(sectionForm)(this.props.dispatch);
+    const { postSectionLayoutSubmission, dispatch, sectionLayoutForm } = this.props;
+    postEditOrAddSection(
+      postSectionLayoutSubmission,
+      sectionLayoutForm.selectedSection
+    )(dispatch);
     this._onSetSectionFormValues();
+  }
+
+  _onToggleSectionOptions() {
+    this.props.dispatch(postToggleAdvancedLayout());
+  }
+
+  _onSetBoxLayoutFormValues(id = null) {
+    if (id != null) {
+      const selectedBlock = this.props.contentBlocks
+        .filter(item => item.id === id)[0];
+      if (selectedBlock && selectedBlock.layout) {
+        const layoutItems = selectedBlock.layout;
+        layoutItems.forEach((item, i) => {
+          this._onChangeBoxLayoutForm({ name: item.name, value: item.value });
+        });
+      }
+    } else {
+      this.props.dispatch(toggleBoxLayoutForm(null));
+      this.props.dispatch(postBoxLayoutFormReset());
+    }
+  }
+
+  _onChangeBoxLayoutForm({ name, value }) {
+    this.props.dispatch(postBoxLayoutFormInput(name, value));
+  }
+
+  _onSubmitBoxLayoutForm() {
+    const { boxLayoutFormSubmission, boxLayoutForm } = this.props;
+    this.props.dispatch(
+      blockSetContentBlockLayout(
+        boxLayoutForm.selectedContentBlockId,
+        boxLayoutFormSubmission
+      )
+    );
+    this._onSetBoxLayoutFormValues();
   }
 
   _onSubmitMarquee() {
     this._onSubmit();
-    this._onClickBackAnchor();
-    this._loadPost();
+    this._setDefaultLeftAnchor();
+    this.setState({
+      selectedSection: null,
+      isEditingMarquee: false
+    });
   }
 
   _onCancel() {
-    this._loadPost();
-    this.props.dispatch(blockCancel());
-    this._onClickBackAnchor();
+    this._onBackToMasterView(true);
+  }
+
+  _onBackToMasterView(cancel = false) {
+    this._removeUnusedContentBlocks();
+    this._setDefaultLeftAnchor();
+    this.setState({
+      selectedSection: null,
+      isEditingMarquee: false
+    });
+    if (cancel) {
+      this.props.dispatch(blockCancel());
+    }
+  }
+
+  _onCloseToast() {
+    this.props.dispatch(postSectionClearToastMessage());
+  }
+
+  _removeUnusedContentBlocks() {
+    this.props.dispatch(
+      postRemoveUnusedContentBlocksFromSection(this.state.selectedSection)
+    );
+  }
+
+  _checkForUnusedContentBlocks() {
+    if (this.state.selectedSection) {
+      if (this.props.post) {
+        const section = this.props.post.sections[this.state.selectedSection];
+        if (section.contentBlocks && section.contentBlocks.length) {
+          return section.contentBlocks
+            .filter((item) => item.edit === true).length > 0;
+        }
+      }
+    }
+    return false;
   }
 
   render() {
-    const { post, error, sectionForm, url } = this.props;
+    const {
+      post,
+      error,
+      sectionLayoutForm,
+      boxLayoutForm,
+      url,
+      toastMessage,
+      request,
+      showSectionLayoutOptions
+    } = this.props;
     const { selectedSection, shouldAnimate } = this.state;
     return (
       <Box primary pad="none">
@@ -285,6 +389,7 @@ export class DashboardPostPage extends Component {
             >
               {post && selectedSection == null &&
                 <PostList
+                  disabled={request}
                   onSelectSection={this._onSelectSection}
                   onMenuItemClick={this._onSectionMenuItemClick}
                   onAddSection={this._onAddSection}
@@ -334,13 +439,29 @@ export class DashboardPostPage extends Component {
             onClose={this._onClearError}
           />
         }
-        <SectionForm
-          {...sectionForm}
+        <SectionLayoutForm
+          {...sectionLayoutForm}
+          onShowMore={this._onToggleSectionOptions}
+          showAdvancedLayout={showSectionLayoutOptions}
           onChange={this._onChangeSectionForm}
-          isEditing={sectionForm.selectedSection !== null}
+          isEditing={sectionLayoutForm.selectedSection !== null}
           onClose={() => this._onSetSectionFormValues(null)}
           onSubmit={this._onSubmitSectionForm}
         />
+        <BoxLayoutForm
+          {...boxLayoutForm}
+          onChange={this._onChangeBoxLayoutForm}
+          onClose={() => this._onSetBoxLayoutFormValues(null)}
+          onSubmit={this._onSubmitBoxLayoutForm}
+        />
+        {toastMessage && 
+          <Toast
+            onClose={this._onCloseToast}
+            status="warning"
+          >
+            {toastMessage}
+          </Toast>
+        }
       </Box>
     );
   }
@@ -348,30 +469,19 @@ export class DashboardPostPage extends Component {
 
 DashboardPostPage.propTypes = {
   url: PropTypes.string,
-  sectionForm: PropTypes.shape({
-    isVisible: PropTypes.bool.isRequired,
-    name: PropTypes.shape({
-      value: PropTypes.string
-    }),
-    padding: PropTypes.shape({
-      value: PropTypes.string,
-      options: PropTypes.array
-    }),
-    basis: PropTypes.shape({
-      value: PropTypes.string,
-      options: PropTypes.array
-    }),
-    wrap: PropTypes.shape({
-      value: PropTypes.bool.isRequired
-    })
-  }).isRequired,
+  sectionLayoutForm: PropTypes.object,
+  boxLayoutForm: PropTypes.object,
   contentBlocks: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string
   }),
+  postSectionLayoutSubmission: PropTypes.object,
+  boxLayoutFormSubmission: PropTypes.array,
   request: PropTypes.bool.isRequired,
   error: PropTypes.string,
+  toastMessage: PropTypes.string,
+  showSectionLayoutOptions: PropTypes.bool.isRequired,
   post: PropTypes.shape({
     sections: PropTypes.arrayOf(
       PropTypes.shape({
@@ -389,7 +499,7 @@ DashboardPostPage.contextTypes = {
 
 function mapStateToProps(state, props) {
   const { post, error, request } = state.posts;
-  const { sectionForm } = state.dashboardPost;
+  const { sectionLayoutForm, boxLayoutForm, toastMessage } = state.dashboardPost;
   const { contentBlocks } = state;
   const { url } = state.fileUpload;
   return {
@@ -397,8 +507,13 @@ function mapStateToProps(state, props) {
     error,
     request,
     url,
-    sectionForm,
-    contentBlocks
+    sectionLayoutForm,
+    boxLayoutForm,
+    contentBlocks,
+    toastMessage,
+    postSectionLayoutSubmission: selectPostSectionFormSubmission(state),
+    boxLayoutFormSubmission: selectBoxLayoutFormSubmission(state),
+    showSectionLayoutOptions: selectAdvancedLayoutOptions(state)
   };
 };
 

@@ -47,6 +47,12 @@ export const blockMoveUp = (id) => (
   }
 );
 
+export const blockSetContentBlockLayout = (id, layout) => ({
+  type: ActionTypes.BLOCK_SET_CONTENT_BLOCK_LAYOUT,
+  layout,
+  id
+});
+
 export const blockMoveDown = (id) => (
   {
     type: ActionTypes.BLOCK_MOVE_DOWN,

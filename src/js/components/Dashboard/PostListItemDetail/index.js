@@ -7,10 +7,7 @@ import Menu from 'grommet/components/Menu';
 import Button from 'grommet/components/Button';
 import AddIcon from 'grommet/components/icons/base/Add';
 import Anchor from 'grommet/components/Anchor';
-// import MarqueeForm from 'grommet-cms/components';
-// $FlowFixMe
 import { DashboardContentBlocks } from 'grommet-cms/containers';
-// $FlowFixMe
 import { PageHeader } from 'grommet-cms/components';
 
 export default function PostListItemDetail(props: {
@@ -22,7 +19,7 @@ export default function PostListItemDetail(props: {
   },
   onSubmit: Function,
   onCreateBlockClick: Function,
-  onCancel: Function
+  onCancel: Function,
 }) {
   const { item, onSubmit, onCreateBlockClick, onCancel } = props;
   return (

@@ -6,14 +6,14 @@ import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import AddIcon from 'grommet/components/icons/base/Add';
 import Anchor from 'grommet/components/Anchor';
-// $FlowFixMe
 import { PageHeader, PostListItem } from 'grommet-cms/components';
 
 type Props = {
   sections?: Array<{ name: string, id: string }>,
   onMenuItemClick: Function,
   onAddSection: Function,
-  onSelectSection: Function
+  onSelectSection: Function,
+  disabled: boolean
 }
 
 export default class PostList extends Component {
@@ -23,7 +23,8 @@ export default class PostList extends Component {
       sections,
       onMenuItemClick,
       onAddSection,
-      onSelectSection
+      onSelectSection,
+      disabled
     } = this.props;
     return (
       <Box>
@@ -37,7 +38,10 @@ export default class PostList extends Component {
             />
           } 
         />
-        <List selectable onSelect={onSelectSection}>
+        <List
+          selectable={!disabled}
+          onSelect={onSelectSection}
+        >
           {sections ?
             sections.map((item, i) => 
               <PostListItem 

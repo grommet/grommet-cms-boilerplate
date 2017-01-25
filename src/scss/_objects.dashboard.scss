@@ -64,3 +64,16 @@
   }
   
 }
+
+.grommetux-layer__container:first-child {
+  display: block !important;
+}
+
+.grommetux-layer--hidden {
+  right: 100% !important;
+}
+
+.dashboad--section-layout-form__scroll {
+  max-height: 70vh;
+  overflow: scroll;
+}

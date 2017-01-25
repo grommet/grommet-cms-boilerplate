@@ -1,12 +1,20 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { findDOMNode } from 'react-dom';
+import Box from 'grommet/components/Box';
+import { PreviewHeader, BlockSelector } from 'grommet-cms/components';
 import {
-  blockEdit, blockRemove, blockType, blockSubmit, blockMoveUp,
+  toggleBoxLayoutForm 
+} from 'grommet-cms/containers/Dashboard/DashboardPostPage/actions';
+import { BLOCK_TYPE_MAP } from '../DashboardContentBlocks/constants';
+import {
+  blockEdit,
+  blockRemove,
+  blockType,
+  blockSubmit,
+  blockMoveUp,
   blockMoveDown
 } from '../DashboardContentBlocks/actions';
-import { connect } from 'react-redux';
-import Box from 'grommet/components/Box';
-import { PreviewHeader, BlockSelector } from 'grommet-cms/components/ContentBlocks';
-import { BLOCK_TYPE_MAP } from '../DashboardContentBlocks/constants';
 
 export class DashboardContentBlock extends Component {
   constructor(props) {
@@ -16,6 +24,15 @@ export class DashboardContentBlock extends Component {
     this._onBlockSubmit = this._onBlockSubmit.bind(this);
     this._onEditClick = this._onEditClick.bind(this);
     this._onCloseClick = this._onCloseClick.bind(this);
+    this._onLayoutClick = this._onLayoutClick.bind(this);
+  }
+
+  componentDidMount() {
+    const { edit } = this.props;
+    if (edit) {
+      const node = findDOMNode(this.blockSelector);
+      node.scrollIntoView();
+    }
   }
 
   _onEditClick(id) {
@@ -41,15 +58,21 @@ export class DashboardContentBlock extends Component {
       this.props.dispatch(blockMoveDown(id));
   }
 
+  _onLayoutClick(id) {
+    this.props.dispatch(toggleBoxLayoutForm(id));
+  }
+
   render() {
     const { blockType, edit, id } = this.props;
 
     // Show block selector when editing and no block type is defined.
     const blockSelector = (edit && !blockType)
       ? (
-        <Box pad="medium">
-          <BlockSelector onClick={this._onBlockSelectClick.bind(this, id)}
-            blockMap={BLOCK_TYPE_MAP} />
+        <Box pad="small" ref={(selector) => this.blockSelector = selector}>
+          <BlockSelector
+            onClick={this._onBlockSelectClick.bind(this, id)}
+            blockMap={BLOCK_TYPE_MAP}
+          />
         </Box>
       ) : undefined;
 
@@ -72,7 +95,7 @@ export class DashboardContentBlock extends Component {
     // Show block preview when editing/creating is complete.
     const preview = (!edit && blockType)
       ? (
-        <Box pad="medium" colorIndex="light-1">
+        <Box pad="small" colorIndex="light-1">
           {React.cloneElement(
             BLOCK_TYPE_MAP[blockType].preview,
             {
@@ -101,6 +124,7 @@ export class DashboardContentBlock extends Component {
         <PreviewHeader
           title={title}
           edit={edit}
+          onLayoutClick={this._onLayoutClick.bind(this, id)}
           onClose={this._onCloseClick.bind(this, id)}
           onMove={this._onBlockMove.bind(this, id)}
           onEdit={this._onEditClick.bind(this, id)}

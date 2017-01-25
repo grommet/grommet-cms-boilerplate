@@ -13,5 +13,6 @@ export PostListItemDetail from './PostListItemDetail';
 export PostList from './PostList';
 export MarqueeForm from './MarqueeForm';
 export AddPostForm from './AddPostForm';
-export SectionForm from './SectionForm';
+export SectionLayoutForm from './SectionLayoutForm';
 export LayoutForm from './LayoutForm';
+export BoxLayoutForm from './BoxLayoutForm';
