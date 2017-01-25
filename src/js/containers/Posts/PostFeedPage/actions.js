@@ -7,14 +7,14 @@ export const loadDataInitiation = (): PostFeedPageAction => ({
   type: T.LOAD_DATA_INITIATION
 });
 
-export const loadDataSuccess = (posts: Array<PostType>):
-  PostFeedPageAction => ({
+export const loadDataSuccess =
+  (posts: Array<PostType>): PostFeedPageAction => ({
     type: T.LOAD_DATA_SUCCESS,
     posts
   });
 
-export const loadDataFailure = (error: { message: string }):
-  PostFeedPageAction => ({
+export const loadDataFailure =
+  (error: { message: string }): PostFeedPageAction => ({
     type: T.LOAD_DATA_FAILURE,
     error
   });
