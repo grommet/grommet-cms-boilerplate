@@ -14,7 +14,6 @@ export default function ViewMoreViewLess(props: {
   if (isShowingMore) {
     return (
       <div>
-        {children}
         <Box align="center">
           <Button
             plain
@@ -23,6 +22,7 @@ export default function ViewMoreViewLess(props: {
             icon={<UpIcon size="small" />}
           />
         </Box>
+        {children}
       </div>
     );
   }
