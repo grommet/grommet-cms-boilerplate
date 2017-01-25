@@ -1,19 +1,13 @@
 /* @flow */
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
-// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
-import { getAssets } from 'grommet-cms/containers/Assets/actions';
-
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import Layer from 'grommet/components/Layer';
-// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
 import { AssetTile } from 'grommet-cms/components/Dashboard';
-// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
+import { getAssets } from 'grommet-cms/containers/Assets/actions';
 import AssetForm from 'grommet-cms/containers/Dashboard/DashboardAssetPage';
-import { PageHeader } from '../../../components/Dashboard';
-// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
+import { PageHeader } from 'grommet-cms/components';
 import type { Asset } from 'grommet-cms/containers/Assets/flowTypes';
 
 type Props = {

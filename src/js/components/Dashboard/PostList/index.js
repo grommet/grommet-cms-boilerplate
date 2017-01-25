@@ -6,7 +6,6 @@ import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import AddIcon from 'grommet/components/icons/base/Add';
 import Anchor from 'grommet/components/Anchor';
-// $FlowFixMe
 import { PageHeader, PostListItem } from 'grommet-cms/components';
 
 type Props = {

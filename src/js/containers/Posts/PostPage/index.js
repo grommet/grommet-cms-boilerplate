@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import Box from 'grommet/components/Box';
+import Headline from 'grommet/components/Headline';
+import Label from 'grommet/components/Label';
 import { getPost } from 'grommet-cms/containers/Posts/PostPage/actions';
 import ContentBlocks from 'grommet-cms/containers/ContentBlocks';
 import { WithLoading } from 'grommet-cms/components';
-import Box from 'grommet/components/Box';
-import Section from 'grommet/components/Section';
-import Headline from 'grommet/components/Headline';
-import Label from 'grommet/components/Label';
 
 export class PostPage extends Component {
   constructor(props) {
@@ -53,11 +52,11 @@ export class PostPage extends Component {
           </Box>
           <Box full>
             {filteredSections.map((item, i) =>
-              <Section
+              <ContentBlocks
                 key={i}
-              >
-                <ContentBlocks blocks={item.contentBlocks} />
-              </Section>
+                layout={item.layout}
+                blocks={item.contentBlocks}
+              />
             )}
           </Box>
         </Box>

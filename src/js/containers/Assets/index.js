@@ -5,8 +5,8 @@ import Section from 'grommet/components/Section';
 import ImageIcon from 'grommet/components/icons/base/Image';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
-// $FlowFixMe required module not found error
-import DashboardAssetsLayer from 'grommet-cms/containers/Dashboard/DashboardAssetsLayer'; // eslint-disable-line
+import DashboardAssetsLayer from
+  'grommet-cms/containers/Dashboard/DashboardAssetsLayer';
 import type { Asset } from './flowTypes';
 
 type AssetUploadState = {

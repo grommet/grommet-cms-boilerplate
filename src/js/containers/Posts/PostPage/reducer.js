@@ -34,9 +34,7 @@ function postSectionsReducer(state = [], action) {
         {
           name: action.name,
           id: action.id,
-          padding: action.padding,
-          wrap: action.wrap,
-          basis: action.basis,
+          layout: action.layout,
           order: state.length || 0,
           contentBlocks: []
         }
@@ -74,17 +72,14 @@ function postSectionsReducer(state = [], action) {
       ];
     case ActionTypes.POST_EDIT_SECTION:
       return [
-        ...state.slice(0, action.selectedSection),
+        ...state.slice(0, action.index),
         {
-          ...state[action.selectedSection],
+          ...state[action.index],
           name: action.name,
           id: action.id,
-          padding: action.padding,
-          wrap: action.wrap,
-          basis: action.basis,
-          order: action.selectedSection
+          layout: action.layout
         },
-        ...state.slice(action.selectedSection + 1)
+        ...state.slice(action.index + 1)
       ];
     default: return state;
   }

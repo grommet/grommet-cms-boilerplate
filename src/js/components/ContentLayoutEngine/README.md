@@ -1,7 +1,42 @@
-import Post from '../models/Post';
-import colors from 'colors/safe';
+## ContentLayoutEngine Component
+A higher order component that wraps sections and content blocks with layout options.
 
-const POSTS = [
+### Example
+
+```js
+<ContentLayoutEngine
+  layout={this.props.layout}
+  blocks={this.props.blocks} // raw blocks
+>
+  {blocks.map((item) =>
+    <ContentBlock item={item} />
+  )}
+</ContentLayoutEngine>
+```
+
+### Props
+
+Flow types
+
+```
+type LayoutType = {
+  name: string,
+  value: string
+};
+
+export type LayoutProps = {
+  children: Array<React$Element<any>>,
+  layout: Array<LayoutType>,
+  blocks: Array<ContentBlockType>
+};
+```
+
+### Other Information
+Children are the mapped content blocks, where as the blocks are the raw contentBlocks, which contain the layout property.
+
+Example Post object with layout options for sections / content blocks.  This is what would
+```
+const posts = [
   {
     author: 'John Doe',
     title: 'Hello World',
@@ -180,20 +215,4 @@ const POSTS = [
     ]
   }
 ];
-
-export default function buildPostCollection() {
-  Post.find().exec(function(err, doc) {
-    if (err) console.log(colors.red('error: ', err));
-
-    if (doc.length === 0) {
-      Post.collection.insert(
-        POSTS, 
-        function(err, small) {
-          if (err) 
-            console.log(colors.red('error creating Post collection', err));
-          console.log(colors.green(`Created Post collection`));
-        }
-      );
-    }
-  });
-};
+```

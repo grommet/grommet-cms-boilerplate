@@ -118,21 +118,23 @@ module.exports = {
         templateFile: './container/reducer.js.hbs',
         abortOnFail: true
       });
-      if (data.wantFlowTypes) {
-        actions.push({
-          type: 'add',
-          path: `${containerPath}/flowTypes.js`,
-          templateFile: './container/flowTypes.js.hbs',
-          abortOnFail: true
-        });
-      }
-      if (data.wantJestTests) {
-        actions.push({
-          type: 'add',
-          path: `${containerPath}/tests/index.test.js`,
-          templateFile: './container/test.js.hbs',
-          abortOnFail: true
-        });
+    }
+    if (data.wantFlowTypes) {
+      actions.push({
+        type: 'add',
+        path: `${containerPath}/flowTypes.js`,
+        templateFile: './container/flowTypes.js.hbs',
+        abortOnFail: true
+      });
+    }
+    if (data.wantJestTests) {
+      actions.push({
+        type: 'add',
+        path: `${containerPath}/tests/index.test.js`,
+        templateFile: './container/test.js.hbs',
+        abortOnFail: true
+      });
+      if (data.wantActionsAndReducer) {
         actions.push({
           type: 'add',
           path: `${containerPath}/tests/reducer.test.js`,

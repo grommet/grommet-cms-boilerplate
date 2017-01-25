@@ -5,11 +5,8 @@ import Image from 'grommet/components/Image';
 import Box from 'grommet/components/Box';
 import Headline from 'grommet/components/Headline';
 import Label from 'grommet/components/Label';
-import Section from 'grommet/components/Section';
-// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
 import { ContentBlocks } from 'grommet-cms/containers';
 import type ContentBlockType from './flowTypes';
-// $FlowFixMe required module not found. See here: https://github.com/facebook/flow/issues/101
 import type { Asset } from 'grommet-cms/containers/Assets/flowTypes';
 
 export default function PostPreviewHeroSection(props: {
@@ -46,10 +43,14 @@ export default function PostPreviewHeroSection(props: {
             }
           </Box>
         </Hero>
-        {post.sections && post.sections.length > 0 && post.sections.map((item, i) =>
-          <Section key={i} pad="medium">
-            <ContentBlocks blocks={item.contentBlocks} />
-          </Section>  
+        {post.sections &&
+          post.sections.length > 0 &&
+            post.sections.map((item, i) =>
+              <ContentBlocks
+                key={i}
+                layout={item.layout}
+                blocks={item.contentBlocks}
+              />
         )}
       </Box>
     );

@@ -1,6 +1,7 @@
 {
   "presets": ["es2015", "react", "stage-0"],
   "plugins": [
+    "flow-react-proptypes",
     "add-module-exports",
     "transform-object-rest-spread",
     "transform-flow-strip-types", ["module-alias", [{
