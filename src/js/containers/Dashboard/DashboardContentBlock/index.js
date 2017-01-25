@@ -2,11 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { findDOMNode } from 'react-dom';
 import Box from 'grommet/components/Box';
-import { PreviewHeader, BlockSelector } from 'grommet-cms/components';
+import {
+  PreviewHeader,
+  BlockSelector,
+  BlockTypeMap as BLOCK_TYPE_MAP
+} from 'grommet-cms/components';
 import {
   toggleBoxLayoutForm 
 } from 'grommet-cms/containers/Dashboard/DashboardPostPage/actions';
-import { BLOCK_TYPE_MAP } from '../DashboardContentBlocks/constants';
 import {
   blockEdit,
   blockRemove,

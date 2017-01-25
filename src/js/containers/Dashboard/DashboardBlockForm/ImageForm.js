@@ -87,7 +87,7 @@ export class ImageForm extends Component {
 };
 
 ImageForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
   data: PropTypes.object
 };
 

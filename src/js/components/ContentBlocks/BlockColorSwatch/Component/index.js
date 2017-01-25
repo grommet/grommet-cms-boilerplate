@@ -3,8 +3,8 @@ import React from 'react';
 import Box from 'grommet/components/Box';
 import ColorTypeList from '../Shared/ColorTypeList';
 
-export default function Component(props: {
-  color: {
+export default function BlockCarouselSwatch(props: {
+  color?: {
     name: string,
     hex: string
   }

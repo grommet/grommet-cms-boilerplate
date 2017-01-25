@@ -1,7 +1,4 @@
-export BlockImageParagraph from './BlockImageParagraph';
-export BlockSelector from './BlockSelector';
-export PreviewHeader from './PreviewHeader';
-export GenericPreview from './GenericPreview';
+export * from './Shared';
 export * from './BlockColorSwatch';
 export * from './BlockCard';
 export * from './BlockCarousel';
@@ -10,3 +7,5 @@ export * from './BlockImage';
 export * from './BlockParagraph';
 export * from './BlockQuote';
 export * from './BlockVideo';
+export * from './BlockImageParagraph';
+export BlockTypeMap from './BlockTypeMap';

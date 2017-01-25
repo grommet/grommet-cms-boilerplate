@@ -16,7 +16,7 @@ type BlockColorSwatchFormState = {
 };
 
 type BlockColorSwatchFormProps = {
-  onSubmit: Function,
+  onSubmit?: Function,
   color?: {
     name: ?string,
     hex: ?string
@@ -61,7 +61,7 @@ export default class BlockColorSwatchForm extends React.Component {
   _onSubmit(event: any) {
     event.preventDefault();
     const { colorInput, nameInput } = this.state;
-    if (this._formIsValid()) {
+    if (this._formIsValid() && this.props.onSubmit) {
       this.props.onSubmit({
         color: {
           hex: colorInput,
