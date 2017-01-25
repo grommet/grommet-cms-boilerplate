@@ -26,7 +26,10 @@ import {
   BlockQuote,
   BlockVideo,
   BlockCarousel,
-  GenericPreview
+  GenericPreview,
+  BlockColorSwatch,
+  BlockColorSwatchForm,
+  BlockColorSwatchWireframe
 } from 'grommet-cms/components';
 
 export const BLOCK_TYPE_MAP = {
@@ -134,6 +137,13 @@ export const BLOCK_TYPE_MAP = {
           pad={{ horizontal: 'small', vertical: 'large' }} />
       </Box>
     )
+  },
+  BlockColorSwatch: {
+    element: <BlockColorSwatch />,
+    name: 'Color Swatch',
+    preview: <GenericPreview />,
+    form: <BlockColorSwatchForm />,
+    wireframe: <BlockColorSwatchWireframe />
   }
 };
 

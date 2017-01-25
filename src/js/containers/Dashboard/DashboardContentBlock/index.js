@@ -31,7 +31,9 @@ export class DashboardContentBlock extends Component {
     const { edit } = this.props;
     if (edit) {
       const node = findDOMNode(this.blockSelector);
-      node.scrollIntoView();
+      if (node) {
+        node.scrollIntoView();
+      }
     }
   }
 
@@ -145,15 +147,36 @@ function mapStateToProps(state, props) {
   const blockIndex = state.contentBlocks.findIndex(
     (block) => block.id === props.id
   );
-  const {
-    blockType, card, carousel, content, edit,
-    image, imageDesc, imageSize, label, linkUrl, source
-  } = state.contentBlocks[blockIndex];
-
-  return {
-    blockType, card, carousel, content, edit,
-    image, imageDesc, imageSize, label, linkUrl, source
-  };
+  const block = state.contentBlocks[blockIndex];
+  if (block) {
+    const {
+      blockType,
+      card,
+      carousel,
+      content,
+      edit,
+      image,
+      imageDesc,
+      imageSize,
+      label,
+      linkUrl,
+      source
+    } = block;
+    return {
+      blockType,
+      card,
+      carousel,
+      content,
+      edit,
+      image,
+      imageDesc,
+      imageSize,
+      label,
+      linkUrl,
+      source
+    };
+  }
+  return {};
 }
 
 export default connect(mapStateToProps)(DashboardContentBlock);

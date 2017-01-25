@@ -227,7 +227,12 @@ export class DashboardPostPage extends Component {
   }
 
   _onCreateBlock() {
-    this.props.dispatch(blockAdd());
+    if (!this._checkForUnusedContentBlocks()) {
+      this.props.dispatch(blockAdd());
+    } else {
+      const message = 'You can only add one new block at a time.';
+      this.props.dispatch(postSectionSetToastMessage(message));
+    }
   }
 
   _onPostChange({ target, option }) {

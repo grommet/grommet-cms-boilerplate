@@ -5,19 +5,26 @@ import Form from 'grommet/components/Form';
 import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
+import Button from 'grommet/components/Button';
+import Footer from 'grommet/components/Footer';
 import ColorTypeList from '../Shared/ColorTypeList';
 
-type InputFormState = {
+type BlockColorSwatchFormState = {
   nameInput: string,
   colorInput: string
 };
 
-export default class InputForm extends React.Component {
-  state: InputFormState;
+type BlockColorSwatchFormProps = {
+  onSubmit: Function
+};
+
+export default class BlockColorSwatchForm extends React.Component {
+  state: BlockColorSwatchFormState;
+  props: BlockColorSwatchFormProps;
   constructor() {
     super();
-    // $FlowFixMe contravariant
-    this._onChange = this._onChange.bind(this);
+    (this:any)._onChange = this._onChange.bind(this);
+    (this:any)._onSubmit = this._onSubmit.bind(this);
     this.state = {
       nameInput: '',
       colorInput: '#ff0000'
@@ -28,6 +35,11 @@ export default class InputForm extends React.Component {
     this.setState({
       [`${target.id}`]: target.value
     });
+  }
+
+  _onSubmit(event: any) {
+    event.preventDefault();
+    this.props.onSubmit(this.state);
   }
 
   render() {
@@ -75,6 +87,13 @@ export default class InputForm extends React.Component {
               </FormField>
             </fieldset>
           </FormFields>
+          <Footer pad="medium">
+            <Button
+              onClick={this._onSubmit}
+              type="submit"
+              label="Done"
+            />
+          </Footer>
         </Form>
       </Box>
     );
