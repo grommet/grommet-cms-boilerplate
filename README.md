@@ -73,4 +73,4 @@ where <type_of_component> is one of: component, container or page.
   - Test: Should the component have an accompanying jest test file? Defaults to No.
 
 ### **Gotchas**
-In order to get the import / export to work, the generator does some pattern matching of the comments in the files to place the new imports.  Just don't delete any comment that is prefixed with `GENERATOR` and things will work great. See below for an example.
+In order to get the import / export to work, the generator does some pattern matching of the comments in the files to place the new imports.  Just don't delete any comment that is prefixed with `GENERATOR` and things will work great.
