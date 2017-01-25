@@ -62,7 +62,7 @@ export default function SectionLayoutForm(props: {
         </Heading>
       </Header>
       <Section pad="medium" align="center">
-        <Form pad="medium">
+        <Form pad="medium" className="dashboad--section-layout-form__scroll">
           <FormFields>
             <fieldset>
               <FormField label="Name" htmlFor="name">
