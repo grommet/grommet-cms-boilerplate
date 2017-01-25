@@ -113,7 +113,7 @@ class HomePage extends Component {
             <Heading align="center" strong>
               {messages.SECTION_TWO_HEADLINE}
             </Heading>
-            <Paragraph size="large" align="center" pad="medium">
+            <Paragraph size="large" align="center">
               {messages.SECTION_TWO_PARAGRAPH}
             </Paragraph>
           </Section>

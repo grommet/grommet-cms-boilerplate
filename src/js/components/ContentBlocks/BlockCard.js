@@ -83,5 +83,7 @@ export default class BlockCard extends Component {
 
 BlockCard.propTypes = {
   content: PropTypes.string,
-  image: PropTypes.string
+  image: PropTypes.shape({
+    path: PropTypes.string
+  })
 };
