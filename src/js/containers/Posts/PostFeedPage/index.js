@@ -19,8 +19,7 @@ class PostFeedPage extends React.Component {
   props: PostFeedPageProps;
   constructor() {
     super();
-    // $FlowFixMe contravariant issue when calling bind
-    this.renderError = this.renderError.bind(this);
+    (this:any).renderError = this.renderError.bind(this);
   }
   componentDidMount() {
     this.props.actions.getPosts();
