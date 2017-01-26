@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import {
-  BLOCK_TYPE_MAP
-} from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/constants';
-import { ContentLayoutEngine } from 'grommet-cms/components';
+import { ContentLayoutEngine, BlockTypeMap } from 'grommet-cms/components';
 
 export default class ContentBlocks extends Component {
   _renderBlocks(blocks) {
     return blocks.map((block, index) => {
       return (!block.edit) ? React.cloneElement(
-        BLOCK_TYPE_MAP[block.blockType].element,
+        BlockTypeMap[block.blockType].element,
         {
           ...block,
           key: `block-${index}`

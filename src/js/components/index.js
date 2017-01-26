@@ -9,6 +9,7 @@ export ErrorNotification from './ErrorNotification';
 export LoadingIndicator from './LoadingIndicator';
 export WithLoading from './WithLoading';
 export * from './ContentBlocks';
+export BlockTypeMap from './ContentBlocks/BlockTypeMap';
 export * from './Dashboard';
 export Logo from './Logo';
 export Markdown from './Markdown';

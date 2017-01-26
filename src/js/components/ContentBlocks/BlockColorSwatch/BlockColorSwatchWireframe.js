@@ -7,15 +7,14 @@ export default function BlockColorSwatchWireframe() {
   return (
     <Box pad={{ between: 'small' }}>
       <Box
-        style={{ height: 30 }}
+        style={{ height: 60 }}
         pad="small"
         colorIndex="accent-3"
+        align="center"
+        justify="center"
       >
-        <BrushIcon colorIndex="light-2" />
+        <BrushIcon style={{ stroke: '#f5f5f5' }} />
       </Box>
-      <Box style={{ height: 10 }} colorIndex="light-2" />
-      <Box style={{ height: 10 }} colorIndex="light-2" />
-      <Box style={{ height: 10 }} colorIndex="light-2" />
     </Box>
   );
 }

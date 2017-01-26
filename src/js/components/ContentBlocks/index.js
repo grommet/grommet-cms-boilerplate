@@ -1,4 +1,3 @@
-export BlockTypeMap from './BlockTypeMap';
 export * from './Shared';
 export * from './BlockColorSwatch';
 export * from './BlockCard';

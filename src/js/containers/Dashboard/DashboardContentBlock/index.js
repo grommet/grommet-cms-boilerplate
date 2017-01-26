@@ -5,7 +5,7 @@ import Box from 'grommet/components/Box';
 import {
   PreviewHeader,
   BlockSelector,
-  BlockTypeMap as BLOCK_TYPE_MAP
+  BlockTypeMap
 } from 'grommet-cms/components';
 import {
   toggleBoxLayoutForm 
@@ -76,7 +76,7 @@ export class DashboardContentBlock extends Component {
         <Box pad="small" ref={(selector) => this.blockSelector = selector}>
           <BlockSelector
             onClick={this._onBlockSelectClick.bind(this, id)}
-            blockMap={BLOCK_TYPE_MAP}
+            blockMap={BlockTypeMap}
           />
         </Box>
       ) : undefined;
@@ -86,7 +86,7 @@ export class DashboardContentBlock extends Component {
       ? (
         <Box pad="medium">
           {React.cloneElement(
-            BLOCK_TYPE_MAP[blockType].form,
+            BlockTypeMap[blockType].form,
             {
               onSubmit: this._onBlockSubmit.bind(this, id),
               ...this.props
@@ -102,7 +102,7 @@ export class DashboardContentBlock extends Component {
       ? (
         <Box pad="small" colorIndex="light-1">
           {React.cloneElement(
-            BLOCK_TYPE_MAP[blockType].preview,
+            BlockTypeMap[blockType].preview,
             {
               ...this.props
             }
@@ -112,7 +112,7 @@ export class DashboardContentBlock extends Component {
 
     // Set box title.
     const title = (blockType)
-      ? BLOCK_TYPE_MAP[blockType].name
+      ? BlockTypeMap[blockType].name
       : 'New Block';
 
     // Highlight box when user is editing.
