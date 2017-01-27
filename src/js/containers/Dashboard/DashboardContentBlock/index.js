@@ -2,11 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { findDOMNode } from 'react-dom';
 import Box from 'grommet/components/Box';
-import { PreviewHeader, BlockSelector } from 'grommet-cms/components';
+import {
+  PreviewHeader,
+  BlockSelector,
+  BlockTypeMap
+} from 'grommet-cms/components';
 import {
   toggleBoxLayoutForm 
 } from 'grommet-cms/containers/Dashboard/DashboardPostPage/actions';
-import { BLOCK_TYPE_MAP } from '../DashboardContentBlocks/constants';
 import {
   blockEdit,
   blockRemove,
@@ -31,7 +34,9 @@ export class DashboardContentBlock extends Component {
     const { edit } = this.props;
     if (edit) {
       const node = findDOMNode(this.blockSelector);
-      node.scrollIntoView();
+      if (node) {
+        node.scrollIntoView();
+      }
     }
   }
 
@@ -71,7 +76,7 @@ export class DashboardContentBlock extends Component {
         <Box pad="small" ref={(selector) => this.blockSelector = selector}>
           <BlockSelector
             onClick={this._onBlockSelectClick.bind(this, id)}
-            blockMap={BLOCK_TYPE_MAP}
+            blockMap={BlockTypeMap}
           />
         </Box>
       ) : undefined;
@@ -81,7 +86,7 @@ export class DashboardContentBlock extends Component {
       ? (
         <Box pad="medium">
           {React.cloneElement(
-            BLOCK_TYPE_MAP[blockType].form,
+            BlockTypeMap[blockType].form,
             {
               onSubmit: this._onBlockSubmit.bind(this, id),
               ...this.props
@@ -97,7 +102,7 @@ export class DashboardContentBlock extends Component {
       ? (
         <Box pad="small" colorIndex="light-1">
           {React.cloneElement(
-            BLOCK_TYPE_MAP[blockType].preview,
+            BlockTypeMap[blockType].preview,
             {
               ...this.props
             }
@@ -107,7 +112,7 @@ export class DashboardContentBlock extends Component {
 
     // Set box title.
     const title = (blockType)
-      ? BLOCK_TYPE_MAP[blockType].name
+      ? BlockTypeMap[blockType].name
       : 'New Block';
 
     // Highlight box when user is editing.
@@ -145,15 +150,38 @@ function mapStateToProps(state, props) {
   const blockIndex = state.contentBlocks.findIndex(
     (block) => block.id === props.id
   );
-  const {
-    blockType, card, carousel, content, edit,
-    image, imageDesc, imageSize, label, linkUrl, source
-  } = state.contentBlocks[blockIndex];
-
-  return {
-    blockType, card, carousel, content, edit,
-    image, imageDesc, imageSize, label, linkUrl, source
-  };
+  const block = state.contentBlocks[blockIndex];
+  if (block) {
+    const {
+      blockType,
+      card,
+      carousel,
+      content,
+      edit,
+      image,
+      imageDesc,
+      imageSize,
+      label,
+      linkUrl,
+      color,
+      source
+    } = block;
+    return {
+      blockType,
+      card,
+      carousel,
+      content,
+      edit,
+      image,
+      imageDesc,
+      imageSize,
+      label,
+      color,
+      linkUrl,
+      source
+    };
+  }
+  return {};
 }
 
 export default connect(mapStateToProps)(DashboardContentBlock);

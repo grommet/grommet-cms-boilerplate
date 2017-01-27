@@ -1,6 +1,5 @@
 // @ flow
 import type { SectionFormSubmission, SectionForm } from './flowTypes';
-// $FlowFixMe required module not found
 import { slugify } from 'grommet-cms/utils';
 
 export default (sectionForm: SectionForm): SectionFormSubmission  => {

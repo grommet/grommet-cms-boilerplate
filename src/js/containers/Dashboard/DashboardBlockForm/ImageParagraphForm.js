@@ -104,7 +104,7 @@ export class ImageParagraphForm extends Component {
 };
 
 ImageParagraphForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
   data: PropTypes.object
 };
 
