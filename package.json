@@ -128,6 +128,6 @@
     "generate": "npm run generator",
     "generate:component": "plop --plopfile ./config/generators/index.js component",
     "generate:container": "plop --plopfile ./config/generators/index.js container",
-    "setup": "flow-typed install && npm install"
+    "setup": "npm install"
   }
 }

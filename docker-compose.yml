@@ -1,0 +1,18 @@
+
+version: '2'
+
+services:
+  grommet-cms:
+    image: grommet-cms:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 8003:8003
+      - 8000:8000
+    links:
+      - db
+  db:
+    image: mongo

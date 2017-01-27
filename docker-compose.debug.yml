@@ -1,0 +1,17 @@
+
+version: '2'
+
+services:
+  grommet-cms-boilerplate:
+    image: grommet-cms-boilerplate:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: development
+    ports:
+      - 8003:8003
+      - 5858:5858
+    volumes:
+      - .:/usr/src/app
+    command: node --debug=5858 server/babel-server.js
