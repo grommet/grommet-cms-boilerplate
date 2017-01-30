@@ -13,7 +13,8 @@ export default function Nav({
   leftAnchor,
   navLinks,
   title,
-  logo
+  logo,
+  pageMenu
 }) {
   const titleElement = (title || logo) ? (
     <Anchor
@@ -38,7 +39,7 @@ export default function Nav({
       className={CLASS_ROOT}
       justify="between"
       pad={{ horizontal: 'medium', vertical: 'small' }}
-      colorIndex="neutral-4"
+      colorIndex="neutral-1"
       align="center"
       size="small"
     >
@@ -54,7 +55,18 @@ export default function Nav({
       <Box direction="row" responsive={false} align="center"
         pad={{ between: 'medium' }}>
         <Menu label="Menu" inline={true} direction="row">
-          {navLinks.map((item, i) =>
+          {pageMenu && pageMenu.length &&
+            <Menu label="Pages">
+              {pageMenu.map((item, i) =>
+                <Anchor
+                  key={i}
+                  label={item.label}
+                  path={`/dashboard/posts/${item.slug}`}
+                />
+              )}
+            </Menu>
+          }
+          {navLinks && navLinks.map((item, i) =>
             <Anchor
               key={i}
               path={item.path}

@@ -39,8 +39,9 @@ export class DashboardPostsPage extends Component {
   componentWillMount() {
     // Reset content block list.
     // TODO: avoid resetting content list here. Possibly route middleware.
+    const { slug } = this.props.params;
     this.props.dispatch(blockAddList([]));
-    this.props.dispatch(getPosts());
+    this.props.dispatch(getPosts(0, slug));
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -206,7 +207,10 @@ DashboardPostsPage.propTypes = {
     isVisible: PropTypes.bool.isRequired
   }).isRequired,
   newPost: PropTypes.object,
-  redirect: PropTypes.bool.isRequired
+  redirect: PropTypes.bool.isRequired,
+  params: PropTypes.shape({
+    slug: PropTypes.string.isRequired
+  }).isRequired
 };
 
 function mapStateToProps (state, props) {

@@ -6,11 +6,18 @@ const initialState = {
   leftNavAnchor: {
     title: null,
     onClick: null
-  }
+  },
+  pageMenu: []
 };
 
 function dashboard(state = initialState, action) {
   switch(action.type) {
+    case ActionTypes.DASHBOARD_LOAD_NAV_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        pageMenu: action.nav
+      };
     case ActionTypes.DASHBOARD_SET_LEFT_NAV_ANCHOR:
       return {
         ...state,
@@ -21,7 +28,6 @@ function dashboard(state = initialState, action) {
       };
     case ActionTypes.DASHBOARD_REQUEST:
       return Object.assign({}, state, {
-        error: '',
         loading: true
       });
       break;

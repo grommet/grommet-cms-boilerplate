@@ -25,7 +25,7 @@ export default class Root extends Component { // eslint-disable-line react/prefe
     return (
       <Provider store={store}>
         <GrommetCmsConfigProvider>
-          <Router 
+          <Router
             history={history} 
             routes={getRoutes(store)} 
             render={applyRouterMiddleware(useScroll())}

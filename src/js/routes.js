@@ -37,7 +37,7 @@ export const getRoutes = (store) => {
         <Route path="homepage" component={DashboardHomePage} onEnter={authRequired} />
         <Route path="users" component={DashboardUsersPage} onEnter={authRequired} />
         <Route path='user/create' component={DashboardUserForm} onEnter={authRequired} />
-        <Route path='posts' component={DashboardPostsPage} onEnter={authRequired} />
+        <Route path='posts/:slug' component={DashboardPostsPage} onEnter={authRequired} />
         <Route path='post/:id' component={DashboardPostPage} onEnter={authRequired} />
         <Redirect from='post/:id' to='/posts/post/:id' />
       </Route>

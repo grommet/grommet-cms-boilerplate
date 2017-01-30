@@ -9,6 +9,7 @@ import {
   DashboardError,
   BackAnchor
 } from 'grommet-cms/components';
+import { loadNavRoutes } from './actions';
 
 export class Dashboard extends Component {
   constructor(props) {
@@ -17,12 +18,16 @@ export class Dashboard extends Component {
     this._onLogoutClick = this._onLogoutClick.bind(this);
   }
 
+  componentWillMount() {
+    this.props.dispatch(loadNavRoutes());
+  }
+
   _onLogoutClick() {
     this.props.dispatch(logout());
   }
 
   _renderNav() {
-    const { leftNavAnchor } = this.props;
+    const { leftNavAnchor, pageMenu } = this.props;
     const { config } = this.context;
     const leftAnchor = leftNavAnchor && leftNavAnchor.title ?
       (
@@ -37,6 +42,7 @@ export class Dashboard extends Component {
       return (
         <DashboardNav
           {...config.cms}
+          pageMenu={pageMenu}
           leftAnchor={leftAnchor}
           onLogoutClick={this._onLogoutClick}
         />
@@ -90,6 +96,7 @@ Dashboard.propTypes = {
     path: PropTypes.string,
     title: PropTypes.string
   }),
+  nav: PropTypes.array,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
   })
@@ -97,11 +104,12 @@ Dashboard.propTypes = {
 
 function mapStateToProps(state, props) {
   const { loggedIn } = state.login;
-  const { loading, error, leftNavAnchor } = state.dashboard;
+  const { loading, error, leftNavAnchor, pageMenu } = state.dashboard;
   return {
     loggedIn,
     loading,
     error,
+    pageMenu,
     leftNavAnchor
   };
 };

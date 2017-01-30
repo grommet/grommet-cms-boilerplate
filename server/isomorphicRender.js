@@ -9,6 +9,7 @@ import env from 'node-env-file';
 import path from 'path';
 import { getRoutes } from '../src/js/routes';
 import { match } from 'react-router';
+import GrommetCmsConfigProvider from 'grommet-cms/containers/GrommetCmsConfigProvider';
 
 // Load environment variables
 env(path.join(__dirname, '..', '.env'));
@@ -60,7 +61,9 @@ export default function isomorphicRender(req, res) {
       const initialState = JSON.stringify(store.getState());
       const InitialComponent = (
         <Provider store={store}>
-          <RouterContext {...renderProps} />
+          <GrommetCmsConfigProvider>
+            <RouterContext {...renderProps} />
+          </GrommetCmsConfigProvider>
         </Provider>
       );
 

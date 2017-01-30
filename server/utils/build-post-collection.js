@@ -1,5 +1,5 @@
+import PostModels from '../models/Post';
 import colors from 'colors/safe';
-import PostModels from '../models/Posts';
 
 const POSTS = [
   {
