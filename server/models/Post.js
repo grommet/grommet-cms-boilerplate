@@ -9,25 +9,26 @@ const PostSchema = new Schema({
   sections: Array,
   slug: String,
   date: Date,
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  _type: String
 }, {
-  collection: 'Post',
+  collection: 'posts',
   discriminatorKey: '_type'
 });
 
 const OurBrandSchema = PostSchema.extend({
-  typeSlug: { type: String, default: 'our-brand' }
+  _type: { type: String, default: 'our-brand' }
 });
 const BrandElementsSchema = PostSchema.extend({
-  typeSlug: { type: String, default: 'brand-elements' }
+  _type: { type: String, default: 'brand-elements' }
 });
 const ApplyingTheBrandSchema = PostSchema.extend({
-  typeSlug: { type: String, default: 'applying-the-brand' }
+  _type: { type: String, default: 'applying-the-brand' }
 });
 
-const OurBrand = mongoose.model('OurBrand', OurBrandSchema);
-const BrandElements = mongoose.model('BrandElements', BrandElementsSchema);
-const ApplyingTheBrand = mongoose.model('ApplyingTheBrand', ApplyingTheBrandSchema);
+const OurBrand = mongoose.model('our-brand', OurBrandSchema);
+const BrandElements = mongoose.model('brand-elements', BrandElementsSchema);
+const ApplyingTheBrand = mongoose.model('applying-the-brand', ApplyingTheBrandSchema);
 const Post = mongoose.model('Post', PostSchema);
 
 export default {

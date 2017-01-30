@@ -124,11 +124,11 @@ export function deletePost(id) {
 }
 
 // Get posts.
-export function getPosts(page = 0, slug) {
+export function getPosts(page = 0, type = '') {
   return (dispatch, getState) => {
     dispatch(postsRequest());
     let { url } = getState().api;
-    return fetch(`${url}/posts/${slug}?page=${page}`, {
+    return fetch(`${url}/posts?type=${type}&page=${page}`, {
       method: 'GET',
       mode: 'cors',
       headers: new Headers({

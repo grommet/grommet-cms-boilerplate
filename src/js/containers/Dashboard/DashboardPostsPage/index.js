@@ -39,9 +39,9 @@ export class DashboardPostsPage extends Component {
   componentWillMount() {
     // Reset content block list.
     // TODO: avoid resetting content list here. Possibly route middleware.
-    const { slug } = this.props.params;
+    const { type } = this.props.params;
     this.props.dispatch(blockAddList([]));
-    this.props.dispatch(getPosts(0, slug));
+    this.props.dispatch(getPosts(0, type));
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -49,13 +49,16 @@ export class DashboardPostsPage extends Component {
       this.setState({orderLayer: false});
   }
 
-  componentWillReceiveProps({ request, posts, redirect }) {
+  componentWillReceiveProps({ request, posts, redirect, params }) {
     if (!request && request !== this.props.request) {
       if (redirect) {
         this.props.dispatch(addPostRedirect());
         this._onToggleAddPostForm();
         this.props.dispatch(getPosts());
       }
+    }
+    if (params.type !== this.props.params.type) {
+      this.props.dispatch(getPosts(0, params.type));
     }
   }
 

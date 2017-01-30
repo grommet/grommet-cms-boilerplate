@@ -1,5 +1,5 @@
 import express from 'express';
-import * as PostModels from '../models/Post';
+import PostModels from '../models/Post';
 const router = express.Router();
 import { slugify } from '../utils/slugify';
 
@@ -10,11 +10,13 @@ const addSpaces = (s) =>
 router.get('/api/routes', function(req, res) {
   let routes = [];
   Object.keys(PostModels).forEach((key) => {
-    const item = {
-      label: addSpaces(key),
-      slug: slugify(addSpaces(key))
-    };
-    routes.push(item);
+    if (key !== 'Post') {
+      const item = {
+        label: addSpaces(key),
+        slug: slugify(addSpaces(key))
+      };
+      routes.push(item);
+    }
   });
 
   res.status(200).send({

@@ -12,37 +12,9 @@ router.get('/api/posts', function(req, res) {
     ? Number(req.query.page)
     : 0;
 
+  const { type } = req.query || 'Post';
   if (page === 0) {
-    const type = req.query.type || 'Post';
-    if (typeof type !== 'undefined') {
-      Post.find({ __type: type })
-        .populate('image')
-        .sort({
-          date: 'desc'
-        })
-        .exec((err, posts) => {
-          if (err) {
-            return res.status(400).send(err);
-          }
-          res.status(200).send(posts);
-        });
-    } else {
-      Post.find().populate('image').sort({
-        date: 'desc'
-      }).exec((err, posts) => {
-        if (err) {
-          return res.status(400).send(err);
-        }
-
-        res.status(200).send(posts);
-      });
-    }
-  } else {
-    const limit = 3;
-    const skip = (page === '1')
-      ? 0
-      : (page - 1) * limit;
-    Post.find().skip(skip).limit(limit).populate('image').sort({
+    Post.find({ _type: type }).populate('image').sort({
       date: 'desc'
     }).exec((err, posts) => {
       if (err) {
@@ -51,6 +23,24 @@ router.get('/api/posts', function(req, res) {
 
       res.status(200).send(posts);
     });
+  } else {
+    const limit = 3;
+    const skip = (page === '1')
+      ? 0
+      : (page - 1) * limit;
+    Post.find({ _type: type })
+      .skip(skip)
+      .limit(limit)
+      .populate('image')
+      .sort({
+        date: 'desc'
+      }).exec((err, posts) => {
+        if (err) {
+          return res.status(400).send(err);
+        }
+
+        res.status(200).send(posts);
+      });
   }
 });
 
@@ -86,6 +76,7 @@ router.post('/api/post/create', isAuthed, function(req, res) {
     slug: slugify(req.body.title),
     image: req.body.image._id || '',
     sections: req.body.sections,
+    _type: req.body._type,
     createdAt: Date.now()
   }, function (err, post) {
     if (err) {

@@ -3,6 +3,7 @@ import autoIncrement from 'mongoose-auto-increment';
 import env from 'node-env-file';
 import path from 'path';
 import { initScript } from './utils/init-script';
+import './models/Post';
 
 // Load environment variables
 env(path.join(__dirname, '..', '.env'));
@@ -13,7 +14,7 @@ const getDbUri = (dbName) => {
     return `mongodb://localhost:27017/${dbName}`;
   else 
     console.log('A database must be specified in the .env.');
-    process.exit();
+  process.exit();
 };
 
 const dbOptions = {
