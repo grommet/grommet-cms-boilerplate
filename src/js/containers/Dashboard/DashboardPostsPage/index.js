@@ -34,14 +34,14 @@ export class DashboardPostsPage extends Component {
     this._onCancelPost = this._onCancelPost.bind(this);
     this._onCreatePost = this._onCreatePost.bind(this);
     this._onPostChange = this._onPostChange.bind(this);
+    this._onFetchPosts = this._onFetchPosts.bind(this);
   }
 
   componentWillMount() {
     // Reset content block list.
     // TODO: avoid resetting content list here. Possibly route middleware.
-    const { type } = this.props.params;
     this.props.dispatch(blockAddList([]));
-    this.props.dispatch(getPosts(0, type));
+    this._onFetchPosts();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -54,7 +54,7 @@ export class DashboardPostsPage extends Component {
       if (redirect) {
         this.props.dispatch(addPostRedirect());
         this._onToggleAddPostForm();
-        this.props.dispatch(getPosts());
+        this._onFetchPosts();
       }
     }
     if (params.type !== this.props.params.type) {
@@ -64,9 +64,10 @@ export class DashboardPostsPage extends Component {
 
   _onSubmitPost() {
     if(!this.props.request) {
-      const { newPost } = this.props;
+      const { newPost, params } = this.props;
       const post = {
         ...newPost,
+        _type: params.type,
         sections: [
           {
             name: newPost.title,
@@ -79,6 +80,12 @@ export class DashboardPostsPage extends Component {
       this.props.dispatch(addPostRedirect());
       this.props.dispatch(submitPost(post));
     }
+  }
+
+  _onFetchPosts() {
+    const { type } = this.props.params;
+    const { currentPage } = this.props;
+    this.props.dispatch(getPosts(currentPage, type));
   }
 
   _onCancelPost() {
@@ -213,12 +220,13 @@ DashboardPostsPage.propTypes = {
   redirect: PropTypes.bool.isRequired,
   params: PropTypes.shape({
     slug: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  currentPage: PropTypes.number.isRequired
 };
 
 function mapStateToProps (state, props) {
   const { request, error, posts, post } = state.posts;
-  const { addPostForm, redirect } = state.dashboardPosts;
+  const { addPostForm, redirect, currentPage } = state.dashboardPosts;
   const { url } = state.fileUpload;
   return {
     request,
@@ -227,6 +235,7 @@ function mapStateToProps (state, props) {
     error,
     posts,
     newPost: post,
+    currentPage,
     addPostForm
   };
 };

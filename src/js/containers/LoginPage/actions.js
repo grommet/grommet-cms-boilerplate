@@ -48,7 +48,7 @@ export function login(user) {
             dispatch(loginSuccess(statusText));
 
             // redirect
-            browserHistory.push('/dashboard/posts');
+            browserHistory.push('/dashboard/homepage');
           }
         },
         err => {

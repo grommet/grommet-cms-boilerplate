@@ -4,7 +4,8 @@ const initialState = {
   addPostForm: {
     isVisible: false
   },
-  redirect: false
+  redirect: false,
+  currentPage: 0
 };
 
 function dashboardPosts(state = initialState, action) {
