@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-const Post = new Schema({
+const ApplyingTheBrand = new Schema({
   title: String,
   subtitle: String,
   image: { type: String, ref: 'File' },
@@ -11,4 +11,4 @@ const Post = new Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-export default mongoose.model('Post', Post);
+export default mongoose.model('ApplyingTheBrand', ApplyingTheBrand);

@@ -1,17 +1,31 @@
 import express from 'express';
-const router = express.Router();
-import Post from '../models/Post';
+import PostModels from '../models/Posts';
 import { isAuthed } from '../middleware/auth';
 import { slugify } from '../utils/slugify';
 
+const router = express.Router();
+
+const findModelByName = (name) =>
+  PostModels[name];
+
+const toUppercase = (str) =>
+  `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
+
 // Get Posts
-router.get('/api/posts', function(req, res) {
+router.get('/api/posts/:name', function(req, res) {
   const page = (req.query.page)
     ? Number(req.query.page)
     : 0;
+  
+  const name = req.params.name;
+  const modelName = name
+    .split('-')
+    .map(s => toUppercase(s))
+    .join('');
+  const Model = findModelByName(modelName);
 
-  if (page === 0) {
-    Post.find().populate('image').sort({
+  if (typeof Model !== 'undefined') {
+    Model.find().populate('image').sort({
       date: 'desc'
     }).exec((err, posts) => {
       if (err) {
@@ -21,19 +35,8 @@ router.get('/api/posts', function(req, res) {
       res.status(200).send(posts);
     });
   } else {
-    const limit = 3;
-    const skip = (page === '1')
-      ? 0
-      : (page - 1) * limit;
-    Post.find().skip(skip).limit(limit).populate('image').sort({
-      date: 'desc'
-    }).exec((err, posts) => {
-      if (err) {
-        return res.status(400).send(err);
-      }
-
-      res.status(200).send(posts);
-    });
+    const statusMessage = { message: 'The requested model does not exist.' };
+    res.status(400).send('The requested model does not exist.');
   }
 });
 
@@ -56,7 +59,6 @@ router.get('/api/post/title/:slug', function(req, res) {
     }
 
     res.status(200).send(post);
-
   });
 });
 

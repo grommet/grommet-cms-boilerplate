@@ -1,34 +1,27 @@
 import React from 'react';
-import GrommetLogo from 'grommet/components/icons/Grommet';
+import BrandHpeStackIcon from 'grommet/components/icons/base/BrandHpeStack';
 
 export default {
   frontend: {
-    title: 'Grommet CMS',
-    logo: <GrommetLogo invert size="small" />,
+    title: 'HPE Brand Central',
+    theme: 'HPE',
+    logo: <BrandHpeStackIcon invert size="small" />,
     favicon: '',
     contact: {
-      copyright: '© 2017 Grommet Labs',
-      email: 'hello@grommet.io',
+      copyright: '© 2017 Hewlett Packard Enterprise',
+      email: 'hello@hpe.com',
       phone: '123-456-7890',
-      website: 'https://grommet.io'
+      website: 'https://www.hpe.com'
     },
     leftNavLinks: [
-      {
-        label: 'Posts',
-        path: '/posts'
-      }
     ],
     rightNavLinks: [
-      {
-        path: '/dashboard',
-        label: 'Dashboard'
-      }
     ]
   },
   cms: {
     title: 'Grommet CMS',
-    logo: <GrommetLogo invert size="small" />,
-    formLogo: <GrommetLogo size="large" />,
+    logo: <BrandHpeStackIcon invert size="small" />,
+    formLogo: <BrandHpeStackIcon size="large" />,
     navLinks: [
       {
         path: '/dashboard/posts',

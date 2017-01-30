@@ -1,5 +1,5 @@
-import Post from '../models/Post';
 import colors from 'colors/safe';
+import PostModels from '../models/Posts';
 
 const POSTS = [
   {
@@ -182,18 +182,21 @@ const POSTS = [
 ];
 
 export default function buildPostCollection() {
-  Post.find().exec(function(err, doc) {
-    if (err) console.log(colors.red('error: ', err));
+  Object.keys(PostModels).forEach((key) => {
+    const Model = PostModels[key];
+    Model.find().exec(function(err, doc) {
+      if (err) console.log(colors.red('error: ', err));
 
-    if (doc.length === 0) {
-      Post.collection.insert(
-        POSTS, 
-        function(err, small) {
-          if (err) 
-            console.log(colors.red('error creating Post collection', err));
-          console.log(colors.green(`Created Post collection`));
-        }
-      );
-    }
+      if (doc.length === 0) {
+        Model.collection.insert(
+          POSTS, 
+          function(err, small) {
+            if (err) 
+              console.log(colors.red('error creating Post collection', err));
+            console.log(colors.green(`Created Post collection`));
+          }
+        );
+      }
+    });
   });
 };

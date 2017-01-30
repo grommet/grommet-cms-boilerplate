@@ -2,8 +2,6 @@ import React from 'react';
 import { Router, Route, IndexRoute, browserHistory, Redirect } from 'react-router';
 
 import {
-  App,
-  HomePage,
   DashboardContainer,
   LoginPage,
   DashboardHomePage,
@@ -11,11 +9,8 @@ import {
   DashboardUsersPage,
   DashboardPostsPage,
   DashboardPostPage,
-  PostPage,
-  DashboardContentBlocks,
   DashboardAssetsPage,
-  DashboardAssetPage,
-  PostFeedPage
+  DashboardAssetPage
 } from 'grommet-cms/containers';
 
 export const getRoutes = (store) => {
@@ -45,16 +40,6 @@ export const getRoutes = (store) => {
         <Route path='posts' component={DashboardPostsPage} onEnter={authRequired} />
         <Route path='post/:id' component={DashboardPostPage} onEnter={authRequired} />
         <Redirect from='post/:id' to='/posts/post/:id' />
-      </Route>
-
-      <Route path="/" component={App}>
-        <IndexRoute component={HomePage} />
-        <Route path="post/:slug" component={PostPage} />
-        <Route path="blocks" component={DashboardContentBlocks} />
-        <Route path="/posts">
-          <IndexRoute component={PostFeedPage} />
-          <Route path="post/:slug" component={PostPage} />
-        </Route>
       </Route>
     </Router>
   );
