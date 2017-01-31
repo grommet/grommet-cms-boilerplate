@@ -1,11 +1,11 @@
 import React from 'react';
-import BrandHpeLabsInsigniaOutlineIcon from 'grommet/components/icons/base/BrandHpeLabsInsigniaOutline';
+import BrandHpeElementPathIcon from 'grommet/components/icons/base/BrandHpeElementPath';
 
 export default {
   frontend: {
     title: 'HPE Brand Central',
     theme: 'HPE',
-    logo: <BrandHpeLabsInsigniaOutlineIcon invert size="small" />,
+    logo: <BrandHpeElementPathIcon invert size="small" />,
     favicon: '',
     contact: {
       copyright: '© 2017 Hewlett Packard Enterprise',
@@ -16,8 +16,8 @@ export default {
   },
   cms: {
     title: 'Brand Central CMS',
-    logo: <BrandHpeLabsInsigniaOutlineIcon invert size="medium" />,
-    formLogo: <BrandHpeLabsInsigniaOutlineIcon colorIndex="plain" size="xlarge" />,
+    logo: <BrandHpeElementPathIcon invert size="medium" />,
+    formLogo: <BrandHpeElementPathIcon colorIndex="plain" size="xlarge" />,
     navLinks: [
       {
         path: '/dashboard/assets',
