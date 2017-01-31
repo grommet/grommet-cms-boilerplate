@@ -5,7 +5,7 @@ import Heading from 'grommet/components/Heading';
 export default function PageHeader ({title, controls}) {
   return (
     <Box colorIndex="light-2" full="horizontal" direction="row"
-      justify="between" responsive={false}
+      justify="between" responsive={false} align="center"
       pad={{ vertical: 'small', horizontal: 'medium' }}>
       <Heading tag="h4" strong={true} margin="none">
         {title}

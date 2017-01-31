@@ -4,9 +4,9 @@ import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import Heading from 'grommet/components/Heading';
 import SpinningIcon from 'grommet/components/icons/Spinning';
-import List from 'grommet-cms/components/Dashboard/List';
 import ConfirmLayer from 'grommet-cms/components/Dashboard/ConfirmLayer';
-import { PageHeader, AddPostForm } from 'grommet-cms/components';
+import AddIcon from 'grommet/components/icons/base/Add';
+import { PageHeader, AddPostForm, PostDashboardList } from 'grommet-cms/components';
 import { getPosts, deletePost } from
   'grommet-cms/containers/Posts/PostPage/actions';
 import { blockAddList } from
@@ -35,6 +35,7 @@ export class DashboardPostsPage extends Component {
     this._onCreatePost = this._onCreatePost.bind(this);
     this._onPostChange = this._onPostChange.bind(this);
     this._onFetchPosts = this._onFetchPosts.bind(this);
+    this._onMenuItemClick = this._onMenuItemClick.bind(this);
   }
 
   componentWillMount() {
@@ -145,6 +146,22 @@ export class DashboardPostsPage extends Component {
     });
   }
 
+  _onMenuItemClick(type, index) {
+    switch(type) {
+      case 'EDIT_PAGE': {
+        const { _id: id } = this.props.posts[index];
+        this.context.router.push(`/dashboard/post/${id}`);
+        break;
+      }
+      case 'DELETE':
+        this._confirmDelete();
+        break;
+      case 'MOVE_UP': break;
+      case 'MOVE_DOWN': break;
+      default: break;
+    }
+  }
+
   _onDeleteSubmit(event) {
     event.preventDefault();
     this.props.dispatch(deletePost(this.state.postToDelete));
@@ -176,8 +193,10 @@ export class DashboardPostsPage extends Component {
       : null;
 
     const list = (Array.isArray(posts) && posts.length > 0 && !request)
-      ? <List list={this.props.posts} route="post" titleKey="title"
-            onDelete={this._confirmDelete} links={true} />
+      ? <PostDashboardList
+          list={this.props.posts}
+          onMenuItemClick={this._onMenuItemClick} 
+        />
       : this._renderLoader(request);
 
     return (
@@ -197,9 +216,12 @@ export class DashboardPostsPage extends Component {
         <PageHeader
           title="Posts"
           controls={
-            <Button onClick={this._onToggleAddPostForm}>
-              Add Post
-            </Button>
+            <Button
+              plain
+              icon={<AddIcon size="small" />}
+              label="Add Post"
+              onClick={this._onToggleAddPostForm}
+            />
           }
         />
         <Box align="center">
@@ -222,6 +244,10 @@ DashboardPostsPage.propTypes = {
     slug: PropTypes.string.isRequired
   }).isRequired,
   currentPage: PropTypes.number.isRequired
+};
+
+DashboardPostsPage.contextTypes = {
+  router: PropTypes.object.isRequired
 };
 
 function mapStateToProps (state, props) {
