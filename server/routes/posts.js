@@ -12,27 +12,11 @@ router.get('/api/posts', function(req, res) {
     ? Number(req.query.page)
     : 0;
 
-  const { type } = req.query || 'Post';
+  const { type } = req.query || '';
+  const params = { _type: type };
   if (page === 0) {
-    Post.find({ _type: type }).populate('image').sort({
-      date: 'desc'
-    }).exec((err, posts) => {
-      if (err) {
-        return res.status(400).send(err);
-      }
-
-      res.status(200).send(posts);
-    });
-  } else {
-    const limit = 3;
-    const skip = (page === '1')
-      ? 0
-      : (page - 1) * limit;
-    Post.find({ _type: type })
-      .skip(skip)
-      .limit(limit)
-      .populate('image')
-      .sort({
+    if (type === '' || !type) {
+      Post.find().populate('image').sort({
         date: 'desc'
       }).exec((err, posts) => {
         if (err) {
@@ -41,6 +25,51 @@ router.get('/api/posts', function(req, res) {
 
         res.status(200).send(posts);
       });
+    } else {
+      Post.find(params).populate('image').sort({
+        date: 'desc'
+      }).exec((err, posts) => {
+        if (err) {
+          return res.status(400).send(err);
+        }
+
+        res.status(200).send(posts);
+      });
+    }
+  } else {
+    const limit = 3;
+    const skip = (page === '1')
+      ? 0
+      : (page - 1) * limit;
+    if (type === '' || !type) {
+      Post.find()
+        .skip(skip)
+        .limit(limit)
+        .populate('image')
+        .sort({
+          date: 'desc'
+        }).exec((err, posts) => {
+          if (err) {
+            return res.status(400).send(err);
+          }
+
+          res.status(200).send(posts);
+        });
+    } else {
+      Post.find(params)
+        .skip(skip)
+        .limit(limit)
+        .populate('image')
+        .sort({
+          date: 'desc'
+        }).exec((err, posts) => {
+          if (err) {
+            return res.status(400).send(err);
+          }
+
+          res.status(200).send(posts);
+        });
+    }
   }
 });
 

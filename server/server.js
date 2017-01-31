@@ -69,6 +69,7 @@ app.use(
 // Allow external calls to API for dev purposes.
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", process.env.BASE_URL);
+  res.header("Access-Control-Allow-Origin", process.env.FRONT_END_URL);
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header("X-Frame-Options", "deny");

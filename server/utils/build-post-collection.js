@@ -557,7 +557,7 @@ export default function buildPostCollection() {
             function(err, small) {
               if (err) 
                 console.log(colors.red('error creating Post collection', err));
-              console.log(colors.green(`Created ${Model} collection`));
+              console.log(colors.green(`Created ${key} collection`));
             }
           );
         }
