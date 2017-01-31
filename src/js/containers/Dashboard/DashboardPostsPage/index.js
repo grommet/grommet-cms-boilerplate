@@ -36,6 +36,7 @@ export class DashboardPostsPage extends Component {
     this._onPostChange = this._onPostChange.bind(this);
     this._onFetchPosts = this._onFetchPosts.bind(this);
     this._onMenuItemClick = this._onMenuItemClick.bind(this);
+    this._onMore = this._onMore.bind(this);
   }
 
   componentWillMount() {
@@ -50,7 +51,7 @@ export class DashboardPostsPage extends Component {
       this.setState({orderLayer: false});
   }
 
-  componentWillReceiveProps({ request, posts, redirect, params }) {
+  componentWillReceiveProps({ request, posts, redirect, params, currentPage }) {
     if (!request && request !== this.props.request) {
       if (redirect) {
         this.props.dispatch(addPostRedirect());
@@ -59,7 +60,10 @@ export class DashboardPostsPage extends Component {
       }
     }
     if (params.type !== this.props.params.type) {
-      this.props.dispatch(getPosts(0, params.type));
+      this._onFetchPosts();
+    }
+    if (currentPage > this.props.currentPage) {
+      this._onFetchPosts(currentPage);
     }
   }
 
@@ -83,10 +87,9 @@ export class DashboardPostsPage extends Component {
     }
   }
 
-  _onFetchPosts() {
+  _onFetchPosts(page = this.props.currentPage) {
     const { type } = this.props.params;
-    const { currentPage } = this.props;
-    this.props.dispatch(getPosts(currentPage, type));
+    this.props.dispatch(getPosts(page, type));
   }
 
   _onCancelPost() {
@@ -147,19 +150,24 @@ export class DashboardPostsPage extends Component {
   }
 
   _onMenuItemClick(type, index) {
+    const { _id: id } = this.props.posts[index];
     switch(type) {
       case 'EDIT_PAGE': {
-        const { _id: id } = this.props.posts[index];
         this.context.router.push(`/dashboard/post/${id}`);
         break;
       }
-      case 'DELETE':
-        this._confirmDelete();
+      case 'DELETE': {
+        this._confirmDelete(id);
         break;
+      }
       case 'MOVE_UP': break;
       case 'MOVE_DOWN': break;
       default: break;
     }
+  }
+
+  _onMore() {
+    // TODO: add on more
   }
 
   _onDeleteSubmit(event) {
@@ -194,6 +202,7 @@ export class DashboardPostsPage extends Component {
 
     const list = (Array.isArray(posts) && posts.length > 0 && !request)
       ? <PostDashboardList
+          onRequestForMore={this._onMore}
           list={this.props.posts}
           onMenuItemClick={this._onMenuItemClick} 
         />
@@ -242,7 +251,7 @@ DashboardPostsPage.propTypes = {
   redirect: PropTypes.bool.isRequired,
   params: PropTypes.shape({
     slug: PropTypes.string.isRequired
-  }).isRequired,
+  }),
   currentPage: PropTypes.number.isRequired
 };
 

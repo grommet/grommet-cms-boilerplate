@@ -16,13 +16,18 @@ export default function PostDashboardList({
   titleKey, 
   links, 
   onMenuItemClick, 
-  route
+  route,
+  onRequestForMore
 }) {
   return (
     <Box full="horizontal" align="center" direction="column">
       <List style={{ width: '100%' }}>
         {list && list.map((item, i) =>
-          <ListItem onClick={() => onMenuItemClick('EDIT_PAGE', i)} key={i}>
+          <ListItem
+            key={i}
+            onMore={onRequestForMore}
+            onClick={() => onMenuItemClick('EDIT_PAGE', i)} 
+          >
             <Box
               full="horizontal"
               pad="medium"

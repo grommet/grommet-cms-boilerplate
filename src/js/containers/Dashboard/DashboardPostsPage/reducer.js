@@ -22,6 +22,11 @@ function dashboardPosts(state = initialState, action) {
         ...state,
         redirect: !state.redirect
       };
+    case ActionTypes.DASHBOARD_POSTS_INCREMENT_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: state.currentPage + 1
+      };
     default:
       return state;
   }
