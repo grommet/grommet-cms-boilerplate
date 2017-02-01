@@ -60,7 +60,7 @@ export class DashboardPostsPage extends Component {
       }
     }
     if (params.type !== this.props.params.type) {
-      this._onFetchPosts();
+      this._onFetchPosts(currentPage, params.type);
     }
     if (currentPage > this.props.currentPage) {
       this._onFetchPosts(currentPage);
@@ -87,8 +87,7 @@ export class DashboardPostsPage extends Component {
     }
   }
 
-  _onFetchPosts(page = this.props.currentPage) {
-    const { type } = this.props.params;
+  _onFetchPosts(page = this.props.currentPage, type = this.props.params.type) {
     this.props.dispatch(getPosts(page, type));
   }
 
@@ -250,7 +249,7 @@ DashboardPostsPage.propTypes = {
   newPost: PropTypes.object,
   redirect: PropTypes.bool.isRequired,
   params: PropTypes.shape({
-    slug: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired
   }),
   currentPage: PropTypes.number.isRequired
 };

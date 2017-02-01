@@ -21,11 +21,10 @@ export default function PostDashboardList({
 }) {
   return (
     <Box full="horizontal" align="center" direction="column">
-      <List style={{ width: '100%' }}>
+      <List onMore={onRequestForMore} style={{ width: '100%' }}>
         {list && list.map((item, i) =>
           <ListItem
             key={i}
-            onMore={onRequestForMore}
             onClick={() => onMenuItemClick('EDIT_PAGE', i)} 
           >
             <Box
@@ -35,12 +34,14 @@ export default function PostDashboardList({
               justify="between"
               responsive={false}
             >
-              <Heading tag="h3">
-                {item.title}
-              </Heading>
-              <Label>
-                {item.subtitle}
-              </Label>
+              <Box direction="column">
+                <Heading tag="h3">
+                  {item.title}
+                </Heading>
+                <Label margin="none">
+                  {item.subtitle}
+                </Label>
+              </Box>
               <Box align="end" justify="center" style={{ zIndex: 10 }}>
                 <Menu
                   closeOnClick

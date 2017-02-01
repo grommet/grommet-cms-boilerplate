@@ -257,9 +257,11 @@ export class DashboardPostPage extends Component {
     if (index != null) {
       const section = this.props.post.sections[index];
       this._onChangeSectionForm({ name: 'name', value: section.name });
-      section.layout.forEach((item, i) => {
-        this._onChangeSectionForm({ name: item.name, value: item.value });
-      });
+      if (section.layout && section.layout.length) {
+        section.layout.forEach((item, i) => {
+          this._onChangeSectionForm({ name: item.name, value: item.value });
+        });
+      }
     } else {
       this.props.dispatch(toggleSectionForm(null));
       this.props.dispatch(postSectionFormReset());

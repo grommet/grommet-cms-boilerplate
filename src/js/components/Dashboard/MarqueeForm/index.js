@@ -105,7 +105,7 @@ export default class MarqueeForm extends Component {
           <Form pad="medium">
             <FormFields>
               <fieldset>
-                <FormField label="Headline" htmlFor="title">
+                <FormField label="Title" htmlFor="title">
                   <input
                     autoFocus
                     id="title"
@@ -114,33 +114,6 @@ export default class MarqueeForm extends Component {
                     value={title || ''}
                     onChange={onChange}
                   />
-                </FormField>
-                <FormField label="Subheading" htmlFor="title">
-                  <input
-                    id="subtitle"
-                    name="subtitle"
-                    type="text"
-                    value={subtitle || ''}
-                    onChange={onChange}
-                  />
-                </FormField>
-                <FormField label="Date" htmlFor="date">
-                  <FormField>
-                    <DateTime
-                      id="date"
-                      name="date"
-                      format="M/D/YYYY"
-                      value={formattedDate || ''}
-                      onChange={(dataString) =>
-                        onChange({
-                          target: {
-                            id: 'date',
-                            value: new Date(dataString)
-                          }
-                        })
-                      }
-                    />
-                  </FormField>
                 </FormField>
                 <FormField label="Background Image" htmlFor="image">
                   <input

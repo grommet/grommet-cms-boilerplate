@@ -30,6 +30,7 @@ export const getRoutes = (store) => {
 
   return (
     <Router history={browserHistory}>
+      <Redirect from='/' to='/dashboard' />
       <Route path='/dashboard' component={DashboardContainer}>
         <IndexRoute component={LoginPage} />
         <Route path="assets" component={DashboardAssetsPage} onEnter={authRequired} />
