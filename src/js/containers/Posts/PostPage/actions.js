@@ -93,11 +93,11 @@ export const postMoveSectionDown = (index) => ({
 });
 
 // Delete post.
-export function deletePost(id) {
+export function deletePost(post) {
   return (dispatch, getState) => {
     dispatch(postsRequest());
     let { url } = getState().api;
-    fetch(`${url}/post/${id}/delete`, {
+    fetch(`${url}/post/${post._id}/delete`, {
       method: 'POST',
       credentials: 'include',
       headers: new Headers({
@@ -111,7 +111,7 @@ export function deletePost(id) {
             dispatch(postsError(text));
           } else {
             // Refresh posts.
-            dispatch(getPosts());
+            dispatch(getPosts(0, post._type));
             dispatch(postDeleteSuccess());
           }
         },

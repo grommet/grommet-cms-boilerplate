@@ -218,7 +218,8 @@ export class DashboardPostsPage extends Component {
 
   _onDeleteSubmit(event) {
     event.preventDefault();
-    this.props.dispatch(deletePost(this.state.postToDelete));
+    const post = this.props.posts.filter(i => i._id === this.state.postToDelete)[0];
+    this.props.dispatch(deletePost(post));
     this.setState({
       layer: false,
       postToDelete: null
