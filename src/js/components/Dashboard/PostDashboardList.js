@@ -62,13 +62,13 @@ export default function PostDashboardList({
                   <Anchor
                     icon={<UpIcon size="small" />}
                     label="Move Up"
-                    disabled={item.sortOrder === 0}
+                    disabled={item.sortOrder === Math.min(...list.map(i => i.sortOrder))}
                     onClick={() => onMenuItemClick('MOVE_UP', i)}
                   />
                   <Anchor
                     icon={<DownIcon size="small" />}
                     label="Move Down"
-                    disabled={item.sortOrder === list.length - 1}
+                    disabled={item.sortOrder === Math.max(...list.map(i => i.sortOrder))}
                     onClick={() => onMenuItemClick('MOVE_DOWN', i)}
                   />
                 </Menu>

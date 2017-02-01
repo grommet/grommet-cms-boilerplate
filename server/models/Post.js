@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import extend from 'mongoose-schema-extend';
-import autoIncrement from 'mongoose-auto-increment';
+import AutoIncrement from 'mongoose-sequence';
 
 const PostSchema = new Schema({
   title: String,
@@ -30,13 +30,10 @@ const ApplyingTheBrandSchema = PostSchema.extend({
   sortOrder: { type: Number, default: 0 }
 });
 
-autoIncrement.initialize(mongoose.connection);
 const OurBrand = mongoose.model('our-brand', OurBrandSchema);
 const BrandElements = mongoose.model('brand-elements', BrandElementsSchema);
 const ApplyingTheBrand = mongoose.model('applying-the-brand', ApplyingTheBrandSchema);
-OurBrandSchema.plugin(autoIncrement.plugin, { model: 'our-brand', field: 'sortOrder' });
-BrandElementsSchema.plugin(autoIncrement.plugin, { model: 'brand-elements', field: 'sortOrder' });
-ApplyingTheBrandSchema.plugin(autoIncrement.plugin, { model: 'applying-the-brand', field: 'sortOrder' });
+PostSchema.plugin(AutoIncrement,  { id: 'sort_order', inc_field: 'sortOrder', reference_fields: ['_type'] });
 const Post = mongoose.model('Post', PostSchema);
 
 export default {

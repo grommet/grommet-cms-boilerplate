@@ -60,6 +60,7 @@
     "mongoose": "4.5.5",
     "mongoose-auto-increment": "^5.0.1",
     "mongoose-schema-extend": "^0.2.2",
+    "mongoose-sequence": "^3.1.0",
     "morgan": "^1.5.0",
     "multer": "^1.2.0",
     "node-env-file": "^0.1.8",
