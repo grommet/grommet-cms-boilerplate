@@ -7,13 +7,11 @@ import SpinningIcon from 'grommet/components/icons/Spinning';
 import ConfirmLayer from 'grommet-cms/components/Dashboard/ConfirmLayer';
 import AddIcon from 'grommet/components/icons/base/Add';
 import { PageHeader, AddPostForm, PostDashboardList } from 'grommet-cms/components';
-import { getPosts, deletePost } from
+import { getPosts, deletePost, submitPost, setPost, updatePost } from
   'grommet-cms/containers/Posts/PostPage/actions';
 import { blockAddList } from
   'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
-import { submitPost, setPost } from
-  'grommet-cms/containers/Posts/PostPage/actions';
-import { toggleAddPostFormVisibility, addPostRedirect } from './actions';
+import { toggleAddPostFormVisibility, addPostRedirect, incrementCurrentPage } from './actions';
 import { slugify } from 'grommet-cms/utils';
 
 export class DashboardPostsPage extends Component {
@@ -36,6 +34,8 @@ export class DashboardPostsPage extends Component {
     this._onPostChange = this._onPostChange.bind(this);
     this._onFetchPosts = this._onFetchPosts.bind(this);
     this._onMenuItemClick = this._onMenuItemClick.bind(this);
+    this._onMovePostOrderUp = this._onMovePostOrderUp.bind(this);
+    this._onMovePostOrderDown = this._onMovePostOrderDown.bind(this);
     this._onMore = this._onMore.bind(this);
   }
 
@@ -159,14 +159,61 @@ export class DashboardPostsPage extends Component {
         this._confirmDelete(id);
         break;
       }
-      case 'MOVE_UP': break;
-      case 'MOVE_DOWN': break;
+      case 'MOVE_UP':
+        this._onMovePostOrderUp(index);
+        break;
+      case 'MOVE_DOWN':
+        this._onMovePostOrderDown(index);
+        break;
       default: break;
     }
   }
 
+  _onMovePostOrderUp(index) {
+    const post = this.props.posts[index];
+    const swappedPost = this.props.posts[index - 1];
+    if (post) {
+      const sortOrder = Math.max(0, post.sortOrder - 1);
+      const newPost = {
+        ...post,
+        sortOrder
+      };
+      this.props.dispatch(updatePost(newPost));
+    }
+    if (swappedPost) {
+      const sortOrder = swappedPost.sortOrder + 1;
+      const newPost = {
+        ...swappedPost,
+        sortOrder
+      };
+      this.props.dispatch(updatePost(newPost));
+    }
+  }
+
+  _onMovePostOrderDown(index) {
+    const post = this.props.posts[index];
+    const swappedPost = this.props.posts[index + 1];
+    if (post) {
+      const sortOrder = post.sortOrder + 1;
+      const newPost = {
+        ...post,
+        sortOrder
+      };
+      this.props.dispatch(updatePost(newPost));
+    }
+    if (swappedPost) {
+      const sortOrder = Math.max(0, swappedPost.sortOrder - 1);
+      const newPost = {
+        ...swappedPost,
+        sortOrder
+      };
+      this.props.dispatch(updatePost(newPost));
+    }
+  }
+
   _onMore() {
-    // TODO: add on more
+    // useful for pagination if we need it, but not currently used
+    this.props.dispatch(incrementCurrentPage());
   }
 
   _onDeleteSubmit(event) {
@@ -201,7 +248,6 @@ export class DashboardPostsPage extends Component {
 
     const list = (Array.isArray(posts) && posts.length > 0 && !request)
       ? <PostDashboardList
-          onRequestForMore={this._onMore}
           list={this.props.posts}
           onMenuItemClick={this._onMenuItemClick} 
         />

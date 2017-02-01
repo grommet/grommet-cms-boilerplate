@@ -230,3 +230,33 @@ export function submitPost(post) {
       );
   };
 }
+
+export function updatePost(post) {
+  const endPoint = `post/${post._id}`;
+
+  return (dispatch, getState) => {
+    dispatch(postsRequest());
+    let { url } = getState().api;
+    return fetch(`${url}/${endPoint}`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify(post)
+    })
+      .then(
+        ({ status, statusText }) => {
+          if (status >= 400) {
+            dispatch(postsError(statusText));
+          } else {
+            dispatch(getPosts(0, post._type));
+          }
+        },
+        err => {
+          // dispatch app error
+          dispatch(postsError('There was an error processing your request.'));
+        }
+      );
+  };
+}

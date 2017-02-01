@@ -552,8 +552,8 @@ export default function buildPostCollection() {
         if (err) console.log(colors.red('error: ', err));
 
         if (doc.length === 0) {
-          Model.collection.insert(
-            POSTS[key], 
+          Model.create(
+            POSTS[key],
             function(err, small) {
               if (err) 
                 console.log(colors.red('error creating Post collection', err));

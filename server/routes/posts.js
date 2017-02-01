@@ -16,9 +16,13 @@ router.get('/api/posts', function(req, res) {
   const params = { _type: type };
   if (page === 0) {
     if (type === '' || !type) {
-      Post.find().populate('image').sort({
-        date: 'desc'
-      }).exec((err, posts) => {
+      Post
+      .find()
+      .populate('image')
+      .sort({
+        sortOrder: 1
+      })
+      .exec((err, posts) => {
         if (err) {
           return res.status(400).send(err);
         }
@@ -26,18 +30,22 @@ router.get('/api/posts', function(req, res) {
         res.status(200).send(posts);
       });
     } else {
-      Post.find(params).populate('image').sort({
-        date: 'desc'
-      }).exec((err, posts) => {
-        if (err) {
-          return res.status(400).send(err);
-        }
+      Post
+        .find(params)
+        .populate('image')
+        .sort({
+          sortOrder: 1
+        })
+        .exec((err, posts) => {
+          if (err) {
+            return res.status(400).send(err);
+          }
 
-        res.status(200).send(posts);
-      });
+          res.status(200).send(posts);
+        });
     }
   } else {
-    const limit = 3;
+    const limit = 10;
     const skip = (page === '1')
       ? 0
       : (page - 1) * limit;
@@ -47,7 +55,7 @@ router.get('/api/posts', function(req, res) {
         .limit(limit)
         .populate('image')
         .sort({
-          date: 'desc'
+          sortOrder: 1
         }).exec((err, posts) => {
           if (err) {
             return res.status(400).send(err);
@@ -61,7 +69,7 @@ router.get('/api/posts', function(req, res) {
         .limit(limit)
         .populate('image')
         .sort({
-          date: 'desc'
+          sortOrder: 1
         }).exec((err, posts) => {
           if (err) {
             return res.status(400).send(err);
@@ -130,6 +138,7 @@ router.post('/api/post/:id', isAuthed, function (req, res) {
     post.sections = req.body.sections;
     post.image = (req.body.image) ? req.body.image._id : undefined;
     post.createdAt = req.body.createdAt;
+    post.sortOrder = req.body.sortOrder;
 
     return post.save(function(err) {
       if (err) return res.status(400).send(err);

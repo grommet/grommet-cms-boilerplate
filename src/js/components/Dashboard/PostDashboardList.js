@@ -16,12 +16,11 @@ export default function PostDashboardList({
   titleKey, 
   links, 
   onMenuItemClick, 
-  route,
-  onRequestForMore
+  route
 }) {
   return (
     <Box full="horizontal" align="center" direction="column">
-      <List onMore={onRequestForMore} style={{ width: '100%' }}>
+      <List style={{ width: '100%' }}>
         {list && list.map((item, i) =>
           <ListItem
             key={i}
@@ -63,12 +62,13 @@ export default function PostDashboardList({
                   <Anchor
                     icon={<UpIcon size="small" />}
                     label="Move Up"
-                    disabled={item.order <= 1}
+                    disabled={item.sortOrder === 0}
                     onClick={() => onMenuItemClick('MOVE_UP', i)}
                   />
                   <Anchor
                     icon={<DownIcon size="small" />}
                     label="Move Down"
+                    disabled={item.sortOrder === list.length - 1}
                     onClick={() => onMenuItemClick('MOVE_DOWN', i)}
                   />
                 </Menu>
