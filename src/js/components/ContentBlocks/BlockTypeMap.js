@@ -3,7 +3,6 @@ import {
   ImageForm,
   ParagraphForm,
   ImageParagraphForm,
-  CardParagraphForm,
   QuoteForm,
   VideoForm,
   CarouselForm
@@ -19,6 +18,7 @@ import {
   BlockImageParagraphWireframe,
   BlockCard,
   BlockCardWireframe,
+  BlockCardForm,
   BlockQuote,
   BlockQuoteWireframe,
   BlockVideo,
@@ -73,7 +73,7 @@ export default {
   BlockCardParagraph: {
     element: <BlockCard />,
     preview: <GenericPreview />,
-    form: <CardParagraphForm />,
+    form: <BlockCardForm />,
     name: 'Card + Paragraph',
     wireframe: <BlockCardWireframe />
   },

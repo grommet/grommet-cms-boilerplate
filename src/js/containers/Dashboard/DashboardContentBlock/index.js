@@ -152,12 +152,7 @@ function mapStateToProps(state, props) {
   );
   const block = state.contentBlocks[blockIndex];
   if (block) {
-    const {
-      ...allProps
-    } = block;
-    return {
-      ...allProps
-    };
+    return block;
   }
   return {};
 }
