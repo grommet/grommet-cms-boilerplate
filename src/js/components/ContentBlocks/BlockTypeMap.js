@@ -28,10 +28,20 @@ import {
   GenericPreview,
   BlockColorSwatch,
   BlockColorSwatchForm,
-  BlockColorSwatchWireframe
+  BlockColorSwatchWireframe,
+  BlockBox,
+  BlockBoxForm,
+  BlockBoxWireframe
 } from './index';
 
 export default {
+  BlockBox: {
+    element: <BlockBox />,
+    preview: <GenericPreview />,
+    form: <BlockBoxForm />,
+    name: 'Box',
+    wireframe: <BlockBoxWireframe />
+  },
   BlockParagraph: {
     element: <BlockParagraph />,
     preview: <GenericPreview />,

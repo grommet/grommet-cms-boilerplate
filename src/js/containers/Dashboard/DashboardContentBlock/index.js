@@ -153,32 +153,10 @@ function mapStateToProps(state, props) {
   const block = state.contentBlocks[blockIndex];
   if (block) {
     const {
-      blockType,
-      card,
-      carousel,
-      content,
-      edit,
-      image,
-      imageDesc,
-      imageSize,
-      label,
-      linkUrl,
-      color,
-      source
+      ...allProps
     } = block;
     return {
-      blockType,
-      card,
-      carousel,
-      content,
-      edit,
-      image,
-      imageDesc,
-      imageSize,
-      label,
-      color,
-      linkUrl,
-      source
+      ...allProps
     };
   }
   return {};

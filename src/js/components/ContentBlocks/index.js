@@ -8,3 +8,4 @@ export * from './BlockParagraph';
 export * from './BlockQuote';
 export * from './BlockVideo';
 export * from './BlockImageParagraph';
+export * from './BlockBox';

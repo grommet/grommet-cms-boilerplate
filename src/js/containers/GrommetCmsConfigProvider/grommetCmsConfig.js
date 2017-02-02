@@ -16,7 +16,7 @@ export default {
   },
   cms: {
     title: 'Brand Central CMS',
-    logo: <BrandHpeElementPathIcon invert size="medium" />,
+    logo: <BrandHpeElementPathIcon size="medium" />,
     formLogo: <BrandHpeElementPathIcon colorIndex="plain" size="xlarge" />,
     navLinks: [
       {

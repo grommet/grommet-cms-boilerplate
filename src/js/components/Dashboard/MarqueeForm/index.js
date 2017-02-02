@@ -4,7 +4,6 @@ import {
 } from 'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
-import DateTime from 'grommet/components/DateTime';
 import Form from 'grommet/components/Form';
 import FormField from 'grommet/components/FormField';
 import FormFields from 'grommet/components/FormFields';
@@ -12,7 +11,6 @@ import Section from 'grommet/components/Section';
 import Footer from 'grommet/components/Footer';
 import ImageIcon from 'grommet/components/icons/base/Image';
 import Menu from 'grommet/components/Menu';
-import { formatDate } from 'grommet-cms/utils';
 import DashboardAssetsLayer from
   'grommet-cms/containers/Dashboard/DashboardAssetsLayer';
 
@@ -89,8 +87,7 @@ export default class MarqueeForm extends Component {
 
   render() {
     const { onChange, post, onCancel } = this.props;
-    const { image, title, subtitle, date } = post;
-    const formattedDate = formatDate(date);
+    const { image, title, subtitle } = post;
     const assetsLayer = (this.state.assetsLayer)
       ? <DashboardAssetsLayer
           onAssetSelect={this._onAssetSelect}
@@ -115,7 +112,18 @@ export default class MarqueeForm extends Component {
                     onChange={onChange}
                   />
                 </FormField>
-                <FormField label="Background Image" htmlFor="image">
+                <FormField label="Subtitle" htmlFor="title">
+                  <textarea
+                    id="subtitle"
+                    name="subtitle"
+                    type="text"
+                    rows="3"
+                    columns="40"
+                    value={subtitle || ''}
+                    onChange={onChange}
+                  />
+                </FormField>
+                <FormField label="Tile Image" htmlFor="image">
                   <input
                     id="image"
                     name="image"
