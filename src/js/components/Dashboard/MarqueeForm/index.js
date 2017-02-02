@@ -118,7 +118,6 @@ export default class MarqueeForm extends Component {
                     name="subtitle"
                     type="text"
                     rows="3"
-                    columns="40"
                     value={subtitle || ''}
                     onChange={onChange}
                   />

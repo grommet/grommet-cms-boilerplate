@@ -20,6 +20,7 @@ export class VideoForm extends Component {
 
     this._onChange = this._onChange.bind(this);
     this._onSubmit = this._onSubmit.bind(this);
+    this._onAssetSelect = this._onAssetSelect.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -38,6 +39,10 @@ export class VideoForm extends Component {
     obj[key] = val;
 
     this.setState(obj);
+  }
+
+  _onAssetSelect(asset) {
+    this.setState({ image: asset });
   }
 
   _validateForm({ image }) {
@@ -78,7 +83,7 @@ export class VideoForm extends Component {
               </FormField>
               <FormField label="Video thumbnail file path" htmlFor="image">
                 <input id="image" name="image" type="text"
-                  value={image} onChange={this._onChange} />
+                  value={image.path} onChange={this._onChange} />
               </FormField>
               <Assets
                 onAssetSelect={this._onAssetSelect}

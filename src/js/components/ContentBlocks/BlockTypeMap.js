@@ -5,7 +5,8 @@ import {
   ImageParagraphForm,
   QuoteForm,
   VideoForm,
-  CarouselForm
+  CarouselForm,
+  CardParagraphForm
 } from 'grommet-cms/containers/Dashboard/DashboardBlockForm';
 import {
   BlockHeading,
@@ -18,7 +19,6 @@ import {
   BlockImageParagraphWireframe,
   BlockCard,
   BlockCardWireframe,
-  BlockCardForm,
   BlockQuote,
   BlockQuoteWireframe,
   BlockVideo,
@@ -73,7 +73,7 @@ export default {
   BlockCardParagraph: {
     element: <BlockCard />,
     preview: <GenericPreview />,
-    form: <BlockCardForm />,
+    form: <CardParagraphForm />,
     name: 'Card + Paragraph',
     wireframe: <BlockCardWireframe />
   },

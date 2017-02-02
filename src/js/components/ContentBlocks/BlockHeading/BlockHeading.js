@@ -1,15 +1,11 @@
 import React, { PropTypes } from 'react';
-import Heading from 'grommet/components/Heading';
-import Section from 'grommet/components/Section';
+import Headline from 'grommet/components/Headline';
 
 export default function BlockHeading ({ content }) {
   return (
-    <Section pad={{ horizontal: 'large', vertical: 'small' }} 
-      alignSelf="center">
-      <Heading tag="h2" margin="none">
-        {content}
-      </Heading>
-    </Section>
+    <Headline>
+      {content}
+    </Headline>
   );
 };
 

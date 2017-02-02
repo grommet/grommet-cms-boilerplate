@@ -4,6 +4,7 @@ import Form from 'grommet/components/Form';
 import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
+import Select from 'grommet/components/Select';
 import { Assets } from 'grommet-cms/containers';
 
 export class ImageForm extends Component {
@@ -11,7 +12,8 @@ export class ImageForm extends Component {
     super(props);
     this.state = {
       image: props.image || '',
-      content: props.content || ''
+      content: props.content || '',
+      imageSize: props.imageSize || 'Large'
     };
 
     this._onChange = this._onChange.bind(this);
@@ -27,9 +29,9 @@ export class ImageForm extends Component {
     }
   }
 
-  _onChange({ target }) {
+  _onChange({ target, option }) {
     const key = target.id;
-    let val = target.value;
+    let val = option || target.value;
 
     let obj  = {};
     obj[key] = val;
@@ -55,7 +57,7 @@ export class ImageForm extends Component {
   }
 
   render() {
-    const { image, content } = this.state;
+    const { image, content, imageSize } = this.state;
     const submit = (this._validateForm(this.state))
       ? this._onSubmit
       : undefined;
@@ -72,6 +74,15 @@ export class ImageForm extends Component {
               <FormField label="Image file path" htmlFor="image">
                 <input id="image" name="image" type="text"
                   value={image.path} onChange={this._onChange} />
+              </FormField>
+              <FormField label="Image Size" htmlFor="imageSize">
+                <Select
+                  id="imageSize"
+                  inline={false}
+                  options={["Small", "Medium", "Large", "Full"]}
+                  value={imageSize}
+                  onChange={this._onChange}
+                />
               </FormField>
               <Assets
                 onAssetSelect={this._onAssetSelect}
