@@ -1,6 +1,7 @@
 /* @flow */
 import React from 'react';
 import Box from 'grommet/components/Box';
+import Markdown from 'grommet/components/Markdown';
 
 export default function BlockBox(props: {
   content: ?string,
@@ -14,7 +15,15 @@ export default function BlockBox(props: {
       size={{ height: 'small' }}
       colorIndex={colorIndex || 'light-1'}
     >
-      {content || ''}
+      <Box pad="small">
+        <Markdown
+          content={content}
+          components={{
+            'p': { 'props':  { size: 'large', margin: 'small' } },
+            'h2': { 'props':  { strong: true } }
+          }}
+        />
+      </Box>
     </Box>
   );
 }

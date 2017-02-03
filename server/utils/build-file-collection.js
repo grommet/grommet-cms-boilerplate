@@ -6,7 +6,7 @@ const FILES = [
   {
     _id: mongoose.Types.ObjectId("587d4860b3ae295860c5fcbf"),
     title: "Hello World Cover",
-    path: "/img/dashboard/posts/hello-world-cover.jpg",
+    path: "/uploads/media/dashboard/posts/hello-world-cover.jpg",
     __v: 0,
     createdAt: "2017-01-16T22:25:36.354Z"
   }

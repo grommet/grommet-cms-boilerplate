@@ -8,7 +8,7 @@ import type {
 export const initialState: DashboardPostPageState = {
   toastMessage: null,
   sectionLayoutForm: {
-    showAdvancedLayoutOptions: false,
+    showAdvancedLayoutOptions: true,
     isVisible: false,
     title: "Section Layout",
     selectedSection: null,
@@ -21,7 +21,7 @@ export const initialState: DashboardPostPageState = {
         name: "pad",
         type: "Select",
         options: ["small", "medium", "large", "none"],
-        value: 'none'
+        value: 'small'
       },
       {
         label: "Flex Basis",
@@ -35,21 +35,21 @@ export const initialState: DashboardPostPageState = {
         name: "direction",
         type: "Select",
         options: ["row", "column"],
-        value: 'column'
+        value: 'row'
       },
       {
         label: "Justify Content",
         name: "justify",
         type: "Select",
         options: ["start", "center", "between", "end"],
-        value: 'center'
+        value: 'start'
       },
       {
         label: "Align Items",
         name: "align",
         type: "Select",
         options: ["start", "center", "end", "baseline", "stretch"],
-        value: 'center'
+        value: 'start'
       },
       {
         label: "Full",
@@ -77,7 +77,7 @@ export const initialState: DashboardPostPageState = {
         name: "pad",
         type: "Select",
         options: ["small", "medium", "large", "none"],
-        value: 'none'
+        value: 'small'
       },
       {
         label: "Size",
