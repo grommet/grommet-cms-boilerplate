@@ -9,16 +9,14 @@ import Button from 'grommet/components/Button';
 import Footer from 'grommet/components/Footer';
 import colorOptions from './internal/colorIndexes';
 
-type ErrorType = {
-  message: string,
-};
+type ErrorType = string;
 
 type BlockColorSwatchFormState = {
   colorIndexInput: ?string,
   contentInput: ?string,
   errors: ?{
     colorIndexInput: ?ErrorType,
-    contentInput: ?ErrorType,
+    contentInput: ?ErrorType
   }
 };
 
@@ -110,11 +108,11 @@ export default class BlockColorSwatchForm extends React.Component {
         <Form>
           <FormFields>
             <fieldset>
-             <FormField
-              label="Content"
-              htmlFor="contentInput"
-              error={errors && errors.contentInput ? errors.contentInput : ''}
-            >
+              <FormField
+                label="Content"
+                htmlFor="contentInput"
+                error={errors && errors.contentInput ? errors.contentInput : ''}
+              >
                 <textarea
                   id="contentInput"
                   name="contentInput"
@@ -132,7 +130,7 @@ export default class BlockColorSwatchForm extends React.Component {
               >
                 <Select
                   onChange={this._onChange}
-                  value={colorIndexInput}
+                  value={colorIndexInput || ''}
                   options={colorOptions}
                   name="colorIndexInput"
                   id="colorIndexInput"

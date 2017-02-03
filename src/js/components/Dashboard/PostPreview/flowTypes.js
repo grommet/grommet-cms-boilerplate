@@ -3,9 +3,5 @@ export type ContentBlockType = {
   id: string,
   edit: boolean,
   card?: ?{},
-  content: string,
-  layout: Array<{
-    value: string,
-    name: string
-  }>
+  content: string
 }

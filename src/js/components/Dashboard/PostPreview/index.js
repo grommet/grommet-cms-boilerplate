@@ -12,7 +12,11 @@ export default function PostPreview(props: {
     title: string,
     subtitle?: string,
     sections?: Array<{
-      contentBlocks: Array<ContentBlockType>
+      contentBlocks: Array<ContentBlockType>,
+      layout: Array<{
+        value: string,
+        name: string
+      }>
     }>
   },
   selectedSection?: number

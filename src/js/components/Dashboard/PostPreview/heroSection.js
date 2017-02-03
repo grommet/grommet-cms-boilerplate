@@ -13,6 +13,10 @@ export default function PostPreviewHeroSection(props: {
     title: string,
     subtitle?: string,
     sections?: Array<{
+      layout: Array<{
+        value: string,
+        name: string
+      }>,
       contentBlocks: Array<ContentBlockType>
     }>
   },
