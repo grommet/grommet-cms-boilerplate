@@ -40,6 +40,7 @@ process.setMaxListeners(0);
 const app = express();
 app.use(compression());
 app.use(morgan('tiny'));
+app.use('/uploads', express.static(path.join(__dirname, '/../uploads')));
 app.use(bodyParser.urlencoded({
   extended: true,
   limit: '20mb'
@@ -113,7 +114,6 @@ app.use('/', express.static(
   path.join(__dirname, '/../dist'),
   { index: '' }
 ));
-app.use('/uploads', express.static(path.join(__dirname, '/../uploads')));
 
 // Isomorphic rendering
 app.use(isomorphicRender);
