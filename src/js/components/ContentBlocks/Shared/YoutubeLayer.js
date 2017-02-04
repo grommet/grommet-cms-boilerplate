@@ -10,7 +10,7 @@ export default function YoutubeLayer ({url, onClose}) {
   const vidId = match[2];
 
   return (
-    <Layer className={CLASS_ROOT} closer={true} onClose={onClose} flush={true}>
+    <Layer className={CLASS_ROOT} closer={true} onClose={onClose}>
       <Box full pad="large" alignSelf="center" align="center" 
         justify="center">
         <Box className={`${CLASS_ROOT}__video-container`} full="horizontal">
