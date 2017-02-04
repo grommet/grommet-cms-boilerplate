@@ -11,7 +11,7 @@ export default function YoutubeLayer ({url, onClose}) {
 
   return (
     <Layer className={CLASS_ROOT} closer={true} onClose={onClose} flush={true}>
-      <Box pad="large" alignSelf="center" style={{minHeight:'90vh'}} align="center" 
+      <Box full pad="large" alignSelf="center" align="center" 
         justify="center">
         <Box className={`${CLASS_ROOT}__video-container`} full="horizontal">
           <iframe width="560" height="315" src={`https://www.youtube.com/embed/${vidId}`}

@@ -4,13 +4,14 @@ import Heading from 'grommet/components/Heading';
 
 export default function BlockImage ({ content, image, imageSize }) {
   const imageSizeLower = imageSize.toLowerCase();
+  const full = imageSize === 'Full' ? 'horizontal' : false;
   const size = imageSize === 'Full'
     ? { height: 'xlarge' }
     : { height: imageSizeLower, width: imageSizeLower };
   return (
     <div>
       <Box
-        full={{ horizontal: imageSize === 'Full' }}
+        full={full}
         size={size}
         texture={image.path}
         style={{ backgroundPosition: '50% 50%' }}

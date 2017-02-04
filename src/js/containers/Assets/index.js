@@ -70,10 +70,10 @@ export default class AssetUpload extends React.Component {
         >
           <Box align="start">
             <Button
-              icon={assetType === 'image' ? <ImageIcon /> : <VideoIcon />}
+              icon={assetType === 'video' ? <VideoIcon /> : <ImageIcon />}
               onClick={this._toggleAssetsLayer}
             >
-              {`Add ${assetType} asset`}
+              {`Add ${assetType ? assetType : ''} asset`}
             </Button>
           </Box>
         </Footer>

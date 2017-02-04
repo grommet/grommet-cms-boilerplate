@@ -3,7 +3,7 @@ import Anchor from 'grommet/components/Anchor';
 import Box from 'grommet/components/Box';
 import Card from 'grommet/components/Card';
 import Heading from 'grommet/components/Heading';
-import Markdown from 'grommet/components/Markdown';
+
 import CirclePlayIcon from 'grommet/components/icons/base/CirclePlay';
 import { YoutubeLayer } from '../Shared';
 
@@ -35,8 +35,8 @@ export default class BlockCard extends Component {
   }
 
   render() {
-    const { card, content, image } = this.props;
-    const { heading, label, linkText, linkUrl } = card;
+    const { card, image } = this.props;
+    const { heading, label, linkText, linkUrl, content } = card;
 
     const videoLayer = (this.state.layerActive)
       ? <YoutubeLayer url={this.state.layerContent} 
@@ -49,34 +49,23 @@ export default class BlockCard extends Component {
       : <Anchor label={linkText} primary={true} href={linkUrl} />;
 
     return (
-      <Box full="horizontal" align="center">
+      <div>
         {videoLayer}
-        <Box full="horizontal" align="center">
-          <Box direction="row">
-            <Box basis="2/3" pad={{horizontal: 'large'}}>
-              <Markdown content={content} components={{ 
-                'p': { 'props':  { size: 'large', margin: 'small' } },
-                'h2': { 'props':  { strong: true } }
-              }}/>
+        <Card
+          thumbnail={image.path}
+          label={label}
+          description={content}
+          heading={
+            <Box pad={{vertical: 'small'}}>
+              <Heading tag="h3" strong={true} margin="none">
+                {heading}
+              </Heading>
             </Box>
-            <Box basis="1/3" pad="large">
-              <Card
-                thumbnail={image.path}
-                label={label}
-                heading={
-                  <Box pad={{vertical: 'small'}}>
-                    <Heading tag="h3" strong={true} margin="none">
-                      {heading}
-                    </Heading>
-                  </Box>
-                }
-                colorIndex="light-2" 
-                link={anchor} 
-              />
-            </Box>
-          </Box>
-        </Box>
-      </Box>
+          }
+          colorIndex="light-2" 
+          link={anchor} 
+        />
+      </div>
     );
   }
 };

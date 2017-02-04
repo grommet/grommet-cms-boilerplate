@@ -1,4 +1,4 @@
-export CardParagraphForm from './CardParagraphForm';
+export CardForm from './CardForm';
 export CarouselForm from './CarouselForm';
 export CarouselSlideForm from './CarouselSlideForm';
 export ImageForm from './ImageForm';
