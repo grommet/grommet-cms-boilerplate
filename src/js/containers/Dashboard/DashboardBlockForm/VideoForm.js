@@ -5,6 +5,7 @@ import Form from 'grommet/components/Form';
 import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
+import CheckBox from 'grommet/components/CheckBox';
 
 import { Assets } from 'grommet-cms/containers';
 
@@ -14,8 +15,8 @@ export class VideoForm extends Component {
     this.state = {
       image: props.image || '',
       content: props.content || '',
-      label: props.label || '',
-      linkUrl: props.linkUrl || ''
+      video: props.video || '',
+      label: props.label || ''
     };
 
     this._onChange = this._onChange.bind(this);
@@ -41,8 +42,8 @@ export class VideoForm extends Component {
     this.setState(obj);
   }
 
-  _onAssetSelect(asset) {
-    this.setState({ image: asset });
+  _onAssetSelect(asset, key='image') {
+    this.setState({ [`${key}`]: asset });
   }
 
   _validateForm({ image }) {
@@ -59,7 +60,7 @@ export class VideoForm extends Component {
   }
 
   render() {
-    const { image, content, label, linkUrl } = this.state;
+    const { image, content, label, video } = this.state;
     const submit = (this._validateForm(this.state))
       ? this._onSubmit
       : undefined;
@@ -77,17 +78,24 @@ export class VideoForm extends Component {
                 <input id="content" name="content" type="text"
                   value={content} onChange={this._onChange} />
               </FormField>
-              <FormField label="Youtube URL" htmlFor="linkUrl">
-                <input id="linkUrl" name="linkUrl" type="text"
-                  value={linkUrl} onChange={this._onChange} />
+              <FormField label="Video file path" htmlFor="video">
+                <input id="video" name="video" type="text"
+                  value={video.path} onChange={this._onChange} />
               </FormField>
               <FormField label="Video thumbnail file path" htmlFor="image">
                 <input id="image" name="image" type="text"
                   value={image.path} onChange={this._onChange} />
               </FormField>
-              <Assets
-                onAssetSelect={this._onAssetSelect}
-              />
+              <Box direction="row" align="center">
+                <Assets
+                  assetType="video"
+                  onAssetSelect={(asset) => this._onAssetSelect(asset, 'video')}
+                />
+                <Assets
+                  assetType="image"
+                  onAssetSelect={(asset) => this._onAssetSelect(asset, 'image')}
+                />
+              </Box>
             </fieldset>
             <Button onClick={submit} primary={false} type="submit"
               label="Done" />
