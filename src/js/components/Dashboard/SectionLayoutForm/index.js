@@ -107,7 +107,7 @@ export default function SectionLayoutForm(props: {
               type="submit"
             />
             <Button
-              label="cancel"
+              label="close"
               onClick={onClose}
               primary={false}
             />

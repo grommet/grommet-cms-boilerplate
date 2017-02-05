@@ -74,7 +74,7 @@ export default function BoxLayoutForm(props: {
               type="submit"
             />
             <Button
-              label="cancel"
+              label="close"
               onClick={onClose}
               primary={false}
             />

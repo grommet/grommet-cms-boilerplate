@@ -278,13 +278,15 @@ export class DashboardPostPage extends Component {
     this.props.dispatch(postSectionFormInput(name, value));
   }
 
-  _onSubmitSectionForm() {
+  _onSubmitSectionForm(close = true) {
     const { postSectionLayoutSubmission, dispatch, sectionLayoutForm } = this.props;
     postEditOrAddSection(
       postSectionLayoutSubmission,
       sectionLayoutForm.selectedSection
     )(dispatch);
-    this._onSetSectionFormValues();
+    if (close) {
+      this._onSetSectionFormValues();
+    }
   }
 
   _onToggleSectionOptions() {
@@ -322,7 +324,7 @@ export class DashboardPostPage extends Component {
     this.props.dispatch(postBoxLayoutFormInput(name, value));
   }
 
-  _onSubmitBoxLayoutForm() {
+  _onSubmitBoxLayoutForm(close = true) {
     const { boxLayoutFormSubmission, boxLayoutForm } = this.props;
     this.props.dispatch(
       blockSetContentBlockLayout(
@@ -330,7 +332,9 @@ export class DashboardPostPage extends Component {
         boxLayoutFormSubmission
       )
     );
-    this._onSetBoxLayoutFormValues();
+    if (close) {
+      this._onSetBoxLayoutFormValues();
+    }
   }
 
   _onSubmitMarquee() {
@@ -492,14 +496,14 @@ export class DashboardPostPage extends Component {
           onChange={this._onChangeSectionForm}
           isEditing={sectionLayoutForm.selectedSection !== null}
           onClose={() => this._onSetSectionFormValues(null)}
-          onSubmit={this._onSubmitSectionForm}
+          onSubmit={() => this._onSubmitSectionForm(false)}
         />
         <BoxLayoutForm
           {...boxLayoutForm}
           onToggleHelp={() => this._onToggleHelp('BOX')}
           onChange={this._onChangeBoxLayoutForm}
           onClose={() => this._onSetBoxLayoutFormValues(null)}
-          onSubmit={this._onSubmitBoxLayoutForm}
+          onSubmit={() => this._onSubmitBoxLayoutForm(false)}
         />
       </Box>
     );
