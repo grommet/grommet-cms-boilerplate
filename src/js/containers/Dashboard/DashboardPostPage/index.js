@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import Box from 'grommet/components/Box';
 import Split from 'grommet/components/Split';
 import Animate from 'grommet/components/Animate';
-import Toast from 'grommet/components/Toast';
+import Anchor from 'grommet/components/Anchor';
+import SettingsOptionIcon from 'grommet/components/icons/base/SettingsOption';
 import {
   dashboardSetLeftNavAnchor
 } from 'grommet-cms/containers/Dashboard/DashboardContainer/actions';
@@ -27,7 +28,6 @@ import {
 import {
   PageHeader,
   PostPreview,
-  ErrorNotification,
   PostList,
   PostListItemDetail,
   SectionLayoutForm,
@@ -53,6 +53,7 @@ import {
   selectBoxLayoutFormSubmission,
   selectAdvancedLayoutOptions
 } from './selectors';
+import DashboardPostPageNotifier from './notifier';
 
 export class DashboardPostPage extends Component {
   constructor(props) {
@@ -451,17 +452,29 @@ export class DashboardPostPage extends Component {
               </Animate>
             </Box>
             <Box>
-              <PageHeader title="Preview" />
+              <PageHeader
+                title="Preview"
+                controls={
+                  <Anchor
+                    onClick={
+                      selectedSection
+                        ? () => this._onSectionMenuItemClick('EDIT_SECTION', selectedSection)
+                        : null
+                    }
+                    icon={<SettingsOptionIcon />}
+                  />
+                }
+              />
               <PostPreview selectedSection={selectedSection} post={post} />
             </Box>
           </Split>
         </WithLoading>
-        {error &&
-          <ErrorNotification
-            errors={[{ message: error }]}
-            onClose={this._onClearError}
-          />
-        }
+        <DashboardPostPageNotifier
+          error={error}
+          onCloseError={this._onClearError}
+          onCloseToast={this._onCloseToast}
+          toastMessage={toastMessage}
+        />
         <SectionLayoutForm
           {...sectionLayoutForm}
           onToggleHelp={() => this._onToggleHelp('SECTION')}
@@ -479,14 +492,6 @@ export class DashboardPostPage extends Component {
           onClose={() => this._onSetBoxLayoutFormValues(null)}
           onSubmit={this._onSubmitBoxLayoutForm}
         />
-        {toastMessage && 
-          <Toast
-            onClose={this._onCloseToast}
-            status="warning"
-          >
-            {toastMessage}
-          </Toast>
-        }
       </Box>
     );
   }
