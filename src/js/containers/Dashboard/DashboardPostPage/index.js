@@ -55,6 +55,8 @@ import {
 } from './selectors';
 import DashboardPostPageNotifier from './notifier';
 
+const CLASS_ROOT = 'dashboard--post-page';
+
 export class DashboardPostPage extends Component {
   constructor(props) {
     super(props);
@@ -395,6 +397,7 @@ export class DashboardPostPage extends Component {
       <Box primary pad="none">
         <WithLoading isLoading={request && !selectedSection && !shouldAnimate} fullHeight>
           <Split
+            className={CLASS_ROOT}
             separator
             priority="left"
             showOnResponsive="priority"
@@ -416,9 +419,10 @@ export class DashboardPostPage extends Component {
                     onSelectSection={this._onSelectSection}
                     onMenuItemClick={this._onSectionMenuItemClick}
                     onAddSection={this._onAddSection}
-                    sections={post.sections
-                      ? post.sections.sort((a, b) => a.order - b.order)
-                      : null
+                    sections={
+                      post.sections
+                        ? post.sections.sort((a, b) => a.order - b.order)
+                        : null
                     }
                   />
                 }
@@ -439,7 +443,7 @@ export class DashboardPostPage extends Component {
                 }
                 {post && selectedSection === 0 &&
                   <Box>
-                    <PageHeader title="Edit Marquee" />
+                    <PageHeader title="Edit Heading" />
                     <MarqueeForm
                       onSubmit={this._onSubmitMarquee}
                       post={post}
@@ -456,12 +460,17 @@ export class DashboardPostPage extends Component {
                 title="Preview"
                 controls={
                   <Anchor
+                    disabled={!selectedSection}
                     onClick={
                       selectedSection
-                        ? () => this._onSectionMenuItemClick('EDIT_SECTION', selectedSection)
+                        ? () =>
+                            this._onSectionMenuItemClick(
+                              'EDIT_SECTION',
+                              selectedSection
+                            )
                         : null
                     }
-                    icon={<SettingsOptionIcon />}
+                    icon={<SettingsOptionIcon size="small" />}
                   />
                 }
               />

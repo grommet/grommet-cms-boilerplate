@@ -76,7 +76,7 @@ export class DashboardPostsPage extends Component {
         sections: [
           {
             name: newPost.title,
-            id: `${slugify(newPost.title)}-marquee`,
+            id: `${slugify(newPost.title)}-heading`,
             order: 0,
             contentBlocks: []
           }
@@ -112,7 +112,9 @@ export class DashboardPostsPage extends Component {
     if (newPost) {
       updatedPost = {
         ...newPost,
-        [key]: newPost.key != null ? `${newPost[key]}${val}` : val
+        [key]: newPost.key != null
+          ? `${newPost[key]}${val}`
+          : val
       };
     } else {
       updatedPost = {

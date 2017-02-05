@@ -29,7 +29,7 @@ export default class PostList extends Component {
     return (
       <Box>
         <PageHeader
-          title="Edit Page" 
+          title="Edit Post" 
           controls={
             <Anchor
               icon={<AddIcon size="small" />}

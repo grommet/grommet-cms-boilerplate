@@ -77,3 +77,9 @@
   max-height: 70vh;
   overflow: scroll;
 }
+
+.dashboard--post-page {
+  .grommetux-split__column--fixed {
+    height: calc(100vh - 74px) !important;
+  }
+}
