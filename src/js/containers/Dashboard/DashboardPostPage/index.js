@@ -496,14 +496,14 @@ export class DashboardPostPage extends Component {
           onChange={this._onChangeSectionForm}
           isEditing={sectionLayoutForm.selectedSection !== null}
           onClose={() => this._onSetSectionFormValues(null)}
-          onSubmit={() => this._onSubmitSectionForm(false)}
+          onSubmit={this._onSubmitSectionForm}
         />
         <BoxLayoutForm
           {...boxLayoutForm}
           onToggleHelp={() => this._onToggleHelp('BOX')}
           onChange={this._onChangeBoxLayoutForm}
           onClose={() => this._onSetBoxLayoutFormValues(null)}
-          onSubmit={() => this._onSubmitBoxLayoutForm(false)}
+          onSubmit={this._onSubmitBoxLayoutForm}
         />
       </Box>
     );

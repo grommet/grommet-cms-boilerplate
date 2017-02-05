@@ -69,12 +69,21 @@ export default function BoxLayoutForm(props: {
           >
             <Button
               label="submit"
-              onClick={onSubmit}
+              onClick={() => onSubmit(false)}
+              primary={true}
+              style={{ margin: '0px 8px' }}
+              type="submit"
+            />
+            <Button
+              label="submit and close"
+              onClick={() => onSubmit(true)}
+              style={{ margin: '0px 8px' }}
               primary={true}
               type="submit"
             />
             <Button
               label="close"
+              style={{ margin: '0px 8px' }}
               onClick={onClose}
               primary={false}
             />

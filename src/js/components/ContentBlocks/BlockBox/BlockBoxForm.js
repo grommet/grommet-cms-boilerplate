@@ -96,8 +96,8 @@ export default class BlockColorSwatchForm extends React.Component {
     const { colorOptions } = this.state;
     const { value } = e.target;
     const newOptions = value === '' || !value
-      ? colorOptionsList 
-      : colorOptions.filter(i => i.includes(value));
+      ? colorOptionsList
+      : colorOptions.filter(i => i.label.includes(value));
     this.setState({
       colorOptions: newOptions
     });

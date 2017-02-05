@@ -98,7 +98,7 @@
     "babel-preset-react": "^6.3.13",
     "classnames": "^2.2.5",
     "eslint-plugin-flowtype": "^2.29.2",
-    "flow-bin": "^0.37.4",
+    "flow-bin": "^0.38.0",
     "grommet-toolbox": "^0.2.2",
     "gulp": "^3.9.0",
     "gulp-clean-css": "^2.0.6",

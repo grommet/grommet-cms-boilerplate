@@ -1,11 +1,11 @@
 // (C) Copyright 2016 Hewlett Packard Enterprise Development LP
 
 import React from 'react';
-import GrommetIcon from 'grommet/components/icons/base/BrandGrommetOutline';
+import BrandHpeElementPathIcon from 'grommet/components/icons/base/BrandHpeElementPath';
 
 const Logo = ({ size = 'large' }) => {
   return (
-    <GrommetIcon size={size} colorIndex="brand" />
+    <BrandHpeElementPathIcon size={size} colorIndex="brand" />
   );
 };
 
