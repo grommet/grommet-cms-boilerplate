@@ -27,7 +27,7 @@ export class Dashboard extends Component {
   }
 
   _renderNav() {
-    const { leftNavAnchor, pageMenu } = this.props;
+    const { leftNavAnchor, pageMenu, params } = this.props;
     const { config } = this.context;
     const leftAnchor = leftNavAnchor && leftNavAnchor.title ?
       (
@@ -42,6 +42,7 @@ export class Dashboard extends Component {
       return (
         <DashboardNav
           {...config.cms}
+          params={params}
           pageMenu={pageMenu}
           leftAnchor={leftAnchor}
           onLogoutClick={this._onLogoutClick}
@@ -92,6 +93,9 @@ Dashboard.contextTypes = {
 
 Dashboard.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  params: React.PropTypes.shape({
+    type: React.PropTypes.string
+  }),
   leftNavAnchor: PropTypes.shape({
     path: PropTypes.string,
     title: PropTypes.string

@@ -7,10 +7,9 @@ export default function PageHeader ({ title, controls, fixed }) {
   return (
     <Header
       fixed={fixed}
-      style={{ maxHeight: 50 }}
+      style={{ maxHeight: 50, width: '100% !important' }}
       size="small"
       colorIndex="light-2"
-      full="horizontal"
       direction="row"
       justify="between"
       responsive={false}

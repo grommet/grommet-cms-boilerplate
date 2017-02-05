@@ -10,6 +10,11 @@ import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import TrashIcon from 'grommet/components/icons/base/Trash';
 import DocumentIcon from 'grommet/components/icons/base/Document';
+import Header from 'grommet/components/Header';
+import Footer from 'grommet/components/Footer';
+import Menu from 'grommet/components/Menu';
+import Section from 'grommet/components/Section';
+import LinkPreviousIcon from 'grommet/components/icons/base/LinkPrevious';
 import { isImage } from 'grommet-cms/utils';
 import type { Asset } from 'grommet-cms/containers/Assets/flowTypes';
 import {
@@ -132,21 +137,56 @@ export class DashboardAssetPage extends Component {
         </FormField>;
 
     return (
-      <Box pad="medium" alignSelf="center">
-        <Form onSubmit={this._onSubmit.bind(this, this.state)}>
-          <FormFields>
-            <fieldset>
-              <FormField label="Title (alt text for images)" htmlFor={"title"}>
-                <input id={"title"} name="title" type="text"
-                  onChange={this._onChange} value={title}/>
-              </FormField>
-              {preview}
-            </fieldset>
-            <p>{this.props.error}</p>
-            <Button onClick={this._onSubmit.bind(this, this.state)} 
-              primary={true} label="Submit" />
-          </FormFields>
-        </Form>
+      <Box full="horizontal">
+        <Header size="small" colorIndex="light-2" style={{ maxHeight: 50 }}>
+          <Box direction="row" pad={{ horizontal: 'medium' }}>
+            <Anchor
+              primary
+              icon={<LinkPreviousIcon />}
+              path="/dashboard/assets"
+            >
+              All Assets
+            </Anchor>
+          </Box>
+        </Header>
+        <Section primary full="horizontal" pad="medium" align="center">
+          <Form onSubmit={this._onSubmit.bind(this, this.state)}>
+            <FormFields>
+              <fieldset>
+                <FormField label="Title (alt text for images)" htmlFor={"title"}>
+                  <input id={"title"} name="title" type="text"
+                    onChange={this._onChange} value={title}/>
+                </FormField>
+                {preview}
+              </fieldset>
+              <p>{this.props.error}</p>
+            </FormFields>
+          </Form>
+        </Section>
+        <Section pad="medium" align="center">
+          <Footer align="center" justify="center" pad="medium">
+            <Menu
+              align="center"
+              justify="between"
+              direction="row"
+              inline
+            >
+              <Button
+                label="submit"
+                primary
+                onClick={this._onSubmit.bind(this, this.state)}
+                style={{ margin: '0px 8px' }}
+                type="submit"
+              />
+              <Button
+                label="cancel"
+                style={{ margin: '0px 8px' }}
+                path="/dashboard/assets"
+                primary={false}
+              />
+            </Menu>
+          </Footer>
+        </Section>
       </Box>
     );
   }

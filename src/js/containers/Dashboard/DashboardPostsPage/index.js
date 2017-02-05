@@ -12,7 +12,7 @@ import { getPosts, deletePost, submitPost, setPost, updatePost } from
 import { blockAddList } from
   'grommet-cms/containers/Dashboard/DashboardContentBlocks/actions';
 import { toggleAddPostFormVisibility, addPostRedirect, incrementCurrentPage } from './actions';
-import { slugify } from 'grommet-cms/utils';
+import { slugify, unslugify } from 'grommet-cms/utils';
 
 export class DashboardPostsPage extends Component {
   constructor(props) {
@@ -21,6 +21,9 @@ export class DashboardPostsPage extends Component {
     this.state = {
       layer: false,
       orderLayer: false,
+      pageHeader: {
+        title: 'Posts'
+      },
       postToDelete: null
     };
     this._confirmDelete = this._confirmDelete.bind(this);
@@ -37,6 +40,7 @@ export class DashboardPostsPage extends Component {
     this._onMovePostOrderUp = this._onMovePostOrderUp.bind(this);
     this._onMovePostOrderDown = this._onMovePostOrderDown.bind(this);
     this._onMore = this._onMore.bind(this);
+    this._setPageHeaderTitle = this._setPageHeaderTitle.bind(this);
   }
 
   componentWillMount() {
@@ -44,6 +48,7 @@ export class DashboardPostsPage extends Component {
     // TODO: avoid resetting content list here. Possibly route middleware.
     this.props.dispatch(blockAddList([]));
     this._onFetchPosts();
+    this._setPageHeaderTitle();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -61,9 +66,21 @@ export class DashboardPostsPage extends Component {
     }
     if (params.type !== this.props.params.type) {
       this._onFetchPosts(currentPage, params.type);
+      this._setPageHeaderTitle(params.type);
     }
     if (currentPage > this.props.currentPage) {
       this._onFetchPosts(currentPage);
+    }
+  }
+
+  _setPageHeaderTitle(type = this.props.params.type) {
+    if (type) {
+      const title = unslugify(type);
+      this.state = {
+        pageHeader: {
+          title: `Posts  |  ${title}`
+        }
+      };
     }
   }
 
@@ -240,7 +257,7 @@ export class DashboardPostsPage extends Component {
 
   render() {
     const { posts, request, addPostForm, url, newPost } = this.props;
-
+    const { title } = this.state.pageHeader;
     const layer = (this.state.layer)
       ?
         <ConfirmLayer
@@ -271,7 +288,7 @@ export class DashboardPostsPage extends Component {
         />
         {layer}
         <PageHeader
-          title="Posts"
+          title={title}
           controls={
             <Button
               plain

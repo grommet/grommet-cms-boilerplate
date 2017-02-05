@@ -1,10 +1,12 @@
 import fetch from 'isomorphic-fetch';
 import * as ActionTypes from './constants';
 import { browserHistory } from 'react-router';
+import { debounce } from 'grommet-cms/utils';
 
-export function assetsRequest() {
+export function assetsRequest(showLoading) {
   return {
-    type: ActionTypes.ASSETS_REQUEST
+    type: ActionTypes.ASSETS_REQUEST,
+    showLoading
   };
 }
 
@@ -22,9 +24,42 @@ export function assetsError(errorMsg) {
   };
 }
 
+export function assetsClearPosts() {
+  return {
+    type: ActionTypes.ASSETS_CLEAR_POSTS
+  };
+}
+
 export function assetsDeleteSuccess() {
   return {
     type: ActionTypes.ASSETS_DELETE_SUCCESS
+  };
+}
+
+export function assetsCountSuccess(count) {
+  return {
+    type: ActionTypes.ASSETS_COUNT_SUCCESS,
+    count
+  };
+}
+
+export function assetsSetPage(page) {
+  return {
+    type: ActionTypes.ASSETS_SET_PAGE,
+    page
+  };
+}
+
+export function assetsIncrementPage() {
+  return function(dispatch, getState) {
+    const { currentPage } = getState().assets;
+    debounce(
+      dispatch(
+        assetsSetPage(currentPage + 1)
+      ),
+      5000,
+      true
+    );
   };
 }
 
@@ -111,11 +146,13 @@ export function submitAsset(data, forwardWhenDone = true) {
 // Get Assets list. 
 // This route is auth protected to avoid publicly listing a site's full list 
 // of resources/assets.
-export function getAssets() {
+export function getAssets(page, showLoading = true) {
   return (dispatch, getState) => {
-    dispatch(assetsRequest());
+    if (showLoading) {
+      dispatch(assetsRequest());
+    }
     let { url } = getState().api;
-    return fetch(`${url}/files`, {
+    return fetch(`${url}/files?page=${page}`, {
       method: 'GET',
       mode: 'cors',
       credentials: 'include',
@@ -144,6 +181,28 @@ export function getAssets() {
           dispatch(assetsError('There was an error processing your request.'));
         }
       );
+  };
+}
+
+export function getAssetsTotalCount() {
+  return (dispatch, getState) => {
+    dispatch(assetsRequest());
+    let { url } = getState().api;
+    return fetch(`${url}/assets-count`, {
+      method: 'GET',
+      mode: 'cors',
+      credentials: 'include',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+    .then(res => res.json())
+    .then(json => {
+      dispatch(assetsCountSuccess(json.total));
+    })
+    .catch(_ => {
+      dispatch(assetsError('There was an error processing your request.'));
+    });
   };
 }
 

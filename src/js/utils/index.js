@@ -105,6 +105,16 @@ export function slugify(text) {
     .replace(/-+$/, '');            // Trim - from end of text
 }
 
+export function unslugify(text = '') {
+  if (text.includes('-')) {
+    return text.split('-')
+      .map(s => `${s.charAt(0).toUpperCase()}${s.slice(1)}`)
+      .join(' ');
+  }
+  return [text]
+    .map(s => `${s.charAt(0).toUpperCase()}${s.slice(1)}`)[0];
+}
+
 /* eslint-disable */
 // from: https://davidwalsh.name/javascript-debounce-function
 export function debounce(func, wait, immediate) {

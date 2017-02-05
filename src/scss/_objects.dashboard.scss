@@ -83,3 +83,11 @@
     height: calc(100vh - 74px) !important;
   }
 }
+
+.dashboard--assets-page {
+  .grommetux-list__more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

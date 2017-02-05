@@ -1,21 +1,54 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
-import { getAssets, deleteAsset } from 'grommet-cms/containers/Assets/actions';
-
+import {
+  getAssets,
+  deleteAsset,
+  assetsIncrementPage,
+  getAssetsTotalCount,
+  assetsClearPosts
+} from 'grommet-cms/containers/Assets/actions';
+import Article from 'grommet/components/Article';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import Heading from 'grommet/components/Heading';
+import List from 'grommet/components/List';
 import SpinningIcon from 'grommet/components/icons/Spinning';
 import { AssetTile, PageHeader } from 'grommet-cms/components/Dashboard';
 
 export class DashboardAssetsPage extends Component {
+  constructor() {
+    super();
+    this._handleMore = this._handleMore.bind(this);
+  }
+
   componentWillMount() {
-    this.props.dispatch(getAssets());
+    const { currentPage } = this.props;
+    const page = currentPage || 1;
+    this.props.dispatch(getAssets(page));
+    this.props.dispatch(getAssetsTotalCount());
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(assetsClearPosts());
+  }
+
+  componentWillReceiveProps({ currentPage }) {
+    if (currentPage && currentPage > this.props.currentPage) {
+      this.props.dispatch(getAssets(currentPage, false));
+    }
   }
 
   _onDeleteClick(id: string) {
     this.props.dispatch(deleteAsset(id));
+  }
+
+  _handleMore() {
+    const { currentPage, totalCount, perPage, assets } = this.props;
+    if (totalCount > currentPage * perPage) {
+      if (assets && assets.length) {
+        this.props.dispatch(assetsIncrementPage());
+      }
+    }
   }
 
   _renderLoader(request) {
@@ -29,7 +62,8 @@ export class DashboardAssetsPage extends Component {
   }
 
   render() {
-    const { post: assets, request } = this.props;
+    const { request, assets, totalCount } = this.props;
+    const hasMore = assets && assets.length && assets.length < totalCount;
     const assetBlocks = (assets.length > 0 && !request)
       ? assets.map(({_id, title, path}) =>
         <AssetTile
@@ -42,29 +76,49 @@ export class DashboardAssetsPage extends Component {
 
 
     return (
-      <Box full="horizontal" align="center">
-        <PageHeader 
-          title="Assets" 
+      <Box full="horizontal">
+        <PageHeader
+          fixed={false}
+          title="Assets"
           controls={
             <Button path="/dashboard/asset/create">
               Add Asset
             </Button>
           }
         />
-        <Box size={{ width: 'xxlarge' }} direction="row" wrap={true} justify="center"
-          pad={{ horizontal: 'medium', vertical: 'medium' }}>
-          {assetBlocks}
-        </Box>
+        <Article
+          className="dashboard--assets-page"
+          primary 
+          full 
+          align="center" 
+          style={{ overflow: 'scroll' }}
+        >
+          <List onMore={hasMore ? () => this._handleMore() : null}>
+            <Box
+              align="center"
+              full="horizontal"
+              direction="row"
+              wrap={true}
+              justify="center"
+              pad={{ horizontal: 'medium', vertical: 'medium' }}
+            >
+              {assetBlocks}
+            </Box>
+          </List>
+        </Article>
       </Box>
     );
   }
 };
 
 function mapStateToProps(state, props) {
-  const { error, posts: post, request } = state.assets;
+  const { error, posts: assets, request, currentPage, perPage, totalCount } = state.assets;
   return {
     error,
-    post,
+    currentPage,
+    totalCount,
+    perPage,
+    assets,
     request
   };
 }

@@ -14,6 +14,7 @@ export default function Nav({
   navLinks,
   title,
   logo,
+  params,
   pageMenu
 }) {
   const titleElement = (title || logo) ? (
@@ -60,6 +61,7 @@ export default function Nav({
               {pageMenu.map((item, i) =>
                 <Anchor
                   key={i}
+                  className={params && params.type === item.slug ? 'active' : ''}
                   label={item.label}
                   path={`/dashboard/posts/${item.slug}`}
                 />
@@ -101,6 +103,9 @@ Nav.propTypes = {
   onLogoutClick: PropTypes.func.isRequired,
   title: React.PropTypes.string.isRequired,
   logo: React.PropTypes.element,
+  params: React.PropTypes.shape({
+    type: React.PropTypes.string
+  }),
   navLinks: React.PropTypes.arrayOf(
     React.PropTypes.shape({
       label: React.PropTypes.string,
