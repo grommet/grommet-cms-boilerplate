@@ -85,10 +85,12 @@ export const initialState: DashboardPostPageState = {
   boxLayoutForm: {
     selectedContentBlockId: null,
     isVisible: false,
+    showHelp: false,
     title: "Box Layout",
     fields: [
       {
         label: "Padding",
+        help: "How much padding should the box surrounding the content block have?",
         name: "pad",
         type: "Select",
         options: ["small", "medium", "large", "none"],
@@ -96,6 +98,7 @@ export const initialState: DashboardPostPageState = {
       },
       {
         label: "Size",
+        help: "How big should the box around the content block be?",
         name: "size",
         type: "Select",
         options: ["auto", "xsmall", "small", "medium", "large", "xlarge", "xxlarge", "full"],
@@ -103,6 +106,7 @@ export const initialState: DashboardPostPageState = {
       },
       {
         label: "Flex",
+        help: "Should the box expand to the remaining space, or should it shrink?",
         name: "flex",
         type: "Select",
         options: ["grow", "shrink", "true", "false"],
@@ -120,9 +124,9 @@ const dashboardPost = (
     case T.POST_TOGGLE_HELP:
       return {
         ...state,
-        sectionLayoutForm: {
-          ...state.sectionLayoutForm,
-          showHelp: !state.sectionLayoutForm.showHelp
+        [`${action.formName}`]: {
+          ...state[`${action.formName}`],
+          showHelp: !state[`${action.formName}`].showHelp
         }
       };
     case T.POST_TOGGLE_ADVANCED_LAYOUT:

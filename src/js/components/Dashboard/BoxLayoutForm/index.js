@@ -17,6 +17,7 @@ export default function BoxLayoutForm(props: {
   onSubmit: Function,
   isVisible: boolean,
   title: string,
+  onToggleHelp: Function,
   fields: Array<{
     label: string,
     name: string,
@@ -30,6 +31,7 @@ export default function BoxLayoutForm(props: {
     onChange,
     onSubmit,
     isVisible,
+    onToggleHelp,
     ...boxLayoutForm
   } = props;
   return (
@@ -49,6 +51,7 @@ export default function BoxLayoutForm(props: {
           <FormFields>
             <LayoutForm
               {...boxLayoutForm}
+              onToggleHelp={onToggleHelp}
               onChange={onChange}
             />
           </FormFields>

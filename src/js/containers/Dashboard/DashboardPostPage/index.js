@@ -287,8 +287,15 @@ export class DashboardPostPage extends Component {
     this.props.dispatch(postToggleAdvancedLayout());
   }
 
-  _onToggleHelp() {
-    this.props.dispatch(postToggleHelp());
+  _onToggleHelp(type) {
+    switch (type) {
+      case 'BOX':
+        this.props.dispatch(postToggleHelp('boxLayoutForm'));
+        break;
+      default:
+        this.props.dispatch(postToggleHelp('sectionLayoutForm'));
+        break;
+    }
   }
 
   _onSetBoxLayoutFormValues(id = null) {
@@ -454,7 +461,7 @@ export class DashboardPostPage extends Component {
         }
         <SectionLayoutForm
           {...sectionLayoutForm}
-          onToggleHelp={this._onToggleHelp}
+          onToggleHelp={() => this._onToggleHelp('SECTION')}
           onShowMore={this._onToggleSectionOptions}
           showAdvancedLayout={showSectionLayoutOptions}
           onChange={this._onChangeSectionForm}
@@ -464,6 +471,7 @@ export class DashboardPostPage extends Component {
         />
         <BoxLayoutForm
           {...boxLayoutForm}
+          onToggleHelp={() => this._onToggleHelp('BOX')}
           onChange={this._onChangeBoxLayoutForm}
           onClose={() => this._onSetBoxLayoutFormValues(null)}
           onSubmit={this._onSubmitBoxLayoutForm}

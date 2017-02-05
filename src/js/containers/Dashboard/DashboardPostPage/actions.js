@@ -52,6 +52,7 @@ export const postToggleAdvancedLayout = (): DashboardPostPageAction => ({
   type: T.POST_TOGGLE_ADVANCED_LAYOUT
 });
 
-export const postToggleHelp = (): DashboardPostPageAction => ({
-  type: T.POST_TOGGLE_HELP
+export const postToggleHelp = (formName: string = 'sectionLayoutForm'): DashboardPostPageAction => ({
+  type: T.POST_TOGGLE_HELP,
+  formName
 });

@@ -56,6 +56,7 @@ export type DashboardPostPageState = {
   boxLayoutForm: {
     title: string,
     isVisible: boolean,
+    showHelp: boolean,
     selectedContentBlockId: ?number,
     fields: Array<{
       label: string,
@@ -76,5 +77,6 @@ export type DashboardPostPageAction = {
   name?: string,
   value?: string,
   index?: ?number,
-  message?: string
+  message?: string,
+  formName?: string
 }
