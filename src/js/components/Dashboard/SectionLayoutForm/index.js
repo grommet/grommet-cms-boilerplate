@@ -50,6 +50,7 @@ export default function SectionLayoutForm(props: {
     onToggleHelp,
     ...sectionLayoutForm
   } = props;
+  const canSubmit = name.value && name.value !== '';
   return (
     <Layer
       closer
@@ -102,14 +103,16 @@ export default function SectionLayoutForm(props: {
           >
             <Button
               label="submit"
-              onClick={() => onSubmit(false)}
+              onClick={canSubmit ? () => onSubmit(false) : null}
               primary={true}
+              disabled={!canSubmit}
               style={{ margin: '0px 8px' }}
               type="submit"
             />
             <Button
               label="submit and close"
-              onClick={() => onSubmit(true)}
+              disabled={!canSubmit}
+              onClick={canSubmit ? () => onSubmit(true) : null}
               style={{ margin: '0px 8px' }}
               primary={true}
               type="submit"

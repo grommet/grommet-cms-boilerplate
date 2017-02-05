@@ -117,7 +117,7 @@ declare module 'grommet/components/Button' {
     icon?: ?React$Element<any>,
     label?: string | ?ReactElementOrNode,
     method?: "push" | "replace",
-    onClick?: Function,
+    onClick?: ?Function,
     path?: string,
     plain?: boolean,
     primary?: boolean,
