@@ -1,7 +1,7 @@
 # Grommet CMS
 
 ## NOTE
-This repo is under active development and as such, it would be best to wait until a proper release before using it in production.  If you're interested in contributing, please read on to get the app setup.
+This repo is under active development and as such, it would be best to wait until a proper release before using it in production.  If you're interested in contributing, please read on to get started.
 
 ## Getting Started
 
