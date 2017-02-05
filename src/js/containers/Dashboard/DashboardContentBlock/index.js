@@ -2,10 +2,15 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { findDOMNode } from 'react-dom';
 import Box from 'grommet/components/Box';
+import Layer from 'grommet/components/Layer';
+import CloseIcon from 'grommet/components/icons/base/Close';
+import Anchor from 'grommet/components/Anchor';
+import Article from 'grommet/components/Article';
 import {
   PreviewHeader,
   BlockSelector,
-  BlockTypeMap
+  BlockTypeMap,
+  PageHeader
 } from 'grommet-cms/components';
 import {
   toggleBoxLayoutForm 
@@ -73,12 +78,36 @@ export class DashboardContentBlock extends Component {
     // Show block selector when editing and no block type is defined.
     const blockSelector = (edit && !blockType)
       ? (
-        <Box pad="small" ref={(selector) => this.blockSelector = selector}>
-          <BlockSelector
-            onClick={this._onBlockSelectClick.bind(this, id)}
-            blockMap={BlockTypeMap}
-          />
-        </Box>
+        <Layer
+          flush
+          align="center"
+          hidden={false} 
+          onClose={this._onCloseClick.bind(this, id)}
+        >
+          <Box>
+            <PageHeader
+              title="Select Content Block Type"
+              controls={
+                <Anchor
+                  onClick={this._onCloseClick.bind(this, id)}
+                  icon={<CloseIcon />}
+                />
+              }
+            />
+            <Box 
+              style={{ maxWidth: 777 }}
+              pad="large" 
+              ref={(selector) => this.blockSelector = selector}
+            >
+              <Article style={{ overflow: 'scroll' }}>
+                <BlockSelector
+                  onClick={this._onBlockSelectClick.bind(this, id)}
+                  blockMap={BlockTypeMap}
+                />
+              </Article>
+            </Box>
+          </Box>
+        </Layer>
       ) : undefined;
 
     // Once a block is selected show content form based on block type.
