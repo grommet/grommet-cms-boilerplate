@@ -77,7 +77,14 @@ export const initialState: DashboardPostPageState = {
         help: "The basis of inner items.  Prefer setting item size vs. flex-basis.",
         name: "basis",
         type: "Select",
-        options: ["xsmall", "small", "medium", "large", "xlarge", "xxlarge", "full", "1/2", "1/3", "2/3", "1/4", "3/4"],
+        options: [
+          "xsmall", "small",
+          "medium", "large",
+          "xlarge", "xxlarge",
+          "full", "1/2",
+          "1/3", "2/3",
+          "1/4", "3/4"
+        ],
         value: 'full'
       }
     ]
@@ -121,14 +128,16 @@ const dashboardPost = (
   action: DashboardPostPageAction
 ): DashboardPostPageState => {
   switch (action.type) {
-    case T.POST_TOGGLE_HELP:
+    case T.POST_TOGGLE_HELP: {
+      const formName = action.formName || 'sectionLayoutForm';
       return {
         ...state,
-        [`${action.formName}`]: {
-          ...state[`${action.formName}`],
-          showHelp: !state[`${action.formName}`].showHelp
+        [`${formName}`]: {
+          ...state[`${formName}`],
+          showHelp: !state[`${formName}`].showHelp
         }
       };
+    }
     case T.POST_TOGGLE_ADVANCED_LAYOUT:
       return {
         ...state,
