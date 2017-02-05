@@ -32,5 +32,5 @@ export default class ContentBlocks extends Component {
 
 ContentBlocks.propTypes = {
   blocks: React.PropTypes.array,
-  layout: React.PropTypes.array.isRequired
+  layout: React.PropTypes.array
 };
