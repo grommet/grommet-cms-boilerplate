@@ -1,4 +1,5 @@
 /* GENERATOR */
+export FlexBoxHelpLayer from './FlexBoxHelpLayer';
 export ViewMoreViewLess from './ViewMoreViewLess';
 export GrommetHero from './GrommetHero';
 export Footer from './Footer';

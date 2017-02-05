@@ -45,7 +45,9 @@ export default class BlockVideo extends Component {
 
 BlockVideo.propTypes = {
   content: PropTypes.string,
-  image: PropTypes.string,
+  image: PropTypes.shape({
+    path: PropTypes.string.isRequired
+  }),
   label: PropTypes.string,
   video: PropTypes.shape({
     path: PropTypes.string.isRequired

@@ -35,7 +35,8 @@ export default function SectionLayoutForm(props: {
     value: ?string
   }>,
   showAdvancedLayout: boolean,
-  onShowMore: Function
+  onShowMore: Function,
+  onToggleHelp: Function
 }) {
   const {
     onClose,
@@ -46,6 +47,7 @@ export default function SectionLayoutForm(props: {
     name,
     showAdvancedLayout,
     onShowMore,
+    onToggleHelp,
     ...sectionLayoutForm
   } = props;
   return (
@@ -56,7 +58,7 @@ export default function SectionLayoutForm(props: {
       hidden={!isVisible}
     >
       <Header pad="medium" align="center">
-        <Heading strong align="center">
+        <Heading strong>
           {`${isEditing ? 'Edit' : 'Add'} Section`}
         </Heading>
       </Header>
@@ -81,6 +83,7 @@ export default function SectionLayoutForm(props: {
             >
               <LayoutForm
                 {...sectionLayoutForm}
+                onToggleHelp={onToggleHelp}
                 onChange={onChange}
               />
             </ViewMoreViewLess>

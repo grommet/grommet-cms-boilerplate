@@ -2,7 +2,6 @@ import React from 'react';
 import {
   ImageForm,
   ParagraphForm,
-  ImageParagraphForm,
   QuoteForm,
   VideoForm,
   CarouselForm,
@@ -15,8 +14,6 @@ import {
   BlockParagraphWireframe,
   BlockImage,
   BlockImageWireframe,
-  BlockImageParagraph,
-  BlockImageParagraphWireframe,
   BlockCard,
   BlockCardWireframe,
   BlockQuote,
@@ -63,18 +60,11 @@ export default {
     name: 'Image',
     wireframe: <BlockImageWireframe />
   },
-  BlockImageParagraph: {
-    element: <BlockImageParagraph />,
-    preview: <GenericPreview />,
-    form: <ImageParagraphForm />,
-    name: 'Image + Paragraph',
-    wireframe: <BlockImageParagraphWireframe />
-  },
   BlockCardParagraph: {
     element: <BlockCard />,
     preview: <GenericPreview />,
     form: <CardForm />,
-    name: 'Card + Paragraph',
+    name: 'Card',
     wireframe: <BlockCardWireframe />
   },
   BlockQuote: {

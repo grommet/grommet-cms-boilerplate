@@ -43,7 +43,8 @@ import {
   postBoxLayoutFormReset,
   postBoxLayoutFormInput,
   toggleBoxLayoutForm,
-  postToggleAdvancedLayout
+  postToggleAdvancedLayout,
+  postToggleHelp
 } from './actions';
 import { debounce } from 'grommet-cms/utils';
 import {
@@ -82,6 +83,7 @@ export class DashboardPostPage extends Component {
     this._onSubmitBoxLayoutForm = this._onSubmitBoxLayoutForm.bind(this);
     this._onBackToMasterView = this._onBackToMasterView.bind(this);
     this._onToggleSectionOptions = this._onToggleSectionOptions.bind(this);
+    this._onToggleHelp = this._onToggleHelp.bind(this);
     this.state = {
       selectedSection: null,
       isEditingMarquee: false,
@@ -128,7 +130,7 @@ export class DashboardPostPage extends Component {
         if (contentBlocks.length) {
           this._onUpdateContentBlocks(contentBlocks);
         } else {
-          this._onUpdateContentBlocks();
+          this._onUpdateContentBlocks([]);
         }
       }
     }
@@ -283,6 +285,10 @@ export class DashboardPostPage extends Component {
 
   _onToggleSectionOptions() {
     this.props.dispatch(postToggleAdvancedLayout());
+  }
+
+  _onToggleHelp() {
+    this.props.dispatch(postToggleHelp());
   }
 
   _onSetBoxLayoutFormValues(id = null) {
@@ -448,6 +454,7 @@ export class DashboardPostPage extends Component {
         }
         <SectionLayoutForm
           {...sectionLayoutForm}
+          onToggleHelp={this._onToggleHelp}
           onShowMore={this._onToggleSectionOptions}
           showAdvancedLayout={showSectionLayoutOptions}
           onChange={this._onChangeSectionForm}

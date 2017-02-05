@@ -37,3 +37,4 @@ export const selectAdvancedLayoutOptions = createSelector(
   selectDashboardPost(),
   dashboardPost => dashboardPost.sectionLayoutForm.showAdvancedLayoutOptions
 );
+

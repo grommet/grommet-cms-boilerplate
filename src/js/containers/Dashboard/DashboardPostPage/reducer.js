@@ -9,29 +9,18 @@ export const initialState: DashboardPostPageState = {
   toastMessage: null,
   sectionLayoutForm: {
     showAdvancedLayoutOptions: true,
+    showHelp: false,
     isVisible: false,
     title: "Section Layout",
+    subtitle: "Set the layout of the section / flex container",
     selectedSection: null,
     name: {
       value: ''
     },
     fields: [
       {
-        label: "Padding",
-        name: "pad",
-        type: "Select",
-        options: ["small", "medium", "large", "none"],
-        value: 'small'
-      },
-      {
-        label: "Flex Basis",
-        name: "basis",
-        type: "Select",
-        options: ["xsmall", "small", "medium", "large", "xlarge", "xxlarge", "full", "1/2", "1/3", "2/3", "1/4", "3/4"],
-        value: 'full'
-      },
-      {
         label: "Flex Direction",
+        help: "How should the content flow?  Row: left to right, Column: top to bottom.",
         name: "direction",
         type: "Select",
         options: ["row", "column"],
@@ -39,6 +28,10 @@ export const initialState: DashboardPostPageState = {
       },
       {
         label: "Justify Content",
+        help: {
+          row: "Justify content to the left / right.",
+          column: "Justify content to the top / bottom."
+        },
         name: "justify",
         type: "Select",
         options: ["start", "center", "between", "end"],
@@ -46,13 +39,26 @@ export const initialState: DashboardPostPageState = {
       },
       {
         label: "Align Items",
+        help: {
+          row: "Align items to the top / bottom.",
+          column: "Aligns items to the left / right."
+        },
         name: "align",
         type: "Select",
         options: ["start", "center", "end", "baseline", "stretch"],
         value: 'start'
       },
       {
+        label: "Padding",
+        name: "pad",
+        help: "How much space should the container add around content?",
+        type: "Select",
+        options: ["small", "medium", "large", "none"],
+        value: 'small'
+      },
+      {
         label: "Full",
+        help: "Should the section span the full width / height of the container.",
         name: "full",
         type: "Select",
         options: ["horizontal", "vertical", "true", "false"],
@@ -60,10 +66,19 @@ export const initialState: DashboardPostPageState = {
       },
       {
         label: 'Wrap',
+        help: "Should the content ever wrap onto a new line?",
         name: 'wrap',
         type: 'Select',
         options: ["true", "false"],
         value: 'false'
+      },
+      {
+        label: "Flex Basis",
+        help: "The basis of inner items.  Prefer setting item size vs. flex-basis.",
+        name: "basis",
+        type: "Select",
+        options: ["xsmall", "small", "medium", "large", "xlarge", "xxlarge", "full", "1/2", "1/3", "2/3", "1/4", "3/4"],
+        value: 'full'
       }
     ]
   },
@@ -102,6 +117,14 @@ const dashboardPost = (
   action: DashboardPostPageAction
 ): DashboardPostPageState => {
   switch (action.type) {
+    case T.POST_TOGGLE_HELP:
+      return {
+        ...state,
+        sectionLayoutForm: {
+          ...state.sectionLayoutForm,
+          showHelp: !state.sectionLayoutForm.showHelp
+        }
+      };
     case T.POST_TOGGLE_ADVANCED_LAYOUT:
       return {
         ...state,

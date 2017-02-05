@@ -5,8 +5,6 @@ import Form from 'grommet/components/Form';
 import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
-import CheckBox from 'grommet/components/CheckBox';
-
 import { Assets } from 'grommet-cms/containers';
 
 export class VideoForm extends Component {

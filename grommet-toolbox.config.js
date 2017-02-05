@@ -60,6 +60,10 @@ export default {
         {
           test: /\.svg$/,
           loader: 'url-loader?limit=10000'
+        },
+        {
+          test: /\.md$/,
+          loader: "html!markdown"
         }
       ]
     }
