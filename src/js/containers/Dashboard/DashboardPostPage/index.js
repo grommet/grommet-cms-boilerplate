@@ -442,7 +442,7 @@ export class DashboardPostPage extends Component {
                   />
                 }
                 {post && selectedSection === 0 &&
-                  <Box>
+                  <Box full="horizontal">
                     <PageHeader title="Edit Heading" />
                     <MarqueeForm
                       onSubmit={this._onSubmitMarquee}

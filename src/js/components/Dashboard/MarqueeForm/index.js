@@ -146,11 +146,12 @@ export default class MarqueeForm extends Component {
             </Box>
           </Footer>
         </Section>
-        <Section pad="medium">
-          <Footer align="center" justify="center" pad="medium">
+        <Section pad="large">
+          <Footer align="center" justify="center" pad="large">
             <Menu
               align="center"
-              style={{ width: '100%' }}
+              pad={{ horizontal: 'medium' }}
+              style={{ width: '70%' }}
               justify="between"
               direction="row"
               inline

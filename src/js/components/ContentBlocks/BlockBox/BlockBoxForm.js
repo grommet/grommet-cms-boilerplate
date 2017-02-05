@@ -7,13 +7,14 @@ import FormField from 'grommet/components/FormField';
 import Select from 'grommet/components/Select';
 import Button from 'grommet/components/Button';
 import Footer from 'grommet/components/Footer';
-import colorOptions from './internal/colorIndexes';
+import colorOptionsList from './internal/colorIndexes';
 
 type ErrorType = string;
 
 type BlockColorSwatchFormState = {
   colorIndexInput: ?string,
   contentInput: ?string,
+  colorOptions: Array<string>,
   errors: ?{
     colorIndexInput: ?ErrorType,
     contentInput: ?ErrorType
@@ -33,6 +34,7 @@ export default class BlockColorSwatchForm extends React.Component {
     super(props);
     (this:any)._onChange = this._onChange.bind(this);
     (this:any)._onSubmit = this._onSubmit.bind(this);
+    (this:any)._onSearch = this._onSearch.bind(this);
     (this:any)._formIsValid = this._formIsValid.bind(this);
     let colorIndexInput = '';
     let contentInput = '';
@@ -46,7 +48,8 @@ export default class BlockColorSwatchForm extends React.Component {
     this.state = {
       errors: null,
       colorIndexInput,
-      contentInput
+      contentInput,
+      colorOptions: colorOptionsList
     };
   }
   
@@ -89,6 +92,17 @@ export default class BlockColorSwatchForm extends React.Component {
     }
   }
 
+  _onSearch(e: any) {
+    const { colorOptions } = this.state;
+    const { value } = e.target;
+    const newOptions = value === '' || !value
+      ? colorOptionsList 
+      : colorOptions.filter(i => i.includes(value));
+    this.setState({
+      colorOptions: newOptions
+    });
+  }
+
   _formIsValid() {
     const { colorIndexInput, contentInput } = this.state;
     if (colorIndexInput && contentInput) {
@@ -101,7 +115,8 @@ export default class BlockColorSwatchForm extends React.Component {
     const {
       colorIndexInput,
       contentInput,
-      errors
+      errors,
+      colorOptions
     } = this.state;
     return (
       <Box colorIndex="light-2" pad="medium">
@@ -129,6 +144,7 @@ export default class BlockColorSwatchForm extends React.Component {
                 error={errors && errors.colorIndexInput ? errors.colorIndexInput : ''}
               >
                 <Select
+                  onSearch={this._onSearch}
                   onChange={this._onChange}
                   value={colorIndexInput || ''}
                   options={colorOptions}

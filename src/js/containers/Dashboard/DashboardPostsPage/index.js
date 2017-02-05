@@ -257,7 +257,7 @@ export class DashboardPostsPage extends Component {
       : this._renderLoader(request);
 
     return (
-      <Box primary direction="column">
+      <Box primary direction="column" full="horizontal">
         <AddPostForm
           isVisible={addPostForm.isVisible}
           onClose={this._onToggleAddPostForm}
