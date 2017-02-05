@@ -20,3 +20,4 @@ export DashboardAssetPage from './Dashboard/DashboardAssetPage';
 export DashboardAssetsLayer from './Dashboard/DashboardAssetsLayer';
 export GrommetCmsConfigProvider from './GrommetCmsConfigProvider';
 export Assets from './Assets';
+export AssetsList from './AssetsList';

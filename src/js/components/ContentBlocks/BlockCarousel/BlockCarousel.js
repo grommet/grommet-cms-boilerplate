@@ -1,23 +1,21 @@
 import React, { PropTypes } from 'react';
 import Box from 'grommet/components/Box';
 import Carousel from 'grommet/components/Carousel';
-import Image from 'grommet/components/Image';
-import Section from 'grommet/components/Section';
 
 export default function BlockCarousel ({ carousel }) {
   const slides = carousel.map((slide, index) =>
     <Box key={`slide-${index}`}>
-      <Image src={slide.image.path} full="horizontal" />
+      <Box
+        style={{ backgroundSize: 'cover', backgroundPosition: 'center', height: 500, width: '100vw' }}
+        texture={slide.image.path}
+      />
     </Box>
   );
 
   return (
-    <Section pad={{ vertical: 'medium', horizontal: 'large' }} 
-      alignSelf="center">
-      <Carousel>
-        {slides}
-      </Carousel>
-    </Section>
+    <Carousel>
+      {slides}
+    </Carousel>
   );
 };
 

@@ -85,7 +85,7 @@ export class CarouselSlideForm extends Component {
                 id="image"
                 name="image"
                 type="text"
-                value={image.path}
+                value={image.path || ''}
                 onChange={this._onChange}
               />
             </FormField>

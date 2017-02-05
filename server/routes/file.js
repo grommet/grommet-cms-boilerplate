@@ -91,7 +91,7 @@ router.get('/api/files', isAuthed, function(req, res) {
       }
     );
   } else {
-    const limit = 9;
+    const limit = 12;
     const skip = (page === 1)
       ? 0
       : (page - 1) * limit;

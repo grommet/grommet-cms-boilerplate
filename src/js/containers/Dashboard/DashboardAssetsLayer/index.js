@@ -2,17 +2,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Box from 'grommet/components/Box';
+import Article from 'grommet/components/Article';
 import Button from 'grommet/components/Button';
 import Layer from 'grommet/components/Layer';
-import { AssetTile } from 'grommet-cms/components/Dashboard';
-import { getAssets } from 'grommet-cms/containers/Assets/actions';
 import AssetForm from 'grommet-cms/containers/Dashboard/DashboardAssetPage';
+import { AssetsList } from 'grommet-cms/containers';
 import { PageHeader } from 'grommet-cms/components';
 import type { Asset } from 'grommet-cms/containers/Assets/flowTypes';
+import { getAssets } from 'grommet-cms/containers/Assets/actions';
 
 type Props = {
   error: string,
-  posts: Array<Asset>,
+  assets: Array<Asset>,
   request: boolean
 };
 
@@ -35,10 +36,6 @@ export class DashboardAssetsLayer extends Component {
     this._onAddAssetClick = this._onAddAssetClick.bind(this);
   }
 
-  componentDidMount() {
-    this.props.dispatch(getAssets());
-  }
-
   _onAddAssetClick() {
     this.setState({ addNewAsset: true });
   }
@@ -52,22 +49,6 @@ export class DashboardAssetsLayer extends Component {
   }
 
   render() {
-    const assets = (
-      this.props.posts
-      && this.props.posts.length > 0
-      && !this.state.addNewAsset)
-      ? this.props.posts.map(({_id, path, title}) =>
-        <AssetTile
-          id={_id}
-          title={title}
-          path={path}
-          key={`asset-${_id}`}
-          size="small"
-          showControls={false}
-          onClick={this.props.onAssetSelect.bind(this, {_id, path, title})}
-        />)
-      : undefined;
-
     const assetForm = (this.state.addNewAsset)
       ?
       <AssetForm
@@ -92,21 +73,27 @@ export class DashboardAssetsLayer extends Component {
           }
         />
         {assetForm}
-        <Box full direction="row" pad="medium"
-          justify="center" wrap={true}>
-          {assets}
-        </Box>
+        <Article
+          className="dashboard--assets-layer"
+          primary
+          full
+          pad="medium"
+          style={{ maxHeight: '90vh' }}
+        >
+          <AssetsList
+            onAssetSelect={this.props.onAssetSelect}
+            tileSize="small"
+          />
+        </Article>
       </Layer>
     );
   }
 };
 
 function mapStateToProps(state, props) {
-  const { error, posts, request } = state.assets;
+  const { error } = state.assets;
   return {
-    error,
-    posts,
-    request
+    error
   };
 }
 
