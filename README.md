@@ -1,5 +1,8 @@
 # Grommet CMS
 
+## NOTE
+This repo is under active development and as such, it would be best to wait until a proper release before using it in production.  If you're interested in contributing, please read on to get the app setup.
+
 ## Getting Started
 
 This is the source code for the Grommet CMS boilerplate.
