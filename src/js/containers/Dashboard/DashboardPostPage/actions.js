@@ -53,5 +53,5 @@ export const postToggleAdvancedLayout = (): DashboardPostPageAction => ({
 });
 
 export const postToggleHelp = (): DashboardPostPageAction => ({
-  type: T.POST_TOGGLE_TOOL_TIP
+  type: T.POST_TOGGLE_HELP
 });

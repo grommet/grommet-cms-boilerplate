@@ -19,5 +19,6 @@ module.name_mapper='\(react\)' -> '<PROJECT_ROOT>/config/flow/GeneralStub.js'
 module.name_mapper='\(redux\)' -> '<PROJECT_ROOT>/config/flow/GeneralStub.js'
 module.name_mapper='\(react-helmet\)' -> '<PROJECT_ROOT>/config/flow/GeneralStub.js'
 module.name_mapper='^grommet-cms\/\(.*\)$' -> '<PROJECT_ROOT>/src/js/\1'
+module.name_mapper.extension='md' -> '<PROJECT_ROOT>/GeneralStub.js'
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable

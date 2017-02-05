@@ -3,6 +3,7 @@ import React from 'react';
 import Layer from 'grommet/components/Layer';
 import Box from 'grommet/components/Box';
 import Markdown from 'grommet/components/Markdown';
+// $FlowFixMe
 import helpText from './flexbox.md';
 
 export default function FlexBoxHelpLayer(props: {
