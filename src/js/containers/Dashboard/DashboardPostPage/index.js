@@ -32,7 +32,8 @@ import {
   PostListItemDetail,
   SectionLayoutForm,
   MarqueeForm,
-  BoxLayoutForm
+  BoxLayoutForm,
+  WithLoading
 } from 'grommet-cms/components';
 import {
   toggleSectionForm,
@@ -391,68 +392,70 @@ export class DashboardPostPage extends Component {
     const { selectedSection, shouldAnimate } = this.state;
     return (
       <Box primary pad="none">
-        <Split
-          separator
-          priority="left"
-          showOnResponsive="priority"
-        >
-          <Box>
-            <Animate
-              keep
-              enter={{
-                animation: 'slide-right',
-                duration: shouldAnimate ? 500 : 0,
-                delay: 0
-              }}
-              leave={{ animation: 'slide-left', duration: 500, delay: 0 }}
-              visible={selectedSection == null}
-            >
-              {post && selectedSection == null &&
-                <PostList
-                  disabled={request}
-                  onSelectSection={this._onSelectSection}
-                  onMenuItemClick={this._onSectionMenuItemClick}
-                  onAddSection={this._onAddSection}
-                  sections={post.sections
-                    ? post.sections.sort((a, b) => a.order - b.order)
-                    : null
-                  }
-                />
-              }
-            </Animate>
-            <Animate
-              keep
-              enter={{ animation: 'slide-left', duration: 500, delay: 0 }}
-              leave={{ animation: 'slide-left', duration: 500, delay: 0 }}
-              visible={typeof selectedSection === 'number'}
-            >
-              {post && selectedSection > 0 &&
-                <PostListItemDetail
-                  onCancel={this._onCancel}
-                  onSubmit={this._onSubmitContentBlocks}
-                  onCreateBlockClick={this._onCreateBlock}
-                  item={post.sections[selectedSection]}
-                />
-              }
-              {post && selectedSection === 0 &&
-                <Box>
-                  <PageHeader title="Edit Marquee" />
-                  <MarqueeForm
-                    onSubmit={this._onSubmitMarquee}
-                    post={post}
-                    onChange={this._onPostChange}
-                    onCancel={this._onCancel}
-                    url={url}
+        <WithLoading isLoading={request && !selectedSection && !shouldAnimate} fullHeight>
+          <Split
+            separator
+            priority="left"
+            showOnResponsive="priority"
+          >
+            <Box>
+              <Animate
+                keep
+                enter={{
+                  animation: 'slide-right',
+                  duration: shouldAnimate ? 500 : 0,
+                  delay: 0
+                }}
+                leave={{ animation: 'slide-left', duration: 500, delay: 0 }}
+                visible={selectedSection == null}
+              >
+                {post && selectedSection == null &&
+                  <PostList
+                    disabled={request}
+                    onSelectSection={this._onSelectSection}
+                    onMenuItemClick={this._onSectionMenuItemClick}
+                    onAddSection={this._onAddSection}
+                    sections={post.sections
+                      ? post.sections.sort((a, b) => a.order - b.order)
+                      : null
+                    }
                   />
-                </Box>
-              }
-            </Animate>
-          </Box>
-          <Box>
-            <PageHeader title="Preview" />
-            <PostPreview selectedSection={selectedSection} post={post} />
-          </Box>
-        </Split>
+                }
+              </Animate>
+              <Animate
+                keep
+                enter={{ animation: 'slide-left', duration: 500, delay: 0 }}
+                leave={{ animation: 'slide-left', duration: 500, delay: 0 }}
+                visible={typeof selectedSection === 'number'}
+              >
+                {post && selectedSection > 0 &&
+                  <PostListItemDetail
+                    onCancel={this._onCancel}
+                    onSubmit={this._onSubmitContentBlocks}
+                    onCreateBlockClick={this._onCreateBlock}
+                    item={post.sections[selectedSection]}
+                  />
+                }
+                {post && selectedSection === 0 &&
+                  <Box>
+                    <PageHeader title="Edit Marquee" />
+                    <MarqueeForm
+                      onSubmit={this._onSubmitMarquee}
+                      post={post}
+                      onChange={this._onPostChange}
+                      onCancel={this._onCancel}
+                      url={url}
+                    />
+                  </Box>
+                }
+              </Animate>
+            </Box>
+            <Box>
+              <PageHeader title="Preview" />
+              <PostPreview selectedSection={selectedSection} post={post} />
+            </Box>
+          </Split>
+        </WithLoading>
         {error &&
           <ErrorNotification
             errors={[{ message: error }]}
