@@ -1,32 +1,33 @@
 import React, { Component, PropTypes } from 'react';
 import Box from 'grommet/components/Box';
-import { VideoCallout, YoutubeLayer } from '../Shared';
+import { VideoCallout, VideoLayer } from '../Shared';
 
 export default class BlockVideo extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      layerActive: false,
-      layerContent: ''
+      layerActive: false
     };
 
     this._toggleVideoLayer = this._toggleVideoLayer.bind(this);
   }
 
-  _toggleVideoLayer(videoUrl) {
+  _toggleVideoLayer() {
     this.setState({ 
-      layerActive: !this.state.layerActive,
-      layerContent: videoUrl
+      layerActive: !this.state.layerActive
     });
   }
 
   render() {
-    const { content, image, label, linkUrl } = this.props;
+    const { content, image, label, video } = this.props;
     const videoLayer = (this.state.layerActive)
-      ? <YoutubeLayer url={this.state.layerContent} 
-          onClose={this._toggleVideoLayer} />
-      : undefined;
+      ? <VideoLayer
+          image={image}
+          video={video}
+          onClose={this._toggleVideoLayer}
+        />
+      : null;
 
     return (
       <Box>
@@ -34,8 +35,8 @@ export default class BlockVideo extends Component {
         <VideoCallout 
           description={content} 
           label={label} 
-          thumbnail={image} 
-          onClick={this._toggleVideoLayer.bind(this, linkUrl)}
+          thumbnail={image.path} 
+          onClick={this._toggleVideoLayer}
         />
       </Box>
     );
@@ -46,5 +47,7 @@ BlockVideo.propTypes = {
   content: PropTypes.string,
   image: PropTypes.string,
   label: PropTypes.string,
-  linkUrl: PropTypes.string
+  video: PropTypes.shape({
+    path: PropTypes.string.isRequired
+  })
 };

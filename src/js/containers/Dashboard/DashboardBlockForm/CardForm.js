@@ -7,7 +7,7 @@ import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
 import { Assets } from 'grommet-cms/containers';
 
-export class CardParagraphForm extends Component {
+export class CardForm extends Component {
   constructor(props) {
     super(props);
 
@@ -58,9 +58,9 @@ export class CardParagraphForm extends Component {
     event.preventDefault();
     const state = Object.assign({}, this.state);
     const formData = {
-      content: state.content,
       image: state.image,
       card: {
+        content: state.content,
         heading: state.heading,
         label: state.label,
         linkText: state.linkText,
@@ -73,7 +73,12 @@ export class CardParagraphForm extends Component {
 
   render() {
     const {
-      content, heading, image, label, linkText, linkUrl
+      content,
+      heading,
+      image,
+      label,
+      linkText,
+      linkUrl
     } = this.state;
     const submit = (this._validateForm(this.state))
       ? this._onSubmit
@@ -84,10 +89,6 @@ export class CardParagraphForm extends Component {
         <Form compact={false} onSubmit={submit}>
           <FormFields>
             <fieldset>
-               <FormField label="Content" htmlFor="content">
-                <textarea id="content" name="content" type="text"
-                  value={content} onChange={this._onChange} rows="10" />
-              </FormField>
               <FormField label="Card Label" htmlFor="label">
                 <input id="label" name="label" type="text"
                   value={label} onChange={this._onChange} />
@@ -95,6 +96,10 @@ export class CardParagraphForm extends Component {
               <FormField label="Card Heading" htmlFor="heading">
                 <input id="heading" name="heading" type="text"
                   value={heading} onChange={this._onChange} />
+              </FormField>
+              <FormField label="Card Content" htmlFor="content">
+                <textarea id="content" name="content" type="text"
+                  value={content} onChange={this._onChange} rows="3" />
               </FormField>
               <FormField label="Card Link Text" htmlFor="linkText">
                 <input id="linkText" name="linkText" type="text"
@@ -121,7 +126,7 @@ export class CardParagraphForm extends Component {
   }
 };
 
-CardParagraphForm.propTypes = {
+CardForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   data: PropTypes.object
 };
@@ -131,5 +136,4 @@ function mapStateToProps(state, props) {
   return { url };
 }
 
-
-export default connect(mapStateToProps)(CardParagraphForm);
+export default connect(mapStateToProps)(CardForm);

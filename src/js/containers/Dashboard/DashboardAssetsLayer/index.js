@@ -77,8 +77,10 @@ export class DashboardAssetsLayer extends Component {
       : undefined;
 
     return (
-      <Layer flush={true} onClose={this.props.onClose}>
-        <PageHeader title="Assets" controls={
+      <Layer align="center" flush={true} onClose={this.props.onClose}>
+        <PageHeader
+          title="Assets"
+          controls={
             <Box direction="row" pad={{ between: 'medium' }}>
               <Button onClick={this._onAddAssetClick}>
                 Add Asset
@@ -90,7 +92,7 @@ export class DashboardAssetsLayer extends Component {
           }
         />
         {assetForm}
-        <Box full="horizontal" direction="row" pad="medium"
+        <Box full direction="row" pad="medium"
           justify="center" wrap={true}>
           {assets}
         </Box>

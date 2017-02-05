@@ -3,6 +3,7 @@ import React from 'react';
 import Footer from 'grommet/components/Footer';
 import Section from 'grommet/components/Section';
 import ImageIcon from 'grommet/components/icons/base/Image';
+import VideoIcon from 'grommet/components/icons/base/Video';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 import DashboardAssetsLayer from
@@ -14,11 +15,15 @@ type AssetUploadState = {
 };
 
 type AssetUploadProps = {
-  onAssetSelect: (asset: Asset) => void
+  onAssetSelect: (asset: Asset) => void,
+  assetType: 'video' | 'image',
 };
 
 export default class AssetUpload extends React.Component {
   state: AssetUploadState;
+  static defaultProps = {
+    assetType: 'image'
+  };
   props: AssetUploadProps;
   constructor() {
     super();
@@ -54,6 +59,7 @@ export default class AssetUpload extends React.Component {
   }
 
   render() {
+    const { assetType } = this.props;
     return (
       <Section>
         {this._renderAssetLayer()}
@@ -63,8 +69,11 @@ export default class AssetUpload extends React.Component {
           pad={{ horizontal: 'medium' }}
         >
           <Box align="start">
-            <Button icon={<ImageIcon />} onClick={this._toggleAssetsLayer}>
-              Add Asset
+            <Button
+              icon={assetType === 'video' ? <VideoIcon /> : <ImageIcon />}
+              onClick={this._toggleAssetsLayer}
+            >
+              {`Add ${assetType ? assetType : ''} asset`}
             </Button>
           </Box>
         </Footer>
