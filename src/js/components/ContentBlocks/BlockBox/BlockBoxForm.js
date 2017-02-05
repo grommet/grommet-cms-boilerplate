@@ -14,7 +14,7 @@ type ErrorType = string;
 type BlockColorSwatchFormState = {
   colorIndexInput: ?string,
   contentInput: ?string,
-  colorOptions: Array<string>,
+  colorOptions: Array<any>,
   errors: ?{
     colorIndexInput: ?ErrorType,
     contentInput: ?ErrorType
