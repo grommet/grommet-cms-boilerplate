@@ -2,9 +2,11 @@
 import React from 'react';
 import Layer from 'grommet/components/Layer';
 import Box from 'grommet/components/Box';
+import Article from 'grommet/components/Article';
 import Markdown from 'grommet/components/Markdown';
 import CloseIcon from 'grommet/components/icons/base/Close';
 import Anchor from 'grommet/components/Anchor';
+import { PageHeader } from 'grommet-cms/components';
 // $FlowFixMe
 import helpText from './flexbox.md';
 
@@ -15,19 +17,25 @@ export default function FlexBoxHelpLayer(props: {
   const { isVisible, onClose } = props;
   return (
     <Layer
+      flush
       hidden={!isVisible}
       onClose={onClose}
-      closer={
-        <Anchor
-          style={{ position: 'absolute', top: 10, right: 10 }}
-          onClick={onClose}
-          icon={<CloseIcon />}
-        />
-      }
+      closer={false}
       align="center"
     >
-      <Box pad="large">
-        <Markdown content={helpText} />
+      <Box full="horizontal">
+        <PageHeader
+          title="Flex Box Help"
+          controls={
+            <Anchor
+              onClick={onClose}
+              icon={<CloseIcon />}
+            />
+          }
+        />
+        <Article pad="large" style={{ maxHeight: 'calc(100vh - 24px)', overflow: 'scroll' }}>
+          <Markdown content={helpText} />
+        </Article>
       </Box>
     </Layer>
   );
