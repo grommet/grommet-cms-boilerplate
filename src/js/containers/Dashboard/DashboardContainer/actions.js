@@ -1,4 +1,4 @@
-import Requests from 'grommet-cms/utils/Request';
+import Requests from 'grommet-cms/utils/request';
 import * as ActionTypes from './constants';
 
 export function dashboardError(error) {
