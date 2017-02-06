@@ -45,7 +45,8 @@ export function persistUser() {
 export function loadPersistedUser() {
   return async function(dispatch) {
     const token = await localStorage.getItem('has_grommet_cms_account');
-    dispatch(loginLoadToken(token));
+    const isValid = token === 'true';
+    dispatch(loginLoadToken(isValid));
   };
 }
 
