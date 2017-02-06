@@ -103,20 +103,22 @@ export default function SectionLayoutForm(props: {
           >
             <Button
               label="submit"
-              onClick={canSubmit ? () => onSubmit(false) : null}
+              onClick={canSubmit ? () => onSubmit(!isEditing) : null}
               primary={true}
               disabled={!canSubmit}
               style={{ margin: '0px 8px' }}
               type="submit"
             />
-            <Button
-              label="submit and close"
-              disabled={!canSubmit}
-              onClick={canSubmit ? () => onSubmit(true) : null}
-              style={{ margin: '0px 8px' }}
-              primary={true}
-              type="submit"
-            />
+            {isEditing &&
+              <Button
+                label="submit and close"
+                disabled={!canSubmit}
+                onClick={canSubmit ? () => onSubmit(true) : null}
+                style={{ margin: '0px 8px' }}
+                primary={true}
+                type="submit"
+              />
+            }
             <Button
               label="close"
               style={{ margin: '0px 8px' }}
