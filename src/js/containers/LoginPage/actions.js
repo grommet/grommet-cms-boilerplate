@@ -26,6 +26,33 @@ export function logoutSuccess() {
   };
 }
 
+export function loginLoadToken(token) {
+  return {
+    type: ActionTypes.USER_LOGIN_LOAD_TOKEN,
+    token
+  };
+}
+
+// Note: not meant to be secure.  The api must validate token effectively.
+// This will allow bypass of login
+export function persistUser() {
+  return new Promise(async (res) => {
+    const token = await localStorage.setItem('has_grommet_cms_account', true);
+    res(token);
+  });
+}
+
+export function loadPersistedUser() {
+  return async function(dispatch) {
+    const token = await localStorage.getItem('has_grommet_cms_account');
+    dispatch(loginLoadToken(token));
+  };
+}
+
+export function clearToken() {
+  localStorage.setItem('has_grommet_cms_account', false);
+}
+
 export function login(user) {
   return (dispatch, getState) => {
     let { url } = getState().api;
@@ -45,10 +72,12 @@ export function login(user) {
               : statusText;
             dispatch(loginError(text));
           } else {
-            dispatch(loginSuccess(statusText));
-
-            // redirect
-            browserHistory.push('/dashboard/homepage');
+            persistUser().then(() => {
+              dispatch(loginSuccess(statusText));
+            })
+            .catch(err => {
+              throw new Error(err.message);
+            });
           }
         },
         err => {
@@ -62,6 +91,7 @@ export function login(user) {
 export function logout(user) {
   return (dispatch, getState) => {
     dispatch(loginRequest());
+    clearToken();
 
     let { url } = getState().api;
     fetch(`${url}/user/logout`, {
@@ -71,7 +101,7 @@ export function logout(user) {
       .then(
         ({ status, statusText }) => {
           if (status >= 400) {
-            //dispatch(loginError(text));
+            dispatch(loginError('There was an error processing your request.'));
           } else {
             dispatch(logoutSuccess(statusText));
             browserHistory.push('/dashboard');
@@ -79,35 +109,7 @@ export function logout(user) {
         },
         err => {
           // dispatch app error
-          //dispatch(loginError('There was an error processing your request.'));
-        }
-      );
-  };
-}
-
-export function checkStatus() {
-  return (dispatch, getState) => {
-    dispatch(loginRequest());
-
-    let { url } = getState().api;
-    fetch(`${url}/check`, {
-      method: 'GET',
-      credentials: 'include'
-    })
-      .then(
-        ({ status, statusText }) => {
-          if (status >= 400) {
-            //dispatch(loginError(text));
-          } else {
-            //dispatch(logoutSuccess(statusText));
-            //browserHistory.push('/dashboard');
-            console.log(`you're in.`);
-            dispatch(loginSuccess(statusText));
-          }
-        },
-        err => {
-          // dispatch app error
-          //dispatch(loginError('There was an error processing your request.'));
+          dispatch(loginError('There was an error processing your request.'));
         }
       );
   };

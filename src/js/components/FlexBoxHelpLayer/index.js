@@ -7,7 +7,6 @@ import Markdown from 'grommet/components/Markdown';
 import CloseIcon from 'grommet/components/icons/base/Close';
 import Anchor from 'grommet/components/Anchor';
 import { PageHeader } from 'grommet-cms/components';
-// $FlowFixMe
 import helpText from './flexbox.md';
 
 export default function FlexBoxHelpLayer(props: {

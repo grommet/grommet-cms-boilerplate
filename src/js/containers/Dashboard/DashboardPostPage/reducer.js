@@ -101,7 +101,7 @@ export const initialState: DashboardPostPageState = {
         name: "pad",
         type: "Select",
         options: ["small", "medium", "large", "none"],
-        value: 'small'
+        value: 'none'
       },
       {
         label: "Size",

@@ -3,7 +3,8 @@ import * as ActionTypes from './constants';
 const initialState = {
   loginRequest: false,
   loginError: '',
-  loggedIn: false
+  loggedIn: false,
+  token: null
 };
 
 function login(state = initialState, action) {
@@ -27,6 +28,11 @@ function login(state = initialState, action) {
         loginError: action.loginError
       });
       break;
+    case ActionTypes.USER_LOGIN_LOAD_TOKEN:
+      return {
+        ...state,
+        loggedIn: action.token
+      };
     case ActionTypes.USER_LOGOUT_SUCCESS:
       return Object.assign({}, state, {
         loginRequest: false,

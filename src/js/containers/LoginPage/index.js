@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-
 import { connect } from 'react-redux';
-import { login } from './actions';
-
+import { login, loadPersistedUser } from './actions';
 import Box from 'grommet/components/Box';
+import { browserHistory } from 'react-router';
 import UserForm from 'grommet-cms/components/Dashboard/UserForm';
 
 export class LoginPage extends Component {
@@ -17,6 +16,16 @@ export class LoginPage extends Component {
       username: '',
       password: ''
     };
+  }
+
+  componentWillMount() {
+    this.props.dispatch(loadPersistedUser());
+  }
+
+  componentWillReceiveProps({ loggedIn }) {
+    if (loggedIn === true && loggedIn !== this.props.loggedIn) {
+      browserHistory.push('/dashboard/homepage');
+    }
   }
 
   _onChange(event) {
