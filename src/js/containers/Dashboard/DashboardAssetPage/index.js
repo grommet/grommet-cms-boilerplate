@@ -64,12 +64,7 @@ export class DashboardAssetPage extends Component {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    const { title, path, _id, file } = nextProps.posts;
-    if (file && file !== this.props.posts.file) {
-      this.setState({
-        path: file.path
-      });
-    }
+    const { title, path, _id } = nextProps.posts;
     if (_id)
       this.setState({
         title,
