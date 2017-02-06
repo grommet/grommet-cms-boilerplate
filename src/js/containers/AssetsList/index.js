@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {
   getAssets,
@@ -12,6 +12,7 @@ import Heading from 'grommet/components/Heading';
 import List from 'grommet/components/List';
 import SpinningIcon from 'grommet/components/icons/Spinning';
 import { AssetTile } from 'grommet-cms/components/Dashboard';
+import { highlightContent } from 'grommet-cms/utils';
 
 export class DashboardAssetsPage extends Component {
   constructor() {
@@ -50,29 +51,39 @@ export class DashboardAssetsPage extends Component {
   }
 
   _renderLoader(request) {
+    const { searchTerm } = this.props;
     return (request)
       ? <SpinningIcon />
       : <Box pad="medium">
           <Heading tag="h2">
-            Click 'Add Asset' to add your first asset.
+            {searchTerm
+              ? `No assets found for search term ${searchTerm}`
+              : "Click 'Add Asset' to add your first asset."
+            }
           </Heading>
         </Box>;
   }
 
   render() {
-    const { request, assets, totalCount, tileSize, onAssetSelect } = this.props;
+    const { request, assets, totalCount, tileSize, onAssetSelect, searchTerm } = this.props;
     const hasMore = assets && assets.length && assets.length < totalCount;
-    const assetBlocks = (assets.length > 0 && !request)
-      ? assets.map(({_id, title, path}) =>
+    const term = searchTerm || '';
+    const filteredAssets = term !== ''
+      ? assets.map(item => ({ _id: item._id, title: item.title, path: item.path }))
+        .filter(item => item.title.toLowerCase().includes(term.toLowerCase()))
+      : assets.map(item => ({ _id: item._id, title: item.title, path: item.path }));
+    const assetBlocks = (filteredAssets.length > 0 && !request)
+      ? filteredAssets.map(({ _id, title, path }) =>
         <AssetTile
           key={`asset-${_id}`}
           id={_id}
           onClick={onAssetSelect ? onAssetSelect.bind(this, { _id, title, path }) : null}
           size={tileSize || 'small'}
           onDeleteClick={this._onDeleteClick.bind(this, _id)}
-          title={title}
-          path={path} />)
-      : this._renderLoader(request);
+          title={term !== '' ? highlightContent(term, title) : title}
+          path={path}
+        />
+      ) : this._renderLoader(request);
 
 
     return (
@@ -90,6 +101,15 @@ export class DashboardAssetsPage extends Component {
       </List>
     );
   }
+};
+
+DashboardAssetsPage.propTypes = {
+  searchTerm: PropTypes.string,
+  request: PropTypes.bool.isRequired,
+  assets: PropTypes.array,
+  totalCount: PropTypes.number.isRequired,
+  tileSize: PropTypes.string,
+  onAssetSelect: PropTypes.func
 };
 
 function mapStateToProps(state, props) {

@@ -5,6 +5,7 @@ import Box from 'grommet/components/Box';
 import Article from 'grommet/components/Article';
 import Button from 'grommet/components/Button';
 import Layer from 'grommet/components/Layer';
+import Search from 'grommet/components/Search';
 import AssetForm from 'grommet-cms/containers/Dashboard/DashboardAssetPage';
 import { AssetsList } from 'grommet-cms/containers';
 import { PageHeader } from 'grommet-cms/components';
@@ -18,8 +19,39 @@ type Props = {
 };
 
 export class DashboardAssetsLayer extends Component {
+  static renderAssetsList({ onAssetSelect }, searchTerm) {
+    return (
+      <Article
+        className="dashboard--assets-layer"
+        primary
+        full
+        pad="medium"
+        style={{ maxHeight: '90vh' }}
+      >
+        <AssetsList
+          searchTerm={searchTerm}
+          onAssetSelect={onAssetSelect}
+          tileSize="small"
+        />
+      </Article>
+    );
+  }
+
+  static renderSearch(onSearch) {
+    return (
+      <Box>
+        <Search
+          inline
+          placeHolder="Start typing to search assets by title..."
+          onDOMChange={onSearch}
+        />
+      </Box>
+    );
+  }
+
   state: {
-    addNewAsset: boolean
+    addNewAsset: boolean,
+    searchTerm: string
   };
 
   _onAssetFormSubmit: () => void;
@@ -29,11 +61,21 @@ export class DashboardAssetsLayer extends Component {
     super(props);
 
     this.state = {
-      addNewAsset: false
+      addNewAsset: false,
+      searchTerm: ''
     };
 
     this._onAssetFormSubmit = this._onAssetFormSubmit.bind(this);
     this._onAddAssetClick = this._onAddAssetClick.bind(this);
+    (this:any)._onSearch = this._onSearch.bind(this);
+    (this:any)._onAssetFormCancel = this._onAssetFormCancel.bind(this);
+  }
+
+  _onSearch(e: any) {
+    const { value } = e.target;
+    this.setState({
+      searchTerm: value || ''
+    });
   }
 
   _onAddAssetClick() {
@@ -48,14 +90,29 @@ export class DashboardAssetsLayer extends Component {
       });
   }
 
+  _onAssetFormCancel() {
+    this.setState({ addNewAsset: false });
+  }
+
   render() {
     const assetForm = (this.state.addNewAsset)
       ?
-      <AssetForm
-        params={{ id: 'create' }}
-        onSubmit={this._onAssetFormSubmit}
-      />
+      <Article
+        full
+        align="center"
+        justify="center"
+        style={{ overflow: 'scroll' }}
+      >
+        <AssetForm
+          isLayer
+          hasHeader={false}
+          params={{ id: 'create' }}
+          onCancel={this._onAssetFormCancel}
+          onSubmit={this._onAssetFormSubmit}
+        />
+      </Article>
       : undefined;
+
 
     return (
       <Layer align="center" flush={true} onClose={this.props.onClose}>
@@ -72,19 +129,9 @@ export class DashboardAssetsLayer extends Component {
             </Box>
           }
         />
+        {!this.state.addNewAsset && DashboardAssetsLayer.renderSearch(this._onSearch)}
         {assetForm}
-        <Article
-          className="dashboard--assets-layer"
-          primary
-          full
-          pad="medium"
-          style={{ maxHeight: '90vh' }}
-        >
-          <AssetsList
-            onAssetSelect={this.props.onAssetSelect}
-            tileSize="small"
-          />
-        </Article>
+        {!this.state.addNewAsset && DashboardAssetsLayer.renderAssetsList(this.props, this.state.searchTerm)}
       </Layer>
     );
   }

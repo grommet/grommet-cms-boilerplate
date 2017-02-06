@@ -26,7 +26,10 @@ import {
 type Props = {
   error: string,
   posts: Asset,
-  request: boolean
+  request: boolean,
+  hasHeader?: boolean,
+  onCancel?: Function,
+  isLayer?: boolean
 };
 
 export class DashboardAssetPage extends Component {
@@ -136,26 +139,40 @@ export class DashboardAssetPage extends Component {
             onChange={this._onChange} />
         </FormField>;
 
+    const hasHeader = this.props.hasHeader != null
+      ? this.props.hasHeader
+      : true;
+    const header = hasHeader
+      ?
+        (
+          <Header size="small" colorIndex="light-2" style={{ maxHeight: 50 }}>
+            <Box direction="row" pad={{ horizontal: 'medium' }}>
+              <Anchor
+                primary
+                icon={<LinkPreviousIcon />}
+                path="/dashboard/assets"
+              >
+                All Assets
+              </Anchor>
+            </Box>
+          </Header>
+        )
+      : null;
+
+    const isRenderedInLayer = this.props.isLayer != null
+      ? this.props.isLayer
+      : false;
+
     return (
       <Box full="horizontal">
-        <Header size="small" colorIndex="light-2" style={{ maxHeight: 50 }}>
-          <Box direction="row" pad={{ horizontal: 'medium' }}>
-            <Anchor
-              primary
-              icon={<LinkPreviousIcon />}
-              path="/dashboard/assets"
-            >
-              All Assets
-            </Anchor>
-          </Box>
-        </Header>
+        {header}
         <Section primary full="horizontal" pad="medium" align="center">
           <Form onSubmit={this._onSubmit.bind(this, this.state)}>
             <FormFields>
               <fieldset>
                 <FormField label="Title (alt text for images)" htmlFor={"title"}>
                   <input id={"title"} name="title" type="text"
-                    onChange={this._onChange} value={title}/>
+                    onChange={this._onChange} value={title || ''}/>
                 </FormField>
                 {preview}
               </fieldset>
@@ -181,7 +198,8 @@ export class DashboardAssetPage extends Component {
               <Button
                 label="cancel"
                 style={{ margin: '0px 8px' }}
-                path="/dashboard/assets"
+                onClick={this.props.onCancel || null}
+                path={isRenderedInLayer ? '' : '/dashboard/assets'}
                 primary={false}
               />
             </Menu>

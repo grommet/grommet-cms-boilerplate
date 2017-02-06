@@ -77,9 +77,10 @@ export default function AssetTile (props) {
         {controls}
         {thumbnail}
         <Box pad="small" justify="center" align="center">
-          <Heading tag="h3" margin="none">
-            {title || 'Asset'}
-          </Heading>
+          <div
+            style={{ fontSize: 24, lineHeight: 1.333 }}
+            dangerouslySetInnerHTML={{ __html: `<h3>${title}</h3>` }}
+          />
         </Box>
       </Box>
     </Box>
