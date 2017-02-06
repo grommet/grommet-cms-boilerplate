@@ -64,7 +64,12 @@ export class DashboardAssetPage extends Component {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    const { title, path, _id } = nextProps.posts;
+    const { title, path, _id, file } = nextProps.posts;
+    if (file && file !== this.props.posts.file) {
+      this.setState({
+        path: file.path
+      });
+    }
     if (_id)
       this.setState({
         title,
@@ -191,7 +196,7 @@ export class DashboardAssetPage extends Component {
               <Button
                 label="submit"
                 primary
-                onClick={this._onSubmit.bind(this, this.state)}
+                onClick={this.state.title != '' ? this._onSubmit.bind(this, this.state) : null}
                 style={{ margin: '0px 8px' }}
                 type="submit"
               />
