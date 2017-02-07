@@ -93,7 +93,7 @@ export class DashboardAssetPage extends Component {
       // If the form is embedded we don't want to forward to the AssetsPage after
       // a successful post.
       const { onSubmit } = this.props;
-      const forwardWhenDone = (onSubmit) 
+      const forwardWhenDone = (onSubmit)
         ? false
         : true;
 

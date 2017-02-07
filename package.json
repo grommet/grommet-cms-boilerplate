@@ -52,6 +52,7 @@
     "express-session": "^1.14.0",
     "express-session-mongo": "^0.1.0",
     "grommet": "^1.2.0",
+    "grommet-addons": "^0.3.0",
     "history": "^2.1.2",
     "html-loader": "^0.4.4",
     "isomorphic-fetch": "^2.2.1",

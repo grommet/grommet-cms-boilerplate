@@ -42,6 +42,13 @@ function assets(state = initialState, action) {
           ...action.posts
         ]
       };
+    case ActionTypes.ASSET_SUCCESS:
+      return {
+        ...state,
+        request: false,
+        error: '',
+        posts: action.posts
+      };
     case ActionTypes.ASSETS_ERROR:
       return {
         ...state,

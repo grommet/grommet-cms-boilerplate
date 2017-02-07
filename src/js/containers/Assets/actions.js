@@ -17,6 +17,13 @@ export function assetsSuccess(posts: Array<Asset>) {
   };
 }
 
+export function assetSuccess(posts: Asset) {
+  return {
+    type: ActionTypes.ASSET_SUCCESS,
+    posts
+  };
+}
+
 export function assetsError(errorMsg) {
   return {
     type: ActionTypes.ASSETS_ERROR,
@@ -232,7 +239,7 @@ export function getAsset(id) {
             const text = statusText;
             dispatch(assetsError(text));
           } else {
-            dispatch(assetsSuccess(json));
+            dispatch(assetSuccess(json));
           }
         },
         err => {

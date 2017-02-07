@@ -68,10 +68,13 @@ export class DashboardAssetsPage extends Component {
     const { request, assets, totalCount, tileSize, onAssetSelect, searchTerm } = this.props;
     const hasMore = assets && assets.length && assets.length < totalCount;
     const term = searchTerm || '';
-    const filteredAssets = term !== ''
-      ? assets.map(item => ({ _id: item._id, title: item.title, path: item.path }))
-        .filter(item => item.title.toLowerCase().includes(term.toLowerCase()))
-      : assets.map(item => ({ _id: item._id, title: item.title, path: item.path }));
+    let filteredAssets = [];
+    if (Array.isArray(assets)) {
+      filteredAssets = term !== ''
+        ? assets.map(item => ({ _id: item._id, title: item.title, path: item.path }))
+          .filter(item => item.title.toLowerCase().includes(term.toLowerCase()))
+        : assets.map(item => ({ _id: item._id, title: item.title, path: item.path }));
+    }
     const assetBlocks = (filteredAssets.length > 0 && !request)
       ? filteredAssets.map(({ _id, title, path }) =>
         <AssetTile
