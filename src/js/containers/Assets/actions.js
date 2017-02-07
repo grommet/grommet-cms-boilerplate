@@ -64,7 +64,7 @@ export function assetsIncrementPage() {
       dispatch(
         assetsSetPage(currentPage + 1)
       ),
-      5000,
+      10000,
       true
     );
   };
@@ -159,7 +159,8 @@ export function getAssets(page, showLoading = true) {
       dispatch(assetsRequest());
     }
     let { url } = getState().api;
-    return fetch(`${url}/files?page=${page}`, {
+    const { perPage } = getState().assets;
+    return fetch(`${url}/files?page=${page}&limit=${perPage}`, {
       method: 'GET',
       mode: 'cors',
       credentials: 'include',

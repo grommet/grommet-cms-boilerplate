@@ -93,7 +93,7 @@ export function getYears () {
 }
 
 export function isImage(path) {
-  return (/\.(gif|jpg|jpeg|tiff|png)$/i).test(path);
+  return (/\.(gif|jpg|jpeg|tiff|png|svg)$/i).test(path);
 }
 
 export function slugify(text) {

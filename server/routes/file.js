@@ -77,9 +77,11 @@ router.post('/api/file/create', isAuthed, upload.single('file'),
 
 // Get files
 router.get('/api/files', isAuthed, function(req, res) {
-  const page = (req.query.page)
-    ? Number(req.query.page)
-    : 0;
+  const page = req.query.page || 0;
+  const limit = req.query.limit ? parseInt(req.query.limit, 10) : 12;
+  const skip = (page === 1)
+    ? 0
+    : (page - 1) * limit;
   if (page === 0) {
     File.find().sort({ createdAt: 'desc' }).exec(
       function(err, files) {
@@ -91,10 +93,6 @@ router.get('/api/files', isAuthed, function(req, res) {
       }
     );
   } else {
-    const limit = 12;
-    const skip = (page === 1)
-      ? 0
-      : (page - 1) * limit;
     File.find()
       .skip(skip)
       .limit(limit)

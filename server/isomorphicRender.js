@@ -10,6 +10,7 @@ import path from 'path';
 import { getRoutes } from '../src/js/routes';
 import { match } from 'react-router';
 import GrommetCmsConfigProvider from 'grommet-cms/containers/GrommetCmsConfigProvider';
+import 'isomorphic-fetch';
 
 // Load environment variables
 env(path.join(__dirname, '..', '.env'));

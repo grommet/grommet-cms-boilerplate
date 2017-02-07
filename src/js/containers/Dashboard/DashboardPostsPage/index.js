@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Box from 'grommet/components/Box';
+import Article from 'grommet/components/Article';
 import Button from 'grommet/components/Button';
 import Heading from 'grommet/components/Heading';
 import SpinningIcon from 'grommet/components/icons/Spinning';
@@ -274,7 +275,11 @@ export class DashboardPostsPage extends Component {
       : this._renderLoader(request);
 
     return (
-      <Box primary direction="column" full="horizontal">
+      <Box 
+        primary 
+        direction="column" 
+        full="horizontal" style={{ maxHeight: 'calc(100vh - 80px)' }}
+      >
         <AddPostForm
           isVisible={addPostForm.isVisible}
           onClose={this._onToggleAddPostForm}
@@ -298,9 +303,12 @@ export class DashboardPostsPage extends Component {
             />
           }
         />
-        <Box align="center">
+        <Article
+          align="center"
+          style={{ maxHeight: 'calc(100vh - 80px)', overflow: 'scroll' }}
+        >
           {list}
-        </Box>
+        </Article>
       </Box>
     );
   }

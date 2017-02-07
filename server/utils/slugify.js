@@ -15,3 +15,13 @@ export function slugifyFile(file) {
   let sluggedFile = `${fileName}-${Date.now()}.${extension}`;
   return sluggedFile;
 };
+
+export function unslugify(text = '') {
+  if (text.includes('-')) {
+    return text.split('-')
+      .map(s => `${s.charAt(0).toUpperCase()}${s.slice(1)}`)
+      .join(' ');
+  }
+  return [text]
+    .map(s => `${s.charAt(0).toUpperCase()}${s.slice(1)}`)[0];
+}

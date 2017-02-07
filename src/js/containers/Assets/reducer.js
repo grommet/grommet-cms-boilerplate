@@ -5,7 +5,7 @@ const initialState = {
   error: '',
   currentPage: 1,
   totalCount: 0,
-  perPage: 12,
+  perPage: 100,
   posts: []
 };
 

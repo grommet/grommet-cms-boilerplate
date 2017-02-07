@@ -1,747 +1,92 @@
 import PostModels from '../models/Post';
 import colors from 'colors/safe';
+import fs from 'fs';
+import path from 'path';
+import { slugify } from './slugify';
 
-const POSTS = {
-  Home: [
-    {
-      _type: 'home',
-      author: 'John Doe',
-      title: 'Hello World - Home',
-      subtitle: "The home page",
-      slug: 'my-first-post-home',
-      image: '587d4860b3ae295860c5fcbf',
-      date: '01/01/2017',
-      sections: [
-        {
-          name: 'Next Next',
-          id: 'next-next-marquee',
-          order: 0,
-          layout: [],
-          contentBlocks: []
-        },
-        {
-          name: 'Memory in the middle',
-          id: 'memory-in-the-middle',
-          order: 1,
-          layout: [
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'basis',
-              value: 'full'
-            },
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'direction',
-              value: 'column'
-            },
-            {
-              name: 'justify',
-              value: 'center'
-            },
-            {
-              name: 'align',
-              value: 'center'
-            },
-            {
-              name: 'full',
-              value: 'false'
-            },
-            {
-              name: 'wrap',
-              value: 'false'
-            }
-          ],
-          contentBlocks: [
-            {
-              content: "This is my first blog post!",
-              blockType: "BlockHeading",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
+function typeFromName(name) {
+  switch (name) {
+    case 'Landing Page':
+      return 'home';
+    case 'Applying The Brand':
+      return 'applying-the-brand';
+    case 'Brand Elements':
+      return 'brand-elements';
+    case 'Our Brand':
+      return 'our-brand';
+    default: return '';
+  }
+}
+
+function generateAssetMap() {
+  return new Promise((res, rej) => {
+    let posts = {};
+    const assetFolder = path.join(__dirname, '..', './assets');
+    fs.readdir(assetFolder, (err, assets) => {
+      assets.forEach((asset, outerIndex) => {
+        const key = asset.split(' ').join('');
+        posts[`${key}`] = [];
+        fs.readdir(`${assetFolder}/${asset}`, (err, innerAssets) => {
+          innerAssets.forEach((innerAsset, innerIndex) => {
+            if (asset !== 'Brand Corner') {
+              const type = typeFromName(asset);
+              const author = 'Admin User';
+              const title = innerAsset;
+              const subtitle = '';
+              const slug = slugify(innerAsset);
+              const date = new Date();
+              const post = {
+                __type: type,
+                author,
+                title,
+                subtitle,
+                slug,
+                date,
+                sections: [
+                  {
+                    name: `${innerAsset} Heading`,
+                    id: `${slug}-heading`,
+                    order: 0,
+                    layout: [],
+                    contentBlocks: []
+                  }
+                ]
+              };
+              posts[`${key}`][innerIndex] = post;
+              if (innerIndex === innerAssets.length - 1) {
+                if (outerIndex === assets.length - 1) {
+                  res(posts);
                 }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de82"
-            },{
-              content: "What an exciting day.",
-              blockType: "BlockParagraph",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
-                }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de81"
+              }
             }
-          ]
-        },
-        {
-          name: 'The rise of common sense analytics',
-          id: 'the-rise-of-common-sense-analytics-our-brand',
-          order: 2,
-          layout: [
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'basis',
-              value: 'full'
-            },
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'direction',
-              value: 'column'
-            },
-            {
-              name: 'justify',
-              value: 'center'
-            },
-            {
-              name: 'align',
-              value: 'center'
-            },
-            {
-              name: 'full',
-              value: 'false'
-            },
-            {
-              name: 'wrap',
-              value: 'false'
-            }
-          ],
-          contentBlocks: [
-            {
-              content: "This is my first blog post!",
-              blockType: "BlockHeading",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
-                }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de82"
-            },{
-              content: "What an exciting day.",
-              blockType: "BlockParagraph",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
-                }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de81"
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  OurBrand: [
-    {
-      _type: 'our-brand',
-      author: 'John Doe',
-      title: 'Hello World - Our Brand',
-      subtitle: "Blog Post",
-      slug: 'my-first-post-our-brand',
-      image: '587d4860b3ae295860c5fcbf',
-      date: '01/01/2017',
-      sections: [
-        {
-          name: 'Next Next',
-          id: 'next-next-marquee',
-          order: 0,
-          layout: [],
-          contentBlocks: []
-        },
-        {
-          name: 'Memory in the middle',
-          id: 'memory-in-the-middle',
-          order: 1,
-          layout: [
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'basis',
-              value: 'full'
-            },
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'direction',
-              value: 'column'
-            },
-            {
-              name: 'justify',
-              value: 'center'
-            },
-            {
-              name: 'align',
-              value: 'center'
-            },
-            {
-              name: 'full',
-              value: 'false'
-            },
-            {
-              name: 'wrap',
-              value: 'false'
-            }
-          ],
-          contentBlocks: [
-            {
-              content: "This is my first blog post!",
-              blockType: "BlockHeading",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
-                }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de82"
-            },{
-              content: "What an exciting day.",
-              blockType: "BlockParagraph",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
-                }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de81"
-            }
-          ]
-        },
-        {
-          name: 'The rise of common sense analytics',
-          id: 'the-rise-of-common-sense-analytics-our-brand',
-          order: 2,
-          layout: [
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'basis',
-              value: 'full'
-            },
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'direction',
-              value: 'column'
-            },
-            {
-              name: 'justify',
-              value: 'center'
-            },
-            {
-              name: 'align',
-              value: 'center'
-            },
-            {
-              name: 'full',
-              value: 'false'
-            },
-            {
-              name: 'wrap',
-              value: 'false'
-            }
-          ],
-          contentBlocks: [
-            {
-              content: "This is my first blog post!",
-              blockType: "BlockHeading",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
-                }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de82"
-            },{
-              content: "What an exciting day.",
-              blockType: "BlockParagraph",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
-                }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de81"
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  ApplyingTheBrand: [
-    {
-      _type: 'applying-the-brand',
-      author: 'John Doe',
-      title: 'Hello World - Applying the Brand',
-      subtitle: "Blog Post",
-      slug: 'my-first-post-applying-the-brand',
-      image: '587d4860b3ae295860c5fcbf',
-      date: '01/01/2017',
-      sections: [
-        {
-          name: 'Next Next',
-          id: 'next-next-marquee',
-          order: 0,
-          layout: [],
-          contentBlocks: []
-        },
-        {
-          name: 'Memory in the middle',
-          id: 'memory-in-the-middle',
-          order: 1,
-          layout: [
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'basis',
-              value: 'full'
-            },
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'direction',
-              value: 'column'
-            },
-            {
-              name: 'justify',
-              value: 'center'
-            },
-            {
-              name: 'align',
-              value: 'center'
-            },
-            {
-              name: 'full',
-              value: 'false'
-            },
-            {
-              name: 'wrap',
-              value: 'false'
-            }
-          ],
-          contentBlocks: [
-            {
-              content: "This is my first blog post!",
-              blockType: "BlockHeading",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
-                }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de82"
-            },{
-              content: "What an exciting day.",
-              blockType: "BlockParagraph",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
-                }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de81"
-            }
-          ]
-        },
-        {
-          name: 'The rise of common sense analytics',
-          id: 'the-rise-of-common-sense-analytics',
-          order: 2,
-          layout: [
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'basis',
-              value: 'full'
-            },
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'direction',
-              value: 'column'
-            },
-            {
-              name: 'justify',
-              value: 'center'
-            },
-            {
-              name: 'align',
-              value: 'center'
-            },
-            {
-              name: 'full',
-              value: 'false'
-            },
-            {
-              name: 'wrap',
-              value: 'false'
-            }
-          ],
-          contentBlocks: [
-            {
-              content: "This is my first blog post!",
-              blockType: "BlockHeading",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
-                }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de82"
-            },{
-              content: "What an exciting day.",
-              blockType: "BlockParagraph",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
-                }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de81"
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  BrandElements: [
-    {
-      _type: 'brand-elements',
-      author: 'John Doe',
-      title: 'Hello World - Brand Elements',
-      subtitle: "Blog Post",
-      slug: 'my-first-post-brand-elements',
-      image: '587d4860b3ae295860c5fcbf',
-      date: '01/01/2017',
-      sections: [
-        {
-          name: 'Next Next',
-          id: 'next-next-marquee',
-          order: 0,
-          layout: [],
-          contentBlocks: []
-        },
-        {
-          name: 'Memory in the middle',
-          id: 'memory-in-the-middle',
-          order: 1,
-          layout: [
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'basis',
-              value: 'full'
-            },
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'direction',
-              value: 'column'
-            },
-            {
-              name: 'justify',
-              value: 'center'
-            },
-            {
-              name: 'align',
-              value: 'center'
-            },
-            {
-              name: 'full',
-              value: 'false'
-            },
-            {
-              name: 'wrap',
-              value: 'false'
-            }
-          ],
-          contentBlocks: [
-            {
-              content: "This is my first blog post!",
-              blockType: "BlockHeading",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
-                }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de82"
-            },{
-              content: "What an exciting day.",
-              blockType: "BlockParagraph",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
-                }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de81"
-            }
-          ]
-        },
-        {
-          name: 'The rise of common sense analytics',
-          id: 'the-rise-of-common-sense-analytics',
-          order: 2,
-          layout: [
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'basis',
-              value: 'full'
-            },
-            {
-              name: 'pad',
-              value: 'none'
-            },
-            {
-              name: 'direction',
-              value: 'column'
-            },
-            {
-              name: 'justify',
-              value: 'center'
-            },
-            {
-              name: 'align',
-              value: 'center'
-            },
-            {
-              name: 'full',
-              value: 'false'
-            },
-            {
-              name: 'wrap',
-              value: 'false'
-            }
-          ],
-          contentBlocks: [
-            {
-              content: "This is my first blog post!",
-              blockType: "BlockHeading",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
-                }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de82"
-            },{
-              content: "What an exciting day.",
-              blockType: "BlockParagraph",
-              edit: false,
-              layout: [
-                {
-                  name: 'pad',
-                  value: 'none'
-                },
-                {
-                  name: 'size',
-                  value: 'auto'
-                },
-                {
-                  name: 'flex',
-                  value: 'false'
-                }
-              ],
-              id: "f15e4fba-b794-4589-9f20-97ff13e6de81"
-            }
-          ]
-        }
-      ]
-    }
-  ]
-};
+          });
+        });
+      });
+    });
+  });
+}
 
 export default function buildPostCollection() {
-  Object.keys(PostModels).forEach((key) => {
-    if (key !== 'Post') {
-      const Model = PostModels[key];
-      Model.find().exec(function(err, doc) {
-        if (err) console.log(colors.red('error: ', err));
+  generateAssetMap()
+  .then(posts => {
+    Object.keys(PostModels).forEach((key) => {
+      if (key !== 'Post') {
+        const Model = PostModels[key];
+        Model.find().exec(function(err, doc) {
+          if (err) console.log(colors.red('error: ', err));
 
-        if (doc.length === 0) {
-          Model.create(
-            POSTS[key],
-            function(err, small) {
-              if (err) 
-                console.log(colors.red('error creating Post collection', err));
-              console.log(colors.green(`Created ${key} collection`));
-            }
-          );
-        }
-      });
-    }
+          if (doc.length === 0) {
+            Model.create(
+              posts[key],
+              function(err, small) {
+                if (err) 
+                  console.log(colors.red('error creating Post collection', err));
+                console.log(colors.green(`Created ${key} collection`));
+              }
+            );
+          }
+        });
+      }
+    });
   });
 };
