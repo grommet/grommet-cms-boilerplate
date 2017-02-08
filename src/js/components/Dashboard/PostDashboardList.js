@@ -38,7 +38,7 @@ export default function PostDashboardList({
                   {item.title}
                 </Heading>
                 <Label margin="none">
-                  {item.subtitle}
+                  {item.subtitle && `${item.subtitle.slice(0, 100)}...`}
                 </Label>
               </Box>
               <Box align="end" justify="center" style={{ zIndex: 10 }}>

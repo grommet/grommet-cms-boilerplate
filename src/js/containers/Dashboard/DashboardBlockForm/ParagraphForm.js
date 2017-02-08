@@ -4,17 +4,19 @@ import Form from 'grommet/components/Form';
 import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
-import { MarkdownHelp } from 'grommet-cms/components';
+import { MarkdownHelpLayer } from 'grommet-cms/components';
 
 export class ParagraphForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: props.content || ''
+      content: props.content || '',
+      layer: false
     };
 
     this._onChange = this._onChange.bind(this);
     this._onSubmit = this._onSubmit.bind(this);
+    this._onToggleHelp = this._onToggleHelp.bind(this);
   }
 
   _onChange({ target }) {
@@ -27,6 +29,12 @@ export class ParagraphForm extends Component {
     this.setState(obj);
   }
 
+  _onToggleHelp() {
+    this.setState({
+      layer: !this.state.layer
+    });
+  }
+
   _onSubmit(event) {
     event.preventDefault();
     const formData = Object.assign({}, this.state);
@@ -34,11 +42,13 @@ export class ParagraphForm extends Component {
   }
 
   render() {
-    const { content } = this.state;
-
+    const { content, layer } = this.state;
+    
     return (
       <Box colorIndex="light-2" pad="medium">
         <Form compact={false} onSubmit={this._onSubmit}>
+          <MarkdownHelpLayer isVisible={layer}
+            onToggle={this._onToggleHelp} />
           <FormFields>
             <fieldset>
               <FormField label="Content" htmlFor="content">

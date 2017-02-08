@@ -50,7 +50,7 @@ export default function index(props) {
       </Heading>
       <hr/>
       <p>
-        ![alt text](http://my-url.com/my-image.png)
+        ![alt text](https://unsplash.it/200/300/?random)
       </p>
       <Box className="press-post markdown">
         <img src="/img/investments/kean-io-logo.png" alt="Keen IO" />
