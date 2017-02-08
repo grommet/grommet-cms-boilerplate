@@ -5,6 +5,7 @@ import ListItem from 'grommet/components/ListItem';
 import Menu from 'grommet/components/Menu';
 import TrashIcon from 'grommet/components/icons/base/Trash';
 import ArticleIcon from 'grommet/components/icons/base/Article';
+import DuplicateIcon from 'grommet/components/icons/base/Duplicate';
 import EditIcon from 'grommet/components/icons/base/Edit';
 import UpIcon from 'grommet/components/icons/base/Up';
 import DownIcon from 'grommet/components/icons/base/Down';
@@ -50,6 +51,12 @@ export default function PostListItem(props: {
               icon={<EditIcon size="small" />}
               label="Edit Section"
               onClick={() => onMenuItemClick('EDIT_SECTION')}
+            />
+            <Anchor
+              icon={<DuplicateIcon size="small" />}
+              label="Duplicate Section"
+              disabled={item.order === 0}
+              onClick={() => onMenuItemClick('DUPLICATE')}
             />
             <Anchor
               icon={<TrashIcon size="small" />}

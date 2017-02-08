@@ -8,8 +8,9 @@ import EditIcon from 'grommet/components/icons/base/Edit';
 import UpIcon from 'grommet/components/icons/base/Up';
 import DownIcon from 'grommet/components/icons/base/Down';
 import SettingsOptionIcon from 'grommet/components/icons/base/SettingsOption';
+import DuplicateIcon from 'grommet/components/icons/base/Duplicate';
 
-export default function PreviewHeader ({ edit, onClose, onEdit, onMove, title, onLayoutClick }) {
+export default function PreviewHeader ({ edit, onClose, onEdit, onMove, title, onLayoutClick, onDuplicateClick }) {
   return (
     <Box direction="row" responsive={false} align="center">
       <Heading tag="h3">
@@ -36,6 +37,11 @@ export default function PreviewHeader ({ edit, onClose, onEdit, onMove, title, o
             onClick={onLayoutClick}
           />
           <Anchor
+            icon={<DuplicateIcon size="small" />}
+            label="Duplicate Block"
+            onClick={onDuplicateClick}
+          />
+          <Anchor
             icon={<TrashIcon size="small" />}
             label="Delete"
             onClick={onClose}
@@ -59,5 +65,7 @@ export default function PreviewHeader ({ edit, onClose, onEdit, onMove, title, o
 PreviewHeader.propTypes = {
   onClose: PropTypes.func,
   onEdit: PropTypes.func,
-  onLayoutClick: PropTypes.func
+  onMove: PropTypes.func,
+  onLayoutClick: PropTypes.func,
+  onDuplicateClick: PropTypes.func
 };

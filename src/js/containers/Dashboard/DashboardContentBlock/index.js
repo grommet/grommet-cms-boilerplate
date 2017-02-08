@@ -21,7 +21,8 @@ import {
   blockType,
   blockSubmit,
   blockMoveUp,
-  blockMoveDown
+  blockMoveDown,
+  blockDuplicate
 } from '../DashboardContentBlocks/actions';
 
 export class DashboardContentBlock extends Component {
@@ -33,6 +34,7 @@ export class DashboardContentBlock extends Component {
     this._onEditClick = this._onEditClick.bind(this);
     this._onCloseClick = this._onCloseClick.bind(this);
     this._onLayoutClick = this._onLayoutClick.bind(this);
+    this._onDuplicate = this._onDuplicate.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +45,11 @@ export class DashboardContentBlock extends Component {
         node.scrollIntoView();
       }
     }
+  }
+
+  _onDuplicate(id) {
+    console.log(`Called on duplicate click`);
+    this.props.dispatch(blockDuplicate(id));
   }
 
   _onEditClick(id) {
@@ -158,6 +165,7 @@ export class DashboardContentBlock extends Component {
         <PreviewHeader
           title={title}
           edit={edit}
+          onDuplicateClick={this._onDuplicate.bind(this, id)}
           onLayoutClick={this._onLayoutClick.bind(this, id)}
           onClose={this._onCloseClick.bind(this, id)}
           onMove={this._onBlockMove.bind(this, id)}

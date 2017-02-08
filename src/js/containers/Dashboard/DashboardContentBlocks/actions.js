@@ -20,6 +20,11 @@ export const blockEdit = (id) => (
   }
 );
 
+export const blockDuplicate = (id) => ({
+  type: ActionTypes.BLOCK_DUPLICATE,
+  id
+});
+
 export const blockType = (id, blockType) => (
   {
     type: ActionTypes.BLOCK_TYPE,

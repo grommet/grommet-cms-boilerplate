@@ -63,6 +63,11 @@ export const postEditSection = (section, index) => ({
   index
 });
 
+export const postDuplicateSection = (index) => ({
+  type: ActionTypes.POST_DUPLICATE_SECTION,
+  index
+});
+
 export const postEditOrAddSection = (section, index) => (dispatch) => {
   if (index !== null) {
     dispatch(postEditSection(section, index));

@@ -18,6 +18,7 @@ import {
   submitPost,
   setPost,
   postDeleteSection,
+  postDuplicateSection,
   postEditOrAddSection,
   postMoveSectionUp,
   postMoveSectionDown,
@@ -178,6 +179,9 @@ export class DashboardPostPage extends Component {
 
   _onSectionMenuItemClick(name, i) {
     switch (name) {
+      case 'DUPLICATE':
+        this.props.dispatch(postDuplicateSection(i));
+        break;
       case 'DELETE':
         this.props.dispatch(postDeleteSection(i));
         break;

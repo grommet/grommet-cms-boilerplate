@@ -9,6 +9,14 @@ const initialState = {
 
 function postSectionsReducer(state = [], action) {
   switch (action.type) {
+    case ActionTypes.POST_DUPLICATE_SECTION:
+      return [
+        ...state.slice(0, action.index),
+        {
+          ...state[action.index]
+        },
+        ...state.slice(action.index)
+      ];
     case ActionTypes.POST_REMOVE_UNUSED_CONTENT_BLOCKS:
       return [
         ...state.slice(0, action.index),
@@ -87,6 +95,14 @@ function postSectionsReducer(state = [], action) {
 
 function posts(state = initialState, action) {
   switch(action.type) {
+    case ActionTypes.POST_DUPLICATE_SECTION:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          sections: postSectionsReducer(state.post.sections, action)
+        }
+      };
     case ActionTypes.POST_REMOVE_UNUSED_CONTENT_BLOCKS:
       return {
         ...state,

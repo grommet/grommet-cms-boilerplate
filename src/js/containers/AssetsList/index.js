@@ -36,7 +36,7 @@ export class DashboardAssetsPage extends Component {
     if (searchTerm !== '' && searchTerm !== this.props.searchTerm) {
       this.props.dispatch(assetsClearPosts());
       this.props.dispatch(getAssets(0, false, searchTerm));
-    } else if (searchTerm === '') { 
+    } else if (searchTerm === '' && this.props.searchTerm !== '') { 
       this.props.dispatch(getAssets(1, false));
     } else if (currentPage && currentPage > this.props.currentPage) {
       this.props.dispatch(getAssets(currentPage, false));
