@@ -10,6 +10,7 @@ import UpIcon from 'grommet/components/icons/base/Up';
 import DownIcon from 'grommet/components/icons/base/Down';
 import Anchor from 'grommet/components/Anchor';
 import Label from 'grommet/components/Label';
+import { shortenText } from 'grommet-cms/utils';
 
 export default function PostDashboardList({
   list, 
@@ -38,7 +39,7 @@ export default function PostDashboardList({
                   {item.title}
                 </Heading>
                 <Label margin="none">
-                  {item.subtitle && `${item.subtitle.slice(0, 100)}...`}
+                  {item.subtitle && `${shortenText(item.subtitle, 100)}...`}
                 </Label>
               </Box>
               <Box align="end" justify="center" style={{ zIndex: 10 }}>

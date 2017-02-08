@@ -5,7 +5,7 @@ import Menu from 'grommet/components/Menu';
 import TrashIcon from 'grommet/components/icons/base/Trash';
 import EditIcon from 'grommet/components/icons/base/Edit';
 import DocumentIcon from 'grommet/components/icons/base/Document';
-import { isImage } from 'grommet-cms/utils';
+import { isImage, shortenText } from 'grommet-cms/utils';
 
 export default function AssetTile (props) {
   const { id, path, title, onDeleteClick, size, showControls, onClick } = props;
@@ -78,7 +78,7 @@ export default function AssetTile (props) {
         <Box pad="small" justify="center" align="center">
           <div
             style={{ fontSize: 24, lineHeight: 1.333 }}
-            dangerouslySetInnerHTML={{ __html: `<h3>${title}</h3>` }}
+            dangerouslySetInnerHTML={{ __html: `<h3>${shortenText(title, 30)}</h3>` }}
           />
         </Box>
       </Box>

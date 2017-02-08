@@ -7,7 +7,6 @@ import http from 'http';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import apicache from 'apicache';
 import expressSanitized from 'express-sanitized';
 import path from 'path';
 import colors from 'colors/safe';
@@ -39,11 +38,9 @@ import MongoStore from 'express-session-mongo';
 process.setMaxListeners(0);
 
 const app = express();
-const cache = apicache.middleware;
 
 app.use(compression());
 app.use(morgan('tiny'));
-app.use('/uploads', cache());
 app.use('/uploads', express.static(path.join(__dirname, '/../uploads')));
 app.use(bodyParser.urlencoded({
   extended: true,
