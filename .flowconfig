@@ -12,6 +12,8 @@
 flow-typed/npm
 
 [options]
+suppress_comment=.*\\$FlowFixMe
+suppress_comment=.*\\$FlowInvalidInputTest
 module.system.node.resolve_dirname=node_modules
 module.system.node.resolve_dirname=src/js
 module.name_mapper='\(react-redux\)' -> '<PROJECT_ROOT>/config/flow/GeneralStub.js'

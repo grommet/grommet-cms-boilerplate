@@ -18,3 +18,4 @@ export LayoutForm from './LayoutForm';
 export BoxLayoutForm from './BoxLayoutForm';
 export List from './List';
 export MarkdownHelpLayer from './MarkdownHelpLayer';
+export AssetFilterLayer from './AssetFilterLayer';

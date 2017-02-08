@@ -39,7 +39,7 @@ export default function PostDashboardList({
                   {item.title}
                 </Heading>
                 <Label margin="none">
-                  {item.subtitle && `${shortenText(item.subtitle, 100)}...`}
+                  {item.subtitle && shortenText(item.subtitle, 100)}
                 </Label>
               </Box>
               <Box align="end" justify="center" style={{ zIndex: 10 }}>
