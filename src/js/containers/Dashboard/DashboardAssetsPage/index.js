@@ -49,12 +49,14 @@ export class DashboardAssetsPage extends Component {
             </Button>
           }
         />
-        <Box>
-          <Search
-            inline
-            placeHolder="Start typing to search assets by title..."
-            onDOMChange={this._onSearch}
-          />
+        <Box direction="row" align="start">
+          <Box flex>
+            <Search
+              inline
+              placeHolder="Start typing to search assets by title..."
+              onDOMChange={this._onSearch}
+            />
+          </Box>
           <AssetFilterLayer
             form={form}
             layerVisible={layerVisible}

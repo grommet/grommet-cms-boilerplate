@@ -12,3 +12,8 @@ export const setFormOptions =
       type: ActionTypes.SET_FORM_OPTIONS,
       options
     });
+
+export const setSearchTerm = (term: string): DashboardAssetsPageAction => ({
+  type: ActionTypes.SET_SEARCH_TERM,
+  term
+});

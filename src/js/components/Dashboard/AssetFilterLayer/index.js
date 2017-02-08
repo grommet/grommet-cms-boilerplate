@@ -2,12 +2,11 @@
 import React from 'react';
 import Box from 'grommet/components/Box';
 import Layer from 'grommet/components/Layer';
-import Box from 'grommet/components/Box';
 import Select from 'grommet/components/Select';
 import Header from 'grommet/components/Header';
 import Section from 'grommet/components/Section';
 import Heading from 'grommet/components/Heading';
-import FilterControl from 'grommet-addons/components/FilterControl';
+import { FilterControl } from 'grommet-cms/components';
 import type { GrommetCustomTypes$SelectValueType } from 'grommet';
 
 export default function AssetFilterLayer(props: {

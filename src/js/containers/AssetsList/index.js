@@ -11,13 +11,14 @@ import Box from 'grommet/components/Box';
 import Heading from 'grommet/components/Heading';
 import List from 'grommet/components/List';
 import SpinningIcon from 'grommet/components/icons/Spinning';
-import { AssetTile } from 'grommet-cms/components/Dashboard';
+import { AssetTile, WithLoading } from 'grommet-cms/components';
 import { highlightContent, uuid } from 'grommet-cms/utils';
 
 export class DashboardAssetsPage extends Component {
   constructor() {
     super();
     this._handleMore = this._handleMore.bind(this);
+    this._renderNoAssetsFound = this._renderNoAssetsFound.bind(this);
   }
 
   componentWillMount() {
@@ -55,18 +56,21 @@ export class DashboardAssetsPage extends Component {
     }
   }
 
-  _renderLoader(request) {
-    const { searchTerm } = this.props;
-    return (request)
-      ? <SpinningIcon />
-      : <Box pad="medium">
-          <Heading tag="h2">
-            {searchTerm
-              ? `No assets found for search term ${searchTerm}`
-              : "Click 'Add Asset' to add your first asset."
-            }
-          </Heading>
-        </Box>;
+  _renderNoAssetsFound() {
+    const { searchTerm, request, assets } = this.props;
+    if (request || assets.length) {
+      return null;
+    }
+    return (
+      <Box pad="medium">
+        <Heading tag="h2">
+          {searchTerm
+            ? `No assets found for search term ${searchTerm}`
+            : "Click 'Add Asset' to add your first asset."
+          }
+        </Heading>
+      </Box>
+    );
   }
 
   render() {
@@ -80,8 +84,8 @@ export class DashboardAssetsPage extends Component {
           .filter(item => item.title.toLowerCase().includes(term.toLowerCase()))
         : assets.map(item => ({ _id: item._id, title: item.title, path: item.path }));
     }
-    const assetBlocks = (filteredAssets.length > 0 && !request)
-      ? filteredAssets.map(({ _id, title, path }) =>
+    const assetBlocks = (filteredAssets.length > 0)
+      && filteredAssets.map(({ _id, title, path }) =>
         <AssetTile
           key={`asset-${_id}-${uuid()}`}
           id={_id}
@@ -91,22 +95,25 @@ export class DashboardAssetsPage extends Component {
           title={term !== '' ? highlightContent(term, title) : title}
           path={path}
         />
-      ) : this._renderLoader(request);
+      );
 
 
     return (
-      <List onMore={hasMore ? () => this._handleMore() : null}>
-        <Box
-          align="center"
-          full="horizontal"
-          direction="row"
-          wrap={true}
-          justify="center"
-          pad={{ horizontal: 'medium', vertical: 'medium' }}
-        >
-          {assetBlocks}
-        </Box>
-      </List>
+      <WithLoading isLoading={request}>
+        <List onMore={hasMore ? () => this._handleMore() : null}>
+          <Box
+            align="center"
+            full="horizontal"
+            direction="row"
+            wrap={true}
+            justify="center"
+            pad={{ horizontal: 'medium', vertical: 'medium' }}
+          >
+            {assetBlocks}
+          </Box>
+          {this._renderNoAssetsFound()}
+        </List>
+      </WithLoading>
     );
   }
 };

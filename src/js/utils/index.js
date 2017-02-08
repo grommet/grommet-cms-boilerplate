@@ -136,7 +136,7 @@ export function debounce(func, wait, immediate) {
 /* eslint-disable */
 // helper to insert mark tags
 function insertMarkTag(sourceString, subString) {
-  return sourceString.replace(new RegExp("(" + subString + ")", "g"), "<mark>$1</mark>");
+  return sourceString.replace(new RegExp("(" + subString + ")", "i"), "<mark>$1</mark>");
 }
 
 // helper to get right content snippet containing the search term
@@ -146,7 +146,7 @@ function setPreviewSnippet(searchTerm, text){
   **/
   let start, end;
   const offset = 200;
-  const pos =  text.indexOf(searchTerm);
+  const pos =  text.toLowerCase().indexOf(searchTerm.toLowerCase());
   if (pos > offset) {
     start = pos - offset;
     end = pos + offset;
@@ -157,14 +157,13 @@ function setPreviewSnippet(searchTerm, text){
   return text.slice(start, end);
 }
 
-// {`${article.content.slice(0, 200)}...`}
-export const highlightContent = (searchTerm, text, originalText) => {
-  if (text.indexOf(searchTerm) !== -1) {
+export const highlightContent = (searchTerm, text) => {
+  if (text.toLowerCase().includes(searchTerm.toLowerCase())) {
     const formattedText = insertMarkTag(text, searchTerm);
     return setPreviewSnippet(searchTerm, formattedText);
   }
   else {
-    return text.slice(0, 300);
+    return text;
   }
 };
 

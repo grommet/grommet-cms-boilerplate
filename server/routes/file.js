@@ -4,7 +4,6 @@ import fs from 'fs';
 import File from '../models/File';
 import mkdirp from 'mkdirp';
 import { slugifyFile } from '../utils/slugify';
-import makeRexExp from '../utils/regExp';
 import { isAuthed } from '../middleware/auth';
 
 const router = express.Router();
@@ -77,15 +76,17 @@ router.post('/api/file/create', isAuthed, upload.single('file'),
 );
 
 // Get files
-router.get('/api/files', isAuthed, function(req, res) {
+router.get('/api/files', function(req, res) {
   const page = req.query.page || 0;
   const limit = req.query.limit ? parseInt(req.query.limit, 10) : 12;
   const searchQuery = req.query.query || '';
   const skip = (page <= 1)
     ? 0
     : (page - 1) * limit;
-  if (page === 0) {
-    File.find().sort({ createdAt: 'desc' }).exec(
+  if (searchQuery !== '') {
+    File.find({ $text: { $search: searchQuery } })
+      .limit(limit)
+      .sort({ createdAt: 'desc' }).exec(
       function(err, files) {
         if (err) {
           return res.status(400).send(err);
@@ -94,11 +95,8 @@ router.get('/api/files', isAuthed, function(req, res) {
         return res.status(200).send(files);
       }
     );
-  } else if (searchQuery !== '') {
-    const name = makeRexExp(searchQuery);
-    File.find({ name })
-      .limit(limit)
-      .sort({ createdAt: 'desc' }).exec(
+  } else if (page === 0) {
+    File.find().sort({ createdAt: 'desc' }).exec(
       function(err, files) {
         if (err) {
           return res.status(400).send(err);

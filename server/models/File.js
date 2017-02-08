@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 const File = new Schema({
-  title: String,
+  title: { type: String, text: true },
   path: String,
   createdAt: { type: Date, default: Date.now }
 });

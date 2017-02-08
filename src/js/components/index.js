@@ -18,3 +18,4 @@ export Nav from './Nav';
 export NavAnchor from './NavAnchor';
 export ShareMenu from './ShareMenu';
 export HomePageIntro from './HomePageIntro';
+export FilterControl from './FilterControl';
