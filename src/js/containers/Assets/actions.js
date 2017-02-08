@@ -162,7 +162,7 @@ export function getAssets(page, showLoading = true, searchTerm = '') {
     const { perPage } = getState().assets;
     let uri = `${url}/files?page=${page}&limit=${perPage}`;
     if (searchTerm && searchTerm !== '') {
-      uri += `query=${encodeURIComponent(searchTerm)}`;
+      uri += `&query=${encodeURIComponent(searchTerm)}`;
     }
     return fetch(uri, {
       method: 'GET',
@@ -185,7 +185,13 @@ export function getAssets(page, showLoading = true, searchTerm = '') {
             const text = statusText;
             dispatch(assetsError(text));
           } else {
-            dispatch(assetsSuccess(json));
+            if (page !== 0) {
+              // add the assets to the end of the list
+              dispatch(assetsSuccess(json));
+            } else {
+              // replace the assets
+              dispatch(assetSuccess(json));
+            }
           }
         },
         err => {

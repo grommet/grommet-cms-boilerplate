@@ -76,7 +76,7 @@ router.post('/api/file/create', isAuthed, upload.single('file'),
 );
 
 // Get files
-router.get('/api/files', function(req, res) {
+router.get('/api/files', isAuthed, function(req, res) {
   const page = req.query.page || 0;
   const limit = req.query.limit ? parseInt(req.query.limit, 10) : 12;
   const searchQuery = req.query.query || '';
@@ -85,8 +85,8 @@ router.get('/api/files', function(req, res) {
     : (page - 1) * limit;
   if (searchQuery !== '') {
     File.find({ $text: { $search: searchQuery } })
-      .limit(limit)
-      .sort({ createdAt: 'desc' }).exec(
+      .sort({ createdAt: 'desc' })
+      .exec(
       function(err, files) {
         if (err) {
           return res.status(400).send(err);

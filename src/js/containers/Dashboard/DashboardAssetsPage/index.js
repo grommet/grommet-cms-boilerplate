@@ -53,6 +53,7 @@ export class DashboardAssetsPage extends Component {
           <Box flex>
             <Search
               inline
+              value={this.state.searchTerm}
               placeHolder="Start typing to search assets by title..."
               onDOMChange={this._onSearch}
             />
@@ -71,6 +72,7 @@ export class DashboardAssetsPage extends Component {
           style={{ overflow: 'scroll' }}
         >
           <AssetsList
+            onClear={this._onSearch}
             searchTerm={this.state.searchTerm}
             tileSize="medium"
           />

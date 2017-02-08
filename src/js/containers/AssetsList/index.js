@@ -10,7 +10,7 @@ import {
 import Box from 'grommet/components/Box';
 import Heading from 'grommet/components/Heading';
 import List from 'grommet/components/List';
-import SpinningIcon from 'grommet/components/icons/Spinning';
+import Anchor from 'grommet/components/Anchor';
 import { AssetTile, WithLoading } from 'grommet-cms/components';
 import { highlightContent, uuid } from 'grommet-cms/utils';
 
@@ -36,6 +36,8 @@ export class DashboardAssetsPage extends Component {
     if (searchTerm !== '' && searchTerm !== this.props.searchTerm) {
       this.props.dispatch(assetsClearPosts());
       this.props.dispatch(getAssets(0, false, searchTerm));
+    } else if (searchTerm === '') { 
+      this.props.dispatch(getAssets(1, false));
     } else if (currentPage && currentPage > this.props.currentPage) {
       this.props.dispatch(getAssets(currentPage, false));
     }
@@ -57,17 +59,20 @@ export class DashboardAssetsPage extends Component {
   }
 
   _renderNoAssetsFound() {
-    const { searchTerm, request, assets } = this.props;
+    const { searchTerm, request, assets, onClear } = this.props;
     if (request || assets.length) {
       return null;
     }
     return (
-      <Box pad="medium">
+      <Box pad="medium" align="center">
         <Heading tag="h2">
           {searchTerm
             ? `No assets found for search term ${searchTerm}`
             : "Click 'Add Asset' to add your first asset."
           }
+        </Heading>
+        <Heading tag="h5">
+          Suggestion: <Anchor onClick={onClear}>reset filters</Anchor> to see them all
         </Heading>
       </Box>
     );
@@ -77,15 +82,8 @@ export class DashboardAssetsPage extends Component {
     const { request, assets, totalCount, tileSize, onAssetSelect, searchTerm } = this.props;
     const hasMore = assets && assets.length && assets.length < totalCount;
     const term = searchTerm || '';
-    let filteredAssets = [];
-    if (Array.isArray(assets)) {
-      filteredAssets = term !== ''
-        ? assets.map(item => ({ _id: item._id, title: item.title, path: item.path }))
-          .filter(item => item.title.toLowerCase().includes(term.toLowerCase()))
-        : assets.map(item => ({ _id: item._id, title: item.title, path: item.path }));
-    }
-    const assetBlocks = (filteredAssets.length > 0)
-      && filteredAssets.map(({ _id, title, path }) =>
+    const assetBlocks = (assets.length > 0)
+      && assets.map(({ _id, title, path }) =>
         <AssetTile
           key={`asset-${_id}-${uuid()}`}
           id={_id}
@@ -124,7 +122,8 @@ DashboardAssetsPage.propTypes = {
   assets: PropTypes.array,
   totalCount: PropTypes.number.isRequired,
   tileSize: PropTypes.string,
-  onAssetSelect: PropTypes.func
+  onAssetSelect: PropTypes.func,
+  onClear: PropTypes.func
 };
 
 function mapStateToProps(state, props) {
