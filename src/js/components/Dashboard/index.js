@@ -17,3 +17,4 @@ export SectionLayoutForm from './SectionLayoutForm';
 export LayoutForm from './LayoutForm';
 export BoxLayoutForm from './BoxLayoutForm';
 export List from './List';
+export MarkdownHelpLayer from './MarkdownHelpLayer';

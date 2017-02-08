@@ -153,14 +153,18 @@ export function submitAsset(data, forwardWhenDone = true) {
 // Get Assets list. 
 // This route is auth protected to avoid publicly listing a site's full list 
 // of resources/assets.
-export function getAssets(page, showLoading = true) {
+export function getAssets(page, showLoading = true, searchTerm = '') {
   return (dispatch, getState) => {
     if (showLoading) {
       dispatch(assetsRequest());
     }
     let { url } = getState().api;
     const { perPage } = getState().assets;
-    return fetch(`${url}/files?page=${page}&limit=${perPage}`, {
+    let uri = `${url}/files?page=${page}&limit=${perPage}`;
+    if (searchTerm && searchTerm !== '') {
+      uri += `query=${encodeURIComponent(searchTerm)}`;
+    }
+    return fetch(uri, {
       method: 'GET',
       mode: 'cors',
       credentials: 'include',

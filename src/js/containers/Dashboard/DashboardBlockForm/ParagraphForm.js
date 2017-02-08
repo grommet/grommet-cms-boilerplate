@@ -4,6 +4,7 @@ import Form from 'grommet/components/Form';
 import FormFields from 'grommet/components/FormFields';
 import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
+import { MarkdownHelp } from 'grommet-cms/components';
 
 export class ParagraphForm extends Component {
   constructor(props) {

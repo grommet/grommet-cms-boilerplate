@@ -12,7 +12,7 @@ import Heading from 'grommet/components/Heading';
 import List from 'grommet/components/List';
 import SpinningIcon from 'grommet/components/icons/Spinning';
 import { AssetTile } from 'grommet-cms/components/Dashboard';
-import { highlightContent } from 'grommet-cms/utils';
+import { highlightContent, uuid } from 'grommet-cms/utils';
 
 export class DashboardAssetsPage extends Component {
   constructor() {
@@ -31,8 +31,11 @@ export class DashboardAssetsPage extends Component {
     this.props.dispatch(assetsClearPosts());
   }
 
-  componentWillReceiveProps({ currentPage }) {
-    if (currentPage && currentPage > this.props.currentPage) {
+  componentWillReceiveProps({ currentPage, searchTerm }) {
+    if (searchTerm !== '' && searchTerm !== this.props.searchTerm) {
+      this.props.dispatch(assetsClearPosts());
+      this.props.dispatch(getAssets(0, false, searchTerm));
+    } else if (currentPage && currentPage > this.props.currentPage) {
       this.props.dispatch(getAssets(currentPage, false));
     }
   }
@@ -42,10 +45,12 @@ export class DashboardAssetsPage extends Component {
   }
 
   _handleMore() {
-    const { currentPage, totalCount, perPage, assets } = this.props;
+    const { currentPage, totalCount, perPage, assets, searchTerm } = this.props;
     if (totalCount > currentPage * perPage) {
       if (assets && assets.length) {
-        this.props.dispatch(assetsIncrementPage());
+        if (!searchTerm) {
+          this.props.dispatch(assetsIncrementPage());
+        }
       }
     }
   }
@@ -78,7 +83,7 @@ export class DashboardAssetsPage extends Component {
     const assetBlocks = (filteredAssets.length > 0 && !request)
       ? filteredAssets.map(({ _id, title, path }) =>
         <AssetTile
-          key={`asset-${_id}`}
+          key={`asset-${_id}-${uuid()}`}
           id={_id}
           onClick={onAssetSelect ? onAssetSelect.bind(this, { _id, title, path }) : null}
           size={tileSize || 'small'}
